@@ -70,6 +70,16 @@ namespace console
                 ms / d,
                 s / d};
         }
+        friend std::ostream &operator<<(std::ostream &os, const TimerResult tr)
+        {
+            if (tr.s >= 1)
+                return os << tr.s << "  s";
+            if (tr.ms >= 1)
+                return os << tr.ms << " ms";
+            if (tr.us >= 1)
+                return os << tr.us << " μs";
+            return os << tr.ns << " ns";
+        }
     };
 
     template <class T>
@@ -164,6 +174,12 @@ namespace console
         TimerResult start = now();
         f(args...);
         return now() - start;
+    }
+
+    void sleep(double s)
+    {
+        std::this_thread::sleep_for(
+            std::chrono::duration<double>(s));
     }
 
     int randomint(int min, int max)
