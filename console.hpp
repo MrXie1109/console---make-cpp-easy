@@ -31,6 +31,47 @@ namespace console
         }
     } print;
 
+    struct TimerResult
+    {
+        double ns, us, ms, s;
+        operator double() const
+        {
+            return ns;
+        }
+        TimerResult operator+(const TimerResult &tr) const
+        {
+            return TimerResult{
+                ns + tr.ns,
+                us + tr.us,
+                ms + tr.ms,
+                s + tr.s};
+        }
+        TimerResult operator-(const TimerResult &tr) const
+        {
+            return TimerResult{
+                ns - tr.ns,
+                us - tr.us,
+                ms - tr.ms,
+                s - tr.s};
+        }
+        TimerResult operator*(double d) const
+        {
+            return TimerResult{
+                ns * d,
+                us * d,
+                ms * d,
+                s * d};
+        }
+        TimerResult operator/(double d) const
+        {
+            return TimerResult{
+                ns / d,
+                us / d,
+                ms / d,
+                s / d};
+        }
+    };
+
     template <class T>
     bool save(const T &data, const char *path)
     {
@@ -108,19 +149,32 @@ namespace console
         return str;
     }
 
+    inline TimerResult now()
+    {
+        int64_t tmp = std::chrono::system_clock::now()
+                          .time_since_epoch()
+                          .count();
+        return TimerResult{(double)tmp, (double)tmp / 1e3,
+                           (double)tmp / 1e6, (double)tmp / 1e9};
+    }
+
+    template <class F, class... Args>
+    TimerResult timer(F f, const Args &...args)
+    {
+        TimerResult start = now();
+        f(args...);
+        return now() - start;
+    }
+
     int randomint(int min, int max)
     {
-        static std::mt19937 gen(std::chrono::system_clock::now()
-                                    .time_since_epoch()
-                                    .count());
+        static std::mt19937 gen(now());
         return std::uniform_int_distribution<>(min, max)(gen);
     }
 
     double uniform(double min, double max)
     {
-        static std::mt19937 gen(std::chrono::system_clock::now()
-                                    .time_since_epoch()
-                                    .count());
+        static std::mt19937 gen(now());
         return std::uniform_real_distribution<>(min, max)(gen);
     }
 
