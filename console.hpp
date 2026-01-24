@@ -1,0 +1,135 @@
+#pragma once
+#include <bits/stdc++.h>
+
+namespace console
+{
+    class
+    {
+        std::ostream *os = &std::cout;
+        std::string end = "\n";
+        std::string sep = " ";
+
+    public:
+        void set(std::ostream &Os = std::cout,
+                 std::string End = "\n",
+                 std::string Sep = " ")
+        {
+            os = &Os;
+            end = End;
+            sep = Sep;
+        }
+        template <class T>
+        void operator()(const T &t)
+        {
+            (*os) << t << end;
+        }
+        template <class T, class... Args>
+        void operator()(const T &t, const Args &...args)
+        {
+            (*os) << t << sep;
+            operator()(args...);
+        }
+    } print;
+
+    template <class T>
+    bool save(const T &data, const char *path)
+    {
+        std::ofstream file(path);
+        if (!file)
+            return false;
+        file.write((const char *)(&data), sizeof(data));
+        return file.good();
+    }
+
+    template <class T>
+    bool load(T &data, const char *path)
+    {
+        std::ifstream file(path);
+        if (!file)
+            return false;
+        file.read((char *)(&data), sizeof(data));
+        return file.good();
+    }
+
+    std::string ltrim(std::string str)
+    {
+        auto it = std::find_if(str.begin(), str.end(),
+                               [](unsigned char c)
+                               { return !std::isspace(c); });
+        str.erase(str.begin(), it);
+        return str;
+    }
+
+    std::string rtrim(std::string str)
+    {
+        auto it = std::find_if(str.rbegin(), str.rend(),
+                               [](unsigned char c)
+                               { return !std::isspace(c); });
+        str.erase(it.base(), str.end());
+        return str;
+    }
+
+    std::string trim(std::string str)
+    {
+        return ltrim(rtrim(str));
+    }
+
+    std::string upper(std::string str)
+    {
+        for (char &ch : str)
+        {
+            if (ch >= 'a' && ch <= 'z')
+                ch += 'A' - 'a';
+        }
+        return str;
+    }
+
+    std::string lower(std::string str)
+    {
+        for (char &ch : str)
+        {
+            if (ch >= 'A' && ch <= 'Z')
+                ch -= 'A' - 'a';
+        }
+        return str;
+    }
+
+    std::string title(std::string str)
+    {
+        if (str[0] >= 'a' && str[0] <= 'z')
+            str[0] += 'A' - 'a';
+        for (std::size_t i = 1; i < str.size(); ++i)
+        {
+            if (std::isspace(str[i - 1]) && str[i] >= 'a' && str[i] <= 'z')
+                str[i] += 'A' - 'a';
+            else if (str[i] >= 'A' && str[i] <= 'Z')
+                str[i] -= 'A' - 'a';
+        }
+        return str;
+    }
+
+    int randomint(int min, int max)
+    {
+        static std::mt19937 gen(std::chrono::system_clock::now()
+                                    .time_since_epoch()
+                                    .count());
+        return std::uniform_int_distribution<>(min, max)(gen);
+    }
+
+    double uniform(double min, double max)
+    {
+        static std::mt19937 gen(std::chrono::system_clock::now()
+                                    .time_since_epoch()
+                                    .count());
+        return std::uniform_real_distribution<>(min, max)(gen);
+    }
+
+    template <class T>
+    auto choice(const T &container) -> decltype(container[0])
+    {
+        if (container.size() <= 0)
+            throw std::invalid_argument(
+                "console::choice: Cannot choose from an empty container");
+        return container[randomint(0, container.size() - 1)];
+    }
+}
