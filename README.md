@@ -1,4 +1,8 @@
-# console.hpp v1.6.0: Logging and Time Utilities
+# console v1.6.x: Logging and Time Utilities
+
+## 版本号：v1.6.1: Bug Fix
+
+## 修复了1处已知bug
 
 ## 📋 接口总览
 
