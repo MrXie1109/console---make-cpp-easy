@@ -231,7 +231,7 @@ namespace console
 
     inline TimerResult now()
     {
-        int64_t tmp = std::chrono::system_clock::now()
+        int64_t tmp = std::chrono::high_resolution_clock::now()
                           .time_since_epoch()
                           .count();
         return TimerResult{(double)tmp, (double)tmp / 1e3,
@@ -267,7 +267,7 @@ namespace console
     template <class T>
     auto choice(const T &container) -> decltype(container[0])
     {
-        if (container.size() <= 0)
+        if (container.empty())
             throw std::invalid_argument(
                 "console::choice: Cannot choose from an empty container");
         return container[randomint(0, container.size() - 1)];
