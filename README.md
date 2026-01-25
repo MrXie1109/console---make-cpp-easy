@@ -1,219 +1,169 @@
-# console.hpp - 让C++控制台编程更简单
+# console.hpp v1.6.0: Logging and Time Utilities
 
-一个模仿Python简洁API但保持C++性能的单文件头文件库。专为讨厌C++标准库繁琐语法的开发者设计，提供直观、实用的工具集。
+## 📋 接口总览
 
-## 🚀 特性亮点
+### 🎯 核心输出系统
+**`print` / `error`** - Python风格输出对象
+- 可变参数，自动分隔
+- 支持彩色输出：`print(Color::Red, "文本")`
+- 可自定义分隔符和结束符
 
-### 1. **Python风格输出**
-```cpp
-print("Hello", "World", 42);               // Hello World 42
-print(Color::Red, "错误信息", Color::Reset); // 彩色输出
-error("错误:", "文件不存在");              // 输出到标准错误
-```
+**`Output` 类** - 可配置输出器
+- 构造函数设置流、结束符、分隔符
+- `set()` 方法动态修改配置
+- 支持颜色参数优先级处理
 
-### 2. **智能输入处理**
-```cpp
-auto name = input("请输入姓名: ");         // 读取整行
-auto age = input<int>("请输入年龄: ");     // 类型安全输入
-auto score = input<double>("请输入分数: ");
-```
+### 📥 智能输入系统
+**`input()`** - 读取整行字符串
+- 带提示符，简洁易用
+- 自动处理缓冲区
 
-### 3. **丰富的工具集**
-- **字符串处理**: `trim`, `split`, `join`, `upper/lower/title`
-- **随机工具**: `randomint`, `uniform`, `choice`
-- **时间工具**: `now()`, `timer()`, `sleep()`
-- **进度显示**: `ProgressBar`, `jdt()`（进度条拼音彩蛋）
-- **等待动画**: `wait()`三种重载方式
+**`input<T>()`** - 类型安全输入
+- 模板参数指定返回类型
+- 自动类型转换，清理缓冲区
+- 支持所有 `operator>>` 可读类型
 
-## 📦 安装与使用
+### 🎨 颜色系统
+**`Color` 枚举** - ANSI颜色码
+- 16种标准终端颜色
+- 前景色（30-37）和亮色（90-97）
+- `Reset` 重置终端颜色
 
-### 单文件包含
-```cpp
-#include "console.hpp"
-using namespace console;
+**`colored()`** - 颜色代码生成
+- 将 `Color` 枚举转为ANSI转义序列
+- 自动集成到输出系统中
 
-int main() {
-    print("欢迎使用console.hpp!");
-    return 0;
-}
-```
+### ⏱️ 时间工具集
+**`TimerResult` 结构** - 时间计量
+- 纳秒/微秒/毫秒/秒四级存储
+- 智能单位选择输出
+- 支持算术运算
 
-### 快速开始
-```cpp
-#include "console.hpp"
-using namespace console;
+**`now()`** - 高精度当前时间
+- 返回 `TimerResult` 对象
+- 支持时间差计算
 
-int main() {
-    // 基本输出
-    print("Hello", "Console", "v1.4.0");
-    
-    // 彩色输出
-    print(Color::Green, "✓ 任务完成");
-    
-    // 用户输入
-    auto name = input("你的名字: ");
-    auto score = input<double>("考试分数: ");
-    
-    // 进度条
-    ProgressBar bar(100);
-    for(int i = 0; i <= 100; i++) {
-        bar(i / 100.0);
-        sleep(0.05);
-    }
-    
-    return 0;
-}
-```
+**`timer()`** - 函数执行计时
+- 接受函数和参数，返回执行时间
+- 简洁的性能测试工具
 
-## 🔧 核心功能
+**`sleep()`** - 线程休眠
+- 秒为单位，支持小数
+- 简化 `std::this_thread::sleep_for`
 
-### 输出系统
-```cpp
-// 基础输出
-print("文本", 123, 3.14);        // 默认分隔符空格，结束符换行
-error("错误信息");                // 输出到stderr
+**`datetime()`** - 格式化时间戳 **【v1.6.0新增】**
+- 自定义格式字符串
+- 包含毫秒精度
+- 线程安全的时间转换
 
-// 彩色输出
-enum class Color {
-    Black, Red, Green, Yellow, Blue, 
-    Magenta, Cyan, White, Reset, ...
-};
-print(Color::Red, "警告", Color::Reset, "正常文本");
+### 📊 日志系统 **【v1.6.0新增】**
+**`Logging` 类** - 分级日志记录器
+- 五个日志级别：DEBUG、INFO、WARN、ERROR、FATAL
+- 自动时间戳和级别标签
+- 彩色输出区分级别
 
-// 自定义格式
-Output custom(std::cout, "\n", ", ");
-custom("苹果", "香蕉", "橙子");  // 苹果, 香蕉, 橙子
-```
+**日志级别控制**
+- `set(Level)` - 设置最低显示级别
+- `set(bool...)` - 精细控制各级别开关
+- 默认显示INFO及以上级别
 
-### 输入系统
-```cpp
-// 读取整行
-std::string line = input("提示: ");
+**快捷方法**
+- `debug()` - 亮黑色，调试信息
+- `info()` - 亮青色，常规信息
+- `warn()` - 亮黄色，警告信息
+- `error()` - 亮红色，错误信息
+- `fatal()` - 亮品红，致命错误
 
-// 类型安全读取
-int num = input<int>("数字: ");
-double val = input<double>("小数: ");
-char ch = input<char>("字符: ");
+### 🔧 字符串工具
+**修剪函数**
+- `trim()` - 去除两端空格
+- `ltrim()` - 去除左侧空格
+- `rtrim()` - 去除右侧空格
 
-// 注意: input<T>()使用operator>>读取单个值
-//        input()使用getline读取整行
-```
+**大小写转换**
+- `upper()` - 全转大写
+- `lower()` - 全转小写
+- `title()` - 标题化（首字母大写）
 
-### 字符串工具
-```cpp
-// 修剪
-trim("  hello  ");      // "hello"
-ltrim("  left");        // "left"
-rtrim("right  ");       // "right"
+**分割与组合**
+- `split()` - 按分隔符分割字符串
+- `join()` - 用分隔符连接字符串向量
+- `partition()` - 三部分分割，返回结构体
 
-// 大小写
-upper("hello");         // "HELLO"
-lower("WORLD");         // "world"
-title("hello world");   // "Hello World"
+### 🎲 随机工具
+**`randomint()`** - 整数随机数
+- 指定范围 [min, max]
+- 均匀分布
 
-// 分割与连接
-split("a,b,c", ",");    // ["a", "b", "c"]
-join({"a", "b", "c"}, "-"); // "a-b-c"
-partition("hello.cpp", "."); // ("hello", ".", "cpp")
-```
+**`uniform()`** - 浮点随机数
+- 指定范围 [min, max]
+- 均匀分布
 
-### 随机工具
-```cpp
-randomint(1, 100);      // 1-100随机整数
-uniform(0.0, 1.0);      // 0-1随机浮点数
+**`choice()`** - 容器随机选择
+- 从任意容器随机选择一个元素
+- 支持 vector、array、set 等
 
-std::vector<int> vec = {1, 2, 3, 4, 5};
-choice(vec);            // 随机选择一个元素
-```
+### 📈 进度显示
+**`ProgressBar` 类** - 可配置进度条
+- 自定义边界字符、填充字符
+- 可调长度，百分比显示
+- 自动范围限制
 
-### 时间工具
-```cpp
-// 计时
-auto start = now();
-sleep(1.5);             // 睡眠1.5秒
-auto elapsed = now() - start;
-print("耗时:", elapsed); // 自动选择合适单位
+**`jdt()`** - 快速进度条 **【拼音彩蛋】**
+- 固定样式，简洁接口
+- 回车符刷新，适合循环显示
+- "进度条"拼音缩写
 
-// 函数计时
-auto time = timer([](){
-    // 你的代码
-});
-print("函数执行时间:", time);
-```
+### ⏳ 等待动画
+**`wait()` 三重载**
+1. `wait(int)` - 固定次数旋转
+2. `wait(bool)` - 条件变量控制
+3. `wait(F)` - 函数条件控制
+- 旋转动画反馈
+- 可自定义结束消息
 
-### 进度显示
-```cpp
-// 进度条类
-ProgressBar bar(100, '|', '|', '#', ' ', '\n', 50);
-for(int i = 0; i <= 100; i++) {
-    bar(i / 100.0);
-    sleep(0.05);
-}
+### 💾 文件工具
+**`save()` / `load()`** - POD类型序列化
+- 二进制保存/加载
+- 简单错误处理
+- 仅限平凡可复制类型
 
-// 快速进度条（彩蛋函数）
-for(int i = 0; i <= 100; i++) {
-    jdt(i / 100.0);     // "进度条"拼音缩写
-    sleep(0.05);
-}
-```
+### 🖥️ 容器美化输出
+**运算符重载** - 美观打印
+- `vector<T>` - 方括号格式 `[1, 2, 3]`
+- `array<T, n>` - 同 vector 格式
+- `pair<T, U>` - 圆括号格式 `(first, second)`
+- `map<K, V>` - 花括号键值对 `{key: value}`
+- `set<T>` - 花括号集合 `{1, 2, 3}`
 
-### 等待动画
-```cpp
-wait(10);               // 旋转动画10次
-wait(some_condition);   // 条件控制
-wait([](){ return !finished(); }); // 函数条件
-```
+## 🚀 v1.6.0 新特性亮点
 
-## 📊 容器美化输出
-```cpp
-std::vector<int> vec = {1, 2, 3};
-std::map<std::string, int> m = {{"a", 1}, {"b", 2}};
-std::set<int> s = {1, 2, 3};
+### 1. **专业日志系统**
+- 五级分级，彩色区分
+- 自动时间戳，毫秒精度
+- 灵活的级别控制
+- 无缝集成现有输出系统
 
-print(vec);  // [1, 2, 3]
-print(m);    // {a: 1, b: 2}
-print(s);    // {1, 2, 3}
-```
+### 2. **时间格式化**
+- `datetime()` 获取可读时间戳
+- 支持标准strftime格式
+- 跨平台兼容（Windows/Linux）
 
-## 🎨 颜色表
-| 颜色 | 前景码 | 亮色码 |
-|------|--------|--------|
-| 黑色 | 30 | 90 |
-| 红色 | 31 | 91 |
-| 绿色 | 32 | 92 |
-| 黄色 | 33 | 93 |
-| 蓝色 | 34 | 94 |
-| 品红 | 35 | 95 |
-| 青色 | 36 | 96 |
-| 白色 | 37 | 97 |
+### 3. **更完整的时间工具链**
+- 从纳秒计量到日期时间
+- 覆盖性能测试到日志记录需求
+- 保持一贯的简洁API设计
 
-## 🛠️ 设计哲学
+## 📖 设计哲学延续
 
-1. **实用主义优先**: 只解决80%常见需求
-2. **API简洁**: 比原生C++更简单，默认值合理
-3. **零依赖**: 单文件头文件，即包含即用
-4. **保持性能**: 在简洁的同时不牺牲C++性能
+- **实用主义**：只解决实际开发痛点
+- **简洁API**：比C++标准库更友好
+- **合理默认**：开箱即用，无需配置
+- **性能保持**：简洁不牺牲效率
+- **单文件**：零依赖，即包含即用
 
-## 📝 版本历史
-
-- **v1.4.0**: 添加彩色输出系统
-- **v1.3.0**: 添加字符串工具和输入系统
-- **v1.2.0**: 添加随机工具和时间工具
-- **v1.1.0**: 添加进度条和等待动画
-- **v1.0.0**: 基础输出和容器美化
-
-## 🔗 链接
-
-- GitHub: [https://github.com/MrXie1109/console---make-cpp-easy](https://github.com/MrXie1109/console---make-cpp-easy)
-- 许可证: MIT
-
-## 💡 提示
-
-- 所有函数提供合理默认值，开箱即用
-- 错误处理简洁，避免复杂异常
-- 支持C++11及以上标准
-- 使用<bits/stdc++.h>简化包含
+console.hpp 持续演化，始终坚守"懒但有效"的核心哲学，为C++开发者提供真正实用的工具集。
 
 ---
-
-**console.hpp - 为讨厌复杂语法的C++开发者而生**
+**GitHub**: [https://github.com/MrXie1109/console---make-cpp-easy](https://github.com/MrXie1109/console---make-cpp-easy)  
+**当前版本**: v1.6.0 - Logging & Time Utilities

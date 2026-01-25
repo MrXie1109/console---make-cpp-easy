@@ -680,4 +680,100 @@ namespace console
         is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         return tmp;
     }
+
+    std::string datetime(const std::string &fmt = "%Y-%m-%d %H:%M:%S")
+    {
+        std::stringstream ss;
+        auto now = std::chrono::system_clock::now();
+        auto time = std::chrono::system_clock::to_time_t(
+            std::chrono::system_clock::now());
+        auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+                      now.time_since_epoch()) %
+                  1000;
+        std::tm tm_buffer;
+#ifdef _WIN32
+        localtime_s(&tm_buffer, &time);
+#else
+        localtime_r(&time, &tm_buffer);
+#endif
+        ss << std::put_time(&tm_buffer, fmt.c_str());
+        ss << '.' << std::setfill('0') << std::setw(3) << ms.count();
+        return ss.str();
+    }
+
+    class Logging
+    {
+    public:
+        enum class Level : int8_t
+        {
+            DEBUG,
+            INFO,
+            WARN,
+            ERROR,
+            FATAL
+        };
+
+    private:
+        Output output;
+        bool &settings(int lvl)
+        {
+            static bool s[5] = {0, 1, 1, 1, 1};
+            return s[lvl];
+        }
+
+    public:
+        Logging(std::ostream &os = std::cout)
+            : output(os, "\n", "") {}
+        template <class... Args>
+        void debug(const Args &...args)
+        {
+            if (settings(0))
+                output(Color::BrightBlack,
+                       '[', datetime(), "] [debug] - ", args...);
+        }
+        template <class... Args>
+        void info(const Args &...args)
+        {
+            if (settings(1))
+                output(Color::BrightCyan,
+                       '[', datetime(), "] [.info] - ", args...);
+        }
+        template <class... Args>
+        void warn(const Args &...args)
+        {
+            if (settings(2))
+                output(Color::BrightYellow,
+                       '[', datetime(), "] [.warn] - ", args...);
+        }
+        template <class... Args>
+        void error(const Args &...args)
+        {
+            if (settings(3))
+                output(Color::BrightRed,
+                       '[', datetime(), "] [error] - ", args...);
+        }
+        template <class... Args>
+        void fatal(const Args &...args)
+        {
+            if (settings(4))
+                output(Color::BrightMagenta,
+                       '[', datetime(), "] [fatal] - ", args...);
+        }
+        void set(Level minLevel)
+        {
+            int8_t n = int8_t(minLevel);
+            for (int i = 0; i < n; i++)
+                settings(i) = false;
+            for (int i = n; i < 5; i++)
+                settings(i) = true;
+        }
+        void set(bool a, bool b, bool c, bool d, bool e)
+        {
+            settings(0) = a;
+            settings(1) = b;
+            settings(2) = c;
+            settings(3) = d;
+            settings(4) = e;
+        }
+    };
 }
