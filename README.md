@@ -32,3 +32,18 @@ int main() {
     
     return 0;
 }
+
+```
+
+有什么？
+print(...) - Python风格输出
+
+容器输出：vector, map, set, array, pair
+
+时间工具：timer(), sleep(), now()
+
+随机工具：randomint(), uniform(), choice()
+
+字符串工具：trim(), split(), join(), partition()
+
+文件工具：save(), load() (仅POD类型)
