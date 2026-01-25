@@ -264,6 +264,32 @@ namespace console
         return os << '}';
     }
 
+    enum class Color : int
+    {
+        Black = 30,
+        Red,
+        Green,
+        Yellow,
+        Blue,
+        Magenta,
+        Cyan,
+        White,
+        BrightBlack = 90,
+        BrightRed,
+        BrightGreen,
+        BrightYellow,
+        BrightBlue,
+        BrightMagenta,
+        BrightCyan,
+        BrightWhite,
+        Reset = 0
+    };
+
+    std::string colored(Color color)
+    {
+        return "\033[" + std::to_string(int(color)) + "m";
+    }
+
     class Output
     {
         std::ostream *os = &std::cout;
@@ -301,6 +327,13 @@ namespace console
         {
             (*os) << t << sep;
             operator()(args...);
+        }
+        template <class... Args>
+        void operator()(Color color, const Args &...args)
+        {
+            (*os) << colored(color);
+            operator()(args...);
+            (*os) << colored(Color::Reset);
         }
     } print, error(std::cerr);
 
@@ -626,5 +659,25 @@ namespace console
             sleep(sep);
         }
         os << end;
+    }
+
+    std::string input(const std::string prompt = "",
+                      std::ostream &os = std::cout, std::istream &is = std::cin)
+    {
+        std::string str;
+        os << prompt;
+        getline(is, str);
+        return str;
+    }
+
+    template <class T>
+    T input(const std::string prompt = "",
+            std::ostream &os = std::cout, std::istream &is = std::cin)
+    {
+        T tmp;
+        os << prompt;
+        is >> tmp;
+        is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return tmp;
     }
 }
