@@ -1,8 +1,8 @@
 # console v1.6.x: Logging and Time Utilities
 
-## 版本号：v1.6.1: Bug Fix
+## 版本号：v1.6.2: Bug Fix 2rd
 
-## 修复了1处已知bug
+## 再次修复了1处已知bug
 
 ## 📋 接口总览
 

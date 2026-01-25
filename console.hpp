@@ -714,6 +714,7 @@ namespace console
 
     private:
         Output output;
+        bool colorful;
         bool &settings(int lvl)
         {
             static bool s[5] = {0, 1, 1, 1, 1};
@@ -722,41 +723,67 @@ namespace console
 
     public:
         Logging(std::ostream &os = std::cout)
-            : output(os, "\n", "") {}
+            : output(os, "\n", ""),
+              colorful(typeid(os) == typeid(std::ostream)) {}
         template <class... Args>
         void debug(const Args &...args)
         {
             if (settings(0))
-                output(Color::BrightBlack,
-                       '[', datetime(), "] [debug] - ", args...);
+            {
+                if (colorful)
+                    output(Color::BrightBlack,
+                           '[', datetime(), "] [debug] - ", args...);
+                else
+                    output('[', datetime(), "] [debug] - ", args...);
+            }
         }
         template <class... Args>
         void info(const Args &...args)
         {
             if (settings(1))
-                output(Color::BrightCyan,
-                       '[', datetime(), "] [.info] - ", args...);
+            {
+                if (colorful)
+                    output(Color::BrightCyan,
+                           '[', datetime(), "] [.info] - ", args...);
+                else
+                    output('[', datetime(), "] [.info] - ", args...);
+            }
         }
         template <class... Args>
         void warn(const Args &...args)
         {
             if (settings(2))
-                output(Color::BrightYellow,
-                       '[', datetime(), "] [.warn] - ", args...);
+            {
+                if (colorful)
+                    output(Color::BrightYellow,
+                           '[', datetime(), "] [.warn] - ", args...);
+                else
+                    output('[', datetime(), "] [.warn] - ", args...);
+            }
         }
         template <class... Args>
         void error(const Args &...args)
         {
             if (settings(3))
-                output(Color::BrightRed,
-                       '[', datetime(), "] [error] - ", args...);
+            {
+                if (colorful)
+                    output(Color::BrightRed,
+                           '[', datetime(), "] [error] - ", args...);
+                else
+                    output('[', datetime(), "] [error] - ", args...);
+            }
         }
         template <class... Args>
         void fatal(const Args &...args)
         {
             if (settings(4))
-                output(Color::BrightMagenta,
-                       '[', datetime(), "] [fatal] - ", args...);
+            {
+                if (colorful)
+                    output(Color::BrightMagenta,
+                           '[', datetime(), "] [fatal] - ", args...);
+                else
+                    output('[', datetime(), "] [fatal] - ", args...);
+            }
         }
         void set(Level minLevel)
         {
