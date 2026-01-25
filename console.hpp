@@ -3,13 +3,83 @@
 
 namespace console
 {
-    class
+    template <class T>
+    std::ostream &operator<<(std::ostream &os, const std::vector<T> &vec)
+    {
+        if (vec.empty())
+            return os << "[]";
+        auto it = vec.begin();
+        os << '[' << *it;
+        while (++it != vec.end())
+        {
+            os << ", " << *it;
+        }
+        return os << ']';
+    }
+
+    template <class T, size_t n>
+    std::ostream &operator<<(std::ostream &os, const std::array<T, n> &ar)
+    {
+        if (ar.empty())
+            return os << "[]";
+        auto it = ar.begin();
+        os << '[' << *it;
+        while (++it != ar.end())
+        {
+            os << ", " << *it;
+        }
+        return os << ']';
+    }
+
+    template <class T, class U>
+    std::ostream &operator<<(std::ostream &os, const std::pair<T, U> &p)
+    {
+        return os << '(' << p.first << ", " << p.second << ')';
+    }
+
+    template <class K, class V>
+    std::ostream &operator<<(std::ostream &os, const std::map<K, V> &m)
+    {
+        if (m.empty())
+            return os << "{}";
+        auto it = m.begin();
+        os << '{' << it->first << ": " << it->second;
+        while (++it != m.end())
+        {
+            os << ", " << it->first << ": " << it->second;
+        }
+        return os << '}';
+    }
+
+    template <class T>
+    std::ostream &operator<<(std::ostream &os, const std::set<T> &s)
+    {
+        if (s.empty())
+            return os << "{}";
+        auto it = s.begin();
+        os << '{' << *it;
+        while (++it != s.end())
+        {
+            os << ", " << *it;
+        }
+        return os << '}';
+    }
+
+    class Output
     {
         std::ostream *os = &std::cout;
         std::string end = "\n";
         std::string sep = " ";
 
     public:
+        Output(std::ostream &Os = std::cout,
+               std::string End = "\n",
+               std::string Sep = " ")
+        {
+            os = &Os;
+            end = End;
+            sep = Sep;
+        }
         void set(std::ostream &Os = std::cout,
                  std::string End = "\n",
                  std::string Sep = " ")
@@ -29,7 +99,7 @@ namespace console
             (*os) << t << sep;
             operator()(args...);
         }
-    } print;
+    } print, error(std::cerr);
 
     struct TimerResult
     {
