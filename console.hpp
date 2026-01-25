@@ -289,7 +289,7 @@ namespace console
         }
         void operator()()
         {
-            (*os) << end;
+            (*os) << end << std::flush;
         }
         template <class T>
         void operator()(const T &t)
@@ -529,5 +529,102 @@ namespace console
             ss << sep << *it;
         }
         return ss.str();
+    }
+
+    class ProgressBar
+    {
+        char leftChar;
+        char rightChar;
+        char fillChar;
+        char emptyChar;
+        char endChar;
+        int length;
+
+    public:
+        ProgressBar(char lc = '|', char rc = '|', char fc = '#',
+                    char ec = ' ', char nc = '\n', int l = 50)
+            : leftChar(lc), rightChar(rc), fillChar(fc),
+              emptyChar(ec), endChar(nc), length(l) {}
+        void operator()(double schedule, std::ostream &os = std::cout)
+        {
+            if (schedule < 0)
+                schedule = 0;
+            if (schedule > 1)
+                schedule = 1;
+            os << leftChar;
+            for (int i = 0; i < length; i++)
+            {
+                if (i * 1.0 / length <= schedule)
+                    os << fillChar;
+                else
+                    os << emptyChar;
+            }
+            os << rightChar;
+            if (schedule == 1)
+                os << "100%";
+            else if (schedule < 0.1)
+                os << ' ' << int(schedule * 100) << " %";
+            else
+                os << int(schedule * 100) << " %";
+            os << endChar << std::flush;
+        }
+    };
+
+    void jdt(double schedule, std::ostream &os = std::cout)
+    {
+        if (schedule < 0)
+            schedule = 0;
+        if (schedule > 1)
+            schedule = 1;
+        os << '|';
+        for (int i = 0; i < 50; i++)
+        {
+            if (i / 50.0 <= schedule)
+                os << '#';
+            else
+                os << ' ';
+        }
+        os << '|';
+        if (schedule == 1)
+            os << "100%";
+        else if (schedule < 0.1)
+            os << ' ' << int(schedule * 100) << " %";
+        else
+            os << int(schedule * 100) << " %";
+        os << '\r' << std::flush;
+    }
+
+    void wait(int times, int sep = 1,
+              const std::string &end = "Done!", std::ostream &os = std::cout)
+    {
+        for (int i = 0; i < times; i++)
+        {
+            os << "/-\\|"[i % 4] << '\b';
+            sleep(sep);
+        }
+        os << end;
+    }
+
+    void wait(bool when, int sep = 1, const std::string &end = "Done!",
+              std::ostream &os = std::cout)
+    {
+        for (int i = 0; when; i++)
+        {
+            os << "/-\\|"[i % 4] << '\b';
+            sleep(sep);
+        }
+        os << end;
+    }
+
+    template <class F>
+    void wait(F f, int sep = 1, const std::string &end = "Done!",
+              std::ostream &os = std::cout)
+    {
+        for (int i = 0; f(); i++)
+        {
+            os << "/-\\|"[i % 4] << '\b';
+            sleep(sep);
+        }
+        os << end;
     }
 }
