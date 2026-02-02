@@ -1,0 +1,10 @@
+#pragma once
+#include "std.h"
+#include "output.h"
+#include "input.h"
+#include "time.h"
+#include "random.h"
+#include "strpp.h"
+#include "logging.h"
+#include "jdt.h"
+#include "csexc.h"
