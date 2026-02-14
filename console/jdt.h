@@ -14,9 +14,23 @@ namespace console
         ostream &os;
     };
 
-    const JdtSettings defaultSettings{50, "[", "]", "#", " ", "\r", cout};
+    const JdtSettings normalSettings{50, "[", "]", "#", " ", "\r", cout};
     const JdtSettings simpleSettings{50, "", "", "=", "-", "\r", cout};
-    const JdtSettings beautifulSettings{50, "▕", "▏", "█", "░", "\r", cout};
+    const JdtSettings beautifulSettings{
+        50,
+        "\u2595", // "▕"
+        "\u258F", // "▏"
+        "\u2588", // "█"
+        "\u2591", // "░"
+        "\r",
+        cout};
+    /**
+     * 注：如果编译器可以识别字面值但无法识别码点
+     *     可以手动将码点替换为对应的字符
+     *     如果均无法识别
+     *     请勿使用beautifulSettings */
+
+    JdtSettings defaultSettings = normalSettings;
 
     void jdt(int percent, const JdtSettings &js = defaultSettings)
     {

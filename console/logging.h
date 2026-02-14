@@ -56,10 +56,10 @@ namespace console
             {
                 if (colorful)
                     output(color::BrightBlack,
-                           '[', datetime(), "] [debug] - ",
+                           '[', datetime(), "] [DEBUG] - ",
                            args..., color::Reset);
                 else
-                    output('[', datetime(), "] [debug] - ", args...);
+                    output('[', datetime(), "] [DEBUG] - ", args...);
             }
         }
         template <class... Args>
@@ -69,10 +69,10 @@ namespace console
             {
                 if (colorful)
                     output(color::BrightCyan,
-                           '[', datetime(), "] [.info] - ",
+                           '[', datetime(), "] [.INFO] - ",
                            args..., color::Reset);
                 else
-                    output('[', datetime(), "] [.info] - ", args...);
+                    output('[', datetime(), "] [.INFO] - ", args...);
             }
         }
         template <class... Args>
@@ -82,10 +82,10 @@ namespace console
             {
                 if (colorful)
                     output(color::BrightYellow,
-                           '[', datetime(), "] [.warn] - ",
+                           '[', datetime(), "] [.WARN] - ",
                            args..., color::Reset);
                 else
-                    output('[', datetime(), "] [.warn] - ", args...);
+                    output('[', datetime(), "] [.WARN] - ", args...);
             }
         }
         template <class... Args>
@@ -95,10 +95,10 @@ namespace console
             {
                 if (colorful)
                     output(color::BrightRed,
-                           '[', datetime(), "] [error] - ",
+                           '[', datetime(), "] [ERROR] - ",
                            args..., color::Reset);
                 else
-                    output('[', datetime(), "] [error] - ", args...);
+                    output('[', datetime(), "] [ERROR] - ", args...);
             }
         }
         template <class... Args>
@@ -108,10 +108,10 @@ namespace console
             {
                 if (colorful)
                     output(color::BrightMagenta,
-                           '[', datetime(), "] [fatal] - ",
+                           '[', datetime(), "] [FATAL] - ",
                            args..., color::Reset);
                 else
-                    output('[', datetime(), "] [fatal] - ", args...);
+                    output('[', datetime(), "] [FATAL] - ", args...);
             }
             throw fatal_logging("console::Logging: Fatal Error");
         }

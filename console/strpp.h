@@ -3,34 +3,40 @@
 #include <vector>
 #include <algorithm>
 #include <cctype>
-#include <vector>
 #include <sstream>
+#include <initializer_list>
+#include <utility>
+#include <cstdint>
+#include "output.h"
+#include "csexc.h"
 
 namespace console
 {
     using namespace std;
 
-    string ltrim(string str)
+    template <class F>
+    string ltrim(string str, F &&f = [](unsigned char c)
+                             { return !isspace(c); })
     {
-        auto it = find_if(str.begin(), str.end(),
-                          [](unsigned char c)
-                          { return !isspace(c); });
+        auto it = find_if(str.begin(), str.end(), f);
         str.erase(str.begin(), it);
         return str;
     }
 
-    string rtrim(string str)
+    template <class F>
+    string rtrim(string str, F &&f = [](unsigned char c)
+                             { return !isspace(c); })
     {
-        auto it = find_if(str.rbegin(), str.rend(),
-                          [](unsigned char c)
-                          { return !isspace(c); });
+        auto it = find_if(str.rbegin(), str.rend(), f);
         str.erase(it.base(), str.end());
         return str;
     }
 
-    string trim(string str)
+    template <class F>
+    string trim(string str, F &&f = [](unsigned char c)
+                            { return !isspace(c); })
     {
-        return ltrim(rtrim(str));
+        return ltrim(rtrim(str, f), f);
     }
 
     string upper(string str)
@@ -88,7 +94,7 @@ namespace console
             return PartitionResult{text, "", ""};
         return PartitionResult{
             text.substr(0, pos),
-            text.substr(pos, sep.size()),
+            sep,
             text.substr(pos + sep.size())};
     }
 
@@ -125,8 +131,56 @@ namespace console
     template <class T>
     string uniToStr(T &&t)
     {
-        stringstream ss;
-        ss << t;
-        return ss.str();
+        ostringstream oss;
+        oss << t;
+        return oss.str();
     }
+    string uniToStr(const string &str) { return str; }
+    string uniToStr(string &&str) { return move(str); }
+    string uniToStr(const char *str) { return string(str); }
+    string uniToStr(char *str) { return string(str); }
+    string uniToStr(int16_t num) { return to_string(num); }
+    string uniToStr(uint16_t num) { return to_string(num); }
+    string uniToStr(int32_t num) { return to_string(num); }
+    string uniToStr(uint32_t num) { return to_string(num); }
+    string uniToStr(long num) { return to_string(num); }
+    string uniToStr(unsigned long num) { return to_string(num); }
+    string uniToStr(int64_t num) { return to_string(num); }
+    string uniToStr(uint64_t num) { return to_string(num); }
+    string uniToStr(float num) { return to_string(num); }
+    string uniToStr(double num) { return to_string(num); }
+    string uniToStr(long double num) { return to_string(num); }
+    string uniToStr(bool b) { return b ? "true" : "false"; }
+
+    template <class T>
+    string operator%(const string &str, const T &t)
+    {
+        auto result = partition(str, "{}");
+        if (result.middle == "{}")
+        {
+            return result.left + uniToStr(t) + result.right;
+        }
+        throw bad_format("...");
+    }
+
+#if __cplusplus == 201103L
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wliteral-suffix"
+#endif
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4455)
+#endif
+    string operator""s(const char *str, size_t)
+    {
+        return string(str);
+    }
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic pop
+#endif
+#endif
 }

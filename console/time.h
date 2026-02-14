@@ -45,18 +45,10 @@ namespace console
     }
 
     template <class F, class... Args>
-    TimerResult timer(F f, const Args &...args)
+    TimerResult timer(F &&f, Args &&...args)
     {
         TimerResult start = now();
         f(args...);
-        return now() - start;
-    }
-
-    template <class T, class F, class... Args>
-    TimerResult timer(T &t, F f, const Args &...args)
-    {
-        TimerResult start = now();
-        t = f(args...);
         return now() - start;
     }
 

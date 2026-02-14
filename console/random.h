@@ -2,6 +2,7 @@
 #include <random>
 #include <chrono>
 #include <cstdint>
+#include <utility>
 
 namespace console
 {
@@ -15,16 +16,18 @@ namespace console
         return gen;
     }
 
-    int64_t randint(int64_t min = 0, int64_t max = 32767,
-                    mt19937 &gen = GEN())
+    template <class T = int>
+    T randint(T min = 0, T max = 32767,
+              mt19937 &gen = GEN())
     {
-        return uniform_int_distribution<int64_t>(min, max)(gen);
+        return uniform_int_distribution<T>(min, max)(gen);
     }
 
-    long double uniform(double min = 0.0, double max = 1.0,
-                        mt19937 &gen = GEN())
+    template <class T = double>
+    T uniform(T min = 0.0, T max = 1.0,
+              mt19937 &gen = GEN())
     {
-        return uniform_real_distribution<long double>(min, max)(gen);
+        return uniform_real_distribution<T>(min, max)(gen);
     }
 
     template <class T>
@@ -37,5 +40,22 @@ namespace console
         for (size_t i = 0; i < index; i++)
             ++it;
         return *it;
+    }
+
+    template <class T>
+    void shuffle(T &&t, mt19937 &gen = GEN())
+    {
+        auto get = [&](size_t index) -> decltype(*begin(t))
+        {
+            auto it = begin(t);
+            for (size_t i = 0; i < index; i++)
+                ++it;
+            return *it;
+        };
+        for (size_t i = t.size() - 1; i > 0; i--)
+        {
+            auto j = randint<size_t>(0, i);
+            swap(get(i), get(j));
+        }
     }
 }

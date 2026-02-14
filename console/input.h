@@ -1,8 +1,9 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <climits>
+#include <limits>
 #include <cfloat>
+#include <cstdint>
 #include "strpp.h"
 
 namespace console
@@ -45,6 +46,8 @@ namespace console
     string inputLine(const string &prompt = "Type a line string: ",
                      const InputSettings &is = inputSettings)
     {
+        if (is.is.peek() == '\n')
+            is.is.get();
         string tmp;
         is.os << prompt;
         getline(is.is, tmp);
@@ -57,7 +60,7 @@ namespace console
         string tmp;
         while (true)
         {
-            tmp = lower(input<string>(prompt, is));
+            tmp = lower(inputLine(prompt, is));
             if (tmp == "yes" || tmp == "y")
                 return true;
             if (tmp == "no" || tmp == "n")
@@ -66,7 +69,7 @@ namespace console
         }
     }
 
-    long double inputWithRange(const string &prompt = "Type yes or no: ",
+    long double inputWithRange(const string &prompt = "Type a number: ",
                                long double min = DBL_MIN,
                                long double max = DBL_MAX,
                                const InputSettings &is = inputSettings)
@@ -96,43 +99,5 @@ namespace console
         char tmp = is.is.get();
         is.is.ignore(numeric_limits<streamsize>::max(), '\n');
         return tmp;
-    }
-
-    template <class T>
-    T &inputChoice(vector<T> &vec,
-                   const string &prompt = "Type your choice: ",
-                   const InputSettings &is = inputSettings)
-    {
-        size_t index;
-        for (size_t i = 0; i < vec.size(); i++)
-        {
-            is.os << i + 1 << ": " << vec[i] << '\n';
-        }
-        while (true)
-        {
-            index = input<size_t>(prompt, is);
-            if (index >= 1 && index <= vec.size())
-                return vec[index - 1];
-            is.os << "Out of range.\n";
-        }
-    }
-
-    template <class T>
-    const T &inputChoice(const vector<T> &vec,
-                         const string &prompt = "Type your choice: ",
-                         const InputSettings &is = inputSettings)
-    {
-        size_t index;
-        for (size_t i = 0; i < vec.size(); i++)
-        {
-            is.os << i + 1 << ": " << vec[i] << '\n';
-        }
-        while (true)
-        {
-            index = input<size_t>(prompt, is);
-            if (index >= 1 && index <= vec.size())
-                return vec[index - 1];
-            is.os << "Out of range.\n";
-        }
     }
 }

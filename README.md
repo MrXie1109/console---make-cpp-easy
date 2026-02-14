@@ -1,472 +1,463 @@
-# console - C++交互式开发工具库
+# console 库 / console Library
 
-> Make C++ Great Again! (MCGA) 🚀
+[![C++11](https://img.shields.io/badge/C++-11-blue.svg)](https://en.cppreference.com/w/cpp/11)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![No Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg)]()
 
-**让C++写起来像Python一样顺手，但保留C++的性能和类型安全。**
+一个轻量级、零依赖的 C++11 控制台工具库，提供简洁的 API 用于输入输出、日志记录、时间测量、随机数生成、字符串处理、文件操作等常见任务。
 
-## 📦 特性
-- **头文件库** - 包含即用，无需编译安装
-- **跨平台** - Windows/WSL/Linux 验证通过
-- **纯C++11** - 零外部依赖，仅需标准库
-- **Python式API** - 熟悉的使用体验
+A lightweight, zero-dependency C++11 console utility library providing simple APIs for common tasks including I/O, logging, time measurement, random number generation, string manipulation, file operations, and more.
 
-## 🚀 快速开始
+## 特性 / Features
+
+- 🚀 **兼容 C++11** - 完全基于 C++11 标准
+- 📦 **零外部依赖** - 仅使用 C++ 标准库
+- 🎯 **简洁 API** - 直观易用的接口设计
+- 🎨 **彩色输出** - 支持终端颜色和样式
+- 📝 **日志系统** - 多级别日志，支持时间戳
+- ⏱️ **时间工具** - 高精度计时和休眠
+- 🔢 **随机数** - 便捷的随机数生成接口
+- 📄 **文件操作** - 简单的文件读写封装
+- 🎭 **动态类型** - 类似 Python 的异构容器
+
+## 模块 / Modules
+
+### 1. 输出 (output.h)
+
+提供类似 Python 的 print 功能和 STL 容器输出支持。
+
+Provides Python-like print functionality and STL container output support.
 
 ```cpp
-#include "console/all.h"  // 一个头文件包含所有功能
-using namespace console;   // 可选，简化调用
+namespace console {
+    // STL 容器输出支持 / STL container output support
+    template<class T> ostream& operator<<(ostream&, const vector<T>&);
+    template<class T, size_t N> ostream& operator<<(ostream&, const array<T, N>&);
+    template<class T, class U> ostream& operator<<(ostream&, const pair<T, U>&);
+    template<class K, class V> ostream& operator<<(ostream&, const map<K, V>&);
+    template<class T> ostream& operator<<(ostream&, const set<T>&);
+
+    // C 数组转换辅助 / C array conversion helpers
+    template<class T, size_t N> array<T, N> to_array(const T (&ar)[N]);
+    template<class T, size_t N> vector<T> to_vector(const T (&ar)[N]);
+
+    // 类似 Python 的 print / Python-like print
+    class Output {
+        void operator()();                                   // 打印结束符
+        template<class T> void operator()(const T& t);      // 打印单个值
+        template<class T, class... Args> void operator()(const T& t, const Args&... args); // 打印多个值
+    };
+    extern Output print;  // 全局 print 对象 / global print object
+}
+```
+
+**示例 / Example**:
+```cpp
+vector<int> vec = {1, 2, 3, 4};
+print("Vector:", vec);  // 输出: Vector: [1, 2, 3, 4]
+
+int arr[] = {5, 6, 7};
+auto arr2 = to_array(arr);  // C数组转 std::array
+```
+
+### 2. 输入 (input.h)
+
+类型安全的控制台输入函数，带错误处理。
+
+Type-safe console input functions with error handling.
+
+```cpp
+namespace console {
+    struct InputSettings {
+        ostream& os;  // 输出流
+        istream& is;  // 输入流
+    };
+    extern InputSettings inputSettings;
+
+    // 通用输入 / Generic input
+    template<class T = string> T input(const string& prompt = "", const InputSettings& is = inputSettings);
+
+    // 便捷输入函数 / Convenience input functions
+    long double inputNumber(const string& prompt = "Type a number: ", const InputSettings& is = inputSettings);
+    string inputLine(const string& prompt = "Type a line string: ", const InputSettings& is = inputSettings);
+    bool inputYesOrNo(const string& prompt = "Type yes or no: ", const InputSettings& is = inputSettings);
+    long double inputWithRange(const string& prompt, long double min, long double max, const InputSettings& is = inputSettings);
+    char inputChar(const string& prompt = "Type a character: ", const InputSettings& is = inputSettings);
+}
+```
+
+**示例 / Example**:
+```cpp
+int age = input<int>("Enter your age: ");
+string name = inputLine("Enter your name: ");
+if (inputYesOrNo("Continue? (yes/no): ")) {
+    // ...
+}
+```
+
+### 3. 时间 (time.h)
+
+高精度时间测量和格式化输出。
+
+High-precision time measurement and formatted output.
+
+```cpp
+namespace console {
+    struct TimerResult {
+        double ns, us, ms, s;  // 纳秒、微秒、毫秒、秒
+        operator double() const;  // 转换为纳秒
+        friend ostream& operator<<(ostream&, const TimerResult);  // 自动选择合适单位
+    };
+
+    TimerResult now();  // 获取当前时间点
+
+    // 测量函数执行时间 / Measure function execution time
+    template<class F, class... Args> TimerResult timer(F&& f, Args&&... args);
+
+    void sleep(double s);  // 休眠指定秒数
+    void sleep(const TimerResult& tr);  // 根据 TimerResult 休眠
+
+    string datetime(const string& fmt = "%Y-%m-%d %H:%M:%S");  // 获取格式化时间
+}
+```
+
+**示例 / Example**:
+```cpp
+auto duration = timer([]{
+    // 耗时操作 / time-consuming operation
+    sleep(0.5);  // 休眠0.5秒
+});
+print("Execution time:", duration);  // 输出: Execution time: 500ms
+
+print("Current time:", datetime());  // 输出: Current time: 2024-01-01 12:34:56
+```
+
+### 4. 随机数 (random.h)
+
+基于 Mersenne Twister 的随机数生成器。
+
+Mersenne Twister based random number generator.
+
+```cpp
+namespace console {
+    // 获取全局随机数生成器 / Get global random number generator
+    mt19937& GEN();
+
+    // 随机整数 / Random integer
+    template<class T = int> T randint(T min = 0, T max = 32767, mt19937& gen = GEN());
+
+    // 随机浮点数 / Random floating point
+    template<class T = double> T uniform(T min = 0.0, T max = 1.0, mt19937& gen = GEN());
+
+    // 从容器随机选择 / Random choice from container
+    template<class T> auto choice(T&& t, mt19937& gen = GEN()) -> decltype(*begin(t));
+
+    // 打乱容器 / Shuffle container
+    template<class T> void shuffle(T&& t, mt19937& gen = GEN());
+}
+```
+
+**示例 / Example**:
+```cpp
+int dice = randint(1, 6);           // 1-6随机数
+double prob = uniform();            // 0-1随机浮点数
+
+vector<int> vec = {1, 2, 3, 4, 5};
+int selected = choice(vec);         // 随机选择一个元素
+shuffle(vec);                       // 打乱顺序
+```
+
+### 5. 字符串处理 (strpp.h)
+
+全面的字符串操作函数。
+
+Comprehensive string manipulation functions.
+
+```cpp
+namespace console {
+    // 修剪 / Trimming
+    template<class F> string ltrim(string str, F&& f = [](unsigned char c){ return !isspace(c); });
+    template<class F> string rtrim(string str, F&& f = [](unsigned char c){ return !isspace(c); });
+    template<class F> string trim(string str, F&& f = [](unsigned char c){ return !isspace(c); });
+
+    // 大小写转换 / Case conversion
+    string upper(string str);
+    string lower(string str);
+    string title(string str);
+
+    // 分割与连接 / Split and join
+    struct PartitionResult { string left, middle, right; };
+    PartitionResult partition(const string& text, const string& sep);
+    vector<string> split(string text, const string& sep = " ");
+    template<class T> string join(const vector<T>& vec, const string& sep = "");
+
+    // 通用类型转字符串 / Universal to string conversion
+    template<class T> string uniToStr(T&& t);
+    string uniToStr(const string& str);
+    string uniToStr(const char* str);
+    string uniToStr(int16_t num);  // 各种数值类型重载 / overloads for numeric types
+    string uniToStr(bool b);  // "true"/"false"
+
+    // 字符串格式化 (类似 Python % 运算符) / String formatting (like Python % operator)
+    template<class T> string operator%(const string& str, const T& t);
+}
+```
+
+**示例 / Example**:
+```cpp
+string str = "  Hello World  ";
+print(trim(str));                    // 输出: Hello World
+print(upper(str));                    // 输出:   HELLO WORLD  
+
+vector<string> parts = split("a,b,c", ",");  // ["a", "b", "c"]
+string joined = join(parts, "-");            // "a-b-c"
+
+string formatted = "Hello, {}!" % "World";   // "Hello, World!"
+```
+
+### 6. 颜色输出 (colorful.h)
+
+ANSI 转义序列颜色常量。
+
+ANSI escape sequence color constants.
+
+```cpp
+namespace console::color {
+    // 前景色 / Foreground colors
+    extern const char *Black, *Red, *Green, *Yellow, *Blue, *Magenta, *Cyan, *White;
+    extern const char *BrightBlack, *BrightRed, *BrightGreen, *BrightYellow;
+    extern const char *BrightBlue, *BrightMagenta, *BrightCyan, *BrightWhite;
+
+    // 背景色 / Background colors
+    extern const char *BgBlack, *BgRed, *BgGreen, *BgYellow, *BgBlue, *BgMagenta, *BgCyan, *BgWhite;
+    extern const char *BgBrightBlack, *BgBrightRed, *BgBrightGreen, *BgBrightYellow;
+    extern const char *BgBrightBlue, *BgBrightMagenta, *BgBrightCyan, *BgBrightWhite;
+
+    // 文本样式 / Text styles
+    extern const char *Bold, *Dim, *Italic, *Underline, *Blink, *Reverse, *Hidden, *Strikethrough;
+    extern const char *Reset;  // 重置所有样式
+}
+```
+
+**示例 / Example**:
+```cpp
+cout << color::Red << "Error message" << color::Reset << endl;
+cout << color::Bold << color::Blue << "Bold blue text" << color::Reset << endl;
+```
+
+### 7. 日志记录 (logging.h)
+
+多级别日志系统，支持彩色输出和时间戳。
+
+Multi-level logging system with color support and timestamps.
+
+```cpp
+namespace console {
+    class Logging {
+    public:
+        enum class Level { DEBUG, INFO, WARN, ERROR, FATAL };
+
+        Logging(ostream& os = cout, bool colorful = false, Level lvl = Level::INFO);
+
+        void set(Level minLevel);              // 设置最低日志级别
+        void set(bool debug, bool info, bool warn, bool error, bool fatal);  // 单独设置每个级别
+
+        template<class... Args> void debug(const Args&... args);
+        template<class... Args> void info(const Args&... args);
+        template<class... Args> void warn(const Args&... args);
+        template<class... Args> void error(const Args&... args);
+        template<class... Args> void fatal(const Args&... args);  // 会抛出 fatal_logging 异常
+    };
+
+    extern Logging logger;  // 全局 logger 对象
+}
+```
+
+**示例 / Example**:
+```cpp
+logger.info("Application started");
+logger.debug("Debug value:", 42);
+
+try {
+    // ...
+} catch (const exception& e) {
+    logger.error("Caught exception:", e.what());
+}
+```
+
+### 8. 进度条 (jdt.h)
+
+可自定义样式的进度条。
+
+Customizable progress bar.
+
+```cpp
+namespace console {
+    struct JdtSettings {
+        int len;           // 进度条长度
+        const char *lch;   // 左边界符
+        const char *rch;   // 右边界符
+        const char *fch;   // 已填充字符
+        const char *ech;   // 未填充字符
+        const char *Ech;   // 结尾字符 (通常为 \r)
+        ostream& os;       // 输出流
+    };
+
+    // 预设样式 / Preset styles
+    extern const JdtSettings normalSettings;      // [##########          ]   50%
+    extern const JdtSettings simpleSettings;      // ==========----------   50%
+    extern const JdtSettings beautifulSettings;   // ▕██████████░░░░░░░░░░▏   50%
+
+    extern JdtSettings defaultSettings;  // 默认样式，可修改
+
+    void jdt(int percent, const JdtSettings& js = defaultSettings);
+}
+```
+
+**示例 / Example**:
+```cpp
+for (int i = 0; i <= 100; i += 10) {
+    jdt(i, beautifulSettings);
+    sleep(0.1);
+}
+cout << endl;
+```
+
+### 9. 文件操作 (file.h)
+
+简单的文件读写封装。
+
+Simple file I/O wrapper.
+
+```cpp
+namespace console {
+    class Path {
+    public:
+        using bytes = vector<unsigned char>;
+
+        Path(const string& str);  // 路径字符串，Windows下自动转换分隔符
+
+        friend Path operator/(const Path& p1, const Path& p2);  // 路径拼接
+
+        string read_text();        // 读取文本文件
+        bytes read_binary();       // 读取二进制文件
+        vector<string> read_lines();  // 按行读取
+
+        void write_text(const string& text);     // 写入文本
+        void write_binary(const bytes& bts);     // 写入二进制
+        void write_lines(const vector<string>& lines);  // 按行写入
+    };
+}
+```
+
+**示例 / Example**:
+```cpp
+Path file("data.txt");
+string content = file.read_text();           // 读取整个文件
+vector<string> lines = file.read_lines();    // 按行读取
+
+Path newFile = Path("backup") / "data.txt";  // 路径拼接
+newFile.write_lines(lines);                  // 写入文件
+```
+
+### 10. 动态类型容器 (box.h)
+
+类似 Python 列表的异构容器。
+
+Heterogeneous container similar to Python list.
+
+```cpp
+namespace console {
+    class Item {  // 可存储任意类型的包装类 / Type-erased wrapper
+    public:
+        Item();                         // 空 Item
+        template<typename T> Item(const T& value);  // 存储任意类型
+        Item(const Item& other);        // 拷贝构造
+        Item(Item&& other) noexcept;    // 移动构造
+
+        template<typename T> T& get();  // 获取存储的值（类型安全）
+    };
+
+    class Box : public vector<Item> {  // 异构容器 / Heterogeneous container
+    public:
+        template<class... Args> Box(Args&&... args);  // 可变参数构造
+
+        template<class T> T& get(size_t index);       // 获取指定索引的元素
+
+        template<class... Args> void unpack(Args&&... args);  // 解包到变量
+    };
+}
+```
+
+**示例 / Example**:
+```cpp
+Box box(42, 3.14, "Hello", vector{1, 2, 3});
+
+int i = box.get<int>(0);              // 42
+double d = box.get<double>(1);        // 3.14
+string s = box.get<string>(2);        // "Hello"
+
+// 解包到变量 / Unpack to variables
+int a; double b; string c;
+box.unpack(a, b, c);                  // a=42, b=3.14, c="Hello"
+```
+
+### 11. 异常类 (csexc.h)
+
+自定义异常类。
+
+Custom exception classes.
+
+```cpp
+namespace console {
+    class fatal_logging : public runtime_error;        // 致命日志错误
+    class jdt_range_error : public invalid_argument;   // 进度条范围错误
+    class bad_format : public invalid_argument;        // 字符串格式错误
+    class file_not_found_error : public runtime_error; // 文件未找到
+    class bad_get : public invalid_argument;           // Item 类型获取错误
+}
+```
+
+## 快速开始 / Quick Start
+
+```cpp
+#include "all.h"
+using namespace console;
 
 int main() {
-    print("Hello", "World", 123, 45.6);      // 自动拼接输出
-    logger.info("程序启动");                 // 结构化日志
-    jdt(75, beautifulSettings);              // 美观进度条
+    // 输出 / Output
+    print("Hello, World!");
+
+    // 输入 / Input
+    string name = inputLine("What's your name? ");
+    print("Nice to meet you,", name);
+
+    // 随机数 / Random
+    int num = randint(1, 100);
+    print("Random number:", num);
+
+    // 时间测量 / Time measurement
+    auto t = timer([]{
+        sleep(0.1);
+    });
+    print("Slept for:", t);
+
+    // 日志 / Logging
+    logger.info("Program finished");
+
     return 0;
 }
 ```
 
-编译（C++11或更高）：
-```bash
-g++ -std=c++11 your_program.cpp -o program
-```
+## 编译要求 / Build Requirements
+
+- C++11 兼容的编译器 / C++11 compatible compiler
+- 仅需标准库 / Standard library only
+
+## 许可证 / License
+
+MIT License[LICENSE](LICENSE)
 
 ---
 
-## 📚 API 参考
-
-### 🖨️ 输出系统 (`output.h`)
-
-#### **核心类**
-```cpp
-class Output;  // 输出引擎，支持自定义分隔符、结束符
-Output print;   // 全局实例，默认输出到cout
-```
-
-#### **函数原型**
-```cpp
-// 1. 容器美化输出（重载operator<<）
-template<class T> ostream& operator<<(ostream&, const vector<T>&);
-template<class T, size_t N> ostream& operator<<(ostream&, const array<T,N>&);
-template<class K, class V> ostream& operator<<(ostream&, const map<K,V>&);
-template<class T> ostream& operator<<(ostream&, const set<T>&);
-template<class T, class U> ostream& operator<<(ostream&, const pair<T,U>&);
-
-// 2. print对象使用
-print(args...);                    // 使用默认配置
-Output(os, sep, end, flush)(args...); // 自定义输出
-
-// 3. 转换函数
-template<class T> string uniToStr(T&& value);  // 任意类型转字符串
-array<T,N> to_array(const T (&arr)[N]);        // C数组转std::array
-vector<T> to_vector(const T (&arr)[N]);        // C数组转std::vector
-```
-
-#### **用途示例**
-```cpp
-vector<int> nums{1, 2, 3};
-map<string, int> scores{{"Alice", 95}, {"Bob", 87}};
-
-print("数组:", nums);              // 输出: 数组: [1, 2, 3]
-print("成绩:", scores);            // 输出: 成绩: {Alice: 95, Bob: 87}
-
-// 自定义输出
-Output(cout, "|", "\n", true)("a", "b", "c");  // 输出: a|b|c
-
-string str = uniToStr(nums);       // "[1, 2, 3]"
-```
-
----
-
-### ⌨️ 输入系统 (`input.h`)
-
-#### **配置结构**
-```cpp
-struct InputSettings {
-    ostream& os;  // 提示信息输出流
-    istream& is;  // 输入流
-} inputSettings{cout, cin};  // 全局默认配置
-```
-
-#### **函数原型**
-```cpp
-// 1. 基础输入
-template<class T>
-T input(const string& prompt = "", 
-        const InputSettings& is = inputSettings);  // 泛型输入
-
-// 2. 专用输入函数
-string inputLine(const string& prompt = "Type a line string: ",
-                 const InputSettings& is = inputSettings);  // 整行输入
-long double inputNumber(const string& prompt = "Type a number: ",
-                        const InputSettings& is = inputSettings);  // 数字输入
-bool inputYesOrNo(const string& prompt = "Type yes or no: ",
-                  const InputSettings& is = inputSettings);  // 是/否输入
-char inputChar(const string& prompt = "Type a character: ",
-               const InputSettings& is = inputSettings);  // 单字符输入
-
-// 3. 带验证的输入
-long double inputWithRange(const string& prompt = "Type yes or no: ",
-                           long double min = DBL_MIN,
-                           long double max = DBL_MAX,
-                           const InputSettings& is = inputSettings);  // 范围验证
-
-// 4. 菜单选择
-template<class T>
-T& inputChoice(const vector<T>& options,
-               const string& prompt = "Type your choice: ",
-               const InputSettings& is = inputSettings);  // 返回引用
-
-template<class T>
-const T& inputChoice(const vector<T>& options,  // const重载版
-                     const string& prompt = "Type your choice: ",
-                     const InputSettings& is = inputSettings);
-```
-
-#### **用途示例**
-```cpp
-auto name = input<string>("请输入姓名: ");
-auto age = input<int>("年龄: ");
-auto height = inputWithRange("身高(cm): ", 50.0, 250.0);
-auto confirm = inputYesOrNo("确认提交? (y/n): ");
-
-vector<string> menu{"开始游戏", "设置", "退出"};
-auto& choice = inputChoice(menu, "请选择: ");  // 返回选中项的引用
-```
-
----
-
-### ⏱️ 时间工具 (`time.h`)
-
-#### **结构体**
-```cpp
-struct TimerResult {
-    double ns, us, ms, s;  // 各时间单位
-    operator double() const;  // 隐式转换为纳秒
-    friend ostream& operator<<(ostream&, const TimerResult&);  // 自动选单位
-};
-```
-
-#### **函数原型**
-```cpp
-TimerResult now();  // 当前时间戳
-template<class F, class... Args>
-TimerResult timer(F func, const Args&... args);  // 测量函数执行时间
-
-template<class T, class F, class... Args>
-TimerResult timer(T& result, F func, const Args&... args);  // 测量并保存结果
-
-void sleep(double seconds);  // 休眠指定秒数
-void sleep(const TimerResult& tr);  // 按TimerResult休眠
-
-string datetime(const string& format = "%Y-%m-%d %H:%M:%S");  // 格式化时间
-```
-
-#### **用途示例**
-```cpp
-auto start = now();
-
-auto time = timer([]{
-    sort(data.begin(), data.end());
-});  // 自动选择单位输出，如"3.072μs"
-
-sleep(1.5);  // 休眠1.5秒
-
-print("当前时间:", datetime());  // "2024-01-31 21:02:01"
-```
-
----
-
-### 🎲 随机工具 (`random.h`)
-
-#### **函数原型**
-```cpp
-mt19937& GEN();  // 获取随机数生成器（单例）
-
-int64_t randint(int64_t min = 0, 
-                int64_t max = 32767,
-                mt19937& gen = GEN());  // 随机整数
-
-long double uniform(double min = 0.0,
-                    double max = 1.0,
-                    mt19937& gen = GEN());  // 随机浮点数
-
-template<class T>
-auto choice(T&& container,
-            mt19937& gen = GEN()) -> decltype(*begin(container));  // 随机选择元素
-```
-
-#### **用途示例**
-```cpp
-auto num = randint(1, 100);  // 1~100随机整数
-auto prob = uniform(0.0, 1.0);  // 0~1随机小数
-
-vector<string> items{"苹果", "香蕉", "橙子"};
-auto& selected = choice(items);  // 随机选择一个
-```
-
----
-
-### 📝 字符串处理 (`strpp.h`)
-
-#### **函数原型**
-```cpp
-// 1. 修剪
-string ltrim(string str);   // 左修剪
-string rtrim(string str);   // 右修剪
-string trim(string str);    // 两侧修剪
-
-// 2. 大小写
-string upper(string str);   // 全大写（ASCII）
-string lower(string str);   // 全小写（ASCII）
-string title(string str);   // 标题化（首字母大写）
-
-// 3. 分割与连接
-struct PartitionResult { string left, middle, right; };  // 分割结果
-PartitionResult partition(const string& text, const string& sep);  // 三部分分割
-
-vector<string> split(string text, const string& sep = " ");  // 分割字符串
-
-template<class T>
-string join(const vector<T>& vec, const string& sep = "");  // 连接字符串
-```
-
-#### **用途示例**
-```cpp
-string text = "  Hello World!  ";
-print("原文本: '", text, "'");
-print("修剪后: '", trim(text), "'");        // "Hello World!"
-print("大写: '", upper(text), "'");         // "  HELLO WORLD!  "
-
-auto parts = split("a,b,c", ",");           // ["a", "b", "c"]
-auto joined = join(parts, "->");            // "a->b->c"
-
-auto pr = partition("hello/world/end", "/");  // left="hello", middle="/", right="world/end"
-```
-
----
-
-### 🎨 颜色常量 (`colorful.h`)
-
-#### **常量定义**
-```cpp
-namespace color {
-    // 前景色
-    const char *Black, *Red, *Green, *Yellow, *Blue, *Magenta, *Cyan, *White;
-    const char *BrightBlack, *BrightRed, *BrightGreen, *BrightYellow;
-    const char *BrightBlue, *BrightMagenta, *BrightCyan, *BrightWhite;
-    const char *Reset;  // 重置颜色
-    
-    // 背景色
-    const char *BgBlack, *BgRed, *BgGreen, *BgYellow, *BgBlue;
-    const char *BgMagenta, *BgCyan, *BgWhite;
-    const char *BgBrightBlack, *BgBrightRed, *BgBrightGreen;
-    const char *BgBrightYellow, *BgBrightBlue, *BgBrightMagenta;
-    const char *BgBrightCyan, *BgBrightWhite;
-    
-    // 样式
-    const char *Bold, *Dim, *Italic, *Underline;
-    const char *Blink, *Reverse, *Hidden, *Strikethrough;
-}
-```
-
-#### **用途示例**
-```cpp
-print(color::Red, "错误: ", color::Reset, "文件不存在");
-print(color::BgBlue, color::Bold, "重要提示", color::Reset);
-```
-
----
-
-### 📋 日志系统 (`logging.h`)
-
-#### **核心类**
-```cpp
-class Logging {
-public:
-    enum class Level : int8_t { DEBUG, INFO, WARN, ERROR, FATAL };
-    
-    // 构造函数
-    Logging(ostream& os = cout, 
-            bool colorful = false,
-            Level level = Level::INFO);
-    
-    // 日志方法
-    template<class... Args> void debug(const Args&... args);
-    template<class... Args> void info(const Args&... args);
-    template<class... Args> void warn(const Args&... args);
-    template<class... Args> void error(const Args&... args);
-    template<class... Args> [[noreturn]] void fatal(const Args&... args);  // 会抛异常
-    
-    // 级别控制
-    void set(Level minLevel);  // 设置最低显示级别
-    void set(bool debug, bool info, bool warn, bool error, bool fatal);  // 精细控制
-};
-
-Logging logger(cout, true, Logging::Level::INFO);  // 全局实例
-```
-
-#### **用途示例**
-```cpp
-logger.set(Logging::Level::DEBUG);  // 显示所有级别
-
-logger.debug("调试信息:", variable);
-logger.info("用户登录:", username);
-logger.warn("内存不足:", free_memory, "MB");
-logger.error("连接失败:", err_code);
-
-try {
-    logger.fatal("致命错误: 数据库崩溃");
-} catch (const fatal_logging& e) {
-    // fatal会抛异常，可以捕获处理
-}
-```
-
----
-
-### 📊 进度条 (`jdt.h`)
-
-#### **配置结构**
-```cpp
-struct JdtSettings {
-    int len;                  // 进度条长度
-    const char *lch, *rch;    // 左右边界字符
-    const char *fch, *ech;    // 填充和空白字符  
-    const char *Ech;          // 结束字符（通常"\r"）
-    ostream &os;              // 输出流
-};
-
-// 预设样式
-const JdtSettings defaultSettings{50, "[", "]", "#", " ", "\r", cout};
-const JdtSettings simpleSettings{50, "", "", "=", "-", "\r", cout};
-const JdtSettings beautifulSettings{50, "▕", "▏", "█", "░", "\r", cout};
-```
-
-#### **函数原型**
-```cpp
-void jdt(int percent, const JdtSettings& js = defaultSettings);
-// 注意：percent应在0-100之间，否则抛jdt_range_error异常
-```
-
-#### **用途示例**
-```cpp
-// 简单使用
-for (int i = 0; i <= 100; i++) {
-    jdt(i);
-    sleep(0.01);
-}
-print();  // 完成后换行
-
-// 使用预设
-jdt(75, beautifulSettings);  // Unicode风格
-jdt(75, simpleSettings);     // 简约风格
-
-// 自定义
-JdtSettings custom{30, "|", "|", "*", ".", "\r", cerr};
-jdt(50, custom);
-```
-
----
-
-### ⚠️ 异常系统 (`csexc.h`)
-
-#### **异常类**
-```cpp
-class fatal_logging : public runtime_error {
-public:
-    fatal_logging(const string& msg);  // 日志系统致命错误
-};
-
-class jdt_range_error : public invalid_argument {
-public:
-    jdt_range_error(const string& msg);  // 进度条参数范围错误
-};
-```
-
-#### **用途示例**
-```cpp
-try {
-    jdt(150);  // 会抛jdt_range_error
-} catch (const jdt_range_error& e) {
-    logger.error("进度参数错误:", e.what());
-}
-
-try {
-    logger.fatal("严重错误");
-} catch (const fatal_logging& e) {
-    // fatal一定会抛异常
-}
-```
-
----
-
-## 🔧 高级用法
-
-### 自定义配置
-```cpp
-// 创建自定义logger
-Logging fileLogger(logfile, false, Logging::Level::DEBUG);
-
-// 自定义进度条样式  
-JdtSettings myStyle{40, ">", "<", "=", " ", "\r", cout};
-
-// 自定义输入设置
-InputSettings myInput{cout, ifstream("input.txt")};
-```
-
-### 组合使用
-```cpp
-// 完整的交互程序示例
-logger.info("程序启动");
-auto name = input<string>("姓名: ");
-logger.info("用户:", name);
-
-print("计算中...");
-auto time = timer([&]{
-    complex_calculation();
-});
-
-jdt(100, beautifulSettings);
-print();
-logger.info("计算完成，耗时:", time);
-```
-
----
-
-## 📁 项目结构
-```
-console/
-├── all.h              # 总包含文件
-├── std.h              # 标准库快捷包含
-├── output.h           # 输出系统
-├── input.h            # 输入系统
-├── time.h             # 时间工具
-├── random.h           # 随机工具
-├── strpp.h            # 字符串处理
-├── colorful.h         # 颜色常量
-├── logging.h          # 日志系统
-├── jdt.h              # 进度条
-└── csexc.h            # 自定义异常
-```
-
----
-
-## ⚠️ 注意事项
-
-1. **颜色输出**：输出到文件时请设置`colorful=false`，避免ANSI码污染
-2. **Unicode字符**：`beautifulSettings`使用Unicode字符，确保终端支持
-3. **异常安全**：`fatal()`会抛出异常，注意捕获处理
-4. **进度条**：使用`"\r"`在同一行更新，完成后记得换行
-
----
-
-## 🎯 设计哲学
-
-**"喂饭但可调味"** - 每个功能都有合理默认值，但所有参数都可自定义。
-
-**"太麻烦了不做"** - 专注于解决80%的常见需求，不做过度设计。
-
-**MCGA精神** - 让C++开发更愉快，更高效，更有趣！
-
----
-
-## 📄 许可证
-MIT License - 详见 [LICENSE](LICENSE) 文件
+**console 库** - 让 C++ 控制台编程更简单 / Making C++ console programming simpler
