@@ -94,7 +94,7 @@ namespace console
         void unpack(Args &&...args)
         {
             size_t i = 0;
-            int _ = {0, ((args = get<Args>(i++)), 0)...};
+            int _[] = {0, ((args = get<Args>(i++)), 0)...};
             (void)_;
         }
     };
