@@ -9,57 +9,52 @@ namespace console
 {
     using namespace std;
 
-    struct TimerResult
+    struct Time
     {
-        double ns, us, ms, s;
+        long double ns, us, ms, s;
 
-        TimerResult(double NS)
+        Time(long double NS)
         {
             ns = NS;
             us = ns / 1000;
             ms = us / 1000;
             s = ms / 1000;
         }
-        operator double() const
+        operator long double() const
         {
             return ns;
         }
-        friend ostream &operator<<(ostream &os, const TimerResult tr)
+        friend ostream &operator<<(ostream &os, const Time t)
         {
-            if (tr.s >= 1)
-                return os << tr.s << " s";
-            if (tr.ms >= 1)
-                return os << tr.ms << "ms";
-            if (tr.us >= 1)
-                return os << tr.us << "μs";
-            return os << tr.ns << "ns";
+            if (t.s >= 1)
+                return os << t.s << " s";
+            if (t.ms >= 1)
+                return os << t.ms << "ms";
+            if (t.us >= 1)
+                return os << t.us << "μs";
+            return os << t.ns << "ns";
         }
     };
 
-    TimerResult now()
+    Time now()
     {
-        return TimerResult(double(chrono::duration_cast<chrono::nanoseconds>(
+        return Time((long double)(chrono::duration_cast<chrono::nanoseconds>(
                                       chrono::high_resolution_clock::now()
                                           .time_since_epoch())
                                       .count()));
     }
 
     template <class F, class... Args>
-    TimerResult timer(F &&f, Args &&...args)
+    Time timer(F &&f, Args &&...args)
     {
-        TimerResult start = now();
+        Time start = now();
         f(args...);
         return now() - start;
     }
 
-    void sleep(double s)
+    void sleep(const Time &tr)
     {
-        this_thread::sleep_for(chrono::duration<double>(s));
-    }
-
-    void sleep(const TimerResult &tr)
-    {
-        this_thread::sleep_for(chrono::duration<double>(tr.s));
+        this_thread::sleep_for(chrono::duration<long double>(tr.s));
     }
 
     string datetime(const string &fmt = "%Y-%m-%d %H:%M:%S")

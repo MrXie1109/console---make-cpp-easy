@@ -16,7 +16,7 @@ namespace console
         string path;
 
     public:
-        using bytes = vector<unsigned char>;
+        using Bytes = vector<unsigned char>;
 
         Path(const string &str) : path(str)
         {
@@ -49,16 +49,16 @@ namespace console
             return text;
         }
 
-        bytes read_binary()
+        Bytes read_binary()
         {
             ifstream fin(path, ios::binary);
             if (!fin.is_open())
                 throw file_not_found_error("Cannot open " + path);
-            bytes bts{
+            Bytes bytes{
                 istreambuf_iterator<char>(fin),
                 (istreambuf_iterator<char>())};
             fin.close();
-            return bts;
+            return bytes;
         }
 
         vector<string> read_lines()
@@ -75,7 +75,7 @@ namespace console
             fout.close();
         }
 
-        void write_binary(const bytes &bts)
+        void write_binary(const Bytes &bts)
         {
             ofstream fout(path, ios::binary);
             if (!fout.is_open())
@@ -95,6 +95,21 @@ namespace console
                 fout << '\n'
                      << *it;
             fout.close();
+        }
+
+        bool exists()
+        {
+            return ifstream(path).is_open();
+        }
+
+        void touch()
+        {
+            ofstream(path);
+        }
+
+        void ensure()
+        {
+            ofstream(path, ios::app);
         }
     };
 }

@@ -1,9 +1,12 @@
 #pragma once
 #include <cstdint>
+#include <sstream>
 #include "output.h"
 #include "colorful.h"
 #include "time.h"
+#include "strpp.h"
 #include "csexc.h"
+#include "literals.h"
 
 namespace console
 {
@@ -104,16 +107,21 @@ namespace console
         template <class... Args>
         void fatal(const Args &...args)
         {
+            using namespace console::literals;
+            std::ostringstream oss;
+            int _[] = {0, (oss << args, 0)...};
+            (void)_;
+            std::string error_info(oss.str());
             if (settings(4))
             {
                 if (colorful)
                     output(color::BrightMagenta,
                            '[', datetime(), "] [FATAL] - ",
-                           args..., color::Reset);
+                           error_info, color::Reset);
                 else
-                    output('[', datetime(), "] [FATAL] - ", args...);
+                    output('[', datetime(), "] [FATAL] - ", error_info);
             }
-            throw fatal_logging("console::Logging: Fatal Error");
+            throw fatal_logging("Fatal Error: "s + error_info);
         }
     } logger(std::cout, true, Logging::Level::INFO);
 }

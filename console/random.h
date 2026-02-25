@@ -3,6 +3,8 @@
 #include <chrono>
 #include <cstdint>
 #include <utility>
+#include <initializer_list>
+#include "csexc.h"
 
 namespace console
 {
@@ -33,13 +35,22 @@ namespace console
     template <class T>
     auto choice(T &&t, mt19937 &gen = GEN()) -> decltype(*begin(t))
     {
-        if (t.empty())
-            throw invalid_argument("Empty container");
+        if (begin(t) == end(t))
+            throw container_error("Empty container");
         auto it = begin(t);
-        size_t index = randint(0, t.size() - 1, gen);
+        size_t index = randint<size_t>(0, t.size() - 1, gen);
         for (size_t i = 0; i < index; i++)
             ++it;
         return *it;
+    }
+
+    template <class T>
+    auto choice(initializer_list<T> init, mt19937 &gen = GEN())
+        -> decltype(*begin(init))
+    {
+        return choice<initializer_list<T>>(
+            forward<initializer_list<T>>(init),
+            gen);
     }
 
     template <class T>

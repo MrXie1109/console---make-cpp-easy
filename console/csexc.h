@@ -40,4 +40,25 @@ namespace console
         bad_get(const string &msg)
             : invalid_argument(msg) {}
     };
+
+    class ndarray_error : public runtime_error
+    {
+    public:
+        ndarray_error(const string &msg)
+            : runtime_error(msg) {}
+    };
+
+    class container_error : public invalid_argument
+    {
+    public:
+        container_error(const string &msg)
+            : invalid_argument(msg) {}
+    };
+
+    class index_error : public out_of_range
+    {
+    public:
+        index_error(const string &msg)
+            : out_of_range(msg) {}
+    };
 }

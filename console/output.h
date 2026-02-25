@@ -11,6 +11,32 @@ namespace console
 {
     using namespace std;
 
+    // 为最难处理的std::tuple来个VIP服务
+
+    template <class Tuple, size_t N = tuple_size<Tuple>::value>
+    struct TuplePrinter
+    {
+        static void print(ostream &os, const Tuple &t)
+        {
+            TuplePrinter<Tuple, N - 1>::print(os, t);
+            if (N > 1)
+                os << ", ";
+            os << get<N - 1>(t);
+        }
+    };
+
+    template <class Tuple>
+    struct TuplePrinter<Tuple, 1>
+    {
+        static void print(ostream &os, const Tuple &t) { os << get<0>(t); }
+    };
+
+    template <class Tuple>
+    struct TuplePrinter<Tuple, 0>
+    {
+        static void print(ostream &os, const Tuple &t) {}
+    };
+
     template <class T>
     ostream &operator<<(ostream &, const vector<T> &);
     template <class T, size_t n>
@@ -21,6 +47,8 @@ namespace console
     ostream &operator<<(ostream &, const map<K, V> &);
     template <class T>
     ostream &operator<<(ostream &, const set<T> &);
+    template <class... Args>
+    ostream &operator<<(ostream &, const tuple<Args...> &);
 
     /**
      * 为各种常见STL容器定义便捷的输出方式
@@ -30,6 +58,7 @@ namespace console
      * std::pair
      * std::map
      * std::set
+     * std::array
      * 注意：C风格数组因兼容性不兼容，
      *      可以先使用console::to_array()或console::to_vector()转化
      */
@@ -110,6 +139,14 @@ namespace console
             os << ", " << *it;
         }
         return os << '}';
+    }
+
+    template <class... Args>
+    ostream &operator<<(ostream &os, const tuple<Args...> &t)
+    {
+        os << "(";
+        TuplePrinter<tuple<Args...>>::print(os, t);
+        return os << ")";
     }
 
     /**

@@ -23,7 +23,7 @@ namespace console
         string message;
         while (true)
         {
-            is.os << prompt;
+            is.os << prompt << flush;
             is.is >> tmp;
             if (!is.is)
             {
@@ -46,27 +46,12 @@ namespace console
     string inputLine(const string &prompt = "Type a line string: ",
                      const InputSettings &is = inputSettings)
     {
+        string tmp;
+        is.os << prompt << flush;
         if (is.is.peek() == '\n')
             is.is.get();
-        string tmp;
-        is.os << prompt;
         getline(is.is, tmp);
         return tmp;
-    }
-
-    bool inputYesOrNo(const string &prompt = "Type yes or no: ",
-                      const InputSettings &is = inputSettings)
-    {
-        string tmp;
-        while (true)
-        {
-            tmp = lower(inputLine(prompt, is));
-            if (tmp == "yes" || tmp == "y")
-                return true;
-            if (tmp == "no" || tmp == "n")
-                return false;
-            is.os << "Please type yes of no.\n";
-        }
     }
 
     long double inputWithRange(const string &prompt = "Type a number: ",
@@ -95,9 +80,25 @@ namespace console
     char inputChar(const string &prompt = "Type a character: ",
                    const InputSettings &is = inputSettings)
     {
-        is.os << prompt;
+        is.os << prompt << flush;
         char tmp = is.is.get();
         is.is.ignore(numeric_limits<streamsize>::max(), '\n');
         return tmp;
+    }
+
+    bool inputYesOrNo(const string &prompt = "Type yes or no: ",
+                      const InputSettings &is = inputSettings)
+    {
+        string tmp;
+        while (true)
+        {
+            char tmp = inputChar(prompt, is);
+            if (tmp == 'Y' || tmp == 'y')
+                return true;
+            else if (tmp == 'N' || tmp == 'n')
+                return false;
+            else
+                is.os << "Please type yes or no." << endl;
+        }
     }
 }

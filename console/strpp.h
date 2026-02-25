@@ -135,52 +135,21 @@ namespace console
         oss << t;
         return oss.str();
     }
-    string uniToStr(const string &str) { return str; }
-    string uniToStr(string &&str) { return move(str); }
-    string uniToStr(const char *str) { return string(str); }
-    string uniToStr(char *str) { return string(str); }
-    string uniToStr(int16_t num) { return to_string(num); }
-    string uniToStr(uint16_t num) { return to_string(num); }
-    string uniToStr(int32_t num) { return to_string(num); }
-    string uniToStr(uint32_t num) { return to_string(num); }
-    string uniToStr(long num) { return to_string(num); }
-    string uniToStr(unsigned long num) { return to_string(num); }
-    string uniToStr(int64_t num) { return to_string(num); }
-    string uniToStr(uint64_t num) { return to_string(num); }
-    string uniToStr(float num) { return to_string(num); }
-    string uniToStr(double num) { return to_string(num); }
-    string uniToStr(long double num) { return to_string(num); }
-    string uniToStr(bool b) { return b ? "true" : "false"; }
 
-    template <class T>
-    string operator%(const string &str, const T &t)
+    class f_string : public string
     {
-        auto result = partition(str, "{}");
-        if (result.middle == "{}")
+    public:
+        template <class... Args>
+        f_string(Args &&...args) : string(forward<Args>(args)...) {}
+        template <class T>
+        f_string operator%(const T &t)
         {
-            return result.left + uniToStr(t) + result.right;
+            auto result = partition(*this, "{}");
+            if (result.middle == "{}")
+            {
+                return result.left + uniToStr(t) + result.right;
+            }
+            throw bad_format("Bad Format");
         }
-        throw bad_format("...");
-    }
-
-#if __cplusplus == 201103L
-#if defined(__GNUC__) || defined(__clang__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wliteral-suffix"
-#endif
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable : 4455)
-#endif
-    string operator""s(const char *str, size_t)
-    {
-        return string(str);
-    }
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
-#if defined(__GNUC__) || defined(__clang__)
-#pragma GCC diagnostic pop
-#endif
-#endif
+    };
 }
