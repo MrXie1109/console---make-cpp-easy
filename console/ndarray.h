@@ -404,7 +404,7 @@ namespace console
                 throw ndarray_error("Shape mismatch");
             for (size_t i = 0; i < data_.size(); ++i)
             {
-                data_[i] += other.data_[i];
+                data_[i] /= other.data_[i];
             }
             return *this;
         }
