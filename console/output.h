@@ -6,12 +6,88 @@
 #include <utility>
 #include <map>
 #include <set>
+#include <deque>
+#include <list>
+#include <forward_list>
+#include <unordered_set>
+#include <unordered_map>
 
 namespace console
 {
     using namespace std;
 
-    // 为最难处理的std::tuple来个VIP服务
+    template <class T>
+    ostream &operator<<(ostream &, const vector<T> &);
+    template <class T>
+    ostream &operator<<(ostream &, const deque<T> &);
+    template <class T>
+    ostream &operator<<(ostream &, const list<T> &);
+    template <class T>
+    ostream &operator<<(ostream &, const forward_list<T> &);
+    template <class T, size_t n>
+    ostream &operator<<(ostream &, const array<T, n> &);
+    template <class T>
+    ostream &operator<<(ostream &, const set<T> &);
+    template <class K, class V>
+    ostream &operator<<(ostream &, const map<K, V> &);
+    template <class T>
+    ostream &operator<<(ostream &, const multiset<T> &);
+    template <class K, class V>
+    ostream &operator<<(ostream &, const multimap<K, V> &);
+    template <class T>
+    ostream &operator<<(ostream &, const unordered_set<T> &);
+    template <class K, class V>
+    ostream &operator<<(ostream &, const unordered_map<K, V> &);
+    template <class T>
+    ostream &operator<<(ostream &, const unordered_multiset<T> &);
+    template <class K, class V>
+    ostream &operator<<(ostream &, const unordered_multimap<K, V> &);
+    template <class T, class U>
+    ostream &operator<<(ostream &, const pair<T, U> &);
+    template <class... Args>
+    ostream &operator<<(ostream &, const tuple<Args...> &);
+
+    template <class Cont>
+    ostream &cont_print_sequence(ostream &os, const Cont &cont)
+    {
+        if (cont.empty())
+            return os << "[]";
+        auto it = cont.begin();
+        os << '[' << *it;
+        while (++it != cont.end())
+        {
+            os << ", " << *it;
+        }
+        return os << ']';
+    }
+
+    template <class Cont>
+    ostream &cont_print_set(ostream &os, const Cont &cont)
+    {
+        if (cont.empty())
+            return os << "{}";
+        auto it = cont.begin();
+        os << '{' << *it;
+        while (++it != cont.end())
+        {
+            os << ", " << *it;
+        }
+        return os << '}';
+    }
+
+    template <class Cont>
+    ostream &cont_print_map(ostream &os, const Cont &cont)
+    {
+        if (cont.empty())
+            return os << "{}";
+        auto it = cont.begin();
+        os << '{' << it->first << ": " << it->second;
+        while (++it != cont.end())
+        {
+            os << ", " << it->first << ": " << it->second;
+        }
+        return os << '}';
+    }
 
     template <class Tuple, size_t N = tuple_size<Tuple>::value>
     struct TuplePrinter
@@ -38,30 +114,82 @@ namespace console
     };
 
     template <class T>
-    ostream &operator<<(ostream &, const vector<T> &);
-    template <class T, size_t n>
-    ostream &operator<<(ostream &, const array<T, n> &);
-    template <class T, class U>
-    ostream &operator<<(ostream &, const pair<T, U> &);
-    template <class K, class V>
-    ostream &operator<<(ostream &, const map<K, V> &);
+    ostream &operator<<(ostream &os, const vector<T> &vec)
+    {
+        return cont_print_sequence(os, vec);
+    }
     template <class T>
-    ostream &operator<<(ostream &, const set<T> &);
+    ostream &operator<<(ostream &os, const deque<T> &deq)
+    {
+        return cont_print_sequence(os, deq);
+    }
+    template <class T>
+    ostream &operator<<(ostream &os, const list<T> &lst)
+    {
+        return cont_print_sequence(os, lst);
+    }
+    template <class T>
+    ostream &operator<<(ostream &os, const forward_list<T> &flst)
+    {
+        return cont_print_sequence(os, flst);
+    }
+    template <class T, size_t n>
+    ostream &operator<<(ostream &os, const array<T, n> &arr)
+    {
+        return cont_print_sequence(os, arr);
+    }
+    template <class T>
+    ostream &operator<<(ostream &os, const set<T> &s)
+    {
+        return cont_print_set(os, s);
+    }
+    template <class K, class V>
+    ostream &operator<<(ostream &os, const map<K, V> &m)
+    {
+        return cont_print_map(os, m);
+    }
+    template <class T>
+    ostream &operator<<(ostream &os, const multiset<T> &ms)
+    {
+        return cont_print_set(os, ms);
+    }
+    template <class K, class V>
+    ostream &operator<<(ostream &os, const multimap<K, V> &mm)
+    {
+        return cont_print_map(os, mm);
+    }
+    template <class T>
+    ostream &operator<<(ostream &os, const unordered_set<T> &us)
+    {
+        return cont_print_set(os, us);
+    }
+    template <class K, class V>
+    ostream &operator<<(ostream &os, const unordered_map<K, V> &um)
+    {
+        return cont_print_map(os, um);
+    }
+    template <class T>
+    ostream &operator<<(ostream &os, const unordered_multiset<T> &ums)
+    {
+        return cont_print_set(os, ums);
+    }
+    template <class K, class V>
+    ostream &operator<<(ostream &os, const unordered_multimap<K, V> &ump)
+    {
+        return cont_print_map(os, ump);
+    }
+    template <class T, class U>
+    ostream &operator<<(ostream &os, const pair<T, U> &p)
+    {
+        return os << '(' << p.first << ", " << p.second << ')';
+    }
     template <class... Args>
-    ostream &operator<<(ostream &, const tuple<Args...> &);
-
-    /**
-     * 为各种常见STL容器定义便捷的输出方式
-     * 支持的类型：
-     * std::vector
-     * std::array
-     * std::pair
-     * std::map
-     * std::set
-     * std::array
-     * 注意：C风格数组因兼容性不兼容，
-     *      可以先使用console::to_array()或console::to_vector()转化
-     */
+    ostream &operator<<(ostream &os, const tuple<Args...> &t)
+    {
+        os << "(";
+        TuplePrinter<tuple<Args...>>::print(os, t);
+        return os << ")";
+    }
 
     template <class T, size_t N>
     array<T, N> to_array(const T (&ar)[N])
@@ -78,90 +206,6 @@ namespace console
         copy(ar, ar + N, vec.begin());
         return vec;
     }
-
-    template <class T>
-    ostream &operator<<(ostream &os, const vector<T> &vec)
-    {
-        if (vec.empty())
-            return os << "[]";
-        auto it = vec.begin();
-        os << '[' << *it;
-        while (++it != vec.end())
-        {
-            os << ", " << *it;
-        }
-        return os << ']';
-    }
-
-    template <class T, size_t N>
-    ostream &operator<<(ostream &os, const array<T, N> &ar)
-    {
-        if (ar.empty())
-            return os << "[]";
-        auto it = ar.begin();
-        os << '[' << *it;
-        while (++it != ar.end())
-        {
-            os << ", " << *it;
-        }
-        return os << ']';
-    }
-
-    template <class T, class U>
-    ostream &operator<<(ostream &os, const pair<T, U> &p)
-    {
-        return os << '(' << p.first << ", " << p.second << ')';
-    }
-
-    template <class K, class V>
-    ostream &operator<<(ostream &os, const map<K, V> &m)
-    {
-        if (m.empty())
-            return os << "{}";
-        auto it = m.begin();
-        os << '{' << it->first << ": " << it->second;
-        while (++it != m.end())
-        {
-            os << ", " << it->first << ": " << it->second;
-        }
-        return os << '}';
-    }
-
-    template <class T>
-    ostream &operator<<(ostream &os, const set<T> &s)
-    {
-        if (s.empty())
-            return os << "{}";
-        auto it = s.begin();
-        os << '{' << *it;
-        while (++it != s.end())
-        {
-            os << ", " << *it;
-        }
-        return os << '}';
-    }
-
-    template <class... Args>
-    ostream &operator<<(ostream &os, const tuple<Args...> &t)
-    {
-        os << "(";
-        TuplePrinter<tuple<Args...>>::print(os, t);
-        return os << ")";
-    }
-
-    /**
-     * 一个类似Python但没有Python好用的输出方式
-     * （至少比std::printf和std::cout好）
-     * 接口：
-     * console::Output output(输出流, 间隔符, 结束符, 是否刷新);
-     * //默认的print设置为std::cout/" "/"\n"/true
-     * print("你好", 123, "世界");
-     * 输出示例：
-     * ---
-     * 你好 123 世界
-     *
-     * ---
-     */
 
     class Output
     {

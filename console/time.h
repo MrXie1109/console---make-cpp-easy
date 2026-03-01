@@ -9,31 +9,51 @@ namespace console
 {
     using namespace std;
 
-    struct Time
+    class Time
     {
-        long double ns, us, ms, s;
+        long double ns_;
 
-        Time(long double NS)
-        {
-            ns = NS;
-            us = ns / 1000;
-            ms = us / 1000;
-            s = ms / 1000;
-        }
+    public:
+        Time(long double ns) : ns_(ns) {}
+
         operator long double() const
         {
-            return ns;
+            return ns_;
         }
+
+        long double ns() const { return ns_; }
+        long double us() const { return ns_ / 1e3; }
+        long double ms() const { return ns_ / 1e6; }
+        long double s() const { return ns_ / 1e9; }
+        long double min() const { return ns_ / 60 / 1e9; }
+        long double hr() const { return ns_ / 3600 / 1e9; }
+
         friend ostream &operator<<(ostream &os, const Time t)
         {
-            if (t.s >= 1)
-                return os << t.s << " s";
-            if (t.ms >= 1)
-                return os << t.ms << "ms";
-            if (t.us >= 1)
-                return os << t.us << "μs";
-            return os << t.ns << "ns";
+            if (t.ns_ > 3600 * 1e9)
+                return os << t.ns_ / 3600 / 1e9 << "hr";
+            if (t.ns_ > 60 * 1e9)
+                return os << t.ns_ / 60 / 1e9 << "min";
+            if (t.ns_ > 1e9)
+                return os << t.ns_ / 1e9 << "s";
+            if (t.ns_ > 1e6)
+                return os << t.ns_ / 1e6 << "ms";
+            if (t.ns_ > 1e3)
+                return os << t.ns_ / 1e3 << "μs";
+            return os << t.ns_ << "ns";
         }
+
+        friend Time operator+(Time t1, Time t2) { return t1.ns_ + t2.ns_; }
+        friend Time operator-(Time t1, Time t2) { return t1.ns_ - t2.ns_; }
+        Time operator*(long double d) const { return ns_ * d; }
+        Time operator/(long double d) const { return ns_ / d; }
+
+        friend bool operator==(Time t1, Time t2) { return t1.ns_ == t2.ns_; }
+        friend bool operator!=(Time t1, Time t2) { return t1.ns_ != t2.ns_; }
+        friend bool operator<(Time t1, Time t2) { return t1.ns_ < t2.ns_; }
+        friend bool operator>(Time t1, Time t2) { return t1.ns_ > t2.ns_; }
+        friend bool operator<=(Time t1, Time t2) { return t1.ns_ <= t2.ns_; }
+        friend bool operator>=(Time t1, Time t2) { return t1.ns_ >= t2.ns_; }
     };
 
     Time now()
@@ -54,7 +74,7 @@ namespace console
 
     void sleep(const Time &tr)
     {
-        this_thread::sleep_for(chrono::duration<long double>(tr.s));
+        this_thread::sleep_for(chrono::duration<long double>(tr.s()));
     }
 
     string datetime(const string &fmt = "%Y-%m-%d %H:%M:%S")
