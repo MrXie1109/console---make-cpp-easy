@@ -41,10 +41,10 @@ namespace console {
     // STL 容器输出支持 / STL container output support
     vector<int> vec = {1, 2, 3};
     cout << vec;                    // [1, 2, 3]
-    
+
     map<string, int> mp = {{"a", 1}, {"b", 2}};
     cout << mp;                     // {a: 1, b: 2}
-    
+
     tuple<int, string, double> t{42, "hello", 3.14};
     cout << t;                      // (42, hello, 3.14)
 
@@ -70,12 +70,12 @@ namespace console {
     // 通用输入 / Generic input
     int age = input<int>("Enter your age: ");
     double price = input<double>("Price: ");
-    
+
     // 便捷输入函数 / Convenience input functions
     string name = inputLine("Your name: ");
     double num = inputWithRange("Number (0-100): ", 0, 100);
     char ch = inputChar("Type a character: ");
-    
+
     if (inputYesOrNo("Continue? (y/n): ")) {
         // ...
     }
@@ -93,13 +93,13 @@ namespace console {
     // Time 结构体，自动选择合适单位显示
     Time t1 = now();                  // 当前时间点
     Time t2 = 1.5_s;                  // 1.5秒（使用字面量）
-    
+
     // 测量函数执行时间 / Measure function execution time
     auto duration = timer([]{
         sleep(100_ms);                 // 休眠100毫秒
     });
     print("Took:", duration);          // Took: 100ms
-    
+
     // 日期时间格式化 / Datetime formatting
     print(datetime());                  // 2024-01-01 12:34:56
     print(datetime("%Y/%m/%d"));        // 2024/01/01
@@ -117,16 +117,16 @@ namespace console {
     // 随机整数 / Random integer
     int dice = randint(1, 6);           // 1-6
     size_t idx = randint<size_t>(0, vec.size() - 1);
-    
+
     // 随机浮点数 / Random floating point
     double prob = uniform();             // 0.0-1.0
     double temp = uniform(-10.0, 40.0);  // -10.0-40.0
-    
+
     // 从容器随机选择 / Random choice from container
     vector<int> vec = {1, 2, 3, 4, 5};
     int selected = choice(vec);          // 随机选择一个
     int picked = choice({1, 2, 3, 4});   // 从初始化列表选择
-    
+
     // 打乱容器 / Shuffle container
     shuffle(vec);                         // 打乱顺序
 }
@@ -143,24 +143,24 @@ namespace console {
     // 修剪 / Trimming
     string s = trim("  Hello World  ");          // "Hello World"
     string s2 = ltrim(",,,Hello", [](char c) { return c != ','; }); // "Hello"
-    
+
     // 大小写转换 / Case conversion
     print(upper("hello"));                       // HELLO
     print(lower("WORLD"));                       // world
     print(title("hello world"));                  // Hello World
-    
+
     // 分割与连接 / Split and join
     auto parts = split("a,b,c", ",");             // ["a", "b", "c"]
     auto joined = join(parts, "-");               // "a-b-c"
-    
+
     // 分区操作 / Partition
     auto [left, mid, right] = partition("key=value", "=");
     // left="key", mid="=", right="value"
-    
+
     // 格式化字符串类 / Formatted string class
     f_string fmt = "{} + {} = {}";
     string result = fmt % 1 % 2 % 3;               // "1 + 2 = 3"
-    
+
     // 通用类型转字符串 / Universal to string conversion
     string str = uniToStr(3.14159);                // "3.14159"
 }
@@ -191,17 +191,17 @@ Multi-level logging system with color support and timestamps.
 namespace console {
     // 全局 logger 对象 / Global logger object
     extern Logging logger;  // 默认彩色输出，级别 INFO
-    
+
     // 配置日志级别 / Configure log levels
     logger.set(Logging::Level::DEBUG);           // 设置最低级别
     logger.set(true, true, false, false, false); // 只开启 DEBUG 和 INFO
-    
+
     // 使用日志 / Using logger
     logger.debug("Debug value:", 42);
     logger.info("Application started");
     logger.warn("Low disk space");
     logger.error("File not found:", filename);
-    
+
     try {
         logger.fatal("Fatal error occurred");     // 抛出 fatal_logging 异常
     } catch (const fatal_logging& e) {
@@ -222,11 +222,11 @@ namespace console {
     extern const JdtSettings normalSettings;      // [##########          ]   50%
     extern const JdtSettings simpleSettings;      // ==========----------   50%
     extern const JdtSettings beautifulSettings;   // ▕██████████░░░░░░░░░░▏   50%
-    
+
     // 自定义样式 / Custom style
     JdtSettings mySettings{30, "|", "|", "=", "-", "\r", cout};
     defaultSettings = beautifulSettings;          // 修改默认样式
-    
+
     // 使用进度条 / Using progress bar
     for (int i = 0; i <= 100; i += 5) {
         jdt(i);                                    // 使用默认样式
@@ -247,16 +247,16 @@ namespace console {
     // 路径操作 / Path operations
     Path file("data.txt");
     Path backup = Path("backup") / "data.txt";    // 路径拼接
-    
+
     // 读取文件 / Read file
     string content = file.read_text();
     vector<string> lines = file.read_lines();
     auto bytes = file.read_binary();
-    
+
     // 写入文件 / Write file
     file.write_text("Hello, World!");
     file.write_lines(lines);
-    
+
     // 检查与创建 / Check and create
     if (!file.exists()) {
         file.touch();                               // 创建空文件
@@ -275,16 +275,16 @@ Type-safe heterogeneous container similar to Python list.
 namespace console {
     // 创建异构容器 / Create heterogeneous container
     Box box(42, 3.14, "Hello", vector{1, 2, 3}, Point{10, 20});
-    
+
     // 类型安全访问 / Type-safe access
     int i = box.get<int>(0);                // 42
     double d = box.get<double>(1);          // 3.14
     string s = box.get<string>(2);          // "Hello"
-    
+
     // 解包到变量 / Unpack to variables
     int a; double b; string c;
     box.unpack(a, b, c);                    // a=42, b=3.14, c="Hello"
-    
+
     // 输出 / Output
     print(box);                              // (42, 3.14, Hello, [1, 2, 3], (10, 20))
 }
@@ -301,26 +301,26 @@ namespace console {
     // 创建多维数组 / Create multidimensional array
     ndarray<int> arr({2, 3});                // 2x3 数组
     ndarray<double> mat({3, 3, 3});          // 3x3x3 三维数组
-    
+
     // 初始化方式 / Initialization methods
     ndarray<int> a1({2, 2}, 42);              // 全部填充 42
     ndarray<int> a2({2, 2}, vector{1, 2, 3, 4}); // 从容器初始化
     ndarray<int> a3({2, 2}, randint, 0, 100); // 用函数生成
-    
+
     // 访问元素 / Element access
     arr[0][1] = 100;                          // 链式下标
     int val = arr[1][2];
     int val2 = arr.at(0, 1);                   // 带边界检查
-    
+
     // 形状操作 / Shape operations
     print(arr.shape());                        // [2, 3]
     arr.reshape(3, 2);                         // 重塑为 3x2
-    
+
     // 算术运算 / Arithmetic operations
     auto sum = arr + 10;                       // 标量加法
     auto prod = arr * arr;                      // 逐元素乘法
     arr += 5;                                   // 原位运算
-    
+
     // 输出 / Output
     ndarray<int> mat2{{1, 2}, {3, 4}};
     print(mat2);                                // [[1, 2], [3, 4]]
@@ -336,24 +336,24 @@ Non-owning container views with subrange support.
 ```cpp
 namespace console {
     vector<int> vec = {0, 1, 2, 3, 4, 5};
-    
+
     // 创建视图 / Create view
     View v1(vec);                               // 整个容器
     View v2(vec, 1, 4);                         // 索引[1,4)区间
     View v3(vec.begin() + 2, vec.end());        // 迭代器区间
-    
+
     // 使用视图 / Using view
     for (auto x : v2) {                         // 遍历: 1, 2, 3
         print(x);
     }
-    
+
     int val = v2[1];                            // 2
     int val2 = v2.at(2);                        // 3（带边界检查）
-    
+
     // 常量视图 / Constant view
     const vector<int> cvec = {1, 2, 3};
     ConstView cv(cvec);                          // 只读视图
-    
+
     // 字符串视图特化 / String view specialization
     string str = "Hello World";
     View<string> sv(str, 0, 5);
@@ -361,7 +361,9 @@ namespace console {
 }
 ```
 
-### 13. 列表推导 (compre.h)
+## 让我重新改一下格式
+
+### 13. 列表推导式 (compre.h)
 
 类似 Python 的列表推导式功能。
 
@@ -369,29 +371,31 @@ Python-like list comprehension functionality.
 
 ```cpp
 namespace console {
-    vector<int> nums = {1, 2, 3, 4, 5, 6};
-    
-    // 映射+过滤 / Map + filter
-    auto squares = compre_mf<vector<int>>(
-        [](int x) { return x * x; },            // 表达式
-        nums,                                    // 范围
-        [](int x) { return x % 2 == 0; }        // 条件
-    );  // 结果: [4, 16, 36]
-    
-    // 仅映射 / Map only
-    auto doubled = compre_m<vector<int>>(
-        [](int x) { return x * 2; },
-        nums
-    );  // 结果: [2, 4, 6, 8, 10, 12]
-    
-    // 仅过滤 / Filter only
-    auto evens = compre_f<vector<int>>(
-        nums,
-        [](int x) { return x % 2 == 0; }
-    );  // 结果: [2, 4, 6]
-    
-    // 仅复制 / Copy only
-    auto copy = compre_c<vector<int>>(nums);    // 结果: [1, 2, 3, 4, 5, 6]
+    // 从任意范围创建 Compre
+    auto c1 = make_compre(vector{1, 2, 3, 4, 5, 6, 7, 8, 9});
+    auto c2 = make_compre(list{"a", "b", "c"});
+    auto c3 = make_compre({1.1, 2.2, 3.3});           // 初始化列表
+    auto c4 = make_compre(arr, 1, 4);                  // 子范围
+    auto c5 = make_compre(vec.begin(), vec.end());     // 迭代器范围
+
+    // 链式操作：筛选 + 变换
+    auto result = make_compre({1, 2, 3, 4, 5, 6, 7, 8, 9})
+        .filter([](int x) { return x & 1; })           // 保留奇数
+        .map([](int x) { return x * x; });              // 平方
+
+    // 转换为标准容器
+    vector<int> vec = result.to<vector<int>>();        // 移动（消费原对象）
+    list<int> lst = result.make<list<int>>();           // 复制（原对象保留）
+
+    // 一次性管道操作
+    auto squares = make_compre({1, 2, 3, 4, 5})
+        .filter([](int x) { return x > 2; })
+        .map([](int x) { return x * x; })
+        .to<vector>();                                   // [9, 16, 25]
+
+    // 类型自动推导
+    auto strings = make_compre({1, 2, 3, 4})
+        .map([](int x) { return to_string(x); });       // Compre<string>
 }
 ```
 
@@ -407,17 +411,17 @@ namespace console {
     cursor_ptr<int> p1(new int(42));
     cursor_ptr<int> p2 = p1;                     // p2 共享游标位置，不拥有所有权
     auto p3 = p1 + 1;                             // 指针运算
-    
+
     // 数组对象 / Array object
     cursor_ptr<int[]> arr(new int[10]{0,1,2,3,4,5,6,7,8,9});
     for (int i = 0; i < 5; ++i) {
         print(*arr);                               // 0, 1, 2, 3, 4
         ++arr;                                      // 移动游标
     }
-    
+
     // 比较操作 / Comparison operations
     if (arr == arr + 5) { /* ... */ }
-    
+
     // 移动语义 / Move semantics
     cursor_ptr<int[]> arr2 = std::move(arr);       // 转移所有权
     // arr 现在为空，arr2 拥有数组
@@ -434,13 +438,13 @@ User-defined literals for convenient syntax.
 namespace console::literals {
     // 字符串字面量 / String literal
     auto str = "hello"s;                    // std::string
-    
+
     // 时间字面量 / Time literals
     Time t1 = 100_ns;                        // 100纳秒
     Time t2 = 2.5_us;                        // 2.5微秒
     Time t3 = 500_ms;                        // 500毫秒
     Time t4 = 1.5_s;                         // 1.5秒
-    
+
     // 格式化字符串字面量 / Format string literal
     auto fmt = "Value: {}"_f;                 // f_string
     string result = fmt % 42;                  // "Value: 42"
@@ -482,17 +486,17 @@ Compile-time type detection tools.
 namespace console {
     // 这些工具主要用于库内部实现
     // 但也可以在用户代码中使用
-    
+
     // 检测是否为容器 / Check if type is container
     static_assert(is_container<vector<int>>::value);
     static_assert(!is_container<int>::value);
-    
+
     // 检测是否为可调用对象 / Check if type is callable
     static_assert(is_callable<decltype(randint), int>::value);
-    
+
     // 检测是否为迭代器 / Check if type is iterator
     static_assert(is_iterator<vector<int>::iterator>::value);
-    
+
     // 检测是否支持下标操作 / Check if type supports subscript
     static_assert(has_subscript<vector<int>, int>::value);
 }
@@ -508,35 +512,35 @@ using namespace console::literals;
 int main() {
     // 输出 / Output
     print("Hello, World!");
-    
+
     // 输入 / Input
     string name = inputLine("What's your name? ");
     int age = input<int>("How old are you? ");
-    
+
     // 日志 / Logging
     logger.info("User:", name, "age:", age);
-    
+
     // 时间测量 / Time measurement
     auto t = timer([]{
         sleep(500_ms);
     });
     print("Slept for:", t);
-    
+
     // 随机数 / Random
     int lucky = randint(1, 100);
     print("Your lucky number:", lucky);
-    
+
     // 字符串格式化 / String formatting
     string msg = f_string("Hello, {}! You are {} years old.") % name % age;
     print(msg);
-    
+
     // 多维数组 / Multidimensional array
     ndarray<int> mat{{2, 2}, {1, 2, 3, 4}};
     print("Matrix:", mat);
-    
+
     // 文件操作 / File operations
     Path("output.txt").write_text(msg);
-    
+
     return 0;
 }
 ```
