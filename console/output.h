@@ -11,6 +11,7 @@
 #include <forward_list>
 #include <unordered_set>
 #include <unordered_map>
+#include <valarray>
 
 namespace console
 {
@@ -46,15 +47,17 @@ namespace console
     ostream &operator<<(ostream &, const pair<T, U> &);
     template <class... Args>
     ostream &operator<<(ostream &, const tuple<Args...> &);
+    template <class T>
+    ostream &operator<<(ostream &, const valarray<T> &);
 
     template <class Cont>
     ostream &cont_print_sequence(ostream &os, const Cont &cont)
     {
-        if (cont.empty())
+        if (begin(cont) == end(cont))
             return os << "[]";
-        auto it = cont.begin();
+        auto it = begin(cont);
         os << '[' << *it;
-        while (++it != cont.end())
+        while (++it != end(cont))
         {
             os << ", " << *it;
         }
@@ -64,11 +67,11 @@ namespace console
     template <class Cont>
     ostream &cont_print_set(ostream &os, const Cont &cont)
     {
-        if (cont.empty())
+        if (begin(cont) == end(cont))
             return os << "{}";
-        auto it = cont.begin();
+        auto it = begin(cont);
         os << '{' << *it;
-        while (++it != cont.end())
+        while (++it != end(cont))
         {
             os << ", " << *it;
         }
@@ -78,11 +81,11 @@ namespace console
     template <class Cont>
     ostream &cont_print_map(ostream &os, const Cont &cont)
     {
-        if (cont.empty())
+        if (begin(cont) == end(cont))
             return os << "{}";
-        auto it = cont.begin();
+        auto it = begin(cont);
         os << '{' << it->first << ": " << it->second;
-        while (++it != cont.end())
+        while (++it != end(cont))
         {
             os << ", " << it->first << ": " << it->second;
         }
@@ -177,6 +180,11 @@ namespace console
     ostream &operator<<(ostream &os, const unordered_multimap<K, V> &ump)
     {
         return cont_print_map(os, ump);
+    }
+    template <class T>
+    ostream &operator<<(ostream &os, const valarray<T> va)
+    {
+        return cont_print_sequence(os, va);
     }
     template <class T, class U>
     ostream &operator<<(ostream &os, const pair<T, U> &p)
