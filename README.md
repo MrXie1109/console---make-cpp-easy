@@ -361,8 +361,6 @@ namespace console {
 }
 ```
 
-## 让我重新改一下格式
-
 ### 13. 列表推导式 (compre.h)
 
 类似 Python 的列表推导式功能。
@@ -371,7 +369,7 @@ Python-like list comprehension functionality.
 
 ```cpp
 namespace console {
-    // 从任意范围创建 Compre
+    // 从任意范围创建 Comprehension
     auto c1 = make_compre(vector{1, 2, 3, 4, 5, 6, 7, 8, 9});
     auto c2 = make_compre(list{"a", "b", "c"});
     auto c3 = make_compre({1.1, 2.2, 3.3});           // 初始化列表
@@ -384,8 +382,8 @@ namespace console {
         .map([](int x) { return x * x; });              // 平方
 
     // 转换为标准容器
-    vector<int> vec = result.to<vector<int>>();        // 移动（消费原对象）
     list<int> lst = result.make<list<int>>();           // 复制（原对象保留）
+    vector<int> vec = result.to<vector<int>>();        // 移动（消费原对象）
 
     // 一次性管道操作
     auto squares = make_compre({1, 2, 3, 4, 5})
@@ -395,7 +393,7 @@ namespace console {
 
     // 类型自动推导
     auto strings = make_compre({1, 2, 3, 4})
-        .map([](int x) { return to_string(x); });       // Compre<string>
+        .map([](int x) { return to_string(x); });       // Comprehension<string>
 }
 ```
 
