@@ -8,36 +8,34 @@
 
 namespace console
 {
-    using namespace std;
-
-    inline mt19937 &GEN()
+    inline std::mt19937 &GEN()
     {
-        static mt19937 gen(chrono::high_resolution_clock::now()
-                               .time_since_epoch()
-                               .count());
+        static std::mt19937 gen(std::chrono::high_resolution_clock::now()
+                                    .time_since_epoch()
+                                    .count());
         return gen;
     }
 
     template <class T = int>
     T randint(T min = 0, T max = 32767,
-              mt19937 &gen = GEN())
+              std::mt19937 &gen = GEN())
     {
-        return uniform_int_distribution<T>(min, max)(gen);
+        return std::uniform_int_distribution<T>(min, max)(gen);
     }
 
     template <class T = double>
     T uniform(T min = 0.0, T max = 1.0,
-              mt19937 &gen = GEN())
+              std::mt19937 &gen = GEN())
     {
-        return uniform_real_distribution<T>(min, max)(gen);
+        return std::uniform_real_distribution<T>(min, max)(gen);
     }
 
     template <class T>
-    auto choice(T &&t, mt19937 &gen = GEN()) -> decltype(*begin(t))
+    auto choice(T &&t, std::mt19937 &gen = GEN()) -> decltype(*std::begin(t))
     {
-        if (begin(t) == end(t))
+        if (std::begin(t) == std::end(t))
             throw container_error("Empty container");
-        auto it = begin(t);
+        auto it = std::begin(t);
         size_t index = randint<size_t>(0, t.size() - 1, gen);
         for (size_t i = 0; i < index; i++)
             ++it;
@@ -45,20 +43,20 @@ namespace console
     }
 
     template <class T>
-    auto choice(initializer_list<T> init, mt19937 &gen = GEN())
-        -> decltype(*begin(init))
+    auto choice(std::initializer_list<T> init, std::mt19937 &gen = GEN())
+        -> decltype(*std::begin(init))
     {
-        return choice<initializer_list<T>>(
-            forward<initializer_list<T>>(init),
+        return choice<std::initializer_list<T>>(
+            std::forward<std::initializer_list<T>>(init),
             gen);
     }
 
     template <class T>
-    void shuffle(T &&t, mt19937 &gen = GEN())
+    void shuffle(T &&t, std::mt19937 &gen = GEN())
     {
-        auto get = [&](size_t index) -> decltype(*begin(t))
+        auto get = [&](size_t index) -> decltype(*std::begin(t))
         {
-            auto it = begin(t);
+            auto it = std::begin(t);
             for (size_t i = 0; i < index; i++)
                 ++it;
             return *it;
@@ -66,7 +64,7 @@ namespace console
         for (size_t i = t.size() - 1; i > 0; i--)
         {
             auto j = randint<size_t>(0, i);
-            swap(get(i), get(j));
+            std::swap(get(i), get(j));
         }
     }
 }

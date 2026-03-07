@@ -4,11 +4,11 @@
 #include <cstdint>
 #include <utility>
 #include <thread>
+#include <sstream>
+#include <ctime>
 
 namespace console
 {
-    using namespace std;
-
     class Time
     {
         long double ns_;
@@ -28,7 +28,7 @@ namespace console
         long double min() const { return ns_ / 60 / 1e9; }
         long double hr() const { return ns_ / 3600 / 1e9; }
 
-        friend ostream &operator<<(ostream &os, const Time t)
+        friend std::ostream &operator<<(std::ostream &os, const Time t)
         {
             if (t.ns_ > 3600 * 1e9)
                 return os << t.ns_ / 3600 / 1e9 << "hr";
@@ -58,10 +58,12 @@ namespace console
 
     Time now()
     {
-        return Time((long double)(chrono::duration_cast<chrono::nanoseconds>(
-                                      chrono::high_resolution_clock::now()
-                                          .time_since_epoch())
-                                      .count()));
+        return Time((long double)(std::chrono::
+                                      duration_cast<std::chrono::nanoseconds>(
+                                          std::chrono::high_resolution_clock::
+                                              now()
+                                                  .time_since_epoch())
+                                          .count()));
     }
 
     template <class F, class... Args>
@@ -74,21 +76,21 @@ namespace console
 
     void sleep(const Time &tr)
     {
-        this_thread::sleep_for(chrono::duration<long double>(tr.s()));
+        std::this_thread::sleep_for(std::chrono::duration<long double>(tr.s()));
     }
 
-    string datetime(const string &fmt = "%Y-%m-%d %H:%M:%S")
+    std::string datetime(const std::string &fmt = "%Y-%m-%d %H:%M:%S")
     {
-        stringstream ss;
-        auto now = chrono::system_clock::now();
-        auto time = chrono::system_clock::to_time_t(now);
-        tm tm_buffer;
+        std::stringstream ss;
+        auto now = std::chrono::system_clock::now();
+        auto time = std::chrono::system_clock::to_time_t(now);
+        std::tm tm_buffer;
 #ifdef _WIN32
         localtime_s(&tm_buffer, &time);
 #else
         localtime_r(&time, &tm_buffer);
 #endif
-        ss << put_time(&tm_buffer, fmt.c_str());
+        ss << std::put_time(&tm_buffer, fmt.c_str());
         return ss.str();
     }
 }

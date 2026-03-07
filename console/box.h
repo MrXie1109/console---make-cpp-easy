@@ -9,8 +9,6 @@
 
 namespace console
 {
-    using namespace std;
-
     class Item
     {
     private:
@@ -18,9 +16,9 @@ namespace console
         {
             virtual ~Base() {}
             virtual Base *clone() const = 0;
-            virtual void print(ostream &) const = 0;
-            virtual string str() const = 0;
-            virtual const type_info &type() const = 0;
+            virtual void print(std::ostream &) const = 0;
+            virtual std::string str() const = 0;
+            virtual const std::type_info &type() const = 0;
         };
         template <typename T>
         struct Derived : Base
@@ -31,15 +29,15 @@ namespace console
             {
                 return new Derived(value);
             }
-            void print(ostream &os) const
+            void print(std::ostream &os) const
             {
                 os << value;
             }
-            string str() const
+            std::string str() const
             {
                 return uniToStr(value);
             }
-            const type_info &type() const
+            const std::type_info &type() const
             {
                 return typeid(T);
             }
@@ -116,32 +114,32 @@ namespace console
             }
             return *this;
         }
-        friend ostream &operator<<(ostream &os, const Item &item)
+        friend std::ostream &operator<<(std::ostream &os, const Item &item)
         {
             item.ptr->print(os);
             return os;
         }
-        string str() const
+        std::string str() const
         {
             return ptr->str();
         }
         ~Item() { delete ptr; }
     };
 
-    class Box : public vector<Item>
+    class Box : public std::vector<Item>
     {
     public:
         template <class... Args>
-        Box(Args &&...args) : vector<Item>({Item(forward<Args>(args))...}) {}
+        Box(Args &&...args) : std::vector<Item>({Item(std::forward<Args>(args))...}) {}
         template <class T>
         T &get(size_t index)
         {
-            return vector<Item>::at(index).get<T>();
+            return std::vector<Item>::at(index).get<T>();
         }
         template <typename T>
         T &unsafe_get(size_t index)
         {
-            return vector<Item>::operator[](index).unsafe_get<T>();
+            return std::vector<Item>::operator[](index).unsafe_get<T>();
         }
         template <class... Args>
         void unpack(Args &&...args)
@@ -157,7 +155,7 @@ namespace console
             int _[] = {0, ((args = unsafe_get<Args>(i++)), 0)...};
             (void)_;
         }
-        friend ostream &operator<<(ostream &os, const Box &box)
+        friend std::ostream &operator<<(std::ostream &os, const Box &box)
         {
             if (box.empty())
                 return os << "()";

@@ -10,14 +10,12 @@
 
 namespace console
 {
-    using namespace std;
-
     template <class T>
     class ndarray
     {
-        vector<T> data_;
-        vector<size_t> shape_;
-        vector<size_t> stride_;
+        std::vector<T> data_;
+        std::vector<size_t> shape_;
+        std::vector<size_t> stride_;
 
         class ndarrayView
         {
@@ -42,7 +40,7 @@ namespace console
             const ndarrayView &operator=(const T &t)
             {
                 if (dims != 0)
-                    throw ndarray_error(to_string(dims) + " dims left");
+                    throw ndarray_error(std::to_string(dims) + " dims left");
                 data[offset] = t;
                 return *this;
             }
@@ -50,22 +48,22 @@ namespace console
             const ndarrayView &operator=(T &&t)
             {
                 if (dims != 0)
-                    throw ndarray_error(to_string(dims) + " dims left");
-                data[offset] = move(t);
+                    throw ndarray_error(std::to_string(dims) + " dims left");
+                data[offset] = std::move(t);
                 return *this;
             }
 
             operator T &()
             {
                 if (dims != 0)
-                    throw ndarray_error(to_string(dims) + " dims left");
+                    throw ndarray_error(std::to_string(dims) + " dims left");
                 return data[offset];
             }
 
             operator const T &() const
             {
                 if (dims != 0)
-                    throw ndarray_error(to_string(dims) + " dims left");
+                    throw ndarray_error(std::to_string(dims) + " dims left");
                 return data[offset];
             }
 
@@ -75,8 +73,8 @@ namespace console
                     throw ndarray_error("No dims left");
                 if (index >= *shape)
                     throw ndarray_error(
-                        "index " + to_string(index) +
-                        "out of range 0 ~ " + to_string(*shape));
+                        "index " + std::to_string(index) +
+                        "out of range 0 ~ " + std::to_string(*shape));
                 return ndarrayView{
                     data,
                     offset + index * *stride,
@@ -91,8 +89,8 @@ namespace console
                     throw ndarray_error("No dims left");
                 if (index >= *shape)
                     throw ndarray_error(
-                        "index " + to_string(index) +
-                        "out of range 0 ~ " + to_string(*shape));
+                        "index " + std::to_string(index) +
+                        "out of range 0 ~ " + std::to_string(*shape));
                 return ndarrayView{
                     data,
                     offset + index * *stride,
@@ -103,7 +101,7 @@ namespace console
         };
 
     public:
-        ndarray(initializer_list<size_t> init)
+        ndarray(std::initializer_list<size_t> init)
             : shape_(init), stride_(init.size())
         {
             if (init.size() == 0)
@@ -113,7 +111,7 @@ namespace console
             {
                 size_of_data *= i;
             }
-            data_ = vector<T>(size_of_data);
+            data_ = std::vector<T>(size_of_data);
             size_t size_of_block = 1;
             for (size_t i = shape_.size() - 1; i < shape_.size(); i--)
             {
@@ -123,34 +121,34 @@ namespace console
         }
 
         template <typename Container>
-        ndarray(initializer_list<size_t> init, Container &&cont,
+        ndarray(std::initializer_list<size_t> init, Container &&cont,
                 typename enable_if_container<Container>::type * = 0)
             : ndarray(init)
         {
-            size_t copy_size = min(cont.size(), data_.size());
+            size_t copy_size = std::min(cont.size(), data_.size());
             auto it = cont.begin();
             for (size_t i = 0; i < copy_size; ++i)
                 data_[i] = *it++;
         }
 
         template <typename F, typename... Args>
-        ndarray(initializer_list<size_t> init, F &&f, Args &&...args,
+        ndarray(std::initializer_list<size_t> init, F &&f, Args &&...args,
                 typename is_callable<F, T>::type * = 0)
             : ndarray(init)
         {
             for (T &item : data_)
-                item = f(forward<Args>(args)...);
+                item = f(std::forward<Args>(args)...);
         }
 
         template <typename U>
-        ndarray(initializer_list<size_t> init, U &&value,
-                typename enable_if<
+        ndarray(std::initializer_list<size_t> init, U &&value,
+                typename std::enable_if<
                     !is_container<U>::value &&
                     !is_callable<U, T>::value>::type * = 0)
             : ndarray(init)
         {
             for (T &item : data_)
-                item = forward<U>(value);
+                item = std::forward<U>(value);
         }
 
         ndarrayView operator[](size_t index)
@@ -159,8 +157,8 @@ namespace console
                 throw ndarray_error("Empty array");
             if (index >= shape_[0])
                 throw ndarray_error(
-                    "index " + to_string(index) +
-                    " out of range 0 ~ " + to_string(shape_[0]));
+                    "index " + std::to_string(index) +
+                    " out of range 0 ~ " + std::to_string(shape_[0]));
             return ndarrayView(data_.data(),
                                index * stride_[0],
                                shape_.size() - 1,
@@ -174,8 +172,8 @@ namespace console
                 throw ndarray_error("Empty array");
             if (index >= shape_[0])
                 throw ndarray_error(
-                    "index " + to_string(index) +
-                    " out of range 0 ~ " + to_string(shape_[0]));
+                    "index " + std::to_string(index) +
+                    " out of range 0 ~ " + std::to_string(shape_[0]));
             return ndarrayView(const_cast<T *>(data_.data()),
                                index * stride_[0],
                                shape_.size() - 1,
@@ -219,7 +217,7 @@ namespace console
         void reshape(Args... indices)
         {
             size_t new_shape_arr[] = {size_t(indices)...};
-            vector<size_t> new_shape(new_shape_arr, new_shape_arr + sizeof...(indices));
+            std::vector<size_t> new_shape(new_shape_arr, new_shape_arr + sizeof...(indices));
             size_t new_size = 1;
             for (size_t dim : new_shape)
                 new_size *= dim;
@@ -235,9 +233,9 @@ namespace console
             }
         }
 
-        const vector<size_t> &shape() const { return shape_; }
+        const std::vector<size_t> &shape() const { return shape_; }
 
-        const vector<size_t> &stride() const { return stride_; }
+        const std::vector<size_t> &stride() const { return stride_; }
 
         size_t size() const { return data_.size(); }
 
@@ -424,11 +422,11 @@ namespace console
             return *this;
         }
 
-        friend ostream &operator<<(ostream &os, const ndarray &self)
+        friend std::ostream &operator<<(std::ostream &os, const ndarray &self)
         {
             if (self.empty())
                 return os << "[]";
-            function<void(size_t, size_t, size_t)> print_dim;
+            std::function<void(size_t, size_t, size_t)> print_dim;
             print_dim = [&](size_t dim, size_t start, size_t end)
             {
                 if (dim == self.dims() - 1)

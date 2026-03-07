@@ -107,11 +107,7 @@ namespace console
         template <class... Args>
         void fatal(const Args &...args)
         {
-            using namespace console::literals;
-            std::ostringstream oss;
-            int _[] = {0, (oss << args, 0)...};
-            (void)_;
-            std::string error_info(oss.str());
+            std::string error_info(uniToStr(std::forward<Args>(args)...));
             if (settings(4))
             {
                 if (colorful)
@@ -121,7 +117,7 @@ namespace console
                 else
                     output('[', datetime(), "] [FATAL] - ", error_info);
             }
-            throw fatal_logging("Fatal Error: "s + error_info);
+            throw fatal_logging("Fatal Error: " + error_info);
         }
     } logger(std::cout, true, Logging::Level::INFO);
 }

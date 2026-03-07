@@ -9,16 +9,14 @@
 
 namespace console
 {
-    using namespace std;
-
     class Path
     {
-        string path;
+        std::string path;
 
     public:
-        using Bytes = vector<unsigned char>;
+        using Bytes = std::vector<unsigned char>;
 
-        Path(const string &str) : path(str)
+        Path(const std::string &str) : path(str)
         {
 #ifdef _WIN32
             for (char &ch : path)
@@ -34,11 +32,11 @@ namespace console
             return p1.path + '/' + p2.path;
         }
 
-        string read_text()
+        std::string read_text()
         {
-            string text;
+            std::string text;
             char ch;
-            ifstream fin(path);
+            std::ifstream fin(path);
             if (!fin.is_open())
                 throw file_not_found_error("Cannot open " + path);
             while (fin.get(ch))
@@ -51,24 +49,24 @@ namespace console
 
         Bytes read_binary()
         {
-            ifstream fin(path, ios::binary);
+            std::ifstream fin(path, std::ios::binary);
             if (!fin.is_open())
                 throw file_not_found_error("Cannot open " + path);
             Bytes bytes{
-                istreambuf_iterator<char>(fin),
-                (istreambuf_iterator<char>())};
+                std::istreambuf_iterator<char>(fin),
+                (std::istreambuf_iterator<char>())};
             fin.close();
             return bytes;
         }
 
-        vector<string> read_lines()
+        std::vector<std::string> read_lines()
         {
             return split(read_text(), "\n");
         }
 
-        void write_text(const string &text)
+        void write_text(const std::string &text)
         {
-            ofstream fout(path);
+            std::ofstream fout(path);
             if (!fout.is_open())
                 throw file_not_found_error("Cannot open " + path);
             fout << text;
@@ -77,16 +75,16 @@ namespace console
 
         void write_binary(const Bytes &bts)
         {
-            ofstream fout(path, ios::binary);
+            std::ofstream fout(path, std::ios::binary);
             if (!fout.is_open())
                 throw file_not_found_error("Cannot open " + path);
             fout.write((const char *)(bts.data()), bts.size());
             fout.close();
         }
 
-        void write_lines(const vector<string> &lines)
+        void write_lines(const std::vector<std::string> &lines)
         {
-            ofstream fout(path, ios::binary);
+            std::ofstream fout(path, std::ios::binary);
             if (!fout.is_open())
                 throw file_not_found_error("Cannot open " + path);
             auto it = lines.begin();
@@ -99,17 +97,17 @@ namespace console
 
         bool exists()
         {
-            return ifstream(path).is_open();
+            return std::ifstream(path).is_open();
         }
 
         void touch()
         {
-            ofstream(path);
+            std::ofstream(path);
         }
 
         void ensure()
         {
-            ofstream(path, ios::app);
+            std::ofstream(path, std::ios::app);
         }
     };
 }

@@ -5,17 +5,15 @@
 
 namespace console
 {
-    using namespace std;
-
     struct JdtSettings
     {
         int len;
         const char *lch, *rch, *fch, *ech, *Ech;
-        ostream &os;
+        std::ostream &os;
     };
 
-    const JdtSettings normalSettings{50, "[", "]", "#", " ", "\r", cout};
-    const JdtSettings simpleSettings{50, "", "", "=", "-", "\r", cout};
+    const JdtSettings normalSettings{50, "[", "]", "#", " ", "\r", std::cout};
+    const JdtSettings simpleSettings{50, "", "", "=", "-", "\r", std::cout};
     const JdtSettings beautifulSettings{
         50,
         "\u2595", // "▕"
@@ -23,7 +21,7 @@ namespace console
         "\u2588", // "█"
         "\u2591", // "░"
         "\r",
-        cout};
+        std::cout};
     /**
      * 注：如果编译器可以识别字面值但无法识别码点
      *     可以手动将码点替换为对应的字符
@@ -35,9 +33,9 @@ namespace console
     void jdt(int percent, const JdtSettings &js = defaultSettings)
     {
         if (percent < 0)
-            throw jdt_range_error(to_string(percent) + " less than 0");
+            throw jdt_range_error(std::to_string(percent) + " less than 0");
         if (percent > 100)
-            throw jdt_range_error(to_string(percent) + " greater than 100");
+            throw jdt_range_error(std::to_string(percent) + " greater than 100");
         int lct = percent * js.len / 100;
         int rct = js.len - lct;
         js.os << js.lch;

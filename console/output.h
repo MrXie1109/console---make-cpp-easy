@@ -15,43 +15,41 @@
 
 namespace console
 {
-    using namespace std;
-
     template <class T>
-    ostream &operator<<(ostream &, const vector<T> &);
+    std::ostream &operator<<(std::ostream &, const std::vector<T> &);
     template <class T>
-    ostream &operator<<(ostream &, const deque<T> &);
+    std::ostream &operator<<(std::ostream &, const std::deque<T> &);
     template <class T>
-    ostream &operator<<(ostream &, const list<T> &);
+    std::ostream &operator<<(std::ostream &, const std::list<T> &);
     template <class T>
-    ostream &operator<<(ostream &, const forward_list<T> &);
+    std::ostream &operator<<(std::ostream &, const std::forward_list<T> &);
     template <class T, size_t n>
-    ostream &operator<<(ostream &, const array<T, n> &);
+    std::ostream &operator<<(std::ostream &, const std::array<T, n> &);
     template <class T>
-    ostream &operator<<(ostream &, const set<T> &);
+    std::ostream &operator<<(std::ostream &, const std::set<T> &);
     template <class K, class V>
-    ostream &operator<<(ostream &, const map<K, V> &);
+    std::ostream &operator<<(std::ostream &, const std::map<K, V> &);
     template <class T>
-    ostream &operator<<(ostream &, const multiset<T> &);
+    std::ostream &operator<<(std::ostream &, const std::multiset<T> &);
     template <class K, class V>
-    ostream &operator<<(ostream &, const multimap<K, V> &);
+    std::ostream &operator<<(std::ostream &, const std::multimap<K, V> &);
     template <class T>
-    ostream &operator<<(ostream &, const unordered_set<T> &);
+    std::ostream &operator<<(std::ostream &, const std::unordered_set<T> &);
     template <class K, class V>
-    ostream &operator<<(ostream &, const unordered_map<K, V> &);
+    std::ostream &operator<<(std::ostream &, const std::unordered_map<K, V> &);
     template <class T>
-    ostream &operator<<(ostream &, const unordered_multiset<T> &);
+    std::ostream &operator<<(std::ostream &, const std::unordered_multiset<T> &);
     template <class K, class V>
-    ostream &operator<<(ostream &, const unordered_multimap<K, V> &);
+    std::ostream &operator<<(std::ostream &, const std::unordered_multimap<K, V> &);
     template <class T, class U>
-    ostream &operator<<(ostream &, const pair<T, U> &);
+    std::ostream &operator<<(std::ostream &, const std::pair<T, U> &);
     template <class... Args>
-    ostream &operator<<(ostream &, const tuple<Args...> &);
+    std::ostream &operator<<(std::ostream &, const std::tuple<Args...> &);
     template <class T>
-    ostream &operator<<(ostream &, const valarray<T> &);
+    std::ostream &operator<<(std::ostream &, const std::valarray<T> &);
 
     template <class Cont>
-    ostream &cont_print_sequence(ostream &os, const Cont &cont)
+    std::ostream &cont_print_sequence(std::ostream &os, const Cont &cont)
     {
         if (begin(cont) == end(cont))
             return os << "[]";
@@ -65,7 +63,7 @@ namespace console
     }
 
     template <class Cont>
-    ostream &cont_print_set(ostream &os, const Cont &cont)
+    std::ostream &cont_print_set(std::ostream &os, const Cont &cont)
     {
         if (begin(cont) == end(cont))
             return os << "{}";
@@ -79,7 +77,7 @@ namespace console
     }
 
     template <class Cont>
-    ostream &cont_print_map(ostream &os, const Cont &cont)
+    std::ostream &cont_print_map(std::ostream &os, const Cont &cont)
     {
         if (begin(cont) == end(cont))
             return os << "{}";
@@ -92,146 +90,152 @@ namespace console
         return os << '}';
     }
 
-    template <class Tuple, size_t N = tuple_size<Tuple>::value>
+    template <class Tuple, size_t N = std::tuple_size<Tuple>::value>
     struct TuplePrinter
     {
-        static void print(ostream &os, const Tuple &t)
+        static void print(std::ostream &os, const Tuple &t)
         {
             TuplePrinter<Tuple, N - 1>::print(os, t);
             if (N > 1)
                 os << ", ";
-            os << get<N - 1>(t);
+            os << std::get<N - 1>(t);
         }
     };
 
     template <class Tuple>
     struct TuplePrinter<Tuple, 1>
     {
-        static void print(ostream &os, const Tuple &t) { os << get<0>(t); }
+        static void print(std::ostream &os, const Tuple &t)
+        {
+            os << std::get<0>(t);
+        }
     };
 
     template <class Tuple>
     struct TuplePrinter<Tuple, 0>
     {
-        static void print(ostream &os, const Tuple &t) {}
+        static void print(std::ostream &os, const Tuple &t) {}
     };
 
     template <class T>
-    ostream &operator<<(ostream &os, const vector<T> &vec)
+    std::ostream &operator<<(std::ostream &os, const std::vector<T> &vec)
     {
         return cont_print_sequence(os, vec);
     }
     template <class T>
-    ostream &operator<<(ostream &os, const deque<T> &deq)
+    std::ostream &operator<<(std::ostream &os, const std::deque<T> &deq)
     {
         return cont_print_sequence(os, deq);
     }
     template <class T>
-    ostream &operator<<(ostream &os, const list<T> &lst)
+    std::ostream &operator<<(std::ostream &os, const std::list<T> &lst)
     {
         return cont_print_sequence(os, lst);
     }
     template <class T>
-    ostream &operator<<(ostream &os, const forward_list<T> &flst)
+    std::ostream &operator<<(std::ostream &os, const std::forward_list<T> &flst)
     {
         return cont_print_sequence(os, flst);
     }
     template <class T, size_t n>
-    ostream &operator<<(ostream &os, const array<T, n> &arr)
+    std::ostream &operator<<(std::ostream &os, const std::array<T, n> &arr)
     {
         return cont_print_sequence(os, arr);
     }
     template <class T>
-    ostream &operator<<(ostream &os, const set<T> &s)
+    std::ostream &operator<<(std::ostream &os, const std::set<T> &s)
     {
         return cont_print_set(os, s);
     }
     template <class K, class V>
-    ostream &operator<<(ostream &os, const map<K, V> &m)
+    std::ostream &operator<<(std::ostream &os, const std::map<K, V> &m)
     {
         return cont_print_map(os, m);
     }
     template <class T>
-    ostream &operator<<(ostream &os, const multiset<T> &ms)
+    std::ostream &operator<<(std::ostream &os, const std::multiset<T> &ms)
     {
         return cont_print_set(os, ms);
     }
     template <class K, class V>
-    ostream &operator<<(ostream &os, const multimap<K, V> &mm)
+    std::ostream &operator<<(std::ostream &os, const std::multimap<K, V> &mm)
     {
         return cont_print_map(os, mm);
     }
     template <class T>
-    ostream &operator<<(ostream &os, const unordered_set<T> &us)
+    std::ostream &operator<<(std::ostream &os, const std::unordered_set<T> &us)
     {
         return cont_print_set(os, us);
     }
     template <class K, class V>
-    ostream &operator<<(ostream &os, const unordered_map<K, V> &um)
+    std::ostream &operator<<(std::ostream &os,
+                             const std::unordered_map<K, V> &um)
     {
         return cont_print_map(os, um);
     }
     template <class T>
-    ostream &operator<<(ostream &os, const unordered_multiset<T> &ums)
+    std::ostream &operator<<(std::ostream &os,
+                             const std::unordered_multiset<T> &ums)
     {
         return cont_print_set(os, ums);
     }
     template <class K, class V>
-    ostream &operator<<(ostream &os, const unordered_multimap<K, V> &ump)
+    std::ostream &operator<<(std::ostream &os,
+                             const std::unordered_multimap<K, V> &ump)
     {
         return cont_print_map(os, ump);
     }
     template <class T>
-    ostream &operator<<(ostream &os, const valarray<T> va)
+    std::ostream &operator<<(std::ostream &os, const std::valarray<T> &va)
     {
         return cont_print_sequence(os, va);
     }
     template <class T, class U>
-    ostream &operator<<(ostream &os, const pair<T, U> &p)
+    std::ostream &operator<<(std::ostream &os, const std::pair<T, U> &p)
     {
         return os << '(' << p.first << ", " << p.second << ')';
     }
     template <class... Args>
-    ostream &operator<<(ostream &os, const tuple<Args...> &t)
+    std::ostream &operator<<(std::ostream &os, const std::tuple<Args...> &t)
     {
         os << "(";
-        TuplePrinter<tuple<Args...>>::print(os, t);
+        TuplePrinter<std::tuple<Args...>>::print(os, t);
         return os << ")";
     }
 
     template <class T, size_t N>
-    array<T, N> to_array(const T (&ar)[N])
+    std::array<T, N> to_array(const T (&ar)[N])
     {
-        array<T, N> arr;
-        copy(ar, ar + N, arr.begin());
+        std::array<T, N> arr;
+        std::copy(ar, ar + N, arr.begin());
         return arr;
     }
 
     template <class T, size_t N>
-    vector<T> to_vector(const T (&ar)[N])
+    std::vector<T> to_vector(const T (&ar)[N])
     {
-        vector<T> vec(N);
-        copy(ar, ar + N, vec.begin());
+        std::vector<T> vec(N);
+        std::copy(ar, ar + N, vec.begin());
         return vec;
     }
 
     class Output
     {
-        ostream &os;
-        string sep;
-        string end;
+        std::ostream &os;
+        std::string sep;
+        std::string end;
         bool isFlush;
 
     public:
-        Output() : os(cout), sep(" "), end("\n"), isFlush(true) {}
-        Output(ostream &o, const string &s, const string &e, bool isF)
+        Output() : os(std::cout), sep(" "), end("\n"), isFlush(true) {}
+        Output(std::ostream &o, const std::string &s, const std::string &e, bool isF)
             : os(o), sep(s), end(e), isFlush(isF) {}
 
         void operator()()
         {
             os << end;
             if (isFlush)
-                os << flush;
+                os << std::flush;
         }
         template <class T>
         void operator()(const T &t)

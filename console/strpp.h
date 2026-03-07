@@ -128,11 +128,12 @@ namespace console
         return ss.str();
     }
 
-    template <class T>
-    string uniToStr(T &&t)
+    template <class... Args>
+    string uniToStr(Args &&...args)
     {
         ostringstream oss;
-        oss << t;
+        int _[] = {0, (oss << forward<Args>(args), 0)...};
+        (void)_;
         return oss.str();
     }
 
