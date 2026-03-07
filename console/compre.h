@@ -41,12 +41,17 @@ namespace console
 
         Comprehension(std::initializer_list<T> init) : vec(init) {}
 
+        std::vector<T> &get_vec()
+        {
+            return vec;
+        }
+
         template <class F>
         auto map(F &&f) const -> Comprehension<decltype(f(vec[0]))>
         {
             Comprehension<decltype(f(vec[0]))> tmp;
             for (const T &item : vec)
-                tmp.vec.push_back(f(item));
+                tmp.get_vec().push_back(f(item));
             return tmp;
         }
 
@@ -75,30 +80,34 @@ namespace console
         }
     };
 
-    template <template <class> class Cont, class T>
-    Comprehension<T> make_compre(const Cont<T> &cont)
+    template <class Cont>
+    auto make_compre(const Cont &cont)
+        -> Comprehension<typename Cont::value_type>
     {
-        return Comprehension<T>(cont);
+        return Comprehension<typename Cont::value_type>(cont);
     }
 
-    template <template <class> class Cont, class T>
-    Comprehension<T> make_compre(Cont<T> &&cont)
+    template <class Cont>
+    auto make_compre(Cont &&cont)
+        -> Comprehension<typename Cont::value_type>
     {
-        return Comprehension<T>(std::move(cont));
+        return Comprehension<typename Cont::value_type>(std::move(cont));
     }
 
-    template <template <class> class Cont, class T>
-    Comprehension<T> make_compre(const Cont<T> &cont,
-                                 size_t start_pos, size_t end_pos)
+    template <class Cont>
+    auto make_compre(const Cont &cont, size_t start_pos, size_t end_pos)
+        -> Comprehension<typename Cont::value_type>
     {
-        return Comprehension<T>(cont, start_pos, end_pos);
+        return Comprehension<typename Cont::value_type>(
+            cont, start_pos, end_pos);
     }
 
-    template <template <class> class Cont, class T>
-    Comprehension<T> make_compre(Cont<T> &&cont,
-                                 size_t start_pos, size_t end_pos)
+    template <class Cont>
+    auto make_compre(Cont &&cont, size_t start_pos, size_t end_pos)
+        -> Comprehension<typename Cont::value_type>
     {
-        return Comprehension<T>(std::move(cont), start_pos, end_pos);
+        return Comprehension<typename Cont::value_type>(
+            std::move(cont), start_pos, end_pos);
     }
 
     template <class Iter>
@@ -111,33 +120,5 @@ namespace console
     Comprehension<T> make_compre(std::initializer_list<T> init)
     {
         return Comprehension<T>(init);
-    }
-
-    template <template <class> class Cont, class K, class V>
-    Comprehension<std::pair<K, V>> make_compre(
-        const Cont<std::pair<K, V>> &cont)
-    {
-        return Comprehension<std::pair<K, V>>(cont);
-    }
-
-    template <template <class> class Cont, class K, class V>
-    Comprehension<std::pair<K, V>> make_compre(Cont<std::pair<K, V>> &&cont)
-    {
-        return Comprehension<std::pair<K, V>>(std::move(cont));
-    }
-
-    template <template <class> class Cont, class K, class V>
-    Comprehension<std::pair<K, V>> make_compre(
-        const Cont<std::pair<K, V>> &cont, size_t start_pos, size_t end_pos)
-    {
-        return Comprehension<std::pair<K, V>>(cont, start_pos, end_pos);
-    }
-
-    template <template <class> class Cont, class K, class V>
-    Comprehension<std::pair<K, V>> make_compre(Cont<std::pair<K, V>> &&cont,
-                                               size_t start_pos, size_t end_pos)
-    {
-        return Comprehension<std::pair<K, V>>(
-            std::move(cont), start_pos, end_pos);
     }
 }
