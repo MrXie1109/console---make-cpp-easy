@@ -3,12 +3,32 @@
 #include <typeinfo>
 #include <utility>
 #include <ostream>
+#include <memory>
+#include <cstdlib>
 #include "strpp.h"
 #include "csexc.h"
 #include "literals.h"
+#ifdef __GNUG__
+#include <cxxabi.h>
+#endif
 
 namespace console
 {
+    std::string tiname(const std::type_info &ti)
+    {
+#ifdef _MSC_VER
+        return ti.name();
+#elif defined(__GNUG__)
+        int status = 0;
+        std::unique_ptr<char, void (*)(void *)> result(
+            abi::__cxa_demangle(ti.name(), nullptr, nullptr, &status),
+            std::free);
+        return (status == 0) ? result.get() : ti.name();
+#else
+        return ti.name();
+#endif
+    }
+
     class Item
     {
     private:
@@ -66,9 +86,9 @@ namespace console
                 throw bad_get("empty item");
             if (typeid(T) != ptr->type())
                 throw bad_get("type mismatch: "s +
-                              typeid(T).name() +
+                              tiname(typeid(T)) +
                               " and " +
-                              ptr->type().name());
+                              tiname(ptr->type()));
             return ((Derived<T> *)ptr)->value;
         }
         template <typename T>
@@ -142,14 +162,14 @@ namespace console
             return std::vector<Item>::operator[](index).unsafe_get<T>();
         }
         template <class... Args>
-        void unpack(Args &&...args)
+        void unpack(Args &...args)
         {
             size_t i = 0;
             int _[] = {0, ((args = get<Args>(i++)), 0)...};
             (void)_;
         }
         template <class... Args>
-        void unsafe_unpack(Args &&...args)
+        void unsafe_unpack(Args &...args)
         {
             size_t i = 0;
             int _[] = {0, ((args = unsafe_get<Args>(i++)), 0)...};

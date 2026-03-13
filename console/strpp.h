@@ -12,34 +12,32 @@
 
 namespace console
 {
-    using namespace std;
-
     template <class F>
-    string ltrim(string str, F &&f = [](unsigned char c)
-                             { return !isspace(c); })
+    std::string ltrim(std::string str, F &&f = [](unsigned char c)
+                                       { return !isspace(c); })
     {
-        auto it = find_if(str.begin(), str.end(), f);
+        auto it = std::find_if(str.begin(), str.end(), f);
         str.erase(str.begin(), it);
         return str;
     }
 
     template <class F>
-    string rtrim(string str, F &&f = [](unsigned char c)
-                             { return !isspace(c); })
+    std::string rtrim(std::string str, F &&f = [](unsigned char c)
+                                       { return !isspace(c); })
     {
-        auto it = find_if(str.rbegin(), str.rend(), f);
+        auto it = std::find_if(str.rbegin(), str.rend(), f);
         str.erase(it.base(), str.end());
         return str;
     }
 
     template <class F>
-    string trim(string str, F &&f = [](unsigned char c)
-                            { return !isspace(c); })
+    std::string trim(std::string str, F &&f = [](unsigned char c)
+                                      { return !isspace(c); })
     {
         return ltrim(rtrim(str, f), f);
     }
 
-    string upper(string str)
+    std::string upper(std::string str)
     {
         for (char &ch : str)
         {
@@ -49,7 +47,7 @@ namespace console
         return str;
     }
 
-    string lower(string str)
+    std::string lower(std::string str)
     {
         for (char &ch : str)
         {
@@ -59,13 +57,16 @@ namespace console
         return str;
     }
 
-    string title(string str)
+    std::string title(std::string str)
     {
+        if (str.empty())
+            return "";
         if (str[0] >= 'a' && str[0] <= 'z')
             str[0] += 'A' - 'a';
         for (size_t i = 1; i < str.size(); ++i)
         {
-            if (isspace(str[i - 1]) && str[i] >= 'a' && str[i] <= 'z')
+            if (isspace((unsigned char)str[i - 1]) &&
+                str[i] >= 'a' && str[i] <= 'z')
                 str[i] += 'A' - 'a';
             else if (str[i] >= 'A' && str[i] <= 'Z')
                 str[i] -= 'A' - 'a';
@@ -75,11 +76,11 @@ namespace console
 
     struct PartitionResult
     {
-        string left;
-        string middle;
-        string right;
-        friend ostream &operator<<(
-            ostream &os, const PartitionResult &pr)
+        std::string left;
+        std::string middle;
+        std::string right;
+        friend std::ostream &operator<<(
+            std::ostream &os, const PartitionResult &pr)
         {
             return os << '(' << pr.left << ", " << pr.middle
                       << ", " << pr.right << ')';
@@ -87,10 +88,10 @@ namespace console
     };
 
     PartitionResult partition(
-        const string &text, const string &sep)
+        const std::string &text, const std::string &sep)
     {
         size_t pos = text.find(sep);
-        if (pos == string::npos)
+        if (pos == std::string::npos)
             return PartitionResult{text, "", ""};
         return PartitionResult{
             text.substr(0, pos),
@@ -98,10 +99,10 @@ namespace console
             text.substr(pos + sep.size())};
     }
 
-    vector<string> split(
-        string text, const string &sep = " ")
+    std::vector<std::string> split(
+        std::string text, const std::string &sep = " ")
     {
-        vector<string> vec;
+        std::vector<std::string> vec;
         PartitionResult pr;
         while ((pr = partition(text, sep)).middle != "")
         {
@@ -113,12 +114,12 @@ namespace console
     }
 
     template <class T>
-    string join(
-        const vector<T> &vec, const string &sep = "")
+    std::string join(
+        const std::vector<T> &vec, const std::string &sep = "")
     {
         if (vec.empty())
             return "";
-        stringstream ss;
+        std::stringstream ss;
         auto it = vec.begin();
         ss << *it;
         while (++it != vec.end())
@@ -129,19 +130,19 @@ namespace console
     }
 
     template <class... Args>
-    string uniToStr(Args &&...args)
+    std::string uniToStr(Args &&...args)
     {
-        ostringstream oss;
-        int _[] = {0, (oss << forward<Args>(args), 0)...};
+        std::ostringstream oss;
+        int _[] = {0, (oss << std::forward<Args>(args), 0)...};
         (void)_;
         return oss.str();
     }
 
-    class f_string : public string
+    class f_string : public std::string
     {
     public:
         template <class... Args>
-        f_string(Args &&...args) : string(forward<Args>(args)...) {}
+        f_string(Args &&...args) : std::string(std::forward<Args>(args)...) {}
         template <class T>
         f_string operator%(const T &t)
         {

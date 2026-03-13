@@ -17,3 +17,4 @@
 #include "view.h"
 #include "compre.h"
 #include "sfinae.h"
+#include "re.h"

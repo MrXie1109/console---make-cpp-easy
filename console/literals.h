@@ -1,4 +1,7 @@
 #pragma once
+#if __cplusplus >= 201703L
+#include <string_view>
+#endif
 #include "strpp.h"
 #include "time.h"
 
@@ -15,10 +18,14 @@ namespace console
 #pragma warning(push)
 #pragma warning(disable : 4455)
 #endif
+#if __cplusplus < 201703L
         std::string operator""s(const char *str, size_t)
         {
             return std::string(str);
         }
+#else
+        using namespace std::literals::string_literals;
+#endif
 #ifdef _MSC_VER
 #pragma warning(pop)
 #endif
