@@ -12,29 +12,54 @@
 
 namespace console
 {
-    template <class F>
-    std::string ltrim(std::string str, F &&f = [](unsigned char c)
-                                       { return !isspace(c); })
+    std::string ltrim(std::string str)
     {
-        auto it = std::find_if(str.begin(), str.end(), f);
+        auto it = std::find_if(str.begin(), str.end(),
+                               [](unsigned char uc) -> bool
+                               { return !isspace(uc); });
         str.erase(str.begin(), it);
         return str;
     }
 
-    template <class F>
-    std::string rtrim(std::string str, F &&f = [](unsigned char c)
-                                       { return !isspace(c); })
+    std::string rtrim(std::string str)
     {
-        auto it = std::find_if(str.rbegin(), str.rend(), f);
+        auto it = std::find_if(str.rbegin(), str.rend(),
+                               [](unsigned char uc) -> bool
+                               { return !isspace(uc); });
         str.erase(it.base(), str.end());
         return str;
     }
 
-    template <class F>
-    std::string trim(std::string str, F &&f = [](unsigned char c)
-                                      { return !isspace(c); })
+    std::string trim(std::string str)
     {
-        return ltrim(rtrim(str, f), f);
+        return ltrim(rtrim(str));
+    }
+
+    std::string ltrim(std::string str, const std::string &chars)
+    {
+        auto it = std::find_if(str.begin(), str.end(),
+                               [&chars](unsigned char ch)
+                               {
+                                   return chars.find(ch) == std::string::npos;
+                               });
+        str.erase(str.begin(), it);
+        return str;
+    }
+
+    std::string rtrim(std::string str, const std::string &chars)
+    {
+        auto it = std::find_if(str.rbegin(), str.rend(),
+                               [&chars](unsigned char ch)
+                               {
+                                   return chars.find(ch) == std::string::npos;
+                               });
+        str.erase(it.base(), str.end());
+        return str;
+    }
+
+    std::string trim(std::string str, const std::string &chars)
+    {
+        return ltrim(rtrim(str, chars), chars);
     }
 
     std::string upper(std::string str)
@@ -82,8 +107,8 @@ namespace console
         friend std::ostream &operator<<(
             std::ostream &os, const PartitionResult &pr)
         {
-            return os << '(' << pr.left << ", " << pr.middle
-                      << ", " << pr.right << ')';
+            return os << "(\"" << pr.left << "\", \"" << pr.middle
+                      << "\", \"" << pr.right << "\")";
         }
     };
 
@@ -141,8 +166,8 @@ namespace console
     class f_string : public std::string
     {
     public:
-        template <class... Args>
-        f_string(Args &&...args) : std::string(std::forward<Args>(args)...) {}
+        using std::string::string;
+
         template <class T>
         f_string operator%(const T &t)
         {

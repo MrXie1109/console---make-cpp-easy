@@ -16,9 +16,12 @@ namespace console
 
     public:
         typedef Iterator iterator;
+        typedef Iterator const_iterator;
 
         Iterator begin() const { return begin_; }
         Iterator end() const { return end_; }
+        Iterator cbegin() const { return begin_; }
+        Iterator cend() const { return end_; }
 
         View(Container &container)
             : begin_(std::begin(container)), end_(std::end(container)) {}
@@ -56,15 +59,18 @@ namespace console
         cIterator begin_, end_;
 
     public:
+        typedef cIterator iterator;
         typedef cIterator const_iterator;
 
+        cIterator begin() const { return begin_; }
+        cIterator end() const { return end_; }
         cIterator cbegin() const { return begin_; }
         cIterator cend() const { return end_; }
 
         View(const Container &container)
             : begin_(std::begin(container)), end_(std::end(container)) {}
         View(const Container &container,
-                  size_t start_pos, size_t end_pos)
+             size_t start_pos, size_t end_pos)
             : begin_(std::next(std::begin(container), start_pos)),
               end_(std::next(std::begin(container), end_pos)) {}
         View(cIterator begin, cIterator end) : begin_(begin), end_(end) {}

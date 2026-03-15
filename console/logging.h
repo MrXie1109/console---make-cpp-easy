@@ -25,28 +25,24 @@ namespace console
     private:
         Output output;
         bool colorful;
-        bool &settings(int lvl)
-        {
-            static bool s[5] = {0, 1, 1, 1, 1};
-            return s[lvl];
-        }
+        bool settings[5];
 
     public:
         void set(Level minLevel)
         {
             int8_t n = int8_t(minLevel);
             for (int i = 0; i < n; i++)
-                settings(i) = false;
+                settings[i] = false;
             for (int i = n; i < 5; i++)
-                settings(i) = true;
+                settings[i] = true;
         }
         void set(bool a, bool b, bool c, bool d, bool e)
         {
-            settings(0) = a;
-            settings(1) = b;
-            settings(2) = c;
-            settings(3) = d;
-            settings(4) = e;
+            settings[0] = a;
+            settings[1] = b;
+            settings[2] = c;
+            settings[3] = d;
+            settings[4] = e;
         }
         Logging(std::ostream &os = std::cout,
                 bool cf = false, Level lvl = Level::INFO)
@@ -55,7 +51,7 @@ namespace console
         template <class... Args>
         void debug(const Args &...args)
         {
-            if (settings(0))
+            if (settings[0])
             {
                 if (colorful)
                     output(color::BrightBlack,
@@ -68,7 +64,7 @@ namespace console
         template <class... Args>
         void info(const Args &...args)
         {
-            if (settings(1))
+            if (settings[1])
             {
                 if (colorful)
                     output(color::BrightCyan,
@@ -81,7 +77,7 @@ namespace console
         template <class... Args>
         void warn(const Args &...args)
         {
-            if (settings(2))
+            if (settings[2])
             {
                 if (colorful)
                     output(color::BrightYellow,
@@ -94,7 +90,7 @@ namespace console
         template <class... Args>
         void error(const Args &...args)
         {
-            if (settings(3))
+            if (settings[3])
             {
                 if (colorful)
                     output(color::BrightRed,
@@ -108,7 +104,7 @@ namespace console
         void fatal(const Args &...args)
         {
             std::string error_info(uniToStr(args...));
-            if (settings(4))
+            if (settings[4])
             {
                 if (colorful)
                     output(color::BrightMagenta,

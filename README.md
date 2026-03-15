@@ -6,9 +6,9 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![No Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg)]()
 
-一个轻量级、零依赖的 C++ 控制台工具库，提供简洁的 API 用于输入输出、日志记录、时间测量、随机数生成、字符串处理、文件操作、多维数组等常见任务。
+一个轻量级、零依赖的 C++ 控制台工具库，提供简洁的 API 用于输入输出、日志记录、时间测量、随机数生成、字符串处理、文件操作、多维数组、正则表达式等常见任务。
 
-A lightweight, zero-dependency C++ console utility library providing simple APIs for common tasks including I/O, logging, time measurement, random number generation, string manipulation, file operations, multidimensional arrays, and more.
+A lightweight, zero-dependency C++ console utility library providing simple APIs for common tasks including I/O, logging, time measurement, random number generation, string manipulation, file operations, multidimensional arrays, regular expressions, and more.
 
 ## 特性 / Features
 
@@ -27,10 +27,22 @@ A lightweight, zero-dependency C++ console utility library providing simple APIs
 - 📊 **进度条** - 可自定义样式的进度条
 - 🧩 **列表推导** - 类似 Python 的列表推导式
 - 🔍 **SFINAE 工具** - 编译期类型检测
+- 🔤 **正则表达式** - Python 风格的正则表达式封装
+- 🧰 **标准库头文件** - 一站式包含所有标准库头文件
 
 ## 模块 / Modules
 
-### 1. 输出 (output.h)
+### 1. 标准库头文件 (std.h)
+
+一站式包含所有 C++ 标准库头文件，根据 C++ 版本条件编译。
+
+One-stop inclusion of all C++ standard library headers, conditionally compiled based on C++ version.
+
+```cpp
+#include "std.h"  // 自动包含当前 C++ 版本支持的所有标准库头文件
+```
+
+### 2. 输出 (output.h)
 
 提供类似 Python 的 print 功能和 STL 容器输出支持。
 
@@ -59,7 +71,7 @@ namespace console {
 }
 ```
 
-### 2. 输入 (input.h)
+### 3. 输入 (input.h)
 
 类型安全的控制台输入函数，带错误处理。
 
@@ -82,7 +94,7 @@ namespace console {
 }
 ```
 
-### 3. 时间 (time.h)
+### 4. 时间 (time.h)
 
 高精度时间测量、休眠和日期时间格式化。
 
@@ -106,7 +118,7 @@ namespace console {
 }
 ```
 
-### 4. 随机数 (random.h)
+### 5. 随机数 (random.h)
 
 基于 Mersenne Twister 的随机数生成器。
 
@@ -132,7 +144,7 @@ namespace console {
 }
 ```
 
-### 5. 字符串处理 (strpp.h)
+### 6. 字符串处理 (strpp.h)
 
 全面的字符串操作函数，包括格式化字符串类。
 
@@ -142,7 +154,7 @@ Comprehensive string manipulation functions, including formatted string class.
 namespace console {
     // 修剪 / Trimming
     string s = trim("  Hello World  ");          // "Hello World"
-    string s2 = ltrim(",,,Hello", [](char c) { return c != ','; }); // "Hello"
+    string s2 = ltrim(",,,Hello", ",,");          // "Hello"
 
     // 大小写转换 / Case conversion
     print(upper("hello"));                       // HELLO
@@ -166,7 +178,7 @@ namespace console {
 }
 ```
 
-### 6. 颜色输出 (colorful.h)
+### 7. 颜色输出 (colorful.h)
 
 ANSI 转义序列颜色常量。
 
@@ -181,7 +193,7 @@ namespace console::color {
 }
 ```
 
-### 7. 日志记录 (logging.h)
+### 8. 日志记录 (logging.h)
 
 多级别日志系统，支持彩色输出和时间戳。
 
@@ -210,7 +222,7 @@ namespace console {
 }
 ```
 
-### 8. 进度条 (jdt.h)
+### 9. 进度条 (jdt.h)
 
 可自定义样式的进度条，支持 Unicode 字符。
 
@@ -236,7 +248,7 @@ namespace console {
 }
 ```
 
-### 9. 文件操作 (file.h)
+### 10. 文件操作 (file.h)
 
 简单的文件读写封装，跨平台路径处理。
 
@@ -265,7 +277,7 @@ namespace console {
 }
 ```
 
-### 10. 动态类型容器 (box.h)
+### 11. 动态类型容器 (box.h)
 
 类型安全的异构容器，类似 Python 列表。
 
@@ -274,23 +286,26 @@ Type-safe heterogeneous container similar to Python list.
 ```cpp
 namespace console {
     // 创建异构容器 / Create heterogeneous container
-    Box box(42, 3.14, "Hello", vector{1, 2, 3}, Point{10, 20});
+    Box box(42, 3.14, "Hello", vector{1, 2, 3});
 
     // 类型安全访问 / Type-safe access
     int i = box.get<int>(0);                // 42
     double d = box.get<double>(1);          // 3.14
     string s = box.get<string>(2);          // "Hello"
 
+    // 类型信息 / Type information
+    string type_name = tiname(typeid(int));  // 获取可读的类型名称
+
     // 解包到变量 / Unpack to variables
     int a; double b; string c;
     box.unpack(a, b, c);                    // a=42, b=3.14, c="Hello"
 
     // 输出 / Output
-    print(box);                              // (42, 3.14, Hello, [1, 2, 3], (10, 20))
+    print(box);                              // (42, 3.14, Hello, [1, 2, 3])
 }
 ```
 
-### 11. 多维数组 (ndarray.h)
+### 12. 多维数组 (ndarray.h)
 
 类似 NumPy 的多维数组，支持任意维度。
 
@@ -327,77 +342,7 @@ namespace console {
 }
 ```
 
-### 12. 容器视图 (view.h)
-
-非拥有式容器视图，支持子区间。
-
-Non-owning container views with subrange support.
-
-```cpp
-namespace console {
-    vector<int> vec = {0, 1, 2, 3, 4, 5};
-
-    // 创建视图 / Create view
-    View v1(vec);                               // 整个容器
-    View v2(vec, 1, 4);                         // 索引[1,4)区间
-    View v3(vec.begin() + 2, vec.end());        // 迭代器区间
-
-    // 使用视图 / Using view
-    for (auto x : v2) {                         // 遍历: 1, 2, 3
-        print(x);
-    }
-
-    int val = v2[1];                            // 2
-    int val2 = v2.at(2);                        // 3（带边界检查）
-
-    // 常量视图 / Constant view
-    const vector<int> cvec = {1, 2, 3};
-    ConstView cv(cvec);                          // 只读视图
-
-    // 字符串视图特化 / String view specialization
-    string str = "Hello World";
-    View<string> sv(str, 0, 5);
-    print(sv);                                   // Hello
-}
-```
-
-### 13. 列表推导式 (compre.h)
-
-类似 Python 的列表推导式功能。
-
-Python-like list comprehension functionality.
-
-```cpp
-namespace console {
-    // 从任意范围创建 Comprehension
-    auto c1 = make_compre(vector{1, 2, 3, 4, 5, 6, 7, 8, 9});
-    auto c2 = make_compre(list{"a", "b", "c"});
-    auto c3 = make_compre({1.1, 2.2, 3.3});           // 初始化列表
-    auto c4 = make_compre(arr, 1, 4);                  // 子范围
-    auto c5 = make_compre(vec.begin(), vec.end());     // 迭代器范围
-
-    // 链式操作：筛选 + 变换
-    auto result = make_compre({1, 2, 3, 4, 5, 6, 7, 8, 9})
-        .filter([](int x) { return x & 1; })           // 保留奇数
-        .map([](int x) { return x * x; });              // 平方
-
-    // 转换为标准容器
-    list<int> lst = result.make<list<int>>();           // 复制（原对象保留）
-    vector<int> vec = result.to<vector<int>>();        // 移动（消费原对象）
-
-    // 一次性管道操作
-    auto squares = make_compre({1, 2, 3, 4, 5})
-        .filter([](int x) { return x > 2; })
-        .map([](int x) { return x * x; })
-        .to<vector>();                                   // [9, 16, 25]
-
-    // 类型自动推导
-    auto strings = make_compre({1, 2, 3, 4})
-        .map([](int x) { return to_string(x); });       // Comprehension<string>
-}
-```
-
-### 14. 双指针游标 (cursor_ptr.h)
+### 13. 双指针游标 (cursor_ptr.h)
 
 分离所有权与访问位置的智能指针。
 
@@ -426,7 +371,7 @@ namespace console {
 }
 ```
 
-### 15. 字面量 (literals.h)
+### 14. 字面量 (literals.h)
 
 用户定义字面量，提供便捷语法。
 
@@ -449,7 +394,139 @@ namespace console::literals {
 }
 ```
 
-### 16. 异常类 (csexc.h)
+### 15. 容器视图 (view.h)
+
+非拥有式容器视图，支持子区间。
+
+Non-owning container views with subrange support.
+
+```cpp
+namespace console {
+    vector<int> vec = {0, 1, 2, 3, 4, 5};
+
+    // 创建视图 / Create view
+    View v1(vec);                               // 整个容器
+    View v2(vec, 1, 4);                         // 索引[1,4)区间
+    View v3(vec.begin() + 2, vec.end());        // 迭代器区间
+
+    // 使用视图 / Using view
+    for (auto x : v2) {                         // 遍历: 1, 2, 3
+        print(x);
+    }
+
+    int val = v2[1];                            // 2
+    int val2 = v2.at(2);                        // 3（带边界检查）
+
+    // 常量视图 / Constant view
+    const vector<int> cvec = {1, 2, 3};
+    View<const vector<int>> cv(cvec);            // 只读视图
+
+    // 字符串视图特化 / String view specialization
+    string str = "Hello World";
+    View<string> sv(str, 0, 5);
+    print(sv);                                   // Hello
+}
+```
+
+### 16. 列表推导式 (compre.h)
+
+类似 Python 的列表推导式功能。
+
+Python-like list comprehension functionality.
+
+```cpp
+namespace console {
+    // 从任意范围创建 Comprehension
+    auto c1 = make_compre(vector{1, 2, 3, 4, 5, 6, 7, 8, 9});
+    auto c2 = make_compre(list{"a", "b", "c"});
+    auto c3 = make_compre({1.1, 2.2, 3.3});           // 初始化列表
+    auto c4 = make_compre(arr, 1, 4);                  // 子范围
+    auto c5 = make_compre(vec.begin(), vec.end());     // 迭代器范围
+
+    // 链式操作：筛选 + 变换
+    auto result = make_compre({1, 2, 3, 4, 5, 6, 7, 8, 9})
+        .filter([](int x) { return x & 1; })           // 保留奇数
+        .map([](int x) { return x * x; });              // 平方
+
+    // 转换为标准容器
+    list<int> lst = result.make<list<int>>();           // 复制（原对象保留）
+    vector<int> vec = result.to<vector<int>>();        // 移动（消费原对象）
+
+    // 一次性管道操作
+    auto squares = make_compre({1, 2, 3, 4, 5})
+        .filter([](int x) { return x > 2; })
+        .map([](int x) { return x * x; })
+        .to<vector>();                                   // [9, 16, 25]
+}
+```
+
+### 17. SFINAE 工具 (sfinae.h)
+
+编译期类型检测工具。
+
+Compile-time type detection tools.
+
+```cpp
+namespace console {
+    // 检测是否为容器 / Check if type is container
+    static_assert(is_container<vector<int>>::value);
+    static_assert(!is_container<int>::value);
+
+    // 检测是否为可调用对象 / Check if type is callable
+    static_assert(is_callable<decltype(randint), int>::value);
+
+    // 检测是否为迭代器 / Check if type is iterator
+    static_assert(is_iterator<vector<int>::iterator>::value);
+
+    // 检测是否为字符串 / Check if type is string
+    static_assert(is_string<string>::value);
+    static_assert(is_string<const char*>::value);
+
+    // 检测是否支持下标操作 / Check if type supports subscript
+    static_assert(has_subscript<vector<int>, int>::value);
+}
+```
+
+### 18. 正则表达式 (re.h)
+
+Python 风格的正则表达式封装。
+
+Python-style regular expression wrapper.
+
+```cpp
+namespace console {
+    // 编译正则表达式 / Compile regex
+    Regex re(R"(\d+)");
+
+    // 搜索 / Search
+    auto match = re.search("abc123def");
+    if (match) {
+        print(match.group());              // "123"
+        print(match.start(), match.end()); // 3, 6
+    }
+
+    // 匹配 / Match (从头开始)
+    auto m2 = re.match("123abc");
+    if (m2) print(m2.group());              // "123"
+
+    // 查找所有 / Find all
+    auto all = re.findall("a1b2c3d4");      // ["1", "2", "3", "4"]
+
+    // 分割 / Split
+    auto parts = Regex(R"(\s+)").split("a b  c   d"); // ["a", "b", "c", "d"]
+
+    // 替换 / Substitute
+    string result = re.sub("X", "abc123def");  // "abcXdef"
+    auto [subbed, count] = re.subn("X", "a1b2c3", 2); // 替换前2个
+
+    // 命名空间函数 / Namespace functions
+    using namespace console::re;
+    auto m = search(R"(\w+)", "Hello World");
+    print(escape("a.b*c"));                   // "a\.b\*c"
+}
+```
+
+### 19. 异常类 (csexc.h)
 
 自定义异常类体系。
 
@@ -470,33 +547,9 @@ namespace console {
         logger.error("File error:", e.what());
     } catch (const fatal_logging& e) {         // 致命日志
         logger.fatal("Fatal:", e.what());
+    } catch (const bad_format& e) {            // 格式化错误
+        logger.error("Format error:", e.what());
     }
-}
-```
-
-### 17. SFINAE 工具 (sfinae.h)
-
-编译期类型检测工具。
-
-Compile-time type detection tools.
-
-```cpp
-namespace console {
-    // 这些工具主要用于库内部实现
-    // 但也可以在用户代码中使用
-
-    // 检测是否为容器 / Check if type is container
-    static_assert(is_container<vector<int>>::value);
-    static_assert(!is_container<int>::value);
-
-    // 检测是否为可调用对象 / Check if type is callable
-    static_assert(is_callable<decltype(randint), int>::value);
-
-    // 检测是否为迭代器 / Check if type is iterator
-    static_assert(is_iterator<vector<int>::iterator>::value);
-
-    // 检测是否支持下标操作 / Check if type supports subscript
-    static_assert(has_subscript<vector<int>, int>::value);
 }
 ```
 
@@ -531,6 +584,10 @@ int main() {
     // 字符串格式化 / String formatting
     string msg = f_string("Hello, {}! You are {} years old.") % name % age;
     print(msg);
+
+    // 正则表达式 / Regular expression
+    auto match = re::search(R"(\d+)", msg);
+    if (match) print("Found number:", match.group());
 
     // 多维数组 / Multidimensional array
     ndarray<int> mat{{2, 2}, {1, 2, 3, 4}};

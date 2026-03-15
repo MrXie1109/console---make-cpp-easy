@@ -14,7 +14,7 @@ namespace console
         long double ns_;
 
     public:
-        Time(long double ns) : ns_(ns) {}
+        Time(long double ns = 0) : ns_(ns) {}
 
         operator long double() const
         {

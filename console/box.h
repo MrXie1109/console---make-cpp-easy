@@ -150,7 +150,8 @@ namespace console
     {
     public:
         template <class... Args>
-        Box(Args &&...args) : std::vector<Item>({Item(std::forward<Args>(args))...}) {}
+        Box(Args &&...args)
+            : std::vector<Item>({Item(std::forward<Args>(args))...}) {}
         template <class T>
         T &get(size_t index)
         {

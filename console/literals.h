@@ -1,7 +1,4 @@
 #pragma once
-#if __cplusplus >= 201703L
-#include <string_view>
-#endif
 #include "strpp.h"
 #include "time.h"
 
@@ -9,7 +6,7 @@ namespace console
 {
     namespace literals
     {
-#if __cplusplus >= 201103L
+#if __cplusplus < 201703L
 #if defined(__GNUC__) || defined(__clang__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wliteral-suffix"
@@ -18,20 +15,18 @@ namespace console
 #pragma warning(push)
 #pragma warning(disable : 4455)
 #endif
-#if __cplusplus < 201703L
         std::string operator""s(const char *str, size_t)
         {
             return std::string(str);
         }
-#else
-        using namespace std::literals::string_literals;
-#endif
 #ifdef _MSC_VER
 #pragma warning(pop)
 #endif
 #if defined(__GNUC__) || defined(__clang__)
 #pragma GCC diagnostic pop
 #endif
+#else
+        using namespace std::literals::string_literals;
 #endif
 
         Time operator""_ns(unsigned long long ns) { return Time(ns); }
