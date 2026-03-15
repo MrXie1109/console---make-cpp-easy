@@ -72,13 +72,11 @@ namespace console
     {
     };
 
-    // 基础模板：默认不是字符串
     template <typename T, typename = void>
     struct is_string : std::false_type
     {
     };
 
-    // ----- 1. 全特化：C风格字符串 -----
     template <>
     struct is_string<const char *> : std::true_type
     {
@@ -89,7 +87,6 @@ namespace console
     {
     };
 
-    // ----- 2. 偏特化：字符数组 -----
     template <size_t N>
     struct is_string<char[N]> : std::true_type
     {
@@ -100,7 +97,6 @@ namespace console
     {
     };
 
-    // ----- 3. 偏特化：宽字符版本 -----
     template <>
     struct is_string<const wchar_t *> : std::true_type
     {
@@ -116,15 +112,12 @@ namespace console
     {
     };
 
-    // ----- 4. 偏特化：现代C++字符串类型（通过SFINAE）-----
     template <typename T>
-    struct is_string<T, std::void_t<
-                            typename T::value_type,               // 必须有value_type
-                            decltype(std::declval<T>().c_str()),  // 必须有c_str()
-                            decltype(std::declval<T>().length()), // 必须有length()
-                            std::enable_if_t<std::is_same_v<
-                                typename T::value_type, char>> // value_type必须是char
-                            >> : std::true_type
+    struct is_string<T, typename std::enable_if<
+                            std::is_same<typename T::value_type, char>::value &&
+                            sizeof(decltype(std::declval<T>().c_str())) &&
+                            sizeof(decltype(std::declval<T>().length()))>::type>
+        : std::true_type
     {
     };
 
