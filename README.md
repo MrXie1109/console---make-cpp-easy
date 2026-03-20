@@ -21,14 +21,15 @@ A lightweight, zero-dependency C++ console utility library providing simple APIs
 - 🔢 **随机数** - 便捷的随机数生成接口（Mersenne Twister）
 - 📄 **文件操作** - 简单的文件读写封装，跨平台路径处理
 - 🎭 **动态类型** - 类型安全的异构容器（Box）
-- 🔷 **多维数组** - 类似 NumPy 的多维数组（ndarray）
-- 👁️ **容器视图** - 非拥有式容器视图（View/ConstView）
+- 🔷 **多维数组** - 类似 NumPy 的多维数组（ndarray），新增视图输出支持
+- 👁️ **容器视图** - 非拥有式容器视图（View/ConstView），优化常量迭代器
 - 🧵 **字符串处理** - 全面的字符串操作（修剪、大小写、分割、格式化）
 - 📊 **进度条** - 可自定义样式的进度条
 - 🧩 **列表推导** - 类似 Python 的列表推导式
-- 🔍 **SFINAE 工具** - 编译期类型检测
+- 🔍 **SFINAE 工具** - 编译期类型检测，新增字符/可打印类型判断
 - 🔤 **正则表达式** - Python 风格的正则表达式封装
 - 🧰 **标准库头文件** - 一站式包含所有标准库头文件
+- ℹ️ **系统信息** - 获取平台、编译器、版本和许可证信息
 
 ## 模块 / Modules
 
@@ -44,9 +45,9 @@ One-stop inclusion of all C++ standard library headers, conditionally compiled b
 
 ### 2. 输出 (output.h)
 
-提供类似 Python 的 print 功能和 STL 容器输出支持。
+提供类似 Python 的 print 功能和 STL 容器输出支持，优化字符串/字符输出格式。
 
-Provides Python-like print functionality and STL container output support.
+Provides Python-like print functionality and STL container output support with optimized string/char formatting.
 
 ```cpp
 namespace console {
@@ -68,6 +69,9 @@ namespace console {
     // 类似 Python 的 print / Python-like print
     print("Value:", 42, vec);        // Value: 42 [1, 2, 3]
     print();                          // 只输出换行
+
+    // 字符串和字符输出优化 / Optimized string and char output
+    print("Hello", 'A');             // "Hello" 'A'
 }
 ```
 
@@ -307,9 +311,9 @@ namespace console {
 
 ### 12. 多维数组 (ndarray.h)
 
-类似 NumPy 的多维数组，支持任意维度。
+类似 NumPy 的多维数组，支持任意维度，新增视图输出功能。
 
-NumPy-like multidimensional array with arbitrary dimensions.
+NumPy-like multidimensional array with arbitrary dimensions, added view output support.
 
 ```cpp
 namespace console {
@@ -335,6 +339,10 @@ namespace console {
     auto sum = arr + 10;                       // 标量加法
     auto prod = arr * arr;                      // 逐元素乘法
     arr += 5;                                   // 原位运算
+
+    // 视图输出 / View output
+    auto view = arr[0];                        // 获取第一行视图
+    print(view);                               // [100, ...]
 
     // 输出 / Output
     ndarray<int> mat2{{1, 2}, {3, 4}};
@@ -396,9 +404,9 @@ namespace console::literals {
 
 ### 15. 容器视图 (view.h)
 
-非拥有式容器视图，支持子区间。
+非拥有式容器视图，支持子区间，优化常量迭代器。
 
-Non-owning container views with subrange support.
+Non-owning container views with subrange support, optimized const iterators.
 
 ```cpp
 namespace console {
@@ -420,6 +428,11 @@ namespace console {
     // 常量视图 / Constant view
     const vector<int> cvec = {1, 2, 3};
     View<const vector<int>> cv(cvec);            // 只读视图
+
+    // 常量迭代器 / Const iterators
+    for (auto it = cv.cbegin(); it != cv.cend(); ++it) {
+        print(*it);
+    }
 
     // 字符串视图特化 / String view specialization
     string str = "Hello World";
@@ -462,9 +475,9 @@ namespace console {
 
 ### 17. SFINAE 工具 (sfinae.h)
 
-编译期类型检测工具。
+编译期类型检测工具，新增字符/可打印类型判断。
 
-Compile-time type detection tools.
+Compile-time type detection tools with added char/printable type checks.
 
 ```cpp
 namespace console {
@@ -481,6 +494,13 @@ namespace console {
     // 检测是否为字符串 / Check if type is string
     static_assert(is_string<string>::value);
     static_assert(is_string<const char*>::value);
+
+    // 检测是否为字符 / Check if type is char
+    static_assert(is_char<char>::value);
+    static_assert(is_char<unsigned char>::value);
+
+    // 检测是否可打印 / Check if type is printable
+    static_assert(is_printable<int>::value);
 
     // 检测是否支持下标操作 / Check if type supports subscript
     static_assert(has_subscript<vector<int>, int>::value);
@@ -553,6 +573,28 @@ namespace console {
 }
 ```
 
+### 20. 系统信息 (info.h)
+
+获取平台、编译器、版本和许可证信息。
+
+Get platform, compiler, version, and license information.
+
+```cpp
+namespace console {
+    // 获取许可证信息 / Get license information
+    print(license());
+
+    // 获取平台信息 / Get platform information
+    print("Platform:", platform());           // Windows/Linux/macOS/Unknown
+
+    // 获取编译器信息 / Get compiler information
+    print("Compiler:", compiler());           // GCC 12.2/MSVC 1934/Clang
+
+    // 获取版本信息 / Get version information
+    print(version());                         // console v3.1.1 (By MrXie1109)
+}
+```
+
 ## 快速开始 / Quick Start
 
 ```cpp
@@ -595,6 +637,11 @@ int main() {
 
     // 文件操作 / File operations
     Path("output.txt").write_text(msg);
+
+    // 系统信息 / System information
+    print("Version:", version());
+    print("Platform:", platform());
+    print("Compiler:", compiler());
 
     return 0;
 }
