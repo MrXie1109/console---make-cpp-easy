@@ -122,6 +122,31 @@ namespace console
                     shape + 1,
                     stride + 1};
             }
+
+            friend std::ostream &operator<<(std::ostream &os,
+                                            const ndarrayView &view)
+            {
+                if (view.dims == 0)
+                {
+                    return os << view.data[view.offset];
+                }
+
+                // 递归打印子视图
+                os << "[";
+                for (size_t i = 0; i < *view.shape; ++i)
+                {
+                    if (i > 0)
+                        os << ", ";
+                    ndarrayView subView(view.data,
+                                        view.offset + i * *view.stride,
+                                        view.dims - 1,
+                                        view.shape + 1,
+                                        view.stride + 1);
+                    os << subView;
+                }
+                os << "]";
+                return os;
+            }
         };
 
     public:
@@ -166,6 +191,56 @@ namespace console
 
         template <typename U>
         ndarray(std::initializer_list<size_t> init, U &&value,
+                typename std::enable_if<
+                    !is_container<U>::value &&
+                    !is_callable<U, T>::value>::type * = 0)
+            : ndarray(init)
+        {
+            for (T &item : data_)
+                item = std::forward<U>(value);
+        }
+
+        ndarray(std::vector<size_t> init)
+            : shape_(init), stride_(init.size())
+        {
+            if (init.size() == 0)
+                return;
+            size_t size_of_data = 1;
+            for (size_t i : init)
+            {
+                size_of_data *= i;
+            }
+            data_ = std::vector<T>(size_of_data);
+            size_t size_of_block = 1;
+            for (size_t i = shape_.size() - 1; i < shape_.size(); i--)
+            {
+                stride_[i] = size_of_block;
+                size_of_block *= shape_[i];
+            }
+        }
+
+        template <typename Container>
+        ndarray(std::vector<size_t> init, Container &&cont,
+                typename enable_if_container<Container>::type * = 0)
+            : ndarray(init)
+        {
+            size_t copy_size = std::min(cont.size(), data_.size());
+            auto it = cont.begin();
+            for (size_t i = 0; i < copy_size; ++i)
+                data_[i] = *it++;
+        }
+
+        template <typename F, typename... Args>
+        ndarray(std::vector<size_t> init, F &&f, Args &&...args,
+                typename is_callable<F, T>::type * = 0)
+            : ndarray(init)
+        {
+            for (T &item : data_)
+                item = f(std::forward<Args>(args)...);
+        }
+
+        template <typename U>
+        ndarray(std::vector<size_t> init, U &&value,
                 typename std::enable_if<
                     !is_container<U>::value &&
                     !is_callable<U, T>::value>::type * = 0)

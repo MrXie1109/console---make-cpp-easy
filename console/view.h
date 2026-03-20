@@ -36,16 +36,17 @@ namespace console
     class View
     {
         using Iterator = typename Container::iterator;
+        using cIterator = typename Container::const_iterator;
         Iterator begin_, end_;
 
     public:
         typedef Iterator iterator;
-        typedef Iterator const_iterator;
+        typedef cIterator const_iterator;
 
         Iterator begin() const { return begin_; }
         Iterator end() const { return end_; }
-        Iterator cbegin() const { return begin_; }
-        Iterator cend() const { return end_; }
+        cIterator cbegin() const { return begin_; }
+        cIterator cend() const { return end_; }
 
         View(Container &container)
             : begin_(std::begin(container)), end_(std::end(container)) {}

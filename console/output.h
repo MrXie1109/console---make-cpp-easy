@@ -36,9 +36,21 @@ SOFTWARE.
 #include <unordered_set>
 #include <unordered_map>
 #include <valarray>
+#include "sfinae.h"
 
 namespace console
 {
+    template <class T>
+    typename std::enable_if<is_string<typename std::decay<T>::type>::value>::type
+    put_value(std::ostream &, T &&);
+    template <class T>
+    typename std::enable_if<is_char<typename std::decay<T>::type>::value>::type
+    put_value(std::ostream &, T &&);
+    template <class T>
+    typename std::enable_if<!is_string<typename std::decay<T>::type>::value &&
+                            !is_char<typename std::decay<T>::type>::value>::type
+    put_value(std::ostream &, T &&);
+
     template <class T>
     std::ostream &operator<<(std::ostream &, const std::vector<T> &);
     template <class T>
@@ -72,16 +84,38 @@ namespace console
     template <class T>
     std::ostream &operator<<(std::ostream &, const std::valarray<T> &);
 
+    template <class T>
+    typename std::enable_if<is_string<typename std::decay<T>::type>::value>::type
+    put_value(std::ostream &os, T &&value)
+    {
+        os << '"' << value << '"';
+    }
+    template <class T>
+    typename std::enable_if<is_char<typename std::decay<T>::type>::value>::type
+    put_value(std::ostream &os, T &&value)
+    {
+        os << "'" << value << "'";
+    }
+    template <class T>
+    typename std::enable_if<!is_string<typename std::decay<T>::type>::value &&
+                            !is_char<typename std::decay<T>::type>::value>::type
+    put_value(std::ostream &os, T &&vlaue)
+    {
+        os << vlaue;
+    }
+
     template <class Cont>
     std::ostream &cont_print_sequence(std::ostream &os, const Cont &cont)
     {
         if (begin(cont) == end(cont))
             return os << "[]";
         auto it = begin(cont);
-        os << '[' << *it;
+        os << '[';
+        put_value(os, *it);
         while (++it != end(cont))
         {
-            os << ", " << *it;
+            os << ", ";
+            put_value(os, *it);
         }
         return os << ']';
     }
@@ -95,7 +129,8 @@ namespace console
         os << '{' << *it;
         while (++it != end(cont))
         {
-            os << ", " << *it;
+            os << ", ";
+            put_value(os, *it);
         }
         return os << '}';
     }
@@ -106,10 +141,16 @@ namespace console
         if (begin(cont) == end(cont))
             return os << "{}";
         auto it = begin(cont);
-        os << '{' << it->first << ": " << it->second;
+        os << '{';
+        put_value(os, it->first);
+        os << ": ";
+        put_value(os, it->second);
         while (++it != end(cont))
         {
-            os << ", " << it->first << ": " << it->second;
+            os << ", ";
+            put_value(os, it->first);
+            os << ": ";
+            put_value(os, it->second);
         }
         return os << '}';
     }
@@ -255,23 +296,24 @@ namespace console
         Output(std::ostream &o, const std::string &s, const std::string &e, bool isF)
             : os(o), sep(s), end(e), isFlush(isF) {}
 
-        void operator()()
+        Output &operator()()
         {
             os << end;
             if (isFlush)
                 os << std::flush;
+            return *this;
         }
         template <class T>
-        void operator()(const T &t)
+        Output &operator()(const T &t)
         {
             os << t;
-            operator()();
+            return operator()();
         }
         template <class T, class... Args>
-        void operator()(const T &t, const Args &...args)
+        Output &operator()(const T &t, const Args &...args)
         {
             os << t << sep;
-            operator()(args...);
+            return operator()(args...);
         }
     } print;
 }
