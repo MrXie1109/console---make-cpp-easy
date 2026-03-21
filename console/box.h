@@ -32,27 +32,9 @@ SOFTWARE.
 #include "strpp.h"
 #include "csexc.h"
 #include "literals.h"
-#ifdef __GNUG__
-#include <cxxabi.h>
-#endif
 
 namespace console
 {
-    std::string tiname(const std::type_info &ti)
-    {
-#ifdef _MSC_VER
-        return ti.name();
-#elif defined(__GNUG__)
-        int status = 0;
-        std::unique_ptr<char, void (*)(void *)> result(
-            abi::__cxa_demangle(ti.name(), nullptr, nullptr, &status),
-            std::free);
-        return (status == 0) ? result.get() : ti.name();
-#else
-        return ti.name();
-#endif
-    }
-
     class Item
     {
     private:
@@ -75,11 +57,13 @@ namespace console
             }
             void print(std::ostream &os) const
             {
-                os << value;
+                repr(value, os);
             }
             std::string str() const
             {
-                return uniToStr(value);
+                std::ostringstream oss;
+                repr(value, oss);
+                return oss.str();
             }
             const std::type_info &type() const
             {

@@ -127,7 +127,7 @@ namespace console
         template <class... Args>
         void fatal(const Args &...args)
         {
-            std::string error_info(uniToStr(args...));
+            std::string error_info(uni_to_str(args...));
             if (settings[4])
             {
                 if (colorful)

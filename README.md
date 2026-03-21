@@ -178,7 +178,7 @@ namespace console {
     string result = fmt % 1 % 2 % 3;               // "1 + 2 = 3"
 
     // 通用类型转字符串 / Universal to string conversion
-    string str = uniToStr(3.14159);                // "3.14159"
+    string str = uni_to_str(3.14159);                // "3.14159"
 }
 ```
 

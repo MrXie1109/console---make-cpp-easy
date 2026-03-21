@@ -37,20 +37,10 @@ SOFTWARE.
 #include <unordered_map>
 #include <valarray>
 #include "sfinae.h"
+#include "utils.h"
 
 namespace console
 {
-    template <class T>
-    typename std::enable_if<is_string<typename std::decay<T>::type>::value>::type
-    put_value(std::ostream &, T &&);
-    template <class T>
-    typename std::enable_if<is_char<typename std::decay<T>::type>::value>::type
-    put_value(std::ostream &, T &&);
-    template <class T>
-    typename std::enable_if<!is_string<typename std::decay<T>::type>::value &&
-                            !is_char<typename std::decay<T>::type>::value>::type
-    put_value(std::ostream &, T &&);
-
     template <class T>
     std::ostream &operator<<(std::ostream &, const std::vector<T> &);
     template <class T>
@@ -84,26 +74,6 @@ namespace console
     template <class T>
     std::ostream &operator<<(std::ostream &, const std::valarray<T> &);
 
-    template <class T>
-    typename std::enable_if<is_string<typename std::decay<T>::type>::value>::type
-    put_value(std::ostream &os, T &&value)
-    {
-        os << '"' << value << '"';
-    }
-    template <class T>
-    typename std::enable_if<is_char<typename std::decay<T>::type>::value>::type
-    put_value(std::ostream &os, T &&value)
-    {
-        os << "'" << value << "'";
-    }
-    template <class T>
-    typename std::enable_if<!is_string<typename std::decay<T>::type>::value &&
-                            !is_char<typename std::decay<T>::type>::value>::type
-    put_value(std::ostream &os, T &&vlaue)
-    {
-        os << vlaue;
-    }
-
     template <class Cont>
     std::ostream &cont_print_sequence(std::ostream &os, const Cont &cont)
     {
@@ -111,11 +81,11 @@ namespace console
             return os << "[]";
         auto it = begin(cont);
         os << '[';
-        put_value(os, *it);
+        repr(*it, os);
         while (++it != end(cont))
         {
             os << ", ";
-            put_value(os, *it);
+            repr(*it, os);
         }
         return os << ']';
     }
@@ -126,11 +96,12 @@ namespace console
         if (begin(cont) == end(cont))
             return os << "{}";
         auto it = begin(cont);
-        os << '{' << *it;
+        os << '{';
+        repr(*it, os);
         while (++it != end(cont))
         {
             os << ", ";
-            put_value(os, *it);
+            repr(*it, os);
         }
         return os << '}';
     }
@@ -142,15 +113,15 @@ namespace console
             return os << "{}";
         auto it = begin(cont);
         os << '{';
-        put_value(os, it->first);
+        repr(it->first, os);
         os << ": ";
-        put_value(os, it->second);
+        repr(it->second, os);
         while (++it != end(cont))
         {
             os << ", ";
-            put_value(os, it->first);
+            repr(it->first, os);
             os << ": ";
-            put_value(os, it->second);
+            repr(it->second, os);
         }
         return os << '}';
     }
@@ -163,7 +134,7 @@ namespace console
             TuplePrinter<Tuple, N - 1>::print(os, t);
             if (N > 1)
                 os << ", ";
-            os << std::get<N - 1>(t);
+            repr(std::get<N - 1>(t), os);
         }
     };
 
@@ -172,7 +143,7 @@ namespace console
     {
         static void print(std::ostream &os, const Tuple &t)
         {
-            os << std::get<0>(t);
+            repr(std::get<0>(t), os);
         }
     };
 
@@ -258,7 +229,11 @@ namespace console
     template <class T, class U>
     std::ostream &operator<<(std::ostream &os, const std::pair<T, U> &p)
     {
-        return os << '(' << p.first << ", " << p.second << ')';
+        os << '(';
+        repr(p.first, os);
+        os << ", ";
+        repr(p.second, os);
+        return os << ')';
     }
     template <class... Args>
     std::ostream &operator<<(std::ostream &os, const std::tuple<Args...> &t)

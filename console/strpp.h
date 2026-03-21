@@ -179,7 +179,7 @@ namespace console
     }
 
     template <class... Args>
-    std::string uniToStr(Args &&...args)
+    std::string uni_to_str(Args &&...args)
     {
         std::ostringstream oss;
         int _[] = {0, (oss << std::forward<Args>(args), 0)...};
@@ -198,7 +198,7 @@ namespace console
             auto result = partition(*this, "{}");
             if (result.middle == "{}")
             {
-                return result.left + uniToStr(t) + result.right;
+                return result.left + uni_to_str(t) + result.right;
             }
             throw bad_format("Bad Format");
         }
