@@ -30,6 +30,7 @@ A lightweight, zero-dependency C++ console utility library providing simple APIs
 - 🔤 **正则表达式** - Python 风格的正则表达式封装
 - 🧰 **标准库头文件** - 一站式包含所有标准库头文件
 - ℹ️ **系统信息** - 获取平台、编译器、版本和许可证信息
+- 🛠️ **通用工具函数** - 新增 `utils.h`，提供统一的类型名称解析和格式化输出（repr）功能
 
 ## 模块 / Modules
 
@@ -46,8 +47,10 @@ One-stop inclusion of all C++ standard library headers, conditionally compiled b
 ### 2. 输出 (output.h)
 
 提供类似 Python 的 print 功能和 STL 容器输出支持，优化字符串/字符输出格式。
+使用统一的 `repr()` 函数替代原有 `put_value`，提升输出格式化一致性。
 
 Provides Python-like print functionality and STL container output support with optimized string/char formatting.
+Uses unified `repr()` function instead of original `put_value` for consistent output formatting.
 
 ```cpp
 namespace console {
@@ -151,8 +154,10 @@ namespace console {
 ### 6. 字符串处理 (strpp.h)
 
 全面的字符串操作函数，包括格式化字符串类。
+函数命名优化：`uniToStr` 重命名为 `uni_to_str`（符合蛇形命名规范）。
 
 Comprehensive string manipulation functions, including formatted string class.
+Function naming optimization: `uniToStr` renamed to `uni_to_str` (compliant with snake_case naming convention).
 
 ```cpp
 namespace console {
@@ -200,8 +205,10 @@ namespace console::color {
 ### 8. 日志记录 (logging.h)
 
 多级别日志系统，支持彩色输出和时间戳。
+内部优化：使用 `uni_to_str` 替代 `uniToStr` 进行字符串转换。
 
 Multi-level logging system with color support and timestamps.
+Internal optimization: Use `uni_to_str` instead of `uniToStr` for string conversion.
 
 ```cpp
 namespace console {
@@ -284,8 +291,10 @@ namespace console {
 ### 11. 动态类型容器 (box.h)
 
 类型安全的异构容器，类似 Python 列表。
+架构优化：类型名称解析逻辑迁移至 `utils.h`，使用 `repr()` 优化输出格式。
 
 Type-safe heterogeneous container similar to Python list.
+Architecture optimization: Type name resolution logic moved to `utils.h`, optimized output format with `repr()`.
 
 ```cpp
 namespace console {
@@ -591,7 +600,31 @@ namespace console {
     print("Compiler:", compiler());           // GCC 12.2/MSVC 1934/Clang
 
     // 获取版本信息 / Get version information
-    print(version());                         // console v3.1.1 (By MrXie1109)
+    print(version());                         // console v3.2.1 (By MrXie1109)
+}
+```
+
+### 21. 通用工具函数 (utils.h) ⭐ 新增
+
+统一的工具函数集合，包含类型名称解析和格式化输出功能。
+
+Unified collection of utility functions, including type name resolution and formatted output.
+
+```cpp
+namespace console {
+    // 获取可读的类型名称 / Get human-readable type name
+    string type_name = tiname(typeid(std::vector<int>));
+
+    // 格式化输出 / Formatted output (repr)
+    repr("hello");    // 输出 "hello" (带双引号)
+    repr('A');        // 输出 'A' (带单引号)
+    repr(true);       // 输出 true (布尔值)
+    repr(42);         // 输出 42 (数字)
+
+    // 不可打印类型输出示例
+    struct MyStruct {};
+    MyStruct s;
+    repr(s);          // 输出 <class "MyStruct">
 }
 ```
 
@@ -659,3 +692,8 @@ MIT License [LICENSE](LICENSE)
 ---
 
 **console 库** - 让 C++ 控制台编程更简单 / Making C++ console programming simpler
+
+### 总结
+1. **核心变更**：`uniToStr` 统一重命名为 `uni_to_str` 符合蛇形命名规范，`output.h` 中用 `repr()` 替代 `put_value` 提升输出一致性；
+2. **架构优化**：新增 `utils.h` 统一管理类型名称解析（`tiname`）和格式化输出（`repr`）逻辑，抽离 `box.h` 中的冗余代码；
+3. **功能增强**：`repr()` 函数支持布尔值、字符串、字符等不同类型的差异化格式化输出，提升调试体验。
