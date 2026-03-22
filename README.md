@@ -622,7 +622,7 @@ Specialized utility library for container output formatting, providing unified t
 ## 快速开始 / Quick Start
 
 ```cpp
-#include "all.h"
+#include "console/all.h"
 using namespace console;
 using namespace console::literals;
 
