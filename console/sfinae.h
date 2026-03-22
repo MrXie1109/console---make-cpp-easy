@@ -25,6 +25,7 @@ SOFTWARE.
 #pragma once
 #include <type_traits>
 #include <iterator>
+#include "outfwd.h"
 
 namespace console
 {

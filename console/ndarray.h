@@ -30,7 +30,7 @@ SOFTWARE.
 #include <functional>
 #include <memory>
 #include "csexc.h"
-#include "sfinae.h"
+#include "repr.h"
 
 namespace console
 {
@@ -128,10 +128,8 @@ namespace console
             {
                 if (view.dims == 0)
                 {
-                    return os << view.data[view.offset];
+                    repr(view.data[view.offset], os);
                 }
-
-                // 递归打印子视图
                 os << "[";
                 for (size_t i = 0; i < *view.shape; ++i)
                 {
@@ -535,7 +533,7 @@ namespace console
                     {
                         if (i > 0)
                             os << ", ";
-                        os << self.data_[start + i * self.stride_[dim]];
+                        repr(self.data_[start + i * self.stride_[dim]], os);
                     }
                     os << "]";
                 }

@@ -43,4 +43,5 @@ SOFTWARE.
 #include "sfinae.h"
 #include "re.h"
 #include "info.h"
-#include "utils.h"
+#include "repr.h"
+#include "outfwd.h"

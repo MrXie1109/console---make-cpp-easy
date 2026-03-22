@@ -23,57 +23,12 @@ SOFTWARE.
 */
 
 #pragma once
-#include <iostream>
 #include <cstddef>
-#include <vector>
-#include <array>
-#include <utility>
-#include <map>
-#include <set>
-#include <deque>
-#include <list>
-#include <forward_list>
-#include <unordered_set>
-#include <unordered_map>
-#include <valarray>
-#include "sfinae.h"
-#include "utils.h"
+#include <iterator>
+#include "repr.h"
 
 namespace console
 {
-    template <class T>
-    std::ostream &operator<<(std::ostream &, const std::vector<T> &);
-    template <class T>
-    std::ostream &operator<<(std::ostream &, const std::deque<T> &);
-    template <class T>
-    std::ostream &operator<<(std::ostream &, const std::list<T> &);
-    template <class T>
-    std::ostream &operator<<(std::ostream &, const std::forward_list<T> &);
-    template <class T, size_t n>
-    std::ostream &operator<<(std::ostream &, const std::array<T, n> &);
-    template <class T>
-    std::ostream &operator<<(std::ostream &, const std::set<T> &);
-    template <class K, class V>
-    std::ostream &operator<<(std::ostream &, const std::map<K, V> &);
-    template <class T>
-    std::ostream &operator<<(std::ostream &, const std::multiset<T> &);
-    template <class K, class V>
-    std::ostream &operator<<(std::ostream &, const std::multimap<K, V> &);
-    template <class T>
-    std::ostream &operator<<(std::ostream &, const std::unordered_set<T> &);
-    template <class K, class V>
-    std::ostream &operator<<(std::ostream &, const std::unordered_map<K, V> &);
-    template <class T>
-    std::ostream &operator<<(std::ostream &, const std::unordered_multiset<T> &);
-    template <class K, class V>
-    std::ostream &operator<<(std::ostream &, const std::unordered_multimap<K, V> &);
-    template <class T, class U>
-    std::ostream &operator<<(std::ostream &, const std::pair<T, U> &);
-    template <class... Args>
-    std::ostream &operator<<(std::ostream &, const std::tuple<Args...> &);
-    template <class T>
-    std::ostream &operator<<(std::ostream &, const std::valarray<T> &);
-
     template <class Cont>
     std::ostream &cont_print_sequence(std::ostream &os, const Cont &cont)
     {

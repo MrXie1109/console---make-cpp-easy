@@ -21,16 +21,15 @@ A lightweight, zero-dependency C++ console utility library providing simple APIs
 - 🔢 **随机数** - 便捷的随机数生成接口（Mersenne Twister）
 - 📄 **文件操作** - 简单的文件读写封装，跨平台路径处理
 - 🎭 **动态类型** - 类型安全的异构容器（Box）
-- 🔷 **多维数组** - 类似 NumPy 的多维数组（ndarray），新增视图输出支持
+- 🔷 **多维数组** - 类似 NumPy 的多维数组（ndarray），支持视图输出
 - 👁️ **容器视图** - 非拥有式容器视图（View/ConstView），优化常量迭代器
 - 🧵 **字符串处理** - 全面的字符串操作（修剪、大小写、分割、格式化）
 - 📊 **进度条** - 可自定义样式的进度条
 - 🧩 **列表推导** - 类似 Python 的列表推导式
-- 🔍 **SFINAE 工具** - 编译期类型检测，新增字符/可打印类型判断
+- 🔍 **SFINAE 工具** - 编译期类型检测，支持字符/可打印类型判断
 - 🔤 **正则表达式** - Python 风格的正则表达式封装
 - 🧰 **标准库头文件** - 一站式包含所有标准库头文件
 - ℹ️ **系统信息** - 获取平台、编译器、版本和许可证信息
-- 🛠️ **通用工具函数** - 新增 `utils.h`，提供统一的类型名称解析和格式化输出（repr）功能
 
 ## 模块 / Modules
 
@@ -47,10 +46,10 @@ One-stop inclusion of all C++ standard library headers, conditionally compiled b
 ### 2. 输出 (output.h)
 
 提供类似 Python 的 print 功能和 STL 容器输出支持，优化字符串/字符输出格式。
-使用统一的 `repr()` 函数替代原有 `put_value`，提升输出格式化一致性。
+容器输出通过独立的 `outfwd.h` 头文件提供前置声明，保证编译效率。
 
 Provides Python-like print functionality and STL container output support with optimized string/char formatting.
-Uses unified `repr()` function instead of original `put_value` for consistent output formatting.
+Container output uses separate `outfwd.h` header for forward declarations to ensure compilation efficiency.
 
 ```cpp
 namespace console {
@@ -154,16 +153,14 @@ namespace console {
 ### 6. 字符串处理 (strpp.h)
 
 全面的字符串操作函数，包括格式化字符串类。
-函数命名优化：`uniToStr` 重命名为 `uni_to_str`（符合蛇形命名规范）。
 
 Comprehensive string manipulation functions, including formatted string class.
-Function naming optimization: `uniToStr` renamed to `uni_to_str` (compliant with snake_case naming convention).
 
 ```cpp
 namespace console {
     // 修剪 / Trimming
     string s = trim("  Hello World  ");          // "Hello World"
-    string s2 = ltrim(",,,Hello", ",,");          // "Hello"
+    string s2 = ltrim(",,,Hello", ",");          // "Hello"
 
     // 大小写转换 / Case conversion
     print(upper("hello"));                       // HELLO
@@ -205,10 +202,8 @@ namespace console::color {
 ### 8. 日志记录 (logging.h)
 
 多级别日志系统，支持彩色输出和时间戳。
-内部优化：使用 `uni_to_str` 替代 `uniToStr` 进行字符串转换。
 
 Multi-level logging system with color support and timestamps.
-Internal optimization: Use `uni_to_str` instead of `uniToStr` for string conversion.
 
 ```cpp
 namespace console {
@@ -291,10 +286,8 @@ namespace console {
 ### 11. 动态类型容器 (box.h)
 
 类型安全的异构容器，类似 Python 列表。
-架构优化：类型名称解析逻辑迁移至 `utils.h`，使用 `repr()` 优化输出格式。
 
 Type-safe heterogeneous container similar to Python list.
-Architecture optimization: Type name resolution logic moved to `utils.h`, optimized output format with `repr()`.
 
 ```cpp
 namespace console {
@@ -306,23 +299,20 @@ namespace console {
     double d = box.get<double>(1);          // 3.14
     string s = box.get<string>(2);          // "Hello"
 
-    // 类型信息 / Type information
-    string type_name = tiname(typeid(int));  // 获取可读的类型名称
-
     // 解包到变量 / Unpack to variables
     int a; double b; string c;
     box.unpack(a, b, c);                    // a=42, b=3.14, c="Hello"
 
-    // 输出 / Output
-    print(box);                              // (42, 3.14, Hello, [1, 2, 3])
+    // 输出 / Output (内部使用 repr 格式化)
+    print(box);                              // (42, 3.14, "Hello", [1, 2, 3])
 }
 ```
 
 ### 12. 多维数组 (ndarray.h)
 
-类似 NumPy 的多维数组，支持任意维度，新增视图输出功能。
+类似 NumPy 的多维数组，支持任意维度和视图输出。
 
-NumPy-like multidimensional array with arbitrary dimensions, added view output support.
+NumPy-like multidimensional array with arbitrary dimensions and view output support.
 
 ```cpp
 namespace console {
@@ -353,7 +343,7 @@ namespace console {
     auto view = arr[0];                        // 获取第一行视图
     print(view);                               // [100, ...]
 
-    // 输出 / Output
+    // 输出 / Output (内部使用 repr 格式化)
     ndarray<int> mat2{{1, 2}, {3, 4}};
     print(mat2);                                // [[1, 2], [3, 4]]
 }
@@ -484,9 +474,9 @@ namespace console {
 
 ### 17. SFINAE 工具 (sfinae.h)
 
-编译期类型检测工具，新增字符/可打印类型判断。
+编译期类型检测工具，支持字符/可打印类型判断。
 
-Compile-time type detection tools with added char/printable type checks.
+Compile-time type detection tools with char/printable type checks.
 
 ```cpp
 namespace console {
@@ -600,33 +590,34 @@ namespace console {
     print("Compiler:", compiler());           // GCC 12.2/MSVC 1934/Clang
 
     // 获取版本信息 / Get version information
-    print(version());                         // console v3.2.1 (By MrXie1109)
+    print(version());                         // console v3.3.0 (By MrXie1109)
 }
 ```
 
-### 21. 通用工具函数 (utils.h) ⭐ 新增
+### 21. 容器输出前置声明 (outfwd.h) ⭐ 新增
 
-统一的工具函数集合，包含类型名称解析和格式化输出功能。
+为所有 STL 容器提供 `operator<<` 的前置声明，优化编译速度，避免重复定义。
 
-Unified collection of utility functions, including type name resolution and formatted output.
+Provides forward declarations for `operator<<` of all STL containers to optimize compilation speed and avoid duplicate definitions.
 
 ```cpp
-namespace console {
-    // 获取可读的类型名称 / Get human-readable type name
-    string type_name = tiname(typeid(std::vector<int>));
-
-    // 格式化输出 / Formatted output (repr)
-    repr("hello");    // 输出 "hello" (带双引号)
-    repr('A');        // 输出 'A' (带单引号)
-    repr(true);       // 输出 true (布尔值)
-    repr(42);         // 输出 42 (数字)
-
-    // 不可打印类型输出示例
-    struct MyStruct {};
-    MyStruct s;
-    repr(s);          // 输出 <class "MyStruct">
-}
+// 无需手动包含，由 output.h 自动引入
+// No need to include manually, automatically imported by output.h
+#include "outfwd.h"
 ```
+
+### 22. 格式化输出工具 (repr.h) ⭐ 新增
+
+专门用于容器输出格式化的工具库，提供统一的类型格式化输出功能，仅在打印容器时内部使用。
+
+Specialized utility library for container output formatting, providing unified type formatting output functionality, only used internally when printing containers.
+
+核心功能：
+- 字符串类型输出带双引号
+- 字符类型输出带单引号
+- 布尔值输出 `true`/`false`
+- 函数指针输出内存地址
+- 不可打印类型输出可读的类型名称
 
 ## 快速开始 / Quick Start
 
@@ -694,6 +685,6 @@ MIT License [LICENSE](LICENSE)
 **console 库** - 让 C++ 控制台编程更简单 / Making C++ console programming simpler
 
 ### 总结
-1. **核心变更**：`uniToStr` 统一重命名为 `uni_to_str` 符合蛇形命名规范，`output.h` 中用 `repr()` 替代 `put_value` 提升输出一致性；
-2. **架构优化**：新增 `utils.h` 统一管理类型名称解析（`tiname`）和格式化输出（`repr`）逻辑，抽离 `box.h` 中的冗余代码；
-3. **功能增强**：`repr()` 函数支持布尔值、字符串、字符等不同类型的差异化格式化输出，提升调试体验。
+1. **新增核心文件**：`outfwd.h` 提供 STL 容器输出的前置声明，优化编译效率；`repr.h` 提供容器输出格式化功能（仅内部使用）；
+2. **架构调整**：移除 `utils.h`，将类型名称解析和格式化输出逻辑整合到 `repr.h` 中，专注容器输出场景；
+3. **功能特性**：`repr` 函数仅在打印容器时使用，支持字符串、字符、布尔值等不同类型的差异化格式化输出。
