@@ -60,84 +60,106 @@ namespace console
     class cursor_ptr
     {
         T *original_ptr;
-        T *curent_ptr;
+        T *current_ptr;
 
     public:
-        cursor_ptr() : original_ptr(nullptr), curent_ptr(nullptr) {}
-        cursor_ptr(T *p) : original_ptr(p), curent_ptr(p) {}
+        cursor_ptr() : original_ptr(nullptr), current_ptr(nullptr) {}
+        cursor_ptr(T *p) : original_ptr(p), current_ptr(p) {}
         cursor_ptr(const cursor_ptr &cp)
-            : original_ptr(nullptr), curent_ptr(cp.curent_ptr) {}
+            : original_ptr(nullptr), current_ptr(cp.current_ptr) {}
         cursor_ptr(cursor_ptr &&cp)
-            : original_ptr(cp.original_ptr), curent_ptr(cp.curent_ptr)
+            : original_ptr(cp.original_ptr), current_ptr(cp.current_ptr)
         {
             cp.original_ptr = nullptr;
         }
-        T &operator*() { return *curent_ptr; }
-        T *operator->() { return curent_ptr; }
-        T &operator[](size_t i) { return *(curent_ptr + i); }
-        T *get() { return curent_ptr; }
-        operator T *() { return curent_ptr; }
-        const T &operator*() const { return *curent_ptr; }
-        const T *operator->() const { return curent_ptr; }
-        const T &operator[](size_t i) const { return *(curent_ptr + i); }
-        const T *get() const { return curent_ptr; }
-        operator const T *() const { return curent_ptr; }
+        T &operator*() { return *current_ptr; }
+        T *operator->() { return current_ptr; }
+        T &operator[](size_t i) { return *(current_ptr + i); }
+        T *get() { return current_ptr; }
+        operator T *() { return current_ptr; }
+        const T &operator*() const { return *current_ptr; }
+        const T *operator->() const { return current_ptr; }
+        const T &operator[](size_t i) const { return *(current_ptr + i); }
+        const T *get() const { return current_ptr; }
+        operator const T *() const { return current_ptr; }
         ~cursor_ptr() { delete original_ptr; }
         cursor_ptr &operator++()
         {
-            ++curent_ptr;
+            ++current_ptr;
             return *this;
         }
         cursor_ptr operator++(int)
         {
             cursor_ptr tmp(*this);
-            ++curent_ptr;
+            ++current_ptr;
+#if __cplusplus >= 201703L
             return tmp;
+#else
+            return std::move(tmp);
+#endif
+            /**
+             * 注：别和我提什么不要return std::move(cp)，有RVO之类的话，
+             * 但是console::cursor_ptr在没有RVO的情况下返回值是致命的！
+             * 我只在确保一定有RVO的C++17及以后直接return cp，在此之前选择保守。
+             * 后不再赘述，Q.E.D.
+             */
         }
         cursor_ptr &operator--()
         {
-            --curent_ptr;
+            --current_ptr;
             return *this;
         }
         cursor_ptr operator--(int)
         {
             cursor_ptr tmp(*this);
-            --curent_ptr;
+            --current_ptr;
+#if __cplusplus >= 201703L
             return tmp;
+#else
+            return std::move(tmp);
+#endif
         }
         cursor_ptr operator+(int sep) const
         {
             cursor_ptr cp;
-            cp.curent_ptr = curent_ptr + sep;
+            cp.current_ptr = current_ptr + sep;
+#if __cplusplus >= 201703L
             return cp;
+#else
+            return std::move(cp);
+#endif
         }
         cursor_ptr operator-(int sep) const
         {
             cursor_ptr cp;
-            cp.curent_ptr = curent_ptr - sep;
+            cp.current_ptr = current_ptr - sep;
+#if __cplusplus >= 201703L
             return cp;
+#else
+            return std::move(cp);
+#endif
         }
         const cursor_ptr &operator+=(int sep)
         {
-            curent_ptr += sep;
+            current_ptr += sep;
             return *this;
         }
         const cursor_ptr &operator-=(int sep)
         {
-            curent_ptr -= sep;
+            current_ptr -= sep;
             return *this;
         }
         int operator-(const cursor_ptr &cp) const
         {
-            return curent_ptr - cp.curent_ptr;
+            return current_ptr - cp.current_ptr;
         }
         bool operator==(const cursor_ptr &cp) const
         {
-            return curent_ptr == cp.curent_ptr;
+            return current_ptr == cp.current_ptr;
         }
         bool operator==(const T *p) const
         {
-            return curent_ptr == p;
+            return current_ptr == p;
         }
         friend bool operator==(const T *p, const cursor_ptr &cp)
         {
@@ -145,11 +167,11 @@ namespace console
         }
         bool operator!=(const cursor_ptr &cp) const
         {
-            return curent_ptr != cp.curent_ptr;
+            return current_ptr != cp.current_ptr;
         }
         bool operator!=(const T *p) const
         {
-            return curent_ptr != p;
+            return current_ptr != p;
         }
         friend bool operator!=(const T *p, const cursor_ptr &cp)
         {
@@ -161,7 +183,7 @@ namespace console
                 return *this;
             delete original_ptr;
             original_ptr = p;
-            curent_ptr = p;
+            current_ptr = p;
             return *this;
         }
         const cursor_ptr &operator=(const cursor_ptr &cp)
@@ -169,7 +191,8 @@ namespace console
             if (this == &cp)
                 return *this;
             delete original_ptr;
-            curent_ptr = cp.curent_ptr;
+            original_ptr = nullptr;
+            current_ptr = cp.current_ptr;
             return *this;
         }
         const cursor_ptr &operator=(cursor_ptr &&cp)
@@ -177,17 +200,17 @@ namespace console
             if (this == &cp)
                 return *this;
             delete original_ptr;
-            curent_ptr = cp.curent_ptr;
+            current_ptr = cp.current_ptr;
             original_ptr = cp.original_ptr;
             cp.original_ptr = nullptr;
             return *this;
         }
         void swap(cursor_ptr &cp)
         {
-            T *p1 = curent_ptr, *p2 = original_ptr;
-            curent_ptr = cp.curent_ptr;
+            T *p1 = current_ptr, *p2 = original_ptr;
+            current_ptr = cp.current_ptr;
             original_ptr = cp.original_ptr;
-            cp.curent_ptr = p1;
+            cp.current_ptr = p1;
             cp.original_ptr = p2;
         }
     };
@@ -196,84 +219,100 @@ namespace console
     class cursor_ptr<T[]>
     {
         T *original_ptr;
-        T *curent_ptr;
+        T *current_ptr;
 
     public:
-        cursor_ptr() : original_ptr(nullptr), curent_ptr(nullptr) {}
-        cursor_ptr(T *p) : original_ptr(p), curent_ptr(p) {}
+        cursor_ptr() : original_ptr(nullptr), current_ptr(nullptr) {}
+        cursor_ptr(T *p) : original_ptr(p), current_ptr(p) {}
         cursor_ptr(const cursor_ptr &cp)
-            : original_ptr(nullptr), curent_ptr(cp.curent_ptr) {}
+            : original_ptr(nullptr), current_ptr(cp.current_ptr) {}
         cursor_ptr(cursor_ptr &&cp)
-            : original_ptr(cp.original_ptr), curent_ptr(cp.curent_ptr)
+            : original_ptr(cp.original_ptr), current_ptr(cp.current_ptr)
         {
             cp.original_ptr = nullptr;
         }
-        T &operator*() { return *curent_ptr; }
-        T *operator->() { return curent_ptr; }
-        T &operator[](size_t i) { return *(curent_ptr + i); }
-        T *get() { return curent_ptr; }
-        operator T *() { return curent_ptr; }
-        const T &operator*() const { return *curent_ptr; }
-        const T *operator->() const { return curent_ptr; }
-        const T &operator[](size_t i) const { return *(curent_ptr + i); }
-        const T *get() const { return curent_ptr; }
-        operator const T *() const { return curent_ptr; }
+        T &operator*() { return *current_ptr; }
+        T *operator->() { return current_ptr; }
+        T &operator[](size_t i) { return *(current_ptr + i); }
+        T *get() { return current_ptr; }
+        operator T *() { return current_ptr; }
+        const T &operator*() const { return *current_ptr; }
+        const T *operator->() const { return current_ptr; }
+        const T &operator[](size_t i) const { return *(current_ptr + i); }
+        const T *get() const { return current_ptr; }
+        operator const T *() const { return current_ptr; }
         ~cursor_ptr() { delete[] original_ptr; }
         cursor_ptr &operator++()
         {
-            ++curent_ptr;
+            ++current_ptr;
             return *this;
         }
         cursor_ptr operator++(int)
         {
             cursor_ptr tmp(*this);
-            ++curent_ptr;
+            ++current_ptr;
+#if __cplusplus >= 201703L
             return tmp;
+#else
+            return std::move(tmp);
+#endif
         }
         cursor_ptr &operator--()
         {
-            --curent_ptr;
+            --current_ptr;
             return *this;
         }
         cursor_ptr operator--(int)
         {
             cursor_ptr tmp(*this);
-            --curent_ptr;
+            --current_ptr;
+#if __cplusplus >= 201703L
             return tmp;
+#else
+            return std::move(tmp);
+#endif
         }
         cursor_ptr operator+(int sep) const
         {
             cursor_ptr cp;
-            cp.curent_ptr = curent_ptr + sep;
+            cp.current_ptr = current_ptr + sep;
+#if __cplusplus >= 201703L
             return cp;
+#else
+            return std::move(cp);
+#endif
         }
         cursor_ptr operator-(int sep) const
         {
             cursor_ptr cp;
-            cp.curent_ptr = curent_ptr - sep;
+            cp.current_ptr = current_ptr - sep;
+#if __cplusplus >= 201703L
             return cp;
+#else
+            return std::move(cp);
+#endif
         }
         const cursor_ptr &operator+=(int sep)
         {
-            curent_ptr += sep;
+            current_ptr += sep;
             return *this;
         }
         const cursor_ptr &operator-=(int sep)
         {
-            curent_ptr -= sep;
+            current_ptr -= sep;
             return *this;
         }
         int operator-(const cursor_ptr &cp) const
         {
-            return curent_ptr - cp.curent_ptr;
+            return current_ptr - cp.current_ptr;
         }
         bool operator==(const cursor_ptr &cp) const
         {
-            return curent_ptr == cp.curent_ptr;
+            return current_ptr == cp.current_ptr;
         }
         bool operator==(const T *p) const
         {
-            return curent_ptr == p;
+            return current_ptr == p;
         }
         friend bool operator==(const T *p, const cursor_ptr &cp)
         {
@@ -281,11 +320,11 @@ namespace console
         }
         bool operator!=(const cursor_ptr &cp) const
         {
-            return curent_ptr != cp.curent_ptr;
+            return current_ptr != cp.current_ptr;
         }
         bool operator!=(const T *p) const
         {
-            return curent_ptr != p;
+            return current_ptr != p;
         }
         friend bool operator!=(const T *p, const cursor_ptr &cp)
         {
@@ -297,7 +336,7 @@ namespace console
                 return *this;
             delete[] original_ptr;
             original_ptr = p;
-            curent_ptr = p;
+            current_ptr = p;
             return *this;
         }
         const cursor_ptr &operator=(const cursor_ptr &cp)
@@ -305,7 +344,8 @@ namespace console
             if (this == &cp)
                 return *this;
             delete[] original_ptr;
-            curent_ptr = cp.curent_ptr;
+            original_ptr = nullptr;
+            current_ptr = cp.current_ptr;
             return *this;
         }
         const cursor_ptr &operator=(cursor_ptr &&cp)
@@ -313,17 +353,17 @@ namespace console
             if (this == &cp)
                 return *this;
             delete[] original_ptr;
-            curent_ptr = cp.curent_ptr;
+            current_ptr = cp.current_ptr;
             original_ptr = cp.original_ptr;
             cp.original_ptr = nullptr;
             return *this;
         }
         void swap(cursor_ptr &cp)
         {
-            T *p1 = curent_ptr, *p2 = original_ptr;
-            curent_ptr = cp.curent_ptr;
+            T *p1 = current_ptr, *p2 = original_ptr;
+            current_ptr = cp.current_ptr;
             original_ptr = cp.original_ptr;
-            cp.curent_ptr = p1;
+            cp.current_ptr = p1;
             cp.original_ptr = p2;
         }
     };
