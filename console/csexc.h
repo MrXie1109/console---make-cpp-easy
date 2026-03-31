@@ -90,4 +90,11 @@ namespace console
         index_error(const std::string &msg)
             : console_error(msg) {}
     };
+
+    class bad_maybe_access : public console_error
+    {
+    public:
+        bad_maybe_access(const std::string &msg)
+            : console_error(msg) {}
+    };
 }

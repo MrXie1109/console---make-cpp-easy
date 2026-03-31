@@ -92,17 +92,7 @@ namespace console
         {
             cursor_ptr tmp(*this);
             ++current_ptr;
-#if __cplusplus >= 201703L
             return tmp;
-#else
-            return std::move(tmp);
-#endif
-            /**
-             * 注：别和我提什么不要return std::move(cp)，有RVO之类的话，
-             * 但是console::cursor_ptr在没有RVO的情况下返回值是致命的！
-             * 我只在确保一定有RVO的C++17及以后直接return cp，在此之前选择保守。
-             * 后不再赘述，Q.E.D.
-             */
         }
         cursor_ptr &operator--()
         {
@@ -113,31 +103,19 @@ namespace console
         {
             cursor_ptr tmp(*this);
             --current_ptr;
-#if __cplusplus >= 201703L
             return tmp;
-#else
-            return std::move(tmp);
-#endif
         }
         cursor_ptr operator+(int sep) const
         {
             cursor_ptr cp;
             cp.current_ptr = current_ptr + sep;
-#if __cplusplus >= 201703L
             return cp;
-#else
-            return std::move(cp);
-#endif
         }
         cursor_ptr operator-(int sep) const
         {
             cursor_ptr cp;
             cp.current_ptr = current_ptr - sep;
-#if __cplusplus >= 201703L
             return cp;
-#else
-            return std::move(cp);
-#endif
         }
         const cursor_ptr &operator+=(int sep)
         {
@@ -251,11 +229,7 @@ namespace console
         {
             cursor_ptr tmp(*this);
             ++current_ptr;
-#if __cplusplus >= 201703L
             return tmp;
-#else
-            return std::move(tmp);
-#endif
         }
         cursor_ptr &operator--()
         {
@@ -266,31 +240,19 @@ namespace console
         {
             cursor_ptr tmp(*this);
             --current_ptr;
-#if __cplusplus >= 201703L
             return tmp;
-#else
-            return std::move(tmp);
-#endif
         }
         cursor_ptr operator+(int sep) const
         {
             cursor_ptr cp;
             cp.current_ptr = current_ptr + sep;
-#if __cplusplus >= 201703L
             return cp;
-#else
-            return std::move(cp);
-#endif
         }
         cursor_ptr operator-(int sep) const
         {
             cursor_ptr cp;
             cp.current_ptr = current_ptr - sep;
-#if __cplusplus >= 201703L
             return cp;
-#else
-            return std::move(cp);
-#endif
         }
         const cursor_ptr &operator+=(int sep)
         {

@@ -30,6 +30,7 @@ SOFTWARE.
 #include <thread>
 #include <sstream>
 #include <ctime>
+#include <iomanip>
 
 namespace console
 {

@@ -1,5 +1,4 @@
 /*
-
 Copyright (c) 2026 MrXie1109
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,41 +28,42 @@ SOFTWARE.
 
 namespace console
 {
-    template <typename T, typename = void>
+    template <class T, class = void>
     struct is_container : std::false_type
     {
     };
 
-    template <typename T>
-    struct is_container<T, typename std::enable_if<
-                               sizeof(decltype(std::declval<T>().begin())) &&
-                               sizeof(decltype(std::declval<T>().end())) &&
-                               std::is_integral<
-                                   decltype(std::declval<T>().size())>::
-                                   value>::type> : std::true_type
-    {
-    };
-
-    template <typename F, typename Ret, typename = void>
-    struct is_callable : std::false_type
-    {
-    };
-
-    template <typename F, typename Ret>
-    struct is_callable<F, Ret,
-                       typename std::enable_if<
-                           std::is_convertible<decltype(std::declval<F>()()),
-                                               Ret>::value>::type>
+    template <class T>
+    struct is_container<
+        T, typename std::enable_if<
+               sizeof(decltype(std::begin(std::declval<T>()))) &&
+               sizeof(decltype(std::end(std::declval<T>())))>::type>
         : std::true_type
     {
     };
 
-    template <typename T, typename = void>
+    template <class F, class = void, class... Args>
+    struct is_callable : std::false_type
+    {
+    };
+
+    template <class F, class... Args>
+    struct is_callable<F,
+                       typename std::enable_if<
+                           std::is_convertible<
+                               decltype(std::declval<F>()(std::declval<Args>()...)),
+                               void>::value>::type,
+                       Args...>
+        : std::true_type
+    {
+    };
+
+    template <class T, class = void>
     struct is_iterator : std::false_type
     {
     };
 
-    template <typename T>
+    template <class T>
     struct is_iterator<T, typename std::enable_if<
                               sizeof(
                                   typename std::iterator_traits<T>::
@@ -72,25 +72,22 @@ namespace console
     {
     };
 
-    template <typename T, typename Idx, typename = void>
+    template <class T, class Idx, class = void>
     struct has_subscript : std::false_type
     {
     };
 
-    template <typename T, typename Idx>
+    template <class T, class Idx>
     struct has_subscript<T, Idx,
                          typename std::enable_if<
-                             sizeof(decltype(std::declval<T>()[std::declval<Idx>()]))>::type> : std::true_type
+                             sizeof(decltype(std::declval<T>()
+                                                 [std::declval<Idx>()]))>::type>
+        : std::true_type
     {
     };
 
-    template <typename T, typename = void>
+    template <class T, class = void>
     struct is_string : std::false_type
-    {
-    };
-
-    template <>
-    struct is_string<const char *> : std::true_type
     {
     };
 
@@ -99,59 +96,39 @@ namespace console
     {
     };
 
-    template <size_t N>
-    struct is_string<char[N]> : std::true_type
-    {
-    };
-
-    template <size_t N>
-    struct is_string<const char[N]> : std::true_type
-    {
-    };
-
-    template <>
-    struct is_string<const wchar_t *> : std::true_type
-    {
-    };
-
     template <>
     struct is_string<wchar_t *> : std::true_type
     {
     };
 
-    template <size_t N>
-    struct is_string<wchar_t[N]> : std::true_type
+    template <>
+    struct is_string<char16_t *> : std::true_type
     {
     };
 
-    template <size_t N>
-    struct is_string<char (&)[N]> : std::true_type
+    template <>
+    struct is_string<char32_t *> : std::true_type
     {
     };
 
-    template <size_t N>
-    struct is_string<const char (&)[N]> : std::true_type
-    {
-    };
-
-    template <typename CharT, typename Traits, typename Alloc>
+    template <class CharT, class Traits, class Alloc>
     struct is_string<std::basic_string<CharT, Traits, Alloc>> : std::true_type
     {
     };
 
 #if __cplusplus >= 201703L
-    template <typename CharT, typename Traits>
+    template <class CharT, class Traits>
     struct is_string<std::basic_string_view<CharT, Traits>> : std::true_type
     {
     };
 #endif
 
-    template <typename T, typename = void>
+    template <class T, class = void>
     struct is_printable : std::false_type
     {
     };
 
-    template <typename T>
+    template <class T>
     struct is_printable<T, typename std::enable_if<
                                sizeof(
                                    decltype(std::declval<std::ostream &>()
@@ -160,7 +137,7 @@ namespace console
     {
     };
 
-    template <typename T, typename = void>
+    template <class T, class = void>
     struct is_char : std::false_type
     {
     };
@@ -181,63 +158,67 @@ namespace console
     };
 
     template <>
-    struct is_char<const char> : std::true_type
+    struct is_char<wchar_t> : std::true_type
     {
     };
 
     template <>
-    struct is_char<const signed char> : std::true_type
+    struct is_char<char16_t> : std::true_type
     {
     };
 
     template <>
-    struct is_char<const unsigned char> : std::true_type
+    struct is_char<char32_t> : std::true_type
     {
     };
 
-    template <typename T>
+    template <class T>
     using enable_if_container =
         typename std::enable_if<is_container<T>::value>::type;
 
-    template <typename T>
+    template <class T>
     using enable_if_not_container =
         typename std::enable_if<!is_container<T>::value>::type;
 
-    template <typename F, typename Ret>
+    template <class F, class... Args>
     using enable_if_callable =
-        typename std::enable_if<is_callable<F, Ret>::value>::type;
+        typename std::enable_if<is_callable<F, Args...>::value>::type;
 
-    template <typename F, typename Ret>
+    template <class F, class... Args>
     using enable_if_not_callable =
-        typename std::enable_if<!is_callable<F, Ret>::value>::type;
+        typename std::enable_if<!is_callable<F, Args...>::value>::type;
 
-    template <typename T>
+    template <class T>
     using enable_if_iterator =
         typename std::enable_if<is_iterator<T>::value>::type;
 
-    template <typename T>
+    template <class T>
     using enable_if_not_iterator =
         typename std::enable_if<!is_iterator<T>::value>::type;
 
-    template <typename T>
+    template <class T>
     using enable_if_string =
-        typename std::enable_if<is_string<T>::value>::type;
+        typename std::enable_if<is_string<
+            typename std::decay<T>::type>::value>::type;
 
-    template <typename T>
+    template <class T>
     using enable_if_not_string =
-        typename std::enable_if<!is_string<T>::value>::type;
+        typename std::enable_if<!is_string<
+            typename std::decay<T>::type>::value>::type;
 
-    template <typename T>
+    template <class T>
     using enable_if_printable =
         typename std::enable_if<is_printable<T>::value>::type;
 
-    template <typename T>
+    template <class T>
     using enable_if_not_printable =
         typename std::enable_if<!is_printable<T>::value>::type;
 
-    template <typename T>
-    using enable_if_char = typename std::enable_if<is_char<T>::value>::type;
+    template <class T>
+    using enable_if_char = typename std::enable_if<is_char<
+        typename std::decay<T>::type>::value>::type;
 
-    template <typename T>
-    using enable_if_not_char = typename std::enable_if<!is_char<T>::value>::type;
+    template <class T>
+    using enable_if_not_char = typename std::enable_if<!is_char<
+        typename std::decay<T>::type>::value>::type;
 }

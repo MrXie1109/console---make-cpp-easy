@@ -110,8 +110,10 @@ namespace console
         !is_printable<typename std::decay<T>::type>::value>::type
     repr(T &&value, std::ostream &os = std::cout)
     {
-        os << "<class \""
+        os << '<'
            << tiname(typeid(typename std::decay<T>::type))
-           << "\">";
+           << " object at "
+           << &value
+           << '>';
     }
 }

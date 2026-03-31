@@ -121,17 +121,17 @@ namespace console
 
         bool exists()
         {
-            return std::ifstream(path).is_open();
+            return std::ifstream{path}.is_open();
         }
 
         void touch()
         {
-            std::ofstream(path);
+            std::ofstream{path};
         }
 
         void ensure()
         {
-            std::ofstream(path, std::ios::app);
+            std::ofstream{path, std::ios::app};
         }
     };
 }

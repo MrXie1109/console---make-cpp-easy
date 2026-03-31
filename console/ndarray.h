@@ -180,7 +180,7 @@ namespace console
 
         template <typename F, typename... Args>
         ndarray(std::initializer_list<size_t> init, F &&f, Args &&...args,
-                typename is_callable<F, T>::type * = 0)
+                typename is_callable<F, Args...>::type * = 0)
             : ndarray(init)
         {
             for (T &item : data_)
