@@ -70,10 +70,10 @@ namespace console
             : console_error(msg) {}
     };
 
-    class ndarray_error : public console_error
+    class multiarray_error : public console_error
     {
     public:
-        ndarray_error(const std::string &msg)
+        multiarray_error(const std::string &msg)
             : console_error(msg) {}
     };
 

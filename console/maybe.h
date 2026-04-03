@@ -44,24 +44,24 @@ namespace console
 
         template <class... Args>
         Maybe(Args &&...args)
-            : ptr(std::make_unique<T>(std::forward<Args>(args)...)) {}
+            : ptr(new T(std::forward<Args>(args)...)) {}
 
         Maybe(const Maybe &other)
-            : ptr(other.ptr ? std::make_unique<T>(other.use()) : nullptr) {}
+            : ptr(other.ptr ? new T(other.value()) : nullptr) {}
 
         Maybe(Maybe &&other)
             : ptr(std::move(other.ptr)) {}
 
         Maybe(decltype(nothing)) : ptr(nullptr) {}
 
-        T &use()
+        T &value()
         {
             if (ptr)
                 return *ptr;
             throw bad_maybe_access("Nothing");
         }
 
-        const T &use() const
+        const T &value() const
         {
             if (ptr)
                 return *ptr;
@@ -70,14 +70,14 @@ namespace console
 
         const Maybe &operator=(T &&value)
         {
-            ptr = std::make_unique<T>(std::forward<T>(value));
+            ptr.reset(new T(std::forward<T>(value)));
             return *this;
         }
 
         Maybe &operator=(const Maybe &other)
         {
             if (this != &other)
-                ptr = other.ptr ? std::make_unique<T>(*other.ptr) : nullptr;
+                ptr.reset(other.ptr ? new T(*other.ptr) : nullptr);
             return *this;
         }
 
@@ -96,29 +96,32 @@ namespace console
 
         void reset()
         {
-            ptr = nullptr;
+            ptr.reset();
         }
 
         template <class... Args>
         void reset(Args &&...args)
         {
-            ptr = std::make_unique<T>(std::forward<Args>(args)...);
+            ptr.reset(new T(std::forward<Args>(args)...));
         }
 
-        friend std::ostream &operator<<(std::ostream &os, const Maybe &opt)
+        friend std::ostream &operator<<(std::ostream &os, const Maybe &maybe)
         {
-            if (opt.ptr)
-                return os << opt.use();
+            if (maybe.ptr)
+                return os << maybe.value();
             return os << "(nothing)";
         }
 
-        friend std::istream &operator>>(std::istream &is, Maybe &opt)
+        friend std::istream &operator>>(std::istream &is, Maybe &maybe)
         {
             T tmp;
             if (is >> tmp)
-                opt.reset(std::move(tmp));
+                maybe.reset(std::move(tmp));
             else
+            {
+                maybe = nothing;
                 is.clear();
+            }
             return is;
         }
 

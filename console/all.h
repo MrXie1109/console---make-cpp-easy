@@ -35,7 +35,7 @@ SOFTWARE.
 #include "csexc.h"
 #include "file.h"
 #include "box.h"
-#include "ndarray.h"
+#include "multiarray.h"
 #include "cursor_ptr.h"
 #include "literals.h"
 #include "view.h"
@@ -45,3 +45,4 @@ SOFTWARE.
 #include "info.h"
 #include "repr.h"
 #include "outfwd.h"
+#include "maybe.h"
