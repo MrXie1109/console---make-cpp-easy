@@ -29,6 +29,7 @@ SOFTWARE.
 #include <stdexcept>
 #include <type_traits>
 #include <initializer_list>
+#include <algorithm>
 #include "csexc.h"
 #include "repr.h"
 
@@ -244,4 +245,883 @@ namespace console
         T *fend() { return (*this)[First - 1].fend(); }
         const T *fend() const { return (*this)[First - 1].fend(); }
     };
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator+(const MultiArray<T, Dims...> &a,
+                                     const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<T, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ + *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator-(const MultiArray<T, Dims...> &a,
+                                     const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<T, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ - *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator*(const MultiArray<T, Dims...> &a,
+                                     const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<T, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ * *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator/(const MultiArray<T, Dims...> &a,
+                                     const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<T, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ / *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator%(const MultiArray<T, Dims...> &a,
+                                     const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<T, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ % *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> &operator+=(MultiArray<T, Dims...> &a,
+                                       const MultiArray<T, Dims...> &b)
+    {
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (ai != a.fend())
+            *ai++ += *bi++;
+        return a;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> &operator-=(MultiArray<T, Dims...> &a,
+                                       const MultiArray<T, Dims...> &b)
+    {
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (ai != a.fend())
+            *ai++ -= *bi++;
+        return a;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> &operator*=(MultiArray<T, Dims...> &a,
+                                       const MultiArray<T, Dims...> &b)
+    {
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (ai != a.fend())
+            *ai++ *= *bi++;
+        return a;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> &operator/=(MultiArray<T, Dims...> &a,
+                                       const MultiArray<T, Dims...> &b)
+    {
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (ai != a.fend())
+            *ai++ /= *bi++;
+        return a;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> &operator%=(MultiArray<T, Dims...> &a,
+                                       const MultiArray<T, Dims...> &b)
+    {
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (ai != a.fend())
+            *ai++ %= *bi++;
+        return a;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<bool, Dims...> operator==(const MultiArray<T, Dims...> &a,
+                                         const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<bool, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ == *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<bool, Dims...> operator!=(const MultiArray<T, Dims...> &a,
+                                         const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<bool, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ != *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<bool, Dims...> operator<(const MultiArray<T, Dims...> &a,
+                                        const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<bool, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ < *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<bool, Dims...> operator>(const MultiArray<T, Dims...> &a,
+                                        const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<bool, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ > *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<bool, Dims...> operator<=(const MultiArray<T, Dims...> &a,
+                                         const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<bool, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ <= *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<bool, Dims...> operator>=(const MultiArray<T, Dims...> &a,
+                                         const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<bool, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ >= *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator+(const MultiArray<T, Dims...> &a,
+                                     const U &value)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ + value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator-(const MultiArray<T, Dims...> &a,
+                                     const U &value)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ - value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator*(const MultiArray<T, Dims...> &a,
+                                     const U &value)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ * value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator/(const MultiArray<T, Dims...> &a,
+                                     const U &value)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ / value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator%(const MultiArray<T, Dims...> &a,
+                                     const U &value)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ % value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> &operator+=(const MultiArray<T, Dims...> &a,
+                                       const U &value)
+    {
+        a.for_each([](T &ref)
+                   { ref += value; });
+        return a;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> &operator-=(const MultiArray<T, Dims...> &a,
+                                       const U &value)
+    {
+        a.for_each([](T &ref)
+                   { ref -= value; });
+        return a;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> &operator*=(const MultiArray<T, Dims...> &a,
+                                       const U &value)
+    {
+        a.for_each([](T &ref)
+                   { ref *= value; });
+        return a;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> &operator/=(const MultiArray<T, Dims...> &a,
+                                       const U &value)
+    {
+        a.for_each([](T &ref)
+                   { ref /= value; });
+        return a;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> &operator%=(const MultiArray<T, Dims...> &a,
+                                       const U &value)
+    {
+        a.for_each([](T &ref)
+                   { ref %= value; });
+        return a;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator+(const U &value,
+                                     const MultiArray<T, Dims...> &a)
+    {
+        return a + value;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator-(const U &value,
+                                     const MultiArray<T, Dims...> &a)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = value - *ai++;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator*(const U &value,
+                                     const MultiArray<T, Dims...> &a)
+    {
+        return a * value;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator/(const U &value,
+                                     const MultiArray<T, Dims...> &a)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = value / *ai++;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator%(const U &value,
+                                     const MultiArray<T, Dims...> &a)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = value % *ai++;
+        return b;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator+(const MultiArray<T, Dims...> &a)
+    {
+        return a;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator-(const MultiArray<T, Dims...> &a)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = -*ai++;
+        return b;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<bool, Dims...> operator!(const MultiArray<T, Dims...> &a)
+    {
+        MultiArray<bool, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = !*ai++;
+        return b;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator~(const MultiArray<T, Dims...> &a)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = ~*ai++;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator==(const MultiArray<T, Dims...> &a,
+                                         const U &value)
+    {
+        MultiArray<bool, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ == value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator!=(const MultiArray<T, Dims...> &a,
+                                         const U &value)
+    {
+        MultiArray<bool, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ != value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator<(const MultiArray<T, Dims...> &a,
+                                        const U &value)
+    {
+        MultiArray<bool, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ < value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator>(const MultiArray<T, Dims...> &a,
+                                        const U &value)
+    {
+        MultiArray<bool, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ > value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator<=(const MultiArray<T, Dims...> &a,
+                                         const U &value)
+    {
+        MultiArray<bool, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ <= value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator>=(const MultiArray<T, Dims...> &a,
+                                         const U &value)
+    {
+        MultiArray<bool, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ >= value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator==(const U &value,
+                                         const MultiArray<T, Dims...> &a)
+    {
+        return a == value;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator!=(const U &value,
+                                         const MultiArray<T, Dims...> &a)
+    {
+        return a != value;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator<(const U &value,
+                                        const MultiArray<T, Dims...> &a)
+    {
+        return a < value;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator>(const U &value,
+                                        const MultiArray<T, Dims...> &a)
+    {
+        return a > value;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator<=(const U &value,
+                                         const MultiArray<T, Dims...> &a)
+    {
+        return a <= value;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator>=(const U &value,
+                                         const MultiArray<T, Dims...> &a)
+    {
+        return a >= value;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator&(const MultiArray<T, Dims...> &a,
+                                     const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<T, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ & *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator|(const MultiArray<T, Dims...> &a,
+                                     const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<T, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ | *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator^(const MultiArray<T, Dims...> &a,
+                                     const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<T, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ ^ *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> &operator&=(MultiArray<T, Dims...> &a,
+                                       const MultiArray<T, Dims...> &b)
+    {
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (ai != a.fend())
+            *ai++ &= *bi++;
+        return a;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> &operator|=(MultiArray<T, Dims...> &a,
+                                       const MultiArray<T, Dims...> &b)
+    {
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (ai != a.fend())
+            *ai++ |= *bi++;
+        return a;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> &operator^=(MultiArray<T, Dims...> &a,
+                                       const MultiArray<T, Dims...> &b)
+    {
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (ai != a.fend())
+            *ai++ ^= *bi++;
+        return a;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator<<(const MultiArray<T, Dims...> &a,
+                                      const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<T, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ << *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator>>(const MultiArray<T, Dims...> &a,
+                                      const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<T, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ >> *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator<<=(MultiArray<T, Dims...> &a,
+                                       const MultiArray<T, Dims...> &b)
+    {
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (ai != a.fend())
+            *ai++ <<= *bi++;
+        return a;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<T, Dims...> operator>>=(MultiArray<T, Dims...> &a,
+                                       const MultiArray<T, Dims...> &b)
+    {
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (ai != a.fend())
+            *ai++ >>= *bi++;
+        return a;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator&(const MultiArray<T, Dims...> &a,
+                                     const U &value)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ & value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator|(const MultiArray<T, Dims...> &a,
+                                     const U &value)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ | value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator^(const MultiArray<T, Dims...> &a,
+                                     const U &value)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ ^ value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator<<(const MultiArray<T, Dims...> &a,
+                                      const U &value)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ << value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator>>(const MultiArray<T, Dims...> &a,
+                                      const U &value)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ >> value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator&(const U &value,
+                                     const MultiArray<T, Dims...> &a)
+    {
+        return a & value;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator|(const U &value,
+                                     const MultiArray<T, Dims...> &a)
+    {
+        return a | value;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator^(const U &value,
+                                     const MultiArray<T, Dims...> &a)
+    {
+        return a ^ value;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator<<(const U &value,
+                                      const MultiArray<T, Dims...> &a)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = value << *ai++;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> operator>>(const U &value,
+                                      const MultiArray<T, Dims...> &a)
+    {
+        MultiArray<T, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = value >> *ai++;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> &operator&=(const MultiArray<T, Dims...> &a,
+                                       const U &value)
+    {
+        a.for_each([](T &ref)
+                   { ref &= value; });
+        return a;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> &operator|=(const MultiArray<T, Dims...> &a,
+                                       const U &value)
+    {
+        a.for_each([](T &ref)
+                   { ref |= value; });
+        return a;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> &operator^=(const MultiArray<T, Dims...> &a,
+                                       const U &value)
+    {
+        a.for_each([](T &ref)
+                   { ref ^= value; });
+        return a;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> &operator<<=(const MultiArray<T, Dims...> &a,
+                                        const U &value)
+    {
+        a.for_each([](T &ref)
+                   { ref <<= value; });
+        return a;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<T, Dims...> &operator>>=(const MultiArray<T, Dims...> &a,
+                                        const U &value)
+    {
+        a.for_each([](T &ref)
+                   { ref >>= value; });
+        return a;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<bool, Dims...> operator&&(const MultiArray<T, Dims...> &a,
+                                         const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<bool, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ && *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims>
+    MultiArray<bool, Dims...> operator||(const MultiArray<T, Dims...> &a,
+                                         const MultiArray<T, Dims...> &b)
+    {
+        MultiArray<bool, Dims...> c;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        auto ci = c.fbegin();
+        while (ci != c.fend())
+            *ci++ = *ai++ || *bi++;
+        return c;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator&&(const MultiArray<T, Dims...> &a,
+                                         const U &value)
+    {
+        MultiArray<bool, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ && value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator||(const MultiArray<T, Dims...> &a,
+                                         const U &value)
+    {
+        MultiArray<bool, Dims...> b;
+        auto ai = a.fbegin();
+        auto bi = b.fbegin();
+        while (bi != b.fend())
+            *bi++ = *ai++ || value;
+        return b;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator&&(const U &value,
+                                         const MultiArray<T, Dims...> &a)
+    {
+        return a && value;
+    }
+
+    template <class T, size_t... Dims, class U>
+    MultiArray<bool, Dims...> operator||(const U &value,
+                                         const MultiArray<T, Dims...> &a)
+    {
+        return a || value;
+    }
+
+    template <class T, size_t... Dims>
+    T sum(const MultiArray<T, Dims...> &a)
+    {
+        T result{};
+        a.for_each([&](const T &ref)
+                   { result += ref; });
+        return result;
+    }
+
+    template <class T, size_t... Dims>
+    T min(const MultiArray<T, Dims...> &a)
+    {
+        return *std::min_element(a.fbegin(), a.fend());
+    }
+
+    template <class T, size_t... Dims>
+    T max(const MultiArray<T, Dims...> &a)
+    {
+        return *std::max_element(a.fbegin(), a.fend());
+    }
+
+    template <class T, size_t... Dims>
+    bool all(const MultiArray<T, Dims...> &a)
+    {
+        for (auto it = a.fbegin(); it != a.fend(); ++it)
+            if (!*it)
+                return false;
+        return true;
+    }
+
+    template <class T, size_t... Dims>
+    bool any(const MultiArray<T, Dims...> &a)
+    {
+        for (auto it = a.fbegin(); it != a.fend(); ++it)
+            if (*it)
+                return true;
+        return false;
+    }
 }
