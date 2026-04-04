@@ -505,46 +505,46 @@ namespace console
     }
 
     template <class T, size_t... Dims, class U>
-    MultiArray<T, Dims...> &operator+=(const MultiArray<T, Dims...> &a,
+    MultiArray<T, Dims...> &operator+=(MultiArray<T, Dims...> &a,
                                        const U &value)
     {
-        a.for_each([](T &ref)
+        a.for_each([&](T &ref)
                    { ref += value; });
         return a;
     }
 
     template <class T, size_t... Dims, class U>
-    MultiArray<T, Dims...> &operator-=(const MultiArray<T, Dims...> &a,
+    MultiArray<T, Dims...> &operator-=(MultiArray<T, Dims...> &a,
                                        const U &value)
     {
-        a.for_each([](T &ref)
+        a.for_each([&](T &ref)
                    { ref -= value; });
         return a;
     }
 
     template <class T, size_t... Dims, class U>
-    MultiArray<T, Dims...> &operator*=(const MultiArray<T, Dims...> &a,
+    MultiArray<T, Dims...> &operator*=(MultiArray<T, Dims...> &a,
                                        const U &value)
     {
-        a.for_each([](T &ref)
+        a.for_each([&](T &ref)
                    { ref *= value; });
         return a;
     }
 
     template <class T, size_t... Dims, class U>
-    MultiArray<T, Dims...> &operator/=(const MultiArray<T, Dims...> &a,
+    MultiArray<T, Dims...> &operator/=(MultiArray<T, Dims...> &a,
                                        const U &value)
     {
-        a.for_each([](T &ref)
+        a.for_each([&](T &ref)
                    { ref /= value; });
         return a;
     }
 
     template <class T, size_t... Dims, class U>
-    MultiArray<T, Dims...> &operator%=(const MultiArray<T, Dims...> &a,
+    MultiArray<T, Dims...> &operator%=(MultiArray<T, Dims...> &a,
                                        const U &value)
     {
-        a.for_each([](T &ref)
+        a.for_each([&](T &ref)
                    { ref %= value; });
         return a;
     }
@@ -978,46 +978,46 @@ namespace console
     }
 
     template <class T, size_t... Dims, class U>
-    MultiArray<T, Dims...> &operator&=(const MultiArray<T, Dims...> &a,
+    MultiArray<T, Dims...> &operator&=(MultiArray<T, Dims...> &a,
                                        const U &value)
     {
-        a.for_each([](T &ref)
+        a.for_each([&](T &ref)
                    { ref &= value; });
         return a;
     }
 
     template <class T, size_t... Dims, class U>
-    MultiArray<T, Dims...> &operator|=(const MultiArray<T, Dims...> &a,
+    MultiArray<T, Dims...> &operator|=(MultiArray<T, Dims...> &a,
                                        const U &value)
     {
-        a.for_each([](T &ref)
+        a.for_each([&](T &ref)
                    { ref |= value; });
         return a;
     }
 
     template <class T, size_t... Dims, class U>
-    MultiArray<T, Dims...> &operator^=(const MultiArray<T, Dims...> &a,
+    MultiArray<T, Dims...> &operator^=(MultiArray<T, Dims...> &a,
                                        const U &value)
     {
-        a.for_each([](T &ref)
+        a.for_each([&](T &ref)
                    { ref ^= value; });
         return a;
     }
 
     template <class T, size_t... Dims, class U>
-    MultiArray<T, Dims...> &operator<<=(const MultiArray<T, Dims...> &a,
+    MultiArray<T, Dims...> &operator<<=(MultiArray<T, Dims...> &a,
                                         const U &value)
     {
-        a.for_each([](T &ref)
+        a.for_each([&](T &ref)
                    { ref <<= value; });
         return a;
     }
 
     template <class T, size_t... Dims, class U>
-    MultiArray<T, Dims...> &operator>>=(const MultiArray<T, Dims...> &a,
+    MultiArray<T, Dims...> &operator>>=(MultiArray<T, Dims...> &a,
                                         const U &value)
     {
-        a.for_each([](T &ref)
+        a.for_each([&](T &ref)
                    { ref >>= value; });
         return a;
     }
