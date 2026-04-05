@@ -57,7 +57,10 @@ namespace console
 
         MultiArray(const base_type &other) : base_type(other) {}
 
-        MultiArray(std::initializer_list<T> init) : base_type(init) {}
+        MultiArray(std::initializer_list<T> init)
+        {
+            std::copy(init.begin(), init.end(), this->begin());
+        }
 
         static constexpr size_t rank() { return 1; }
         static constexpr size_t size() { return D; }
@@ -146,8 +149,12 @@ namespace console
             fill(value);
         }
 
+        MultiArray(const base_type &other) : base_type(other) {}
+
         MultiArray(std::initializer_list<MultiArray<T, Rest...>> init)
-            : base_type(init) {}
+        {
+            std::copy(init.begin(), init.end(), this->begin());
+        }
 
         static constexpr size_t rank() { return 1 + sizeof...(Rest); }
 

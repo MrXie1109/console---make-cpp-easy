@@ -46,3 +46,4 @@ SOFTWARE.
 #include "repr.h"
 #include "outfwd.h"
 #include "maybe.h"
+#include "matools.h"

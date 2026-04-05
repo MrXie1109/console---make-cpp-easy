@@ -4,8 +4,10 @@
 [![C++20](https://img.shields.io/badge/C++-20-blue.svg)](https://en.cppreference.com/w/cpp/20)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![No Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg)]()
+
 一个轻量级、零依赖的 C++ 控制台工具库，提供简洁的 API 用于输入输出、日志记录、时间测量、随机数生成、字符串处理、文件操作、多维数组、正则表达式等常见任务。
 A lightweight, zero-dependency C++ console utility library providing simple APIs for common tasks including I/O, logging, time measurement, random number generation, string manipulation, file operations, multidimensional arrays, regular expressions, and more.
+
 ## 特性 / Features
 - 🚀 **多标准支持** - 兼容 C++11/14/17/20/23（条件编译）
 - 📦 **零外部依赖** - 仅使用 C++ 标准库
@@ -16,7 +18,7 @@ A lightweight, zero-dependency C++ console utility library providing simple APIs
 - 🔢 **随机数** - 便捷的随机数生成接口（Mersenne Twister）
 - 📄 **文件操作** - 简单的文件读写封装，跨平台路径处理
 - 🎭 **动态类型** - 类型安全的异构容器（Box）
-- 🔷 **多维数组** - 编译期定长多维数组（MultiArray），支持逐元素运算
+- 🔷 **多维数组** - 编译期定长多维数组（MultiArray），优化初始化逻辑，支持逐元素运算
 - 👁️ **容器视图** - 非拥有式容器视图（View），优化常量迭代器
 - 🧵 **字符串处理** - 全面的字符串操作（修剪、大小写、分割、格式化）
 - 📊 **进度条** - 可自定义样式的进度条
@@ -26,6 +28,8 @@ A lightweight, zero-dependency C++ console utility library providing simple APIs
 - 🧰 **标准库头文件** - 一站式包含所有标准库头文件
 - ℹ️ **系统信息** - 获取平台、编译器、版本和许可证信息
 - ✨ **空值包装** - 安全的空值包装类型（Maybe），避免空指针异常
+- 🛠️ **工具扩展** - 新增 matools 工具集，增强库内通用能力
+
 ## 模块 / Modules
 ### 1. 标准库头文件 (std.h)
 一站式包含所有 C++ 标准库头文件，根据 C++ 版本条件编译。
@@ -33,6 +37,7 @@ One-stop inclusion of all C++ standard library headers, conditionally compiled b
 ```cpp
 #include "std.h"  // 自动包含当前 C++ 版本支持的所有标准库头文件
 ```
+
 ### 2. 输出 (output.h)
 提供类似 Python 的 print 功能和 STL 容器输出支持，优化字符串/字符输出格式。
 容器输出通过独立的 `outfwd.h` 头文件提供前置声明，保证编译效率。
@@ -56,6 +61,7 @@ namespace console {
     print();                          // 只输出换行
 }
 ```
+
 ### 3. 输入 (input.h)
 类型安全的控制台输入函数，带错误处理。
 Type-safe console input functions with error handling.
@@ -73,6 +79,7 @@ namespace console {
     }
 }
 ```
+
 ### 4. 时间 (time.h)
 高精度时间测量、休眠和日期时间格式化。
 High-precision time measurement, sleep, and datetime formatting.
@@ -91,6 +98,7 @@ namespace console {
     print(datetime("%Y/%m/%d"));        // 2024/01/01
 }
 ```
+
 ### 5. 随机数 (random.h)
 基于 Mersenne Twister 的随机数生成器。
 Mersenne Twister based random number generator.
@@ -110,6 +118,7 @@ namespace console {
     shuffle(vec);                         // 打乱顺序
 }
 ```
+
 ### 6. 字符串处理 (strpp.h)
 全面的字符串操作函数，包括格式化字符串类。
 Comprehensive string manipulation functions, including formatted string class.
@@ -135,6 +144,7 @@ namespace console {
     string str = uni_to_str(3.14159);                // "3.14159"
 }
 ```
+
 ### 7. 颜色输出 (colorful.h)
 ANSI 转义序列颜色常量。
 ANSI escape sequence color constants.
@@ -146,6 +156,7 @@ namespace console::color {
     cout << color::BgYellow << color::Black << "Warning" << color::Reset << endl;
 }
 ```
+
 ### 8. 日志记录 (logging.h)
 多级别日志系统，支持彩色输出和时间戳。
 Multi-level logging system with color support and timestamps.
@@ -168,6 +179,7 @@ namespace console {
     }
 }
 ```
+
 ### 9. 进度条 (jdt.h)
 可自定义样式的进度条，支持 Unicode 字符。
 Customizable progress bar with Unicode support.
@@ -188,6 +200,7 @@ namespace console {
     cout << endl;
 }
 ```
+
 ### 10. 文件操作 (file.h)
 简单的文件读写封装，跨平台路径处理。
 Simple file I/O wrapper with cross-platform path handling.
@@ -210,6 +223,7 @@ namespace console {
     }
 }
 ```
+
 ### 11. 动态类型容器 (box.h)
 类型安全的异构容器，类似 Python 列表。
 Type-safe heterogeneous container similar to Python list.
@@ -228,9 +242,10 @@ namespace console {
     print(box);                              // (42, 3.14, "Hello", [1, 2, 3])
 }
 ```
+
 ### 12. 编译期多维数组 (multiarray.h)
-编译期定长多维数组，支持逐元素算术、逻辑、位运算，扁平化访问。
-Compile-time fixed-size multidimensional array with element-wise arithmetic, logic, and bit operations, flat access support.
+编译期定长多维数组，优化初始化列表构造实现，支持逐元素算术、逻辑、位运算，扁平化访问。
+Compile-time fixed-size multidimensional array with optimized initializer_list construction, element-wise arithmetic, logic, and bit operations, flat access support.
 ```cpp
 namespace console {
     // 创建多维数组 / Create multidimensional array
@@ -258,6 +273,7 @@ namespace console {
     print(mat2);                                // [[1, 2], [3, 4]]
 }
 ```
+
 ### 13. 双指针游标 (cursor_ptr.h)
 分离所有权与访问位置的智能指针。
 Smart pointer separating ownership and access position.
@@ -280,6 +296,7 @@ namespace console {
     // arr 现在为空，arr2 拥有数组
 }
 ```
+
 ### 14. 字面量 (literals.h)
 用户定义字面量，提供便捷语法。
 User-defined literals for convenient syntax.
@@ -297,6 +314,7 @@ namespace console::literals {
     string result = fmt % 42;                  // "Value: 42"
 }
 ```
+
 ### 15. 容器视图 (view.h)
 非拥有式容器视图，支持子区间，优化常量迭代器。
 Non-owning container views with subrange support, optimized const iterators.
@@ -322,6 +340,7 @@ namespace console {
     print(sv);                                   // Hello
 }
 ```
+
 ### 16. 列表推导式 (compre.h)
 类似 Python 的列表推导式功能。
 Python-like list comprehension functionality.
@@ -334,13 +353,14 @@ namespace console {
     auto c4 = make_compre(arr, 1, 4);                  // 子范围
     // 链式操作：筛选 + 变换
     auto result = make_compre({1, 2, 3, 4, 5, 6, 7, 8, 9})
-        .filter([](int x) { return x & 1; })           // 保留奇数
-        .map([](int x) { return x * x; });              // 平方
+        .filter([](sslocal://flow/file_open?url=int+x&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=) { return x & 1; })           // 保留奇数
+        .map([](sslocal://flow/file_open?url=int+x&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=) { return x * x; });              // 平方
     // 转换为标准容器
     vector<int> vec = result.to<vector<int>>();        // 移动转换
     list<int> lst = result.make<list<int>>();           // 复制转换
 }
 ```
+
 ### 17. SFINAE 工具 (sfinae.h)
 编译期类型检测工具，支持字符/可打印类型判断。
 Compile-time type detection tools with char/printable type checks.
@@ -362,6 +382,7 @@ namespace console {
     static_assert(is_printable<int>::value);
 }
 ```
+
 ### 18. 正则表达式 (re.h)
 Python 风格的正则表达式封装。
 Python-style regular expression wrapper.
@@ -384,6 +405,7 @@ namespace console {
     string result = re.sub("X", "abc123def");  // "abcXdef"
 }
 ```
+
 ### 19. 异常类 (csexc.h)
 自定义异常类体系。
 Custom exception class hierarchy.
@@ -409,6 +431,7 @@ namespace console {
     }
 }
 ```
+
 ### 20. 系统信息 (info.h)
 获取平台、编译器、版本和许可证信息。
 Get platform, compiler, version, and license information.
@@ -421,10 +444,11 @@ namespace console {
     // 获取编译器信息 / Get compiler information
     print("Compiler:", compiler());           // GCC 12.2/MSVC 1934/Clang
     // 获取版本信息 / Get version information
-    print(version());                         // console v3.5.2 (By MrXie1109)
+    print(version());                         // console v3.7.0 (By MrXie1109)
 }
 ```
-### 21. 空值包装 (maybe.h) ⭐ 新增
+
+### 21. 空值包装 (maybe.h)
 安全的空值包装类型，避免空指针异常，支持值访问与默认值。
 Safe nullable wrapper type to avoid null pointer exceptions, support value access and default value.
 ```cpp
@@ -443,6 +467,7 @@ namespace console {
     print(m2);                                 // 42
 }
 ```
+
 ### 22. 容器输出前置声明 (outfwd.h)
 为所有 STL 容器提供 `operator<<` 的前置声明，优化编译速度，避免重复定义。
 Provides forward declarations for `operator<<` of all STL containers to optimize compilation speed and avoid duplicate definitions.
@@ -450,6 +475,7 @@ Provides forward declarations for `operator<<` of all STL containers to optimize
 // 无需手动包含，由 output.h 自动引入
 #include "outfwd.h"
 ```
+
 ### 23. 格式化输出工具 (repr.h)
 专门用于容器输出格式化的工具库，提供统一的类型格式化输出功能，仅在打印容器时内部使用。
 Specialized utility library for container output formatting, providing unified type formatting output functionality, only used internally when printing containers.
@@ -459,6 +485,30 @@ Specialized utility library for container output formatting, providing unified t
 - 布尔值输出 `true`/`false`
 - 函数指针输出内存地址
 - 不可打印类型输出可读的类型名称
+
+24. 扩展工具集 (matools.h) ⭐ 新增
+MultiArray 专用工具集，提供多维数组数值计算、线性代数、统计分析、随机初始化等配套功能，强化 MultiArray 运算能力与使用便捷性。
+MultiArray-specific toolset providing multi-dimensional array numerical calculation, linear algebra, statistical analysis, random initialization and other supporting functions, enhancing the computing power and usability of MultiArray.
+```cpp
+namespace console {
+    // 多维数组统计函数
+    auto sum = sum(arr);            // 数组所有元素求和
+    auto avg = mean(arr);           // 计算数组均值
+    auto var = variance(arr);       // 计算方差
+    auto dev = stddev(arr);         // 计算标准差
+    print_stats(arr);               // 打印完整统计信息
+
+    // 线性代数运算
+    auto product = dot(arr1, arr2); // 向量点积
+    auto length = norm(arr);        // 向量L2范数
+    auto sim = cosine(arr1, arr2);  // 余弦相似度
+
+    // 数组初始化与操作
+    auto rand_arr = randn<2,3>();   // 生成随机正态分布多维数组
+    auto uni_arr = randuniform<2,3>(); // 均匀分布随机数组
+}
+```
+
 ## 快速开始 / Quick Start
 ```cpp
 #include "console/all.h"
@@ -501,10 +551,20 @@ int main() {
     return 0;
 }
 ```
+
+## 版本更新说明 / Version Update
+- **v3.7.0**
+  - 新增 `matools.h` 工具集，统一包含于 `all.h`
+  - 优化 `MultiArray` 初始化列表构造，改用 `std::copy` 实现
+  - 完善多维数组拷贝构造与嵌套初始化逻辑
+  - 版本号从 v3.6.0 升级至 v3.7.0
+
 ## 编译要求 / Build Requirements
 - C++11 兼容的编译器（支持 C++11/14/17/20/23 新特性可选）
 - 仅需标准库，无外部依赖
+
 ## 许可证 / License
 MIT License [LICENSE](LICENSE)
+
 ---
 **console 库** - 让 C++ 控制台编程更简单 / Making C++ console programming simpler

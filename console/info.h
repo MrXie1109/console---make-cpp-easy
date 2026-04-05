@@ -81,6 +81,6 @@ SOFTWARE.)";
 
     inline std::string version()
     {
-        return "console v3.6.0 (By MrXie1109)";
+        return "console v3.7.0 (By MrXie1109)";
     }
 }
