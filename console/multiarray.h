@@ -82,38 +82,28 @@ namespace console
                 visit(item);
         }
 
-        reference at(size_t i)
-        {
-            if (i >= D)
-                throw multiarray_error(
-                    "index " +
-                    std::to_string(i) +
-                    " out of range [0, " +
-                    std::to_string(D) +
-                    ')');
-            return (*this)[i];
-        }
-
-        const_reference at(size_t i) const
-        {
-            if (i >= D)
-                throw multiarray_error(
-                    "index " +
-                    std::to_string(i) +
-                    " out of range [0, " +
-                    std::to_string(D) +
-                    ')');
-            return (*this)[i];
-        }
-
         reference operator()(size_t i)
         {
-            return at(i);
+            if (i >= D)
+                throw multiarray_error(
+                    "index " +
+                    std::to_string(i) +
+                    " out of range [0, " +
+                    std::to_string(D) +
+                    ')');
+            return (*this)[i];
         }
 
         const_reference operator()(size_t i) const
         {
-            return at(i);
+            if (i >= D)
+                throw multiarray_error(
+                    "index " +
+                    std::to_string(i) +
+                    " out of range [0, " +
+                    std::to_string(D) +
+                    ')');
+            return (*this)[i];
         }
 
         friend std::ostream &operator<<(std::ostream &os, const MultiArray &ma)
@@ -188,7 +178,7 @@ namespace console
 
         template <class... Indices>
         typename std::enable_if<sizeof...(Indices) + 1 == rank(), T &>::type
-        at(size_t idx, Indices... rest)
+        operator()(size_t idx, Indices... rest)
         {
             if (idx >= First)
                 throw multiarray_error(
@@ -197,12 +187,12 @@ namespace console
                     " out of range [0, " +
                     std::to_string(First) +
                     ')');
-            return base_type::operator[](idx).at(rest...);
+            return base_type::operator[](idx).operator()(rest...);
         }
 
         template <class... Indices>
         typename std::enable_if<sizeof...(Indices) + 1 == rank(), const T &>::type
-        at(size_t idx, Indices... rest) const
+        operator()(size_t idx, Indices... rest) const
         {
             if (idx >= First)
                 throw multiarray_error(
@@ -211,19 +201,7 @@ namespace console
                     " out of range [0, " +
                     std::to_string(First) +
                     ')');
-            return base_type::operator[](idx).at(rest...);
-        }
-
-        template <class... Indices>
-        T &operator()(Indices... indices)
-        {
-            return at(indices...);
-        }
-
-        template <class... Indices>
-        const T &operator()(Indices... indices) const
-        {
-            return at(indices...);
+            return base_type::operator[](idx).operator()(rest...);
         }
 
         friend std::ostream &operator<<(std::ostream &os, const MultiArray &ma)
