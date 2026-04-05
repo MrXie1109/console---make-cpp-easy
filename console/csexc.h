@@ -56,10 +56,10 @@ namespace console
             : console_error(msg) {}
     };
 
-    class file_not_found_error : public console_error
+    class file_error : public console_error
     {
     public:
-        file_not_found_error(const std::string &msg)
+        file_error(const std::string &msg)
             : console_error(msg) {}
     };
 
