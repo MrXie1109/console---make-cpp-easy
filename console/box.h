@@ -51,6 +51,7 @@ namespace console
         {
             T value;
             Derived(const T &v) : value(v) {}
+            Derived(T &&v) : value(std::move(v)) {}
             Base *clone() const
             {
                 return new Derived(value);
@@ -75,17 +76,15 @@ namespace console
     public:
         Item() : ptr(nullptr) {}
         template <typename T>
-        Item(const T &value)
-            : ptr(new Derived<T>(value)) {}
+        Item(T &&value)
+            : ptr(new Derived<typename std::decay<T>::type>(
+                  std::forward<T>(value))) {}
         Item(const Item &other)
             : ptr(other.ptr ? other.ptr->clone() : nullptr) {}
         Item(Item &&other) noexcept : ptr(other.ptr)
         {
             other.ptr = nullptr;
         }
-        template <size_t N>
-        Item(const char (&str)[N])
-            : ptr(new Derived<const char *>((const char *)str)) {}
         template <typename T>
         T &get()
         {

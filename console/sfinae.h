@@ -97,6 +97,16 @@ namespace console
     };
 
     template <>
+    struct is_string<signed char *> : std::true_type
+    {
+    };
+
+    template <>
+    struct is_string<unsigned char *> : std::true_type
+    {
+    };
+
+    template <>
     struct is_string<wchar_t *> : std::true_type
     {
     };
@@ -108,6 +118,36 @@ namespace console
 
     template <>
     struct is_string<char32_t *> : std::true_type
+    {
+    };
+
+    template <>
+    struct is_string<const char *> : std::true_type
+    {
+    };
+
+    template <>
+    struct is_string<const signed char *> : std::true_type
+    {
+    };
+
+    template <>
+    struct is_string<const unsigned char *> : std::true_type
+    {
+    };
+
+    template <>
+    struct is_string<const wchar_t *> : std::true_type
+    {
+    };
+
+    template <>
+    struct is_string<const char16_t *> : std::true_type
+    {
+    };
+
+    template <>
+    struct is_string<const char32_t *> : std::true_type
     {
     };
 

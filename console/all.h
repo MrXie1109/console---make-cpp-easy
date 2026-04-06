@@ -47,3 +47,7 @@ SOFTWARE.
 #include "outfwd.h"
 #include "maybe.h"
 #include "matools.h"
+
+#ifdef _WIN32
+#include "win/melody.h"
+#endif

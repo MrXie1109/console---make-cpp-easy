@@ -486,7 +486,7 @@ Specialized utility library for container output formatting, providing unified t
 - 函数指针输出内存地址
 - 不可打印类型输出可读的类型名称
 
-24. 扩展工具集 (matools.h) ⭐ 新增
+### 24. 扩展工具集 (matools.h)
 MultiArray 专用工具集，提供多维数组数值计算、线性代数、统计分析、随机初始化等配套功能，强化 MultiArray 运算能力与使用便捷性。
 MultiArray-specific toolset providing multi-dimensional array numerical calculation, linear algebra, statistical analysis, random initialization and other supporting functions, enhancing the computing power and usability of MultiArray.
 ```cpp
@@ -506,6 +506,34 @@ namespace console {
     // 数组初始化与操作
     auto rand_arr = randn<2,3>();   // 生成随机正态分布多维数组
     auto uni_arr = randuniform<2,3>(); // 均匀分布随机数组
+}
+```
+
+## 拓展模块 / Extension Modules
+
+### Windows
+
+#### MIDI库 (win/melody.h)
+仅Windows操作系统可用的MIDI渲染器
+MIDI Renderer Available Only on Windows Operating System
+```cpp
+namespace console {
+    // BMP相关
+    int bmp = midi::get_bmp();  // 获取BMP，默认为120
+    midi::set_bmp(139);         // 设置BMP为139
+
+    // 发声
+    midi::play(60);             // 中音Do，一拍
+    midi::play(62, .5);         // 中音Re，半拍
+    midi::Note n{64, 2};        // 聚合体Note
+    midi::play(n);              // 等价于midi::play(64, 2)
+    midi::Note notes[] = {60, 62, 64};  // Note的数组
+    midi::play(notes);          // 乐谱演奏
+
+    // 便捷使用
+    namespace midi = console::midi;         // 建议
+    using namespace console::midi::pitches; // 建议
+    // 之后可以C4、F5等等
 }
 ```
 
