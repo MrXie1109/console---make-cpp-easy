@@ -116,11 +116,11 @@ namespace console
                 return os << "[]";
             auto it = ma.begin();
             os << '[';
-            repr(*it);
+            repr(*it, os);
             while (++it != ma.end())
             {
                 os << ", ";
-                repr(*it);
+                repr(*it, os);
             }
             return os << ']';
         }
@@ -245,10 +245,12 @@ namespace console
             if (ma.begin() == ma.end())
                 return os << "[]";
             auto it = ma.begin();
-            os << '[' << *it;
+            os << '[';
+            repr(*it, os);
             while (++it != ma.end())
             {
-                os << ", " << *it;
+                os << ", ";
+                repr(*it, os);
             }
             return os << ']';
         }

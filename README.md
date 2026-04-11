@@ -592,8 +592,7 @@ int main() {
 ```
 
 ## 版本更新说明 / Version Update
-- **v3.9.1**
-  - 新增了 `multiarray_cast` 和 `unsafe_multiarray_cast`
+- **v3.9.2**
   - 修复多处已知 Bug
 
 ## 编译要求 / Build Requirements
