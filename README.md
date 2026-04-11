@@ -272,6 +272,9 @@ namespace console {
     // 输出 / Output
     MultiArray<int, 2, 2> mat2{{1, 2}, {3, 4}};
     print(mat2);                                // [[1, 2], [3, 4]]
+    // 转化 / Cast
+    auto ma1 = mutilarray_cast<6>(mat);         // 在同一类型，大小不变下重塑数组并返回
+    auto ma2 = unsafe_mutilarray_cast<float, 3, 2>(arr);         // 霸道的重解释内存
 }
 ```
 
@@ -451,7 +454,7 @@ namespace console {
     // 获取编译器信息 / Get compiler information
     print("Compiler:", compiler());           // GCC 12.2/MSVC 1934/Clang
     // 获取版本信息 / Get version information
-    print(version());                         // console v3.9.0 (By MrXie1109)
+    print(version());                         // console v3.9.1 (By MrXie1109)
 }
 ```
 
@@ -516,6 +519,9 @@ namespace console {
 ```
 
 ## 拓展模块 / Extension Modules
+警告：拓展模块不会被自动包含于 `all.h` ！你必须手动包含它们！
+Warning: Extension modules are not automatically included in `all.h`! You must manually include them!
+
 ### Windows
 #### MIDI库 (win/melody.h)  Re
 完全重写模式，由函数式转为面向对象，新增了音色和力度，仅Windows操作系统可用的MIDI渲染器，支持乐器切换、音量控制、异步播放
@@ -586,11 +592,8 @@ int main() {
 ```
 
 ## 版本更新说明 / Version Update
-- **v3.9.0**
-  - 重写 `win/melody.h`，修改行为模式，**不自动包含于 `all.h`**
-  - 优化 `re.h` 正则迭代器实现，**重写finditer逻辑**
-  - 新增 `input.h` 的 `inputAll` 函数
-  - 新增 `csexc.h` 的 `bad_maybe_access` 异常类型
+- **v3.9.1**
+  - 新增了 `multiarray_cast` 和 `unsafe_multiarray_cast`
   - 修复多处已知 Bug
 
 ## 编译要求 / Build Requirements

@@ -32,6 +32,7 @@ SOFTWARE.
 #include <algorithm>
 #include "csexc.h"
 #include "repr.h"
+#include <cstring>
 
 namespace console
 {
@@ -115,11 +116,11 @@ namespace console
                 return os << "[]";
             auto it = ma.begin();
             os << '[';
-            repr(*it, os);
+            repr(*it);
             while (++it != ma.end())
             {
                 os << ", ";
-                repr(*it, os);
+                repr(*it);
             }
             return os << ']';
         }
@@ -183,9 +184,7 @@ namespace console
                 sub.for_each(visit);
         }
 
-        template <class... Indices>
-        typename std::enable_if<sizeof...(Indices) + 1 == rank(), T &>::type
-        operator()(size_t idx, Indices... rest)
+        reference operator()(size_t idx)
         {
             if (idx >= First)
                 throw multiarray_error(
@@ -194,13 +193,27 @@ namespace console
                     " out of range [0, " +
                     std::to_string(First) +
                     ')');
-            return base_type::operator[](idx).operator()(rest...);
+            return base_type::operator[](idx);
+        }
+
+        const_reference operator()(size_t idx) const
+        {
+            if (idx >= First)
+                throw multiarray_error(
+                    "index " +
+                    std::to_string(idx) +
+                    " out of range [0, " +
+                    std::to_string(First) +
+                    ')');
+            return base_type::operator[](idx);
         }
 
         template <class... Indices>
-        typename std::enable_if<sizeof...(Indices) + 1 == rank(), const T &>::type
-        operator()(size_t idx, Indices... rest) const
+        auto operator()(size_t idx, Indices... rest)
+            -> decltype(base_type::operator[](idx)(rest...))
         {
+            static_assert(sizeof...(Indices) < rank(),
+                          "Too Many Arguments!");
             if (idx >= First)
                 throw multiarray_error(
                     "index " +
@@ -208,7 +221,23 @@ namespace console
                     " out of range [0, " +
                     std::to_string(First) +
                     ')');
-            return base_type::operator[](idx).operator()(rest...);
+            return base_type::operator[](idx)(rest...);
+        }
+
+        template <class... Indices>
+        auto operator()(size_t idx, Indices... rest) const
+            -> decltype(base_type::operator[](idx)(rest...))
+        {
+            static_assert(sizeof...(Indices) < rank(),
+                          "Too Many Arguments!");
+            if (idx >= First)
+                throw multiarray_error(
+                    "index " +
+                    std::to_string(idx) +
+                    " out of range [0, " +
+                    std::to_string(First) +
+                    ')');
+            return base_type::operator[](idx)(rest...);
         }
 
         friend std::ostream &operator<<(std::ostream &os, const MultiArray &ma)
@@ -227,8 +256,8 @@ namespace console
         T *fbegin() { return this->data()->fbegin(); }
         const T *fbegin() const { return this->data()->fbegin(); }
 
-        T *fend() { return (*this)[First - 1].fend(); }
-        const T *fend() const { return (*this)[First - 1].fend(); }
+        T *fend() { return this->fbegin() + this->size(); }
+        const T *fend() const { return this->fbegin() + this->size(); }
     };
 
     template <class T, size_t... Dims>
@@ -1108,5 +1137,27 @@ namespace console
             if (*it)
                 return true;
         return false;
+    }
+
+    template <size_t... OutArrDims, class VarType, size_t... InArrDims>
+    MultiArray<VarType, OutArrDims...> multiarray_cast(
+        const MultiArray<VarType, InArrDims...> &inputArr)
+    {
+        static_assert(MultiArray<VarType, OutArrDims...>::size() ==
+                          MultiArray<VarType, InArrDims...>::size(),
+                      "Bad multiarray_cast: Mismatch Size");
+        MultiArray<VarType, OutArrDims...> outputArr;
+        memcpy(&outputArr, &inputArr, sizeof(outputArr));
+        return outputArr;
+    }
+
+    template <class OutType, size_t... OutArrDims,
+              class InType, size_t... InArrDims>
+    MultiArray<InType, OutArrDims...> unsafe_multiarray_cast(
+        const MultiArray<InType, InArrDims...> &inputArr)
+    {
+        MultiArray<OutType, OutArrDims...> outputArr;
+        memcpy(&outputArr, &inputArr, sizeof(outputArr));
+        return outputArr;
     }
 }
