@@ -1,10 +1,9 @@
 # console 库 / console Library
 [![C++11](https://img.shields.io/badge/C++-11-blue.svg)](https://en.cppreference.com/w/cpp/11)
 [![C++17](https://img.shields.io/badge/C++-17-blue.svg)](https://en.cppreference.com/w/cpp/17)
-[![C++20](https://img.shields.io/badge/C++-20-blue.svg)](https://en.cppreference.com/w/cpp/20)
+[![C++20](https://img.shields.io/badge/C++-20-blue.svg)](https://img.shields.io/badge/C++-20-blue.svg)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![No Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg)]()
-
 一个轻量级、零依赖的 C++ 控制台工具库，提供简洁的 API 用于输入输出、日志记录、时间测量、随机数生成、字符串处理、文件操作、多维数组、正则表达式等常见任务。
 A lightweight, zero-dependency C++ console utility library providing simple APIs for common tasks including I/O, logging, time measurement, random number generation, string manipulation, file operations, multidimensional arrays, regular expressions, and more.
 
@@ -29,16 +28,17 @@ A lightweight, zero-dependency C++ console utility library providing simple APIs
 - ℹ️ **系统信息** - 获取平台、编译器、版本和许可证信息
 - ✨ **空值包装** - 安全的空值包装类型（Maybe），避免空指针异常
 - 🛠️ **工具扩展** - 新增 matools 工具集，增强库内通用能力
+- 🎵 **MIDI 功能** - Windows 平台专属简洁 MIDI 播放能力
 
 ## 模块 / Modules
-### 1. 标准库头文件 (std.h)
+### 1. 标准库头文件 (std.h) ~
 一站式包含所有 C++ 标准库头文件，根据 C++ 版本条件编译。
 One-stop inclusion of all C++ standard library headers, conditionally compiled based on C++ version.
 ```cpp
 #include "std.h"  // 自动包含当前 C++ 版本支持的所有标准库头文件
 ```
 
-### 2. 输出 (output.h)
+### 2. 输出 (output.h)  ~
 提供类似 Python 的 print 功能和 STL 容器输出支持，优化字符串/字符输出格式。
 容器输出通过独立的 `outfwd.h` 头文件提供前置声明，保证编译效率。
 Provides Python-like print functionality and STL container output support with optimized string/char formatting.
@@ -62,7 +62,8 @@ namespace console {
 }
 ```
 
-### 3. 输入 (input.h)
+### 3. 输入 (input.h)   +
+新增 `inputAll` 函数，支持读取全部输入流内容
 类型安全的控制台输入函数，带错误处理。
 Type-safe console input functions with error handling.
 ```cpp
@@ -74,13 +75,13 @@ namespace console {
     string name = inputLine("Your name: ");
     double num = inputWithRange("Number (0-100): ", 0, 100);
     char ch = inputChar("Type a character: ");
-    if (inputYesOrNo("Continue? (y/n): ")) {
-        // ...
-    }
+    bool cont = inputYesOrNo("Continue? (y/n): ");
+    // 新增：读取全部输入 / New: Read all input
+    string all_input = inputAll("Input anything: ");
 }
 ```
 
-### 4. 时间 (time.h)
+### 4. 时间 (time.h)    ~
 高精度时间测量、休眠和日期时间格式化。
 High-precision time measurement, sleep, and datetime formatting.
 ```cpp
@@ -99,7 +100,7 @@ namespace console {
 }
 ```
 
-### 5. 随机数 (random.h)
+### 5. 随机数 (random.h)    ~
 基于 Mersenne Twister 的随机数生成器。
 Mersenne Twister based random number generator.
 ```cpp
@@ -119,7 +120,7 @@ namespace console {
 }
 ```
 
-### 6. 字符串处理 (strpp.h)
+### 6. 字符串处理 (strpp.h) ~
 全面的字符串操作函数，包括格式化字符串类。
 Comprehensive string manipulation functions, including formatted string class.
 ```cpp
@@ -145,7 +146,7 @@ namespace console {
 }
 ```
 
-### 7. 颜色输出 (colorful.h)
+### 7. 颜色输出 (colorful.h)    ~
 ANSI 转义序列颜色常量。
 ANSI escape sequence color constants.
 ```cpp
@@ -157,7 +158,7 @@ namespace console::color {
 }
 ```
 
-### 8. 日志记录 (logging.h)
+### 8. 日志记录 (logging.h) ~
 多级别日志系统，支持彩色输出和时间戳。
 Multi-level logging system with color support and timestamps.
 ```cpp
@@ -180,7 +181,7 @@ namespace console {
 }
 ```
 
-### 9. 进度条 (jdt.h)
+### 9. 进度条 (jdt.h)   ~
 可自定义样式的进度条，支持 Unicode 字符。
 Customizable progress bar with Unicode support.
 ```cpp
@@ -201,7 +202,7 @@ namespace console {
 }
 ```
 
-### 10. 文件操作 (file.h)
+### 10. 文件操作 (file.h)   ~
 简单的文件读写封装，跨平台路径处理。
 Simple file I/O wrapper with cross-platform path handling.
 ```cpp
@@ -224,7 +225,7 @@ namespace console {
 }
 ```
 
-### 11. 动态类型容器 (box.h)
+### 11. 动态类型容器 (box.h)    ~
 类型安全的异构容器，类似 Python 列表。
 Type-safe heterogeneous container similar to Python list.
 ```cpp
@@ -243,7 +244,7 @@ namespace console {
 }
 ```
 
-### 12. 编译期多维数组 (multiarray.h)
+### 12. 编译期多维数组 (multiarray.h)   ~
 编译期定长多维数组，优化初始化列表构造实现，支持逐元素算术、逻辑、位运算，扁平化访问。
 Compile-time fixed-size multidimensional array with optimized initializer_list construction, element-wise arithmetic, logic, and bit operations, flat access support.
 ```cpp
@@ -274,7 +275,7 @@ namespace console {
 }
 ```
 
-### 13. 双指针游标 (cursor_ptr.h)
+### 13. 双指针游标 (cursor_ptr.h)   ~
 分离所有权与访问位置的智能指针。
 Smart pointer separating ownership and access position.
 ```cpp
@@ -297,7 +298,7 @@ namespace console {
 }
 ```
 
-### 14. 字面量 (literals.h)
+### 14. 字面量 (literals.h) ~
 用户定义字面量，提供便捷语法。
 User-defined literals for convenient syntax.
 ```cpp
@@ -315,7 +316,7 @@ namespace console::literals {
 }
 ```
 
-### 15. 容器视图 (view.h)
+### 15. 容器视图 (view.h)   ~
 非拥有式容器视图，支持子区间，优化常量迭代器。
 Non-owning container views with subrange support, optimized const iterators.
 ```cpp
@@ -341,7 +342,7 @@ namespace console {
 }
 ```
 
-### 16. 列表推导式 (compre.h)
+### 16. 列表推导式 (compre.h)   ~
 类似 Python 的列表推导式功能。
 Python-like list comprehension functionality.
 ```cpp
@@ -353,15 +354,15 @@ namespace console {
     auto c4 = make_compre(arr, 1, 4);                  // 子范围
     // 链式操作：筛选 + 变换
     auto result = make_compre({1, 2, 3, 4, 5, 6, 7, 8, 9})
-        .filter([](sslocal://flow/file_open?url=int+x&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=) { return x & 1; })           // 保留奇数
-        .map([](sslocal://flow/file_open?url=int+x&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=) { return x * x; });              // 平方
+        .filter([](int x) { return x & 1; })           // 保留奇数
+        .map([](int x) { return x * x; });              // 平方
     // 转换为标准容器
-    vector<int> vec = result.to<vector<int>>();        // 移动转换
     list<int> lst = result.make<list<int>>();           // 复制转换
+    vector<int> vec = result.to<vector<int>>();        // 移动转换
 }
 ```
 
-### 17. SFINAE 工具 (sfinae.h)
+### 17. SFINAE 工具 (sfinae.h)  ~
 编译期类型检测工具，支持字符/可打印类型判断。
 Compile-time type detection tools with char/printable type checks.
 ```cpp
@@ -383,13 +384,14 @@ namespace console {
 }
 ```
 
-### 18. 正则表达式 (re.h)
+### 18. 正则表达式 (re.h)   +
+重写迭代器与遍历逻辑，新增迭代器对封装，优化遍历使用方式
 Python 风格的正则表达式封装。
 Python-style regular expression wrapper.
 ```cpp
 namespace console {
     // 编译正则表达式 / Compile regex
-    Regex re(R"(\d+)");
+    Regex re(R"(\\d+)");
     // 搜索 / Search
     auto match = re.search("abc123def");
     if (match) {
@@ -399,6 +401,10 @@ namespace console {
     auto m2 = re.match("123abc");
     // 查找所有 / Find all
     auto all = re.findall("a1b2c3d4");      // ["1", "2", "3", "4"]
+    // 遍历匹配结果（优化后）/ Iterate matches (optimized)
+    for (auto m : re.finditer("a1b2c3")) {
+        print(m.group());
+    }
     // 分割 / Split
     auto parts = Regex(R"(\s+)").split("a b  c   d"); // ["a", "b", "c", "d"]
     // 替换 / Substitute
@@ -406,7 +412,8 @@ namespace console {
 }
 ```
 
-### 19. 异常类 (csexc.h)
+### 19. 异常类 (csexc.h)    +
+新增 `bad_maybe_access` 异常,适配 Maybe 空值访问错误
 自定义异常类体系。
 Custom exception class hierarchy.
 ```cpp
@@ -420,19 +427,19 @@ namespace console {
         logger.error("Array error:", e.what());
     } catch (const index_error& e) {           // 索引越界
         logger.error("Index out of range:", e.what());
-    } catch (const file_not_found_error& e) {  // 文件未找到
+    } catch (const file_error& e) {            // 文件错误
         logger.error("File error:", e.what());
     } catch (const fatal_logging& e) {         // 致命日志
         logger.fatal("Fatal:", e.what());
     } catch (const bad_format& e) {            // 格式化错误
         logger.error("Format error:", e.what());
-    } catch (const bad_maybe_access& e) {      // 空值访问
+    } catch (const bad_maybe_access& e) {      // 新增：Maybe 空值访问
         logger.error("Maybe access error:", e.what());
     }
 }
 ```
 
-### 20. 系统信息 (info.h)
+### 20. 系统信息 (info.h)   ±
 获取平台、编译器、版本和许可证信息。
 Get platform, compiler, version, and license information.
 ```cpp
@@ -444,11 +451,11 @@ namespace console {
     // 获取编译器信息 / Get compiler information
     print("Compiler:", compiler());           // GCC 12.2/MSVC 1934/Clang
     // 获取版本信息 / Get version information
-    print(version());                         // console v3.7.0 (By MrXie1109)
+    print(version());                         // console v3.9.0 (By MrXie1109)
 }
 ```
 
-### 21. 空值包装 (maybe.h)
+### 21. 空值包装 (maybe.h)  ~
 安全的空值包装类型，避免空指针异常，支持值访问与默认值。
 Safe nullable wrapper type to avoid null pointer exceptions, support value access and default value.
 ```cpp
@@ -468,7 +475,7 @@ namespace console {
 }
 ```
 
-### 22. 容器输出前置声明 (outfwd.h)
+### 22. 容器输出前置声明 (outfwd.h) ~
 为所有 STL 容器提供 `operator<<` 的前置声明，优化编译速度，避免重复定义。
 Provides forward declarations for `operator<<` of all STL containers to optimize compilation speed and avoid duplicate definitions.
 ```cpp
@@ -476,7 +483,7 @@ Provides forward declarations for `operator<<` of all STL containers to optimize
 #include "outfwd.h"
 ```
 
-### 23. 格式化输出工具 (repr.h)
+### 23. 格式化输出工具 (repr.h) ~
 专门用于容器输出格式化的工具库，提供统一的类型格式化输出功能，仅在打印容器时内部使用。
 Specialized utility library for container output formatting, providing unified type formatting output functionality, only used internally when printing containers.
 核心功能：
@@ -486,8 +493,8 @@ Specialized utility library for container output formatting, providing unified t
 - 函数指针输出内存地址
 - 不可打印类型输出可读的类型名称
 
-### 24. 扩展工具集 (matools.h)
-MultiArray 专用工具集，提供多维数组数值计算、线性代数、统计分析、随机初始化等配套功能，强化 MultiArray 运算能力与使用便捷性。
+### 24. 扩展工具集 (matools.h)  ~
+ MultiArray 专用工具集，提供多维数组数值计算、线性代数、统计分析、随机初始化等配套功能，强化 MultiArray 运算能力与使用便捷性。
 MultiArray-specific toolset providing multi-dimensional array numerical calculation, linear algebra, statistical analysis, random initialization and other supporting functions, enhancing the computing power and usability of MultiArray.
 ```cpp
 namespace console {
@@ -497,43 +504,40 @@ namespace console {
     auto var = variance(arr);       // 计算方差
     auto dev = stddev(arr);         // 计算标准差
     print_stats(arr);               // 打印完整统计信息
-
     // 线性代数运算
     auto product = dot(arr1, arr2); // 向量点积
     auto length = norm(arr);        // 向量L2范数
     auto sim = cosine(arr1, arr2);  // 余弦相似度
-
     // 数组初始化与操作
-    auto rand_arr = randn<2,3>();   // 生成随机正态分布多维数组
-    auto uni_arr = randuniform<2,3>(); // 均匀分布随机数组
+    linspace(arr, 0, 10);          // 线性等分填充
+    randomize(arr, 0, 100);        // 均匀随机初始化
+    auto res = clamp(arr, 0, 50);  // 数值截断
 }
 ```
 
 ## 拓展模块 / Extension Modules
-
 ### Windows
-
-#### MIDI库 (win/melody.h)
-仅Windows操作系统可用的MIDI渲染器
+#### MIDI库 (win/melody.h)  Re
+完全重写模式，由函数式转为面向对象，新增了音色和力度，仅Windows操作系统可用的MIDI渲染器，支持乐器切换、音量控制、异步播放
 MIDI Renderer Available Only on Windows Operating System
 ```cpp
 namespace console {
-    // BMP相关
-    int bmp = midi::get_bmp();  // 获取BMP，默认为120
-    midi::set_bmp(139);         // 设置BMP为139
-
-    // 发声
-    midi::play(60);             // 中音Do，一拍
-    midi::play(62, .5);         // 中音Re，半拍
-    midi::Note n{64, 2};        // 聚合体Note
-    midi::play(n);              // 等价于midi::play(64, 2)
-    midi::Note notes[] = {60, 62, 64};  // Note的数组
-    midi::play(notes);          // 乐谱演奏
-
-    // 便捷使用
-    namespace midi = console::midi;         // 建议
-    using namespace console::midi::pitches; // 建议
-    // 之后可以C4、F5等等
+    // 创建 MIDI 实例
+    MIDI midi(Instrument::AcousticGrandPiano, 120, 100);
+    // 播放单音
+    midi.play(Note(pitches::C4, 1));
+    // 异步播放（不阻塞）
+    midi.nplay(Note(pitches::D4, 0.5));
+    // 播放乐谱数组
+    Note melody[] = {
+        {pitches::C4, 1}, {pitches::D4, 1},
+        {pitches::E4, 1}, {pitches::REST, 0.5}
+    };
+    midi.play(melody);
+    // 切换乐器
+    midi.set_instrument(Instrument::Violin);
+    // 调整音量
+    midi.set_volume(80);
 }
 ```
 
@@ -542,6 +546,7 @@ namespace console {
 #include "console/all.h"
 using namespace console;
 using namespace console::literals;
+
 int main() {
     // 输出 / Output
     print("Hello, World!");
@@ -581,15 +586,17 @@ int main() {
 ```
 
 ## 版本更新说明 / Version Update
-- **v3.7.0**
-  - 新增 `matools.h` 工具集，统一包含于 `all.h`
-  - 优化 `MultiArray` 初始化列表构造，改用 `std::copy` 实现
-  - 完善多维数组拷贝构造与嵌套初始化逻辑
-  - 版本号从 v3.6.0 升级至 v3.7.0
+- **v3.9.0**
+  - 重写 `win/melody.h`，修改行为模式，**不自动包含于 `all.h`**
+  - 优化 `re.h` 正则迭代器实现，**重写finditer逻辑**
+  - 新增 `input.h` 的 `inputAll` 函数
+  - 新增 `csexc.h` 的 `bad_maybe_access` 异常类型
+  - 修复多处已知 Bug
 
 ## 编译要求 / Build Requirements
 - C++11 兼容的编译器（支持 C++11/14/17/20/23 新特性可选）
 - 仅需标准库，无外部依赖
+- 使用 MIDI 功能需链接 `winmm` 库（Windows）
 
 ## 许可证 / License
 MIT License [LICENSE](LICENSE)

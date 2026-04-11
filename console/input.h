@@ -125,4 +125,11 @@ namespace console
                 is.os << "Please type yes or no." << std::endl;
         }
     }
+
+    std::string inputAll(const std::string &prompt = "",
+                         const InputSettings &is = inputSettings)
+    {
+        return {std::istreambuf_iterator<char>(is.is),
+                std::istreambuf_iterator<char>()};
+    }
 }

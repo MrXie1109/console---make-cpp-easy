@@ -139,12 +139,15 @@ namespace console
         {
         private:
             std::sregex_iterator it;
-            std::sregex_iterator end;
 
         public:
-            Iterator(std::sregex_iterator i, std::sregex_iterator e)
-                : it(i), end(e) {}
+            Iterator(std::sregex_iterator i)
+                : it(i) {}
 
+            bool operator==(const Iterator &other) const
+            {
+                return it == other.it;
+            }
             bool operator!=(const Iterator &other) const
             {
                 return it != other.it;
@@ -157,11 +160,25 @@ namespace console
             }
         };
 
-        Iterator finditer(const std::string &text) const
+        class IteratorPair
         {
-            return Iterator(
-                std::sregex_iterator(text.begin(), text.end(), pattern),
-                std::sregex_iterator());
+        private:
+            Iterator begin_;
+            Iterator end_;
+
+        public:
+            typedef Iterator iterator;
+
+            IteratorPair(iterator beg, iterator end) : begin_(beg), end_(end) {}
+
+            iterator begin() const { return begin_; }
+            iterator end() const { return end_; }
+        };
+
+        IteratorPair finditer(const std::string &text) const
+        {
+            return {{std::sregex_iterator(text.begin(), text.end(), pattern)},
+                    {std::sregex_iterator()}};
         }
 
         std::vector<std::string> split(const std::string &text,
