@@ -69,14 +69,14 @@ namespace console
                 std::mt19937 &gen = default_gen())
         -> decltype(*std::begin(init))
     {
-        return choice<std::initializer_list<T>>(
-            std::forward<std::initializer_list<T>>(init),
-            gen);
+        return choice<std::initializer_list<T>>((init), gen);
     }
 
     template <class C>
     void shuffle(C &&c, std::mt19937 &gen = default_gen())
     {
+        if (std::begin(c) == std::end(c))
+            throw container_error("Empty container");
         for (size_t i = c.size() - 1; i > 0; i--)
         {
             auto j = randint<size_t>(0, i, gen);

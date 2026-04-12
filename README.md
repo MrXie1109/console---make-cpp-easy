@@ -33,6 +33,7 @@ A lightweight, zero-dependency C++ console utility library providing simple APIs
 ## 模块 / Modules
 ### 1. 标准库头文件 (std.h) ~
 一站式包含所有 C++ 标准库头文件，根据 C++ 版本条件编译。
+
 One-stop inclusion of all C++ standard library headers, conditionally compiled based on C++ version.
 ```cpp
 #include "std.h"  // 自动包含当前 C++ 版本支持的所有标准库头文件
@@ -41,6 +42,7 @@ One-stop inclusion of all C++ standard library headers, conditionally compiled b
 ### 2. 输出 (output.h)  ~
 提供类似 Python 的 print 功能和 STL 容器输出支持，优化字符串/字符输出格式。
 容器输出通过独立的 `outfwd.h` 头文件提供前置声明，保证编译效率。
+
 Provides Python-like print functionality and STL container output support with optimized string/char formatting.
 Container output uses separate `outfwd.h` header for forward declarations to ensure compilation efficiency.
 ```cpp
@@ -62,9 +64,10 @@ namespace console {
 }
 ```
 
-### 3. 输入 (input.h)   +
+### 3. 输入 (input.h)   ~
 新增 `inputAll` 函数，支持读取全部输入流内容
 类型安全的控制台输入函数，带错误处理。
+
 Type-safe console input functions with error handling.
 ```cpp
 namespace console {
@@ -83,6 +86,7 @@ namespace console {
 
 ### 4. 时间 (time.h)    ~
 高精度时间测量、休眠和日期时间格式化。
+
 High-precision time measurement, sleep, and datetime formatting.
 ```cpp
 namespace console {
@@ -100,8 +104,9 @@ namespace console {
 }
 ```
 
-### 5. 随机数 (random.h)    ~
+### 5. 随机数 (random.h)    +
 基于 Mersenne Twister 的随机数生成器。
+
 Mersenne Twister based random number generator.
 ```cpp
 namespace console {
@@ -122,6 +127,7 @@ namespace console {
 
 ### 6. 字符串处理 (strpp.h) ~
 全面的字符串操作函数，包括格式化字符串类。
+
 Comprehensive string manipulation functions, including formatted string class.
 ```cpp
 namespace console {
@@ -148,6 +154,7 @@ namespace console {
 
 ### 7. 颜色输出 (colorful.h)    ~
 ANSI 转义序列颜色常量。
+
 ANSI escape sequence color constants.
 ```cpp
 namespace console::color {
@@ -160,6 +167,7 @@ namespace console::color {
 
 ### 8. 日志记录 (logging.h) ~
 多级别日志系统，支持彩色输出和时间戳。
+
 Multi-level logging system with color support and timestamps.
 ```cpp
 namespace console {
@@ -183,6 +191,7 @@ namespace console {
 
 ### 9. 进度条 (jdt.h)   ~
 可自定义样式的进度条，支持 Unicode 字符。
+
 Customizable progress bar with Unicode support.
 ```cpp
 namespace console {
@@ -204,6 +213,7 @@ namespace console {
 
 ### 10. 文件操作 (file.h)   ~
 简单的文件读写封装，跨平台路径处理。
+
 Simple file I/O wrapper with cross-platform path handling.
 ```cpp
 namespace console {
@@ -227,6 +237,7 @@ namespace console {
 
 ### 11. 动态类型容器 (box.h)    ~
 类型安全的异构容器，类似 Python 列表。
+
 Type-safe heterogeneous container similar to Python list.
 ```cpp
 namespace console {
@@ -246,6 +257,7 @@ namespace console {
 
 ### 12. 编译期多维数组 (multiarray.h)   ~
 编译期定长多维数组，优化初始化列表构造实现，支持逐元素算术、逻辑、位运算，扁平化访问。
+
 Compile-time fixed-size multidimensional array with optimized initializer_list construction, element-wise arithmetic, logic, and bit operations, flat access support.
 ```cpp
 namespace console {
@@ -258,8 +270,7 @@ namespace console {
     // 访问元素 / Element access
     arr[0][1] = 100;                          // 链式下标
     int val = arr[1][2];
-    int val2 = arr.at(0, 1);                   // 带边界检查
-    int val3 = arr(0, 1);                      // 函数式访问
+    int val3 = arr(0, 1);                      // 带检查的访问
     // 形状操作 / Shape operations
     print(arr.rank());                        // 2
     print(arr.size());                        // 6
@@ -280,6 +291,7 @@ namespace console {
 
 ### 13. 双指针游标 (cursor_ptr.h)   ~
 分离所有权与访问位置的智能指针。
+
 Smart pointer separating ownership and access position.
 ```cpp
 namespace console {
@@ -301,8 +313,9 @@ namespace console {
 }
 ```
 
-### 14. 字面量 (literals.h) ~
+### 14. 字面量 (literals.h) +
 用户定义字面量，提供便捷语法。
+
 User-defined literals for convenient syntax.
 ```cpp
 namespace console::literals {
@@ -313,6 +326,8 @@ namespace console::literals {
     Time t2 = 2.5_us;                        // 2.5微秒
     Time t3 = 500_ms;                        // 500毫秒
     Time t4 = 1.5_s;                         // 1.5秒
+    Time t5 = 0.5_min;                       // 0.5分钟
+    Time t6 = 4_hr;                          // 4小时
     // 格式化字符串字面量 / Format string literal
     auto fmt = "Value: {}"_f;                 // f_string
     string result = fmt % 42;                  // "Value: 42"
@@ -321,6 +336,7 @@ namespace console::literals {
 
 ### 15. 容器视图 (view.h)   ~
 非拥有式容器视图，支持子区间，优化常量迭代器。
+
 Non-owning container views with subrange support, optimized const iterators.
 ```cpp
 namespace console {
@@ -347,6 +363,7 @@ namespace console {
 
 ### 16. 列表推导式 (compre.h)   ~
 类似 Python 的列表推导式功能。
+
 Python-like list comprehension functionality.
 ```cpp
 namespace console {
@@ -367,6 +384,7 @@ namespace console {
 
 ### 17. SFINAE 工具 (sfinae.h)  ~
 编译期类型检测工具，支持字符/可打印类型判断。
+
 Compile-time type detection tools with char/printable type checks.
 ```cpp
 namespace console {
@@ -387,9 +405,10 @@ namespace console {
 }
 ```
 
-### 18. 正则表达式 (re.h)   +
+### 18. 正则表达式 (re.h)   ~
 重写迭代器与遍历逻辑，新增迭代器对封装，优化遍历使用方式
 Python 风格的正则表达式封装。
+
 Python-style regular expression wrapper.
 ```cpp
 namespace console {
@@ -415,9 +434,10 @@ namespace console {
 }
 ```
 
-### 19. 异常类 (csexc.h)    +
+### 19. 异常类 (csexc.h)    ~
 新增 `bad_maybe_access` 异常,适配 Maybe 空值访问错误
 自定义异常类体系。
+
 Custom exception class hierarchy.
 ```cpp
 namespace console {
@@ -444,6 +464,7 @@ namespace console {
 
 ### 20. 系统信息 (info.h)   ±
 获取平台、编译器、版本和许可证信息。
+
 Get platform, compiler, version, and license information.
 ```cpp
 namespace console {
@@ -458,8 +479,9 @@ namespace console {
 }
 ```
 
-### 21. 空值包装 (maybe.h)  ~
+### 21. 空值包装 (maybe.h)  +
 安全的空值包装类型，避免空指针异常，支持值访问与默认值。
+
 Safe nullable wrapper type to avoid null pointer exceptions, support value access and default value.
 ```cpp
 namespace console {
@@ -480,6 +502,7 @@ namespace console {
 
 ### 22. 容器输出前置声明 (outfwd.h) ~
 为所有 STL 容器提供 `operator<<` 的前置声明，优化编译速度，避免重复定义。
+
 Provides forward declarations for `operator<<` of all STL containers to optimize compilation speed and avoid duplicate definitions.
 ```cpp
 // 无需手动包含，由 output.h 自动引入
@@ -488,6 +511,7 @@ Provides forward declarations for `operator<<` of all STL containers to optimize
 
 ### 23. 格式化输出工具 (repr.h) ~
 专门用于容器输出格式化的工具库，提供统一的类型格式化输出功能，仅在打印容器时内部使用。
+
 Specialized utility library for container output formatting, providing unified type formatting output functionality, only used internally when printing containers.
 核心功能：
 - 字符串类型输出带双引号
@@ -498,6 +522,7 @@ Specialized utility library for container output formatting, providing unified t
 
 ### 24. 扩展工具集 (matools.h)  ~
  MultiArray 专用工具集，提供多维数组数值计算、线性代数、统计分析、随机初始化等配套功能，强化 MultiArray 运算能力与使用便捷性。
+
 MultiArray-specific toolset providing multi-dimensional array numerical calculation, linear algebra, statistical analysis, random initialization and other supporting functions, enhancing the computing power and usability of MultiArray.
 ```cpp
 namespace console {
@@ -520,11 +545,12 @@ namespace console {
 
 ## 拓展模块 / Extension Modules
 警告：拓展模块不会被自动包含于 `all.h` ！你必须手动包含它们！
+
 Warning: Extension modules are not automatically included in `all.h`! You must manually include them!
 
 ### Windows
-#### MIDI库 (win/melody.h)  Re
-完全重写模式，由函数式转为面向对象，新增了音色和力度，仅Windows操作系统可用的MIDI渲染器，支持乐器切换、音量控制、异步播放
+#### MIDI库 (win/melody.h)  ~
+仅Windows操作系统可用的MIDI渲染器，支持乐器切换、音量控制、异步播放
 MIDI Renderer Available Only on Windows Operating System
 ```cpp
 namespace console {
@@ -592,7 +618,7 @@ int main() {
 ```
 
 ## 版本更新说明 / Version Update
-- **v3.9.2**
+- **v3.9.3**
   - 修复多处已知 Bug
 
 ## 编译要求 / Build Requirements

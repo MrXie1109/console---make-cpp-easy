@@ -68,9 +68,15 @@ namespace console
             throw bad_maybe_access("Nothing");
         }
 
+        const Maybe &operator=(const T &value)
+        {
+            ptr.reset(new T(value));
+            return *this;
+        }
+
         const Maybe &operator=(T &&value)
         {
-            ptr.reset(new T(std::forward<T>(value)));
+            ptr.reset(new T(std::move(value)));
             return *this;
         }
 

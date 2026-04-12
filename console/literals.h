@@ -26,10 +26,8 @@ SOFTWARE.
 #include "strpp.h"
 #include "time.h"
 
-namespace console
+namespace console::literals
 {
-    namespace literals
-    {
 #if __cplusplus < 201703L
 #if defined(__GNUC__) || defined(__clang__)
 #pragma GCC diagnostic push
@@ -39,10 +37,10 @@ namespace console
 #pragma warning(push)
 #pragma warning(disable : 4455)
 #endif
-        std::string operator""s(const char *str, size_t)
-        {
-            return std::string(str);
-        }
+    std::string operator""s(const char *str, size_t)
+    {
+        return std::string(str);
+    }
 #ifdef _MSC_VER
 #pragma warning(pop)
 #endif
@@ -50,18 +48,22 @@ namespace console
 #pragma GCC diagnostic pop
 #endif
 #else
-        using namespace std::literals::string_literals;
+    using namespace std::literals::string_literals;
 #endif
 
-        Time operator""_ns(unsigned long long ns) { return Time(ns); }
-        Time operator""_us(unsigned long long us) { return Time(us * 1e3); }
-        Time operator""_ms(unsigned long long ms) { return Time(ms * 1e6); }
-        Time operator""_s(unsigned long long s) { return Time(s * 1e9); }
-        Time operator""_ns(long double ns) { return Time(ns); }
-        Time operator""_us(long double us) { return Time(us * 1e3); }
-        Time operator""_ms(long double ms) { return Time(ms * 1e6); }
-        Time operator""_s(long double s) { return Time(s * 1e9); }
+    Time operator""_ns(unsigned long long ns) { return Time(ns); }
+    Time operator""_us(unsigned long long us) { return Time(us * 1e3); }
+    Time operator""_ms(unsigned long long ms) { return Time(ms * 1e6); }
+    Time operator""_s(unsigned long long s) { return Time(s * 1e9); }
+    Time operator""_min(unsigned long long ms) { return Time(ms * 6e10); }
+    Time operator""_hr(unsigned long long s) { return Time(s * 3.6e12); }
 
-        f_string operator""_f(const char *str, size_t) { return str; }
-    }
+    Time operator""_ns(long double ns) { return Time(ns); }
+    Time operator""_us(long double us) { return Time(us * 1e3); }
+    Time operator""_ms(long double ms) { return Time(ms * 1e6); }
+    Time operator""_s(long double s) { return Time(s * 1e9); }
+    Time operator""_min(long double ms) { return Time(ms * 6e10); }
+    Time operator""_hr(long double s) { return Time(s * 3.6e12); }
+
+    f_string operator""_f(const char *str, size_t) { return str; }
 }
