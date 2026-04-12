@@ -201,17 +201,11 @@ namespace console {
     static const Config& beautiful();   // ▕██████████░░░░░░░░░░▏ 50%
 
     // 自定义样式 / Custom style
-    Config myConfig;
-    myConfig.width = 30;
-    myConfig.prefix = "|";
-    myConfig.suffix = "|";
-    myConfig.fill_char = "=";
-    myConfig.empty_char = "-";
-    myConfig.show_percent = true;
+    Config myConfig{std::cout, 30, "=", "-", "|", "|", true};
 
     // 使用进度条 / Using progress bar
     std::vector<int> data(100);
-    for (size_t index : Progress(data, Progress::beautiful())) {
+    for (int n : progress(data, ProgressStyle::beautiful())) {
         // 处理数据...
     }
 }
@@ -481,7 +475,7 @@ namespace console {
     // 获取编译器信息 / Get compiler information
     print("Compiler:", compiler());           // GCC 12.2/MSVC 1934/Clang
     // 获取版本信息 / Get version information
-    print(version());                         // console v3.10.0 (By MrXie1109)
+    print(version());                         // console v3.11.0 (By MrXie1109)
 }
 ```
 

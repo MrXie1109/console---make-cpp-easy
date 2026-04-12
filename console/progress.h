@@ -31,31 +31,41 @@ SOFTWARE.
 namespace console
 {
 
+    struct ProgressConfig
+    {
+        std::ostream &os;
+        int width;
+        std::string fill_char;
+        std::string empty_char;
+        std::string prefix;
+        std::string suffix;
+        bool show_percent;
+
+        ProgressConfig(std::ostream &o = std::cout, int w = 50,
+                       std::string fc = "#", std::string ec = ".",
+                       std::string pre = "[", std::string suf = "]",
+                       bool sp = true)
+            : os(o), width(w), fill_char(std::move(fc)),
+              empty_char(std::move(ec)), prefix(std::move(pre)),
+              suffix(std::move(suf)), show_percent(sp) {}
+    };
+
+    template <class Iter>
     class Progress
     {
     public:
-        struct Config
-        {
-            std::ostream &os = std::cout;
-            int width = 50;
-            std::string fill_char = "#";
-            std::string empty_char = ".";
-            std::string prefix = "[";
-            std::string suffix = "]";
-            bool show_percent = true;
-        };
-
         class iterator
         {
-            const Config *config_;
+            const ProgressConfig *config_;
             size_t current_;
             size_t total_;
+            Iter it_;
 
             void draw() const
             {
                 if (!config_)
                     return;
-                int percent = current_ * 100.0 / total_;
+                int percent = current_ * 100 / total_;
                 int filled = percent * config_->width / 100;
                 config_->os << '\r' << config_->prefix;
                 for (int i = 0; i < filled; ++i)
@@ -72,8 +82,10 @@ namespace console
             }
 
         public:
-            iterator(const Config *config, size_t current, size_t total)
-                : config_(config), current_(current), total_(total) {}
+            iterator(const ProgressConfig *config, size_t current,
+                     size_t total, Iter it)
+                : config_(config), current_(current),
+                  total_(total), it_(it) {}
             iterator &operator++()
             {
                 if (current_ < total_)
@@ -97,16 +109,25 @@ namespace console
             {
                 return current_ != other.current_;
             }
-            size_t operator*() const
+            decltype(*it_) operator*() const
             {
-                return current_;
+                return *it_;
             }
         };
 
         template <typename Cont>
-        Progress(const Cont &cont, const Config &config = normal())
+        Progress(const Cont &cont, const ProgressConfig &config = {})
             : config_(config),
-              total_(std::distance(std::begin(cont), std::end(cont))) {}
+              total_(std::distance(std::begin(cont), std::end(cont))),
+              begin_(std::begin(cont)),
+              end_(std::end(cont)) {}
+
+        template <typename Cont>
+        Progress(Cont &cont, const ProgressConfig &config = {})
+            : config_(config),
+              total_(std::distance(std::begin(cont), std::end(cont))),
+              begin_(std::begin(cont)),
+              end_(std::end(cont)) {}
 
         ~Progress()
         {
@@ -115,36 +136,47 @@ namespace console
 
         iterator begin()
         {
-            return iterator(&config_, 0, total_);
+            return iterator(&config_, 0, total_, begin_);
         }
 
         iterator end()
         {
-            return iterator(&config_, total_, total_);
-        }
-
-        static const Config &normal()
-        {
-            static Config cfg{};
-            return cfg;
-        }
-
-        static const Config &simple()
-        {
-            static Config cfg{std::cout, 50, "=", "-", "", "", false};
-            return cfg;
-        }
-
-        static const Config &beautiful()
-        {
-            static Config cfg{std::cout, 50, "\u2588", "\u2591",
-                              "\u2595", "\u258F",
-                              true};
-            return cfg;
+            return iterator(&config_, total_, total_, begin_);
         }
 
     private:
-        Config config_;
+        ProgressConfig config_;
         size_t total_;
+        Iter begin_;
+        Iter end_;
     };
+
+    namespace ProgressStyle
+    {
+        inline const ProgressConfig &normal()
+        {
+            static ProgressConfig cfg{};
+            return cfg;
+        }
+
+        inline const ProgressConfig &simple()
+        {
+            static ProgressConfig cfg{std::cout, 50, "=", "-", "", "", false};
+            return cfg;
+        }
+
+        inline const ProgressConfig &beautiful()
+        {
+            static ProgressConfig cfg{std::cout, 50, "\u2588", "\u2591",
+                                      "\u2595", "\u258F", true};
+            return cfg;
+        }
+    }
+
+    template <class Cont>
+    auto progress(Cont &&cont, const ProgressConfig &pc = {})
+        -> Progress<decltype(std::begin(cont))>
+    {
+        return {std::forward<Cont>(cont), pc};
+    }
 }
