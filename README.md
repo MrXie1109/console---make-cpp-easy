@@ -435,7 +435,6 @@ namespace console {
 ```
 
 ### 19. 异常类 (csexc.h)    ~
-新增 `bad_maybe_access` 异常,适配 Maybe 空值访问错误
 自定义异常类体系。
 
 Custom exception class hierarchy.
@@ -456,7 +455,7 @@ namespace console {
         logger.fatal("Fatal:", e.what());
     } catch (const bad_format& e) {            // 格式化错误
         logger.error("Format error:", e.what());
-    } catch (const bad_maybe_access& e) {      // 新增：Maybe 空值访问
+    } catch (const bad_maybe_access& e) {      // Maybe 空值访问
         logger.error("Maybe access error:", e.what());
     }
 }
@@ -475,7 +474,7 @@ namespace console {
     // 获取编译器信息 / Get compiler information
     print("Compiler:", compiler());           // GCC 12.2/MSVC 1934/Clang
     // 获取版本信息 / Get version information
-    print(version());                         // console v3.11.0 (By MrXie1109)
+    print(version());                         // console v3.11.1 (By MrXie1109)
 }
 ```
 

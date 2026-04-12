@@ -42,13 +42,6 @@ namespace console
             : console_error(msg) {}
     };
 
-    class jdt_range_error : public console_error
-    {
-    public:
-        jdt_range_error(const std::string &msg)
-            : console_error(msg) {}
-    };
-
     class bad_format : public console_error
     {
     public:
