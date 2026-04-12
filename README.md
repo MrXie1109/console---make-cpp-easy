@@ -104,7 +104,7 @@ namespace console {
 }
 ```
 
-### 5. 随机数 (random.h)    +
+### 5. 随机数 (random.h)    ~
 基于 Mersenne Twister 的随机数生成器。
 
 Mersenne Twister based random number generator.
@@ -189,25 +189,31 @@ namespace console {
 }
 ```
 
-### 9. 进度条 (jdt.h)   ~
+### 9. 进度条 (progress.h)   Re
 可自定义样式的进度条，支持 Unicode 字符。
 
 Customizable progress bar with Unicode support.
 ```cpp
 namespace console {
     // 预设样式 / Preset styles
-    extern const JdtSettings normalSettings;      // [##########          ]   50%
-    extern const JdtSettings simpleSettings;      // ==========----------   50%
-    extern const JdtSettings beautifulSettings;   // ▕██████████░░░░░░░░░░▏   50%
+    static const Config& normal();      // [##########          ] 50%
+    static const Config& simple();      // ==========---------- 50%
+    static const Config& beautiful();   // ▕██████████░░░░░░░░░░▏ 50%
+
     // 自定义样式 / Custom style
-    JdtSettings mySettings{30, "|", "|", "=", "-", "\r", cout};
-    defaultSettings = beautifulSettings;          // 修改默认样式
+    Config myConfig;
+    myConfig.width = 30;
+    myConfig.prefix = "|";
+    myConfig.suffix = "|";
+    myConfig.fill_char = "=";
+    myConfig.empty_char = "-";
+    myConfig.show_percent = true;
+
     // 使用进度条 / Using progress bar
-    for (int i = 0; i <= 100; i += 5) {
-        jdt(i);                                    // 使用默认样式
-        this_thread::sleep_for(50ms);
+    std::vector<int> data(100);
+    for (size_t index : Progress(data, Progress::beautiful())) {
+        // 处理数据...
     }
-    cout << endl;
 }
 ```
 
@@ -284,8 +290,8 @@ namespace console {
     MultiArray<int, 2, 2> mat2{{1, 2}, {3, 4}};
     print(mat2);                                // [[1, 2], [3, 4]]
     // 转化 / Cast
-    auto ma1 = mutilarray_cast<6>(mat);         // 在同一类型，大小不变下重塑数组并返回
-    auto ma2 = unsafe_mutilarray_cast<float, 3, 2>(arr);         // 霸道的重解释内存
+    auto ma1 = multiarray_cast<6>(mat);         // 在同一类型，大小不变下重塑数组并返回
+    auto ma2 = unsafe_multiarray_cast<float, 3, 2>(arr);         // 霸道的重解释内存
 }
 ```
 
@@ -313,7 +319,7 @@ namespace console {
 }
 ```
 
-### 14. 字面量 (literals.h) +
+### 14. 字面量 (literals.h) ~
 用户定义字面量，提供便捷语法。
 
 User-defined literals for convenient syntax.
@@ -475,11 +481,11 @@ namespace console {
     // 获取编译器信息 / Get compiler information
     print("Compiler:", compiler());           // GCC 12.2/MSVC 1934/Clang
     // 获取版本信息 / Get version information
-    print(version());                         // console v3.9.1 (By MrXie1109)
+    print(version());                         // console v3.10.0 (By MrXie1109)
 }
 ```
 
-### 21. 空值包装 (maybe.h)  +
+### 21. 空值包装 (maybe.h)  ~
 安全的空值包装类型，避免空指针异常，支持值访问与默认值。
 
 Safe nullable wrapper type to avoid null pointer exceptions, support value access and default value.
@@ -618,7 +624,8 @@ int main() {
 ```
 
 ## 版本更新说明 / Version Update
-- **v3.9.3**
+- **v3.10.0**
+  - 移除 `jdt.h` 并重写为 `progress.h`
   - 修复多处已知 Bug
 
 ## 编译要求 / Build Requirements

@@ -31,7 +31,7 @@ SOFTWARE.
 #include "strpp.h"
 #include "colorful.h"
 #include "logging.h"
-#include "jdt.h"
+#include "progress.h"
 #include "csexc.h"
 #include "file.h"
 #include "box.h"
