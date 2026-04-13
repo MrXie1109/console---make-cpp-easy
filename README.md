@@ -474,7 +474,7 @@ namespace console {
     // 获取编译器信息 / Get compiler information
     print("Compiler:", compiler());           // GCC 12.2/MSVC 1934/Clang
     // 获取版本信息 / Get version information
-    print(version());                         // console v3.11.1 (By MrXie1109)
+    print(version());                         // console v3.11.3 (By MrXie1109)
 }
 ```
 
@@ -617,6 +617,9 @@ int main() {
 ```
 
 ## 版本更新说明 / Version Update
+
+- **v3.11.3**
+  - 紧急修复了 Progress 迭代器不前进的恶性 Bug
 
 - **v3.11.2**
   - 为 Progress 实现了 Throttling

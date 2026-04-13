@@ -101,6 +101,7 @@ namespace console
                 if (current_ < total_)
                 {
                     ++current_;
+                    ++it_;
                     draw();
                 }
                 return *this;
