@@ -1149,7 +1149,7 @@ namespace console
                           MultiArray<VarType, InArrDims...>::size(),
                       "Bad multiarray_cast: Mismatch Size");
         MultiArray<VarType, OutArrDims...> outputArr;
-        memcpy(&outputArr, &inputArr, sizeof(outputArr));
+        std::copy(inputArr.fbegin(), inputArr.fend(), outputArr.fbegin());
         return outputArr;
     }
 

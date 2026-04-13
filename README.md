@@ -189,7 +189,7 @@ namespace console {
 }
 ```
 
-### 9. 进度条 (progress.h)   Re
+### 9. 进度条 (progress.h)   ~
 可自定义样式的进度条，支持 Unicode 字符。
 
 Customizable progress bar with Unicode support.
@@ -255,7 +255,7 @@ namespace console {
 }
 ```
 
-### 12. 编译期多维数组 (multiarray.h)   ~
+### 12. 编译期多维数组 (multiarray.h)   Fix
 编译期定长多维数组，优化初始化列表构造实现，支持逐元素算术、逻辑、位运算，扁平化访问。
 
 Compile-time fixed-size multidimensional array with optimized initializer_list construction, element-wise arithmetic, logic, and bit operations, flat access support.
@@ -474,7 +474,7 @@ namespace console {
     // 获取编译器信息 / Get compiler information
     print("Compiler:", compiler());           // GCC 12.2/MSVC 1934/Clang
     // 获取版本信息 / Get version information
-    print(version());                         // console v3.11.3 (By MrXie1109)
+    print(version());                         // console v3.11.4 (By MrXie1109)
 }
 ```
 
@@ -618,11 +618,14 @@ int main() {
 
 ## 版本更新说明 / Version Update
 
+- **v3.11.4**
+  - 修复 `multiarray_cast` 的一个已知 Bug
+
 - **v3.11.3**
-  - 紧急修复了 Progress 迭代器不前进的恶性 Bug
+  - 紧急修复了 `Progress` 迭代器不前进的恶性 Bug
 
 - **v3.11.2**
-  - 为 Progress 实现了 Throttling
+  - 为 `Progress` 实现了 `Throttling`
   - 修复多处已知 Bug
 
 - **v3.11.1**
