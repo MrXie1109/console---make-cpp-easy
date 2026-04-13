@@ -26,6 +26,7 @@ SOFTWARE.
 #include <iostream>
 #include <string>
 #include <iterator>
+#include <chrono>
 #include "csexc.h"
 
 namespace console
@@ -60,11 +61,18 @@ namespace console
             size_t current_;
             size_t total_;
             Iter it_;
+            std::chrono::steady_clock::time_point last_draw_;
 
-            void draw() const
+            void draw()
             {
                 if (!config_)
                     return;
+                auto now = std::chrono::steady_clock::now();
+                if (current_ < total_ &&
+                    (now - last_draw_) < std::chrono::milliseconds{50})
+                {
+                    return;
+                }
                 int percent = current_ * 100 / total_;
                 int filled = percent * config_->width / 100;
                 config_->os << '\r' << config_->prefix;
@@ -79,13 +87,15 @@ namespace console
                     config_->os << percent << '%';
                 }
                 config_->os.flush();
+                last_draw_ = now;
             }
 
         public:
             iterator(const ProgressConfig *config, size_t current,
                      size_t total, Iter it)
                 : config_(config), current_(current),
-                  total_(total), it_(it) {}
+                  total_(total), it_(it),
+                  last_draw_(std::chrono::steady_clock::now()) {}
             iterator &operator++()
             {
                 if (current_ < total_)

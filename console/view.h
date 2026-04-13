@@ -119,7 +119,7 @@ namespace console
             return (*this)[pos];
         }
 
-        Container collect() { return Container(begin_, end_); }
+        Container collect() const { return Container(begin_, end_); }
     };
 
     std::ostream &operator<<(std::ostream &os, const View<std::string> &sv)

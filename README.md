@@ -617,8 +617,17 @@ int main() {
 ```
 
 ## 版本更新说明 / Version Update
-- **v3.10.0**
-  - 移除 `jdt.h` 并重写为 `progress.h`
+
+- **v3.11.2**
+  - 为 Progress 实现了 Throttling
+  - 修复多处已知 Bug
+
+- **v3.11.1**
+  - 移除了无用的 `jdt_range_error` 异常
+  - 修复多处已知 Bug
+
+- **v3.11.0**
+  - 再一次重写了 `progress.h`
   - 修复多处已知 Bug
 
 ## 编译要求 / Build Requirements
