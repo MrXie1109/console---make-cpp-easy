@@ -1,3 +1,14 @@
+/**
+ * @file output.h
+ * @brief 提供 STL 容器的格式化输出和灵活的输出控制工具。
+ * @details 该头文件重载了 `operator<<` 使得标准容器（vector, list, set, map 等）、
+ *          pair 和 tuple 可以直接输出到流。同时提供了 `Output` 类用于灵活控制输出格式，
+ *          以及辅助函数 `to_array` 和 `to_vector` 用于将 C 风格数组转换为 STL 容器。
+ * @author MrXie1109
+ * @date 2026
+ * @copyright MIT License
+ */
+
 /*
 
 Copyright (c) 2026 MrXie1109
@@ -29,6 +40,13 @@ SOFTWARE.
 
 namespace console
 {
+    /**
+     * @brief 输出序列容器（如 vector, list）的内容，格式为 [a, b, c]。
+     * @tparam Cont 容器类型，必须支持 begin()/end() 迭代器。
+     * @param os 输出流。
+     * @param cont 要输出的容器。
+     * @return std::ostream& 输出流引用。
+     */
     template <class Cont>
     std::ostream &cont_print_sequence(std::ostream &os, const Cont &cont)
     {
@@ -45,6 +63,13 @@ namespace console
         return os << ']';
     }
 
+    /**
+     * @brief 输出集合容器（如 set, unordered_set）的内容，格式为 {a, b, c}。
+     * @tparam Cont 容器类型，必须支持 begin()/end() 迭代器。
+     * @param os 输出流。
+     * @param cont 要输出的容器。
+     * @return std::ostream& 输出流引用。
+     */
     template <class Cont>
     std::ostream &cont_print_set(std::ostream &os, const Cont &cont)
     {
@@ -61,6 +86,13 @@ namespace console
         return os << '}';
     }
 
+    /**
+     * @brief 输出映射容器（如 map, unordered_map）的内容，格式为 {key: value, ...}。
+     * @tparam Cont 容器类型，其元素必须为 pair<const K, V> 且支持 ->first 和 ->second。
+     * @param os 输出流。
+     * @param cont 要输出的容器。
+     * @return std::ostream& 输出流引用。
+     */
     template <class Cont>
     std::ostream &cont_print_map(std::ostream &os, const Cont &cont)
     {
@@ -81,9 +113,19 @@ namespace console
         return os << '}';
     }
 
+    /**
+     * @brief 用于递归打印 tuple 的辅助模板（主模板）。
+     * @tparam Tuple tuple 类型。
+     * @tparam N 当前要打印的最后一个元素的索引（从 1 开始）。
+     */
     template <class Tuple, size_t N = std::tuple_size<Tuple>::value>
     struct TuplePrinter
     {
+        /**
+         * @brief 递归打印 tuple 元素。
+         * @param os 输出流。
+         * @param t tuple 对象。
+         */
         static void print(std::ostream &os, const Tuple &t)
         {
             TuplePrinter<Tuple, N - 1>::print(os, t);
@@ -93,6 +135,9 @@ namespace console
         }
     };
 
+    /**
+     * @brief 递归打印 tuple 的偏特化：处理单个元素。
+     */
     template <class Tuple>
     struct TuplePrinter<Tuple, 1>
     {
@@ -102,11 +147,20 @@ namespace console
         }
     };
 
+    /**
+     * @brief 递归打印 tuple 的偏特化：处理空 tuple。
+     */
     template <class Tuple>
     struct TuplePrinter<Tuple, 0>
     {
         static void print(std::ostream &os, const Tuple &t) {}
     };
+
+    // ==================== 标准容器 operator<< 重载 ====================
+
+    /// @cond INTERNAL
+    // 这些重载利用了上面的辅助函数，使得容器可以直接输出。
+    /// @endcond
 
     template <class T>
     std::ostream &operator<<(std::ostream &os, const std::vector<T> &vec)
@@ -181,6 +235,14 @@ namespace console
     {
         return cont_print_sequence(os, va);
     }
+    /**
+     * @brief 输出 std::pair，格式为 (first, second)。
+     * @tparam T pair 的第一个类型。
+     * @tparam U pair 的第二个类型。
+     * @param os 输出流。
+     * @param p pair 对象。
+     * @return std::ostream& 输出流引用。
+     */
     template <class T, class U>
     std::ostream &operator<<(std::ostream &os, const std::pair<T, U> &p)
     {
@@ -190,6 +252,13 @@ namespace console
         repr(p.second, os);
         return os << ')';
     }
+    /**
+     * @brief 输出 std::tuple，格式为 (elem1, elem2, ...)。
+     * @tparam Args tuple 的元素类型。
+     * @param os 输出流。
+     * @param t tuple 对象。
+     * @return std::ostream& 输出流引用。
+     */
     template <class... Args>
     std::ostream &operator<<(std::ostream &os, const std::tuple<Args...> &t)
     {
@@ -198,6 +267,13 @@ namespace console
         return os << ")";
     }
 
+    /**
+     * @brief 将 C 风格数组转换为 std::array。
+     * @tparam T 数组元素类型。
+     * @tparam N 数组大小（由编译器推导）。
+     * @param ar 原始数组。
+     * @return std::array<T, N> 转换后的 array。
+     */
     template <class T, size_t N>
     std::array<T, N> to_array(const T (&ar)[N])
     {
@@ -206,6 +282,13 @@ namespace console
         return arr;
     }
 
+    /**
+     * @brief 将 C 风格数组转换为 std::vector。
+     * @tparam T 数组元素类型。
+     * @tparam N 数组大小（由编译器推导）。
+     * @param ar 原始数组。
+     * @return std::vector<T> 转换后的 vector。
+     */
     template <class T, size_t N>
     std::vector<T> to_vector(const T (&ar)[N])
     {
@@ -214,18 +297,47 @@ namespace console
         return vec;
     }
 
+    /**
+     * @brief 灵活的输出控制类，支持链式调用和多种参数。
+     * @details 该类允许用户指定分隔符、结尾符和是否立即刷新，并提供 `operator()` 重载
+     *          来接收任意数量的参数进行格式化输出。
+     *          默认全局实例 `print` 的行为类似于 Python 的 `print` 函数。
+     *
+     * 使用示例：
+     * @code
+     * print("Hello", "world");     // 输出 "Hello world\n" 并刷新
+     * print();                      // 只输出换行
+     * Output err(std::cerr, "", "\n", true);
+     * err("Error:", code);          // 输出到 stderr，无分隔符
+     * @endcode
+     */
     class Output
     {
-        std::ostream &os;
-        std::string sep;
-        std::string end;
-        bool isFlush;
+        std::ostream &os; ///< 输出目标流
+        std::string sep;  ///< 多个参数之间的分隔符
+        std::string end;  ///< 结尾符（通常是换行符）
+        bool isFlush;     ///< 输出后是否立即刷新
 
     public:
+        /**
+         * @brief 默认构造，输出到 std::cout，分隔符为空格，结尾为换行，并刷新。
+         */
         Output() : os(std::cout), sep(" "), end("\n"), isFlush(true) {}
+
+        /**
+         * @brief 自定义构造。
+         * @param o   输出流。
+         * @param s   参数之间的分隔符。
+         * @param e   结尾符。
+         * @param isF 输出后是否刷新。
+         */
         Output(std::ostream &o, const std::string &s, const std::string &e, bool isF)
             : os(o), sep(s), end(e), isFlush(isF) {}
 
+        /**
+         * @brief 无参数调用：仅输出结尾符（如换行）。
+         * @return Output& 当前对象引用，支持链式调用。
+         */
         Output &operator()()
         {
             os << end;
@@ -233,17 +345,33 @@ namespace console
                 os << std::flush;
             return *this;
         }
+
+        /**
+         * @brief 单参数调用：输出该参数后加结尾符。
+         * @tparam T 参数类型（必须支持 operator<<）。
+         * @param t 要输出的对象。
+         * @return Output& 当前对象引用。
+         */
         template <class T>
         Output &operator()(const T &t)
         {
             os << t;
             return operator()();
         }
+
+        /**
+         * @brief 多参数调用：依次输出每个参数，参数之间插入分隔符，最后加结尾符。
+         * @tparam T 第一个参数类型。
+         * @tparam Args 其余参数类型包。
+         * @param t     第一个参数。
+         * @param args  其余参数。
+         * @return Output& 当前对象引用。
+         */
         template <class T, class... Args>
         Output &operator()(const T &t, const Args &...args)
         {
             os << t << sep;
             return operator()(args...);
         }
-    } print;
+    } print; ///< 全局输出对象，模仿 Python 的 print 函数。
 }
