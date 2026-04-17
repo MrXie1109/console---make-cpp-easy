@@ -1,5 +1,13 @@
-/*
+/**
+ * @file file.h
+ * @brief 提供跨平台的文件路径封装和文件 I/O 操作。
+ * @details 包含 Path 类，支持路径拼接、文本/二进制读写、按行读写、POD 类型读写等。
+ * @author MrXie1109
+ * @date 2026
+ * @copyright MIT License
+ */
 
+/*
 Copyright (c) 2026 MrXie1109
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,7 +27,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
 
 #pragma once
@@ -34,13 +41,25 @@ SOFTWARE.
 
 namespace console
 {
+    /**
+     * @class Path
+     * @brief 文件路径封装类，提供便捷的文件读写和路径操作。
+     * @details 在 Windows 平台上自动将 '/' 转换为 '\\'，支持路径拼接运算符 /。
+     *          所有文件读写操作均会抛出 file_error 异常（若文件无法打开或流状态异常）。
+     */
     class Path
     {
-        std::string path;
+        std::string path; ///< 存储的路径字符串
 
     public:
+        /// @brief 字节类型别名，表示二进制数据的容器（unsigned char 的 vector）。
         using Bytes = std::vector<unsigned char>;
 
+        /**
+         * @brief 从字符串构造 Path 对象。
+         * @param str 路径字符串。
+         * @note 在 Windows 上会将 '/' 自动转换为 '\\'。
+         */
         Path(const std::string &str) : path(str)
         {
 #ifdef _WIN32
@@ -52,11 +71,23 @@ namespace console
 #endif
         }
 
+        /**
+         * @brief 路径拼接运算符。
+         * @param p1 左路径。
+         * @param p2 右路径。
+         * @return Path 拼接后的新路径，格式为 "p1/p2" 或 "p1\\p2"。
+         * @note 在 Windows 拼接后，构造函数会自动将 '/' 变成 '\\'。
+         */
         friend Path operator/(const Path &p1, const Path &p2)
         {
             return p1.path + '/' + p2.path;
         }
 
+        /**
+         * @brief 以文本模式读取文件全部内容。
+         * @return std::string 文件内容。
+         * @throw file_error 若文件无法打开或读取过程中流状态出错。
+         */
         std::string read_text()
         {
             std::ifstream fin(path);
@@ -70,6 +101,11 @@ namespace console
             return text;
         }
 
+        /**
+         * @brief 以二进制模式读取文件全部内容。
+         * @return Bytes 无符号字节向量。
+         * @throw file_error 若文件无法打开或读取过程中流状态出错。
+         */
         Bytes read_binary()
         {
             std::ifstream fin(path, std::ios::binary);
@@ -83,11 +119,23 @@ namespace console
             return bytes;
         }
 
+        /**
+         * @brief 按行读取文本文件，返回每行字符串的 vector。
+         * @return std::vector<std::string> 各行内容（不包含换行符）。
+         * @throw file_error 若文件无法打开或读取过程中出错。
+         */
         std::vector<std::string> read_lines()
         {
             return split(read_text(), "\n");
         }
 
+        /**
+         * @brief 从二进制文件读取一个 POD 类型对象（类型安全版本）。
+         * @tparam T 必须是平凡可复制（trivially copyable）的类型。
+         * @return T 读取到的对象。
+         * @throw file_error 若文件无法打开或读取失败。
+         * @note 编译期检查 T 是否为 POD 类型，否则触发 static_assert。
+         */
         template <class T>
         T read_POD()
         {
@@ -103,6 +151,13 @@ namespace console
             return data;
         }
 
+        /**
+         * @brief 从二进制文件读取一个 POD 类型对象（不安全版本）。
+         * @tparam T 任何类型（无编译期检查）。
+         * @return T 读取到的对象。
+         * @throw file_error 若文件无法打开或读取失败。
+         * @warning 不检查 T 是否为 POD 类型，可能因类型不匹配导致未定义行为。
+         */
         template <class T>
         T unsafe_read_POD()
         {
@@ -116,6 +171,11 @@ namespace console
             return data;
         }
 
+        /**
+         * @brief 以文本模式写入字符串到文件（覆盖模式）。
+         * @param text 要写入的文本。
+         * @throw file_error 若文件无法打开或写入过程中流状态出错。
+         */
         void write_text(const std::string &text)
         {
             std::ofstream fout(path);
@@ -126,6 +186,11 @@ namespace console
                 throw file_error("The Stream of \"" + path + "\" is Not Good");
         }
 
+        /**
+         * @brief 以二进制模式写入字节数据到文件（覆盖模式）。
+         * @param bts 要写入的字节向量。
+         * @throw file_error 若文件无法打开或写入过程中流状态出错。
+         */
         void write_binary(const Bytes &bts)
         {
             std::ofstream fout(path, std::ios::binary);
@@ -136,6 +201,12 @@ namespace console
                 throw file_error("The Stream of \"" + path + "\" is Not Good");
         }
 
+        /**
+         * @brief 将多行字符串写入文件，每行之间用换行符分隔。
+         * @param lines 字符串向量。
+         * @throw file_error 若文件无法打开或写入过程中出错。
+         * @note 若 lines 为空，则不做任何操作（不创建文件）。
+         */
         void write_lines(const std::vector<std::string> &lines)
         {
             std::ofstream fout(path, std::ios::binary);
@@ -152,6 +223,13 @@ namespace console
                 throw file_error("The Stream of \"" + path + "\" is Not Good");
         }
 
+        /**
+         * @brief 写入一个 POD 类型对象到二进制文件（类型安全版本）。
+         * @tparam T 必须是平凡可复制类型。
+         * @param data 要写入的对象。
+         * @throw file_error 若文件无法打开或写入过程中出错。
+         * @note 编译期检查 T 是否为 POD 类型。
+         */
         template <class T>
         void write_POD(const T &data)
         {
@@ -165,6 +243,13 @@ namespace console
                 throw file_error("The Stream of \"" + path + "\" is Not Good");
         }
 
+        /**
+         * @brief 写入一个对象到二进制文件（不安全版本）。
+         * @tparam T 任何类型。
+         * @param data 要写入的对象。
+         * @throw file_error 若文件无法打开或写入过程中出错。
+         * @warning 不检查 T 是否为 POD 类型，直接以二进制写入内存表示，可能导致不可移植。
+         */
         template <class T>
         void unsafe_write_POD(const T &data)
         {
@@ -176,16 +261,28 @@ namespace console
                 throw file_error("The Stream of \"" + path + "\" is Not Good");
         }
 
+        /**
+         * @brief 检查文件是否存在。
+         * @return bool 若文件存在且可打开则返回 true，否则 false。
+         */
         bool exists()
         {
             return std::ifstream{path}.is_open();
         }
 
+        /**
+         * @brief 创建空文件（若已存在则更新访问和修改时间）。
+         * @details 相当于 Unix 的 touch 命令，若文件不存在则创建，若存在则仅更新时间戳。
+         */
         void touch()
         {
             std::ofstream{path};
         }
 
+        /**
+         * @brief 确保文件存在，若不存在则创建空文件。
+         * @details 使用追加模式打开文件，不会清空已有内容。
+         */
         void ensure()
         {
             std::ofstream{path, std::ios::app};

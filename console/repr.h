@@ -1,5 +1,14 @@
-/*
+/**
+ * @file repr.h
+ * @brief 提供类似 Python 的 repr() 函数，用于生成对象的可读字符串表示。
+ * @details 该头文件通过 SFINAE 技术重载 repr 函数，支持字符串、字符、布尔值、nullptr、函数指针、
+ *          可打印类型（有 operator<<）以及不可打印类型（输出类型信息及地址）。
+ * @author MrXie1109
+ * @date 2026
+ * @copyright MIT License
+ */
 
+/*
 Copyright (c) 2026 MrXie1109
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,7 +28,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
 
 #pragma once
@@ -34,6 +42,17 @@ SOFTWARE.
 
 namespace console
 {
+    /**
+     * @defgroup repr 类型表示
+     * @brief 提供类型名称和值的可读表示。
+     * @{
+     */
+
+    /**
+     * @brief 获取类型信息的可读名称（跨平台 demangle）。
+     * @param ti std::type_info 对象。
+     * @return std::string 人类可读的类型名。
+     */
     std::string tiname(const std::type_info &ti)
     {
 #ifdef _MSC_VER
@@ -49,20 +68,36 @@ namespace console
 #endif
     }
 
+    /**
+     * @brief 输出字符串类型（std::string, const char* 等）的表示，带双引号。
+     * @tparam T 字符串类型（由 enable_if_string 约束）。
+     * @param value 要输出的值。
+     * @param os 输出流，默认为 std::cout。
+     */
     template <class T>
-    enable_if_string<typename std::decay<T>::type>
-    repr(T &&value, std::ostream &os = std::cout)
+    enable_if_string<T> repr(T &&value, std::ostream &os = std::cout)
     {
         os << '"' << value << '"';
     }
 
+    /**
+     * @brief 输出字符类型的表示，带单引号。
+     * @tparam T 字符类型（由 enable_if_char 约束）。
+     * @param value 要输出的字符。
+     * @param os 输出流，默认为 std::cout。
+     */
     template <class T>
-    enable_if_char<typename std::decay<T>::type>
-    repr(T &&value, std::ostream &os = std::cout)
+    enable_if_char<T> repr(T &&value, std::ostream &os = std::cout)
     {
         os << "'" << value << "'";
     }
 
+    /**
+     * @brief 输出布尔值的表示（"true" 或 "false"）。
+     * @tparam T 必须是 bool 类型。
+     * @param value 布尔值。
+     * @param os 输出流。
+     */
     template <class T>
     typename std::enable_if<
         std::is_same<typename std::decay<T>::type, bool>::value>::type
@@ -71,6 +106,12 @@ namespace console
         os << (value ? "true" : "false");
     }
 
+    /**
+     * @brief 输出 nullptr 的表示。
+     * @tparam T 必须是 std::nullptr_t。
+     * @param value nullptr。
+     * @param os 输出流。
+     */
     template <class T>
     typename std::enable_if<
         std::is_same<typename std::decay<T>::type, std::nullptr_t>::value>::type
@@ -79,6 +120,13 @@ namespace console
         os << "nullptr";
     }
 
+    /**
+     * @brief 输出函数指针的表示，格式为 "<function at 地址>"。
+     * @tparam Ret 函数返回类型。
+     * @tparam Args 函数参数类型包。
+     * @param f 函数指针。
+     * @param os 输出流。
+     */
     template <class Ret, class... Args>
     void repr(Ret (*f)(Args...), std::ostream &os = std::cout)
     {
@@ -88,25 +136,35 @@ namespace console
             os << "nullptr";
     }
 
+    /**
+     * @brief 输出可打印类型（定义了 operator<<）的表示，直接输出值。
+     * @tparam T 类型条件：不是 bool，不是字符串，不是字符，不是函数指针，且 is_printable<T>::value 为 true。
+     * @param value 要输出的值。
+     * @param os 输出流。
+     */
     template <class T>
     typename std::enable_if<
         !std::is_same<typename std::decay<T>::type, bool>::value &&
-        !is_string<typename std::decay<T>::type>::value &&
-        !is_char<typename std::decay<T>::type>::value &&
-        !std::is_function<
-            typename std::remove_pointer<
-                typename std::decay<T>::type>::type>::value &&
+        !is_string<T>::value &&
+        !is_char<T>::value &&
+        !std::is_function<typename std::decay<T>::type>::value &&
         is_printable<typename std::decay<T>::type>::value>::type
     repr(T &&value, std::ostream &os = std::cout)
     {
         os << value;
     }
 
+    /**
+     * @brief 输出不可打印类型的表示，格式为 "<类型名 object at 地址>"。
+     * @tparam T 类型条件：不是 nullptr，不是字符串，不是字符，且 is_printable<T>::value 为 false。
+     * @param value 要输出的对象。
+     * @param os 输出流。
+     */
     template <class T>
     typename std::enable_if<
         !std::is_same<typename std::decay<T>::type, std::nullptr_t>::value &&
-        !is_string<typename std::decay<T>::type>::value &&
-        !is_char<typename std::decay<T>::type>::value &&
+        !is_string<T>::value &&
+        !is_char<T>::value &&
         !is_printable<typename std::decay<T>::type>::value>::type
     repr(T &&value, std::ostream &os = std::cout)
     {
@@ -116,4 +174,6 @@ namespace console
            << &value
            << '>';
     }
+
+    /** @} */ // end of repr group
 }

@@ -9,7 +9,6 @@
  */
 
 /*
-
 Copyright (c) 2026 MrXie1109
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,7 +28,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
 
 #pragma once
@@ -42,6 +40,7 @@ SOFTWARE.
 namespace console
 {
     /**
+     * @struct ProgressConfig
      * @brief 进度条显示配置。
      * @details 该结构体控制进度条的外观和行为，包括输出流、宽度、填充字符、前后缀以及是否显示百分比。
      */
@@ -52,7 +51,7 @@ namespace console
         std::string fill_char;  ///< 已填充部分使用的字符（如 "#"）。
         std::string empty_char; ///< 未填充部分使用的字符（如 "."）。
         std::string prefix;     ///< 进度条前缀字符串（如 "["）。
-        std::string suffix;     ///< 进度条后缀字符串（如 "]"）。
+        std::string suffix;     ///< 进度条后缀字符串（如 "]"]。
         bool show_percent;      ///< 是否在进度条后显示百分比数字。
 
         /**
@@ -75,6 +74,7 @@ namespace console
     };
 
     /**
+     * @class Progress
      * @brief 进度条迭代器包装器，用于在遍历容器时显示进度。
      * @tparam Iter 底层迭代器类型（通常为容器的迭代器）。
      * @details 该类返回一个特殊的迭代器，在每次递增时更新并重绘进度条。
@@ -86,6 +86,7 @@ namespace console
     {
     public:
         /**
+         * @class iterator
          * @brief 进度条的迭代器，负责绘制进度条。
          * @details 该迭代器包装了底层迭代器，并在递增时根据已完成比例刷新进度条显示。
          *          绘制频率限制为每 50 毫秒一次，以避免刷新过快。
@@ -144,7 +145,7 @@ namespace console
                   total_(total), it_(it),
                   last_draw_(std::chrono::steady_clock::now()) {}
 
-            /// 前置递增：移动到下一个元素，并更新进度条。
+            /// @brief 前置递增：移动到下一个元素，并更新进度条。
             iterator &operator++()
             {
                 if (current_ < total_)
@@ -156,7 +157,7 @@ namespace console
                 return *this;
             }
 
-            /// 后置递增（调用前置递增）。
+            /// @brief 后置递增（调用前置递增）。
             iterator operator++(int)
             {
                 iterator tmp = *this;
@@ -164,19 +165,19 @@ namespace console
                 return tmp;
             }
 
-            /// 比较迭代器是否相等（通过当前进度索引）。
+            /// @brief 比较迭代器是否相等（通过当前进度索引）。
             bool operator==(const iterator &other) const
             {
                 return current_ == other.current_;
             }
 
-            /// 比较迭代器是否不等。
+            /// @brief 比较迭代器是否不等。
             bool operator!=(const iterator &other) const
             {
                 return current_ != other.current_;
             }
 
-            /// 解引用：返回底层迭代器所指向的元素。
+            /// @brief 解引用：返回底层迭代器所指向的元素。
             decltype(*it_) operator*() const
             {
                 return *it_;
@@ -218,13 +219,13 @@ namespace console
             config_.os << std::endl;
         }
 
-        /// 返回指向第一个元素的迭代器（进度条起始）。
+        /// @brief 返回指向第一个元素的迭代器（进度条起始）。
         iterator begin()
         {
             return iterator(&config_, 0, total_, begin_);
         }
 
-        /// 返回指向末尾的迭代器（进度条结束）。
+        /// @brief 返回指向末尾的迭代器（进度条结束）。
         iterator end()
         {
             return iterator(&config_, total_, total_, end_);
@@ -238,6 +239,7 @@ namespace console
     };
 
     /**
+     * @namespace ProgressStyle
      * @brief 预定义的进度条样式。
      * @details 提供几种常用样式，可直接作为 ProgressConfig 使用。
      */

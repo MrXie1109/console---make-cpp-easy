@@ -1,5 +1,15 @@
-/*
+/**
+ * @file view.h
+ * @brief 提供容器的非拥有视图（View），支持区间切片和便捷的工厂函数。
+ * @details View 类是一个轻量级的容器视图，不复制数据，仅保存一对迭代器。
+ *          支持范围 for 循环、下标访问、边界检查的 at() 方法，以及 collect() 复制数据到新容器。
+ *          同时提供工厂函数 make_view 简化 View 对象的创建。
+ * @author MrXie1109
+ * @date 2026
+ * @copyright MIT License
+ */
 
+/*
 Copyright (c) 2026 MrXie1109
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,7 +29,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
 
 #pragma once
@@ -32,6 +41,14 @@ SOFTWARE.
 
 namespace console
 {
+    /**
+     * @class View
+     * @brief 容器的非拥有视图（可变版本）。
+     * @tparam Container 容器类型，必须支持迭代器。
+     * @details View 不拥有数据，仅保存一对迭代器，可以高效地表示容器的一个连续子区间。
+     *          支持迭代器、下标访问、边界检查的 at() 方法，以及 collect() 复制数据到新容器。
+     * @note 需要确保底层容器在视图生命周期内有效。
+     */
     template <class Container>
     class View
     {
@@ -43,28 +60,61 @@ namespace console
         typedef Iterator iterator;
         typedef cIterator const_iterator;
 
+        /// @brief 返回起始迭代器。
         Iterator begin() const { return begin_; }
+        /// @brief 返回结束迭代器。
         Iterator end() const { return end_; }
+        /// @brief 返回常量起始迭代器。
         cIterator cbegin() const { return begin_; }
+        /// @brief 返回常量结束迭代器。
         cIterator cend() const { return end_; }
 
+        /**
+         * @brief 构造整个容器的视图。
+         * @param container 底层容器（非 const 左值引用）。
+         */
         View(Container &container)
             : begin_(std::begin(container)), end_(std::end(container)) {}
+
+        /**
+         * @brief 构造容器子区间的视图。
+         * @param container 底层容器。
+         * @param start_pos 起始索引（包含）。
+         * @param end_pos 结束索引（不包含）。
+         */
         View(Container &container, size_t start_pos, size_t end_pos)
             : begin_(std::next(std::begin(container), start_pos)),
               end_(std::next(std::begin(container), end_pos)) {}
+
+        /**
+         * @brief 从迭代器对构造视图。
+         * @param begin 起始迭代器。
+         * @param end 结束迭代器。
+         */
         View(Iterator begin, Iterator end) : begin_(begin), end_(end) {}
 
+        /// @brief 返回视图中的元素个数。
         size_t size() const
         {
             return std::distance(begin_, end_);
         }
 
+        /**
+         * @brief 无边界检查的下标访问。
+         * @param pos 索引。
+         * @return 元素的引用。
+         */
         auto operator[](size_t pos) const -> decltype(*begin_)
         {
             return *std::next(begin_, pos);
         }
 
+        /**
+         * @brief 带边界检查的下标访问。
+         * @param pos 索引。
+         * @return 元素的引用。
+         * @throw index_error 若索引超出范围。
+         */
         auto at(size_t pos) const -> decltype(*begin_)
         {
             if (pos >= size())
@@ -74,9 +124,18 @@ namespace console
             return (*this)[pos];
         }
 
+        /**
+         * @brief 将视图中的元素复制到一个新的容器中。
+         * @return Container 包含视图元素的新容器。
+         */
         Container collect() { return Container(begin_, end_); }
     };
 
+    /**
+     * @class View<const Container>
+     * @brief 容器的非拥有视图（常量版本）。
+     * @tparam Container 容器类型。
+     */
     template <class Container>
     class View<const Container>
     {
@@ -92,12 +151,29 @@ namespace console
         cIterator cbegin() const { return begin_; }
         cIterator cend() const { return end_; }
 
+        /**
+         * @brief 构造整个常量容器的视图。
+         * @param container 常量容器引用。
+         */
         View(const Container &container)
             : begin_(std::begin(container)), end_(std::end(container)) {}
+
+        /**
+         * @brief 构造常量容器子区间的视图。
+         * @param container 常量容器引用。
+         * @param start_pos 起始索引。
+         * @param end_pos 结束索引。
+         */
         View(const Container &container,
              size_t start_pos, size_t end_pos)
             : begin_(std::next(std::begin(container), start_pos)),
               end_(std::next(std::begin(container), end_pos)) {}
+
+        /**
+         * @brief 从常量迭代器对构造视图。
+         * @param begin 起始迭代器。
+         * @param end 结束迭代器。
+         */
         View(cIterator begin, cIterator end) : begin_(begin), end_(end) {}
 
         size_t size() const
@@ -119,9 +195,19 @@ namespace console
             return (*this)[pos];
         }
 
+        /**
+         * @brief 将常量视图中的元素复制到新容器。
+         * @return Container 新容器。
+         */
         Container collect() const { return Container(begin_, end_); }
     };
 
+    /**
+     * @brief 输出 std::string 视图的内容（直接输出字符串，不添加额外格式）。
+     * @param os 输出流。
+     * @param sv 字符串视图。
+     * @return std::ostream& 流引用。
+     */
     std::ostream &operator<<(std::ostream &os, const View<std::string> &sv)
     {
         for (auto it = sv.begin(); it != sv.end(); ++it)
@@ -131,9 +217,135 @@ namespace console
         return os;
     }
 
+    /**
+     * @brief 输出任意视图的内容（通过 collect() 转为容器后输出）。
+     * @tparam T 视图的元素类型（实际上为容器类型）。
+     * @param os 输出流。
+     * @param v 视图对象。
+     * @return std::ostream& 流引用。
+     * @warning 有性能开销。
+     */
     template <class T>
     std::ostream &operator<<(std::ostream &os, const View<T> &v)
     {
         return os << v.collect();
     }
+
+    // ========================== 工厂函数 ==========================
+
+    /**
+     * @defgroup view_factories 视图工厂函数
+     * @brief 用于方便创建 View 对象的辅助函数。
+     * @{
+     */
+
+    /**
+     * @brief 创建整个容器的视图（可变版本）。
+     * @tparam Container 容器类型。
+     * @param cont 容器引用。
+     * @return View<Container> 视图对象。
+     */
+    template <class Container>
+    View<Container> make_view(Container &cont)
+    {
+        return {cont};
+    }
+
+    /**
+     * @brief 创建整个容器的视图（常量版本）。
+     * @tparam Container 容器类型。
+     * @param cont 常量容器引用。
+     * @return View<const Container> 视图对象。
+     */
+    template <class Container>
+    View<const Container> make_view(const Container &cont)
+    {
+        return {cont};
+    }
+
+    /**
+     * @brief 创建容器子区间的视图（可变版本）。
+     * @tparam Container 容器类型。
+     * @param cont 容器引用。
+     * @param start 起始索引（包含）。
+     * @param end 结束索引（不包含）。
+     * @return View<Container> 视图对象。
+     */
+    template <class Container>
+    View<Container> make_view(Container &cont, size_t start, size_t end)
+    {
+        return {cont, start, end};
+    }
+
+    /**
+     * @brief 创建容器子区间的视图（常量版本）。
+     * @tparam Container 容器类型。
+     * @param cont 常量容器引用。
+     * @param start 起始索引。
+     * @param end 结束索引。
+     * @return View<const Container> 视图对象。
+     */
+    template <class Container>
+    View<const Container> make_view(const Container &cont, size_t start, size_t end)
+    {
+        return {cont, start, end};
+    }
+
+    /**
+     * @brief 从迭代器对创建视图（可变版本）。
+     * @tparam Container 迭代器类型。
+     * @param begin 起始迭代器。
+     * @param end 结束迭代器。
+     * @return View<Container> 视图对象。
+     */
+    template <class Container>
+    View<Container> make_view(typename Container::iterator begin,
+                              typename Container::iterator end)
+    {
+        return {begin, end};
+    }
+
+    /**
+     * @brief 从迭代器对创建视图（常量版本）。
+     * @tparam Container 迭代器类型。
+     * @param begin 起始迭代器。
+     * @param end 结束迭代器。
+     * @return View<const Container> 视图对象。
+     */
+    template <class Container>
+    View<const Container> make_view(typename Container::const_iterator begin,
+                                    typename Container::const_iterator end)
+    {
+        return {begin, end};
+    }
+
+    /**
+     * @brief 从指针对创建视图（可变版本）。
+     * @tparam T 指针指向的对象类型。
+     * @param begin 起始指针。
+     * @param end 结束指针。
+     * @return View<std::vector<T>> 视图对象。
+     */
+    template <class T>
+    View<std::vector<T>> make_view(T *begin,
+                                   T *end)
+    {
+        return {begin, end};
+    }
+
+    /**
+     * @brief 从指针对创建视图（常量版本）。
+     * @tparam T 指针指向的对象类型。
+     * @param begin 起始指针。
+     * @param end 结束指针。
+     * @return View<const std::vector<T>> 视图对象。
+     */
+    template <class T>
+    View<const std::vector<T>> make_view(const T *begin,
+                                         const T *end)
+    {
+        return {begin, end};
+    }
+
+    /** @} */ // end of view_factories
 }

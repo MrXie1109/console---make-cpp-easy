@@ -10,7 +10,6 @@
  */
 
 /*
-
 Copyright (c) 2026 MrXie1109
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,7 +29,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
 
 #pragma once
@@ -40,6 +38,12 @@ SOFTWARE.
 
 namespace console
 {
+    /**
+     * @defgroup output_helpers 输出辅助函数
+     * @brief 用于输出不同容器类型的辅助函数。
+     * @{
+     */
+
     /**
      * @brief 输出序列容器（如 vector, list）的内容，格式为 [a, b, c]。
      * @tparam Cont 容器类型，必须支持 begin()/end() 迭代器。
@@ -113,8 +117,16 @@ namespace console
         return os << '}';
     }
 
+    /** @} */
+
     /**
-     * @brief 用于递归打印 tuple 的辅助模板（主模板）。
+     * @defgroup tuple_printer Tuple 打印辅助
+     * @brief 用于递归打印 std::tuple 的辅助模板。
+     * @{
+     */
+
+    /**
+     * @brief 递归打印 tuple 的辅助模板（主模板）。
      * @tparam Tuple tuple 类型。
      * @tparam N 当前要打印的最后一个元素的索引（从 1 开始）。
      */
@@ -156,85 +168,117 @@ namespace console
         static void print(std::ostream &os, const Tuple &t) {}
     };
 
+    /** @} */
+
     // ==================== 标准容器 operator<< 重载 ====================
 
-    /// @cond INTERNAL
-    // 这些重载利用了上面的辅助函数，使得容器可以直接输出。
-    /// @endcond
+    /**
+     * @defgroup output_std_containers 标准容器输出重载
+     * @brief 为各种 STL 容器提供 operator<< 重载。
+     * @{
+     */
 
+    /// @brief 输出 std::vector。
     template <class T>
     std::ostream &operator<<(std::ostream &os, const std::vector<T> &vec)
     {
         return cont_print_sequence(os, vec);
     }
+
+    /// @brief 输出 std::deque。
     template <class T>
     std::ostream &operator<<(std::ostream &os, const std::deque<T> &deq)
     {
         return cont_print_sequence(os, deq);
     }
+
+    /// @brief 输出 std::list。
     template <class T>
     std::ostream &operator<<(std::ostream &os, const std::list<T> &lst)
     {
         return cont_print_sequence(os, lst);
     }
+
+    /// @brief 输出 std::forward_list。
     template <class T>
     std::ostream &operator<<(std::ostream &os, const std::forward_list<T> &flst)
     {
         return cont_print_sequence(os, flst);
     }
+
+    /// @brief 输出 std::array。
     template <class T, size_t n>
     std::ostream &operator<<(std::ostream &os, const std::array<T, n> &arr)
     {
         return cont_print_sequence(os, arr);
     }
+
+    /// @brief 输出 std::set。
     template <class T>
     std::ostream &operator<<(std::ostream &os, const std::set<T> &s)
     {
         return cont_print_set(os, s);
     }
+
+    /// @brief 输出 std::map。
     template <class K, class V>
     std::ostream &operator<<(std::ostream &os, const std::map<K, V> &m)
     {
         return cont_print_map(os, m);
     }
+
+    /// @brief 输出 std::multiset。
     template <class T>
     std::ostream &operator<<(std::ostream &os, const std::multiset<T> &ms)
     {
         return cont_print_set(os, ms);
     }
+
+    /// @brief 输出 std::multimap。
     template <class K, class V>
     std::ostream &operator<<(std::ostream &os, const std::multimap<K, V> &mm)
     {
         return cont_print_map(os, mm);
     }
+
+    /// @brief 输出 std::unordered_set。
     template <class T>
     std::ostream &operator<<(std::ostream &os, const std::unordered_set<T> &us)
     {
         return cont_print_set(os, us);
     }
+
+    /// @brief 输出 std::unordered_map。
     template <class K, class V>
     std::ostream &operator<<(std::ostream &os,
                              const std::unordered_map<K, V> &um)
     {
         return cont_print_map(os, um);
     }
+
+    /// @brief 输出 std::unordered_multiset。
     template <class T>
     std::ostream &operator<<(std::ostream &os,
                              const std::unordered_multiset<T> &ums)
     {
         return cont_print_set(os, ums);
     }
+
+    /// @brief 输出 std::unordered_multimap。
     template <class K, class V>
     std::ostream &operator<<(std::ostream &os,
                              const std::unordered_multimap<K, V> &ump)
     {
         return cont_print_map(os, ump);
     }
+
+    /// @brief 输出 std::valarray。
     template <class T>
     std::ostream &operator<<(std::ostream &os, const std::valarray<T> &va)
     {
         return cont_print_sequence(os, va);
     }
+
     /**
      * @brief 输出 std::pair，格式为 (first, second)。
      * @tparam T pair 的第一个类型。
@@ -252,6 +296,7 @@ namespace console
         repr(p.second, os);
         return os << ')';
     }
+
     /**
      * @brief 输出 std::tuple，格式为 (elem1, elem2, ...)。
      * @tparam Args tuple 的元素类型。
@@ -266,6 +311,14 @@ namespace console
         TuplePrinter<std::tuple<Args...>>::print(os, t);
         return os << ")";
     }
+
+    /** @} */
+
+    /**
+     * @defgroup array_conversion 数组转换函数
+     * @brief 将 C 风格数组转换为 std::array 或 std::vector。
+     * @{
+     */
 
     /**
      * @brief 将 C 风格数组转换为 std::array。
@@ -297,7 +350,10 @@ namespace console
         return vec;
     }
 
+    /** @} */
+
     /**
+     * @class Output
      * @brief 灵活的输出控制类，支持链式调用和多种参数。
      * @details 该类允许用户指定分隔符、结尾符和是否立即刷新，并提供 `operator()` 重载
      *          来接收任意数量的参数进行格式化输出。

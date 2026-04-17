@@ -1,5 +1,12 @@
-/*
+/**
+ * @file info.h
+ * @brief 提供库的版本信息、许可证、编译器及平台识别函数。
+ * @author MrXie1109
+ * @date 2026
+ * @copyright MIT License
+ */
 
+/*
 Copyright (c) 2026 MrXie1109
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,7 +26,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
 
 #pragma once
@@ -27,6 +33,10 @@ SOFTWARE.
 
 namespace console
 {
+    /**
+     * @brief 返回 MIT 许可证全文。
+     * @return std::string 许可证文本。
+     */
     inline std::string license()
     {
         return R"(Copyright (c) 2026 MrXie1109
@@ -50,6 +60,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.)";
     }
 
+    /**
+     * @brief 返回当前操作系统平台名称。
+     * @details 根据预定义宏识别 Windows、Linux、macOS 或 Unknown。
+     * @return std::string 平台名称。
+     */
     inline std::string platform()
     {
 #ifdef _WIN32
@@ -63,6 +78,11 @@ SOFTWARE.)";
 #endif
     }
 
+    /**
+     * @brief 返回当前使用的编译器名称和版本。
+     * @details 支持 GCC（版本号）、MSVC（版本号）、Clang（仅名称）以及其他。
+     * @return std::string 编译器信息。
+     */
     inline std::string compiler()
     {
 #ifdef __GNUC__
@@ -79,8 +99,21 @@ SOFTWARE.)";
 #endif
     }
 
+    /**
+     * @brief 返回库的版本字符串。
+     * @return std::string 格式为 "console vX.Y.Z"。
+     */
     inline std::string version()
     {
-        return "console v3.11.4 (By MrXie1109)";
+        return "console v4.0.0";
+    }
+
+    /**
+     * @brief 返回库的作者。
+     * @return std::string "MrXie1109"。
+     */
+    inline std::string anthor()
+    {
+        return "MrXie1109";
     }
 }

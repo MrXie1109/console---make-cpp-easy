@@ -1,5 +1,13 @@
-/*
+/**
+ * @file all.h
+ * @brief 一键式包含头文件。
+ * @details 本文件包含了整个库的所有核心模块，方便用户快速引入。
+ * @author MrXie1109
+ * @date 2026
+ * @copyright MIT License
+ */
 
+/*
 Copyright (c) 2026 MrXie1109
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,7 +27,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
 
 #pragma once
@@ -47,3 +54,11 @@ SOFTWARE.
 #include "outfwd.h"
 #include "maybe.h"
 #include "matools.h"
+
+/**
+ * @namespace console
+ * @brief 本库所有组件所在的顶层命名空间。
+ */
+namespace console
+{
+}

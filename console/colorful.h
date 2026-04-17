@@ -1,5 +1,12 @@
-/*
+/**
+ * @file colorful.h
+ * @brief 提供控制台颜色和样式修饰的 ANSI 转义序列常量。
+ * @author MrXie1109
+ * @date 2026
+ * @copyright MIT License
+ */
 
+/*
 Copyright (c) 2026 MrXie1109
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,60 +26,105 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
 
 #pragma once
 
 namespace console
 {
+    /**
+     * @namespace console::color
+     * @brief 包含控制台颜色、背景色和文本样式的 ANSI 转义序列常量。
+     * @details 使用方式：`std::cout << color::Red << "Hello" << color::Reset;`
+     */
     namespace color
     {
-        const char
-            *Black = "\033[30m",
-            *Red = "\033[31m",
-            *Green = "\033[32m",
-            *Yellow = "\033[33m",
-            *Blue = "\033[34m",
-            *Magenta = "\033[35m",
-            *Cyan = "\033[36m",
-            *White = "\033[37m",
-            *BrightBlack = "\033[90m",
-            *BrightRed = "\033[91m",
-            *BrightGreen = "\033[92m",
-            *BrightYellow = "\033[93m",
-            *BrightBlue = "\033[94m",
-            *BrightMagenta = "\033[95m",
-            *BrightCyan = "\033[96m",
-            *BrightWhite = "\033[97m",
-            *Reset = "\033[0m";
+        // ------------------------------ 前景色 ------------------------------
+        /// @brief 黑色前景
+        const char *Black = "\033[30m";
+        /// @brief 红色前景
+        const char *Red = "\033[31m";
+        /// @brief 绿色前景
+        const char *Green = "\033[32m";
+        /// @brief 黄色前景
+        const char *Yellow = "\033[33m";
+        /// @brief 蓝色前景
+        const char *Blue = "\033[34m";
+        /// @brief 品红前景
+        const char *Magenta = "\033[35m";
+        /// @brief 青色前景
+        const char *Cyan = "\033[36m";
+        /// @brief 白色前景
+        const char *White = "\033[37m";
+        /// @brief 亮黑色（灰）前景
+        const char *BrightBlack = "\033[90m";
+        /// @brief 亮红色前景
+        const char *BrightRed = "\033[91m";
+        /// @brief 亮绿色前景
+        const char *BrightGreen = "\033[92m";
+        /// @brief 亮黄色前景
+        const char *BrightYellow = "\033[93m";
+        /// @brief 亮蓝色前景
+        const char *BrightBlue = "\033[94m";
+        /// @brief 亮品红前景
+        const char *BrightMagenta = "\033[95m";
+        /// @brief 亮青色前景
+        const char *BrightCyan = "\033[96m";
+        /// @brief 亮白色前景
+        const char *BrightWhite = "\033[97m";
+        /// @brief 重置所有颜色/样式
+        const char *Reset = "\033[0m";
 
-        const char
-            *BgBlack = "\033[40m",
-            *BgRed = "\033[41m",
-            *BgGreen = "\033[42m",
-            *BgYellow = "\033[43m",
-            *BgBlue = "\033[44m",
-            *BgMagenta = "\033[45m",
-            *BgCyan = "\033[46m",
-            *BgWhite = "\033[47m",
-            *BgBrightBlack = "\033[100m",
-            *BgBrightRed = "\033[101m",
-            *BgBrightGreen = "\033[102m",
-            *BgBrightYellow = "\033[103m",
-            *BgBrightBlue = "\033[104m",
-            *BgBrightMagenta = "\033[105m",
-            *BgBrightCyan = "\033[106m",
-            *BgBrightWhite = "\033[107m";
+        // ------------------------------ 背景色 ------------------------------
+        /// @brief 黑色背景
+        const char *BgBlack = "\033[40m";
+        /// @brief 红色背景
+        const char *BgRed = "\033[41m";
+        /// @brief 绿色背景
+        const char *BgGreen = "\033[42m";
+        /// @brief 黄色背景
+        const char *BgYellow = "\033[43m";
+        /// @brief 蓝色背景
+        const char *BgBlue = "\033[44m";
+        /// @brief 品红背景
+        const char *BgMagenta = "\033[45m";
+        /// @brief 青色背景
+        const char *BgCyan = "\033[46m";
+        /// @brief 白色背景
+        const char *BgWhite = "\033[47m";
+        /// @brief 亮黑色背景
+        const char *BgBrightBlack = "\033[100m";
+        /// @brief 亮红色背景
+        const char *BgBrightRed = "\033[101m";
+        /// @brief 亮绿色背景
+        const char *BgBrightGreen = "\033[102m";
+        /// @brief 亮黄色背景
+        const char *BgBrightYellow = "\033[103m";
+        /// @brief 亮蓝色背景
+        const char *BgBrightBlue = "\033[104m";
+        /// @brief 亮品红背景
+        const char *BgBrightMagenta = "\033[105m";
+        /// @brief 亮青色背景
+        const char *BgBrightCyan = "\033[106m";
+        /// @brief 亮白色背景
+        const char *BgBrightWhite = "\033[107m";
 
-        const char
-            *Bold = "\033[1m",
-            *Dim = "\033[2m",
-            *Italic = "\033[3m",
-            *Underline = "\033[4m",
-            *Blink = "\033[5m",
-            *Reverse = "\033[7m",
-            *Hidden = "\033[8m",
-            *Strikethrough = "\033[9m";
+        // ------------------------------ 文本样式 ------------------------------
+        /// @brief 粗体
+        const char *Bold = "\033[1m";
+        /// @brief 暗淡（降低亮度）
+        const char *Dim = "\033[2m";
+        /// @brief 斜体
+        const char *Italic = "\033[3m";
+        /// @brief 下划线
+        const char *Underline = "\033[4m";
+        /// @brief 闪烁
+        const char *Blink = "\033[5m";
+        /// @brief 反转（交换前景和背景）
+        const char *Reverse = "\033[7m";
+        /// @brief 隐藏（不可见）
+        const char *Hidden = "\033[8m";
+        /// @brief 删除线
+        const char *Strikethrough = "\033[9m";
     }
 }

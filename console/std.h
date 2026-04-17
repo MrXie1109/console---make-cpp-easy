@@ -1,3 +1,13 @@
+/**
+ * @file std.h
+ * @brief 聚合包含所有 C++ 标准库头文件（根据语言标准版本条件包含）。
+ * @details 该头文件旨在提供一站式标准库包含，方便快速开发。根据 __cplusplus 宏，
+ *          自动包含对应 C++ 版本的标准库头文件，包括 C++11、C++14、C++17、C++20、C++23 等。
+ * @author MrXie1109
+ * @date 2026
+ * @copyright MIT License
+ */
+
 /*
 
 Copyright (c) 2026 MrXie1109
@@ -19,7 +29,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
 
 #pragma once

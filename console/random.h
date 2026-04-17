@@ -26,7 +26,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
 
 #pragma once
@@ -39,6 +38,12 @@ SOFTWARE.
 
 namespace console
 {
+    /**
+     * @defgroup random 随机数工具
+     * @brief 随机数生成、随机选择、随机打乱等实用函数。
+     * @{
+     */
+
     /**
      * @brief 获取一个全局的、以当前时间戳为种子的 Mersenne Twister 随机数引擎。
      * @details 该函数返回一个静态的 std::mt19937 对象的引用，引擎使用高精度时钟的当前时间点进行初始化。
@@ -135,4 +140,6 @@ namespace console
                       *std::next(std::begin(c), j));
         }
     }
+
+    /** @} */ // end of random group
 }
