@@ -105,7 +105,7 @@ SOFTWARE.)";
      */
     inline std::string version()
     {
-        return "console v3.12.4";
+        return "console v4.0.0";
     }
 
     /**
