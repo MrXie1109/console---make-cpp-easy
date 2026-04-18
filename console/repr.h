@@ -145,8 +145,8 @@ namespace console
     template <class T>
     typename std::enable_if<
         !std::is_same<typename std::decay<T>::type, bool>::value &&
-        !is_string<T>::value &&
-        !is_char<T>::value &&
+        !is_string<typename std::decay<T>::type>::value &&
+        !is_char<typename std::decay<T>::type>::value &&
         !std::is_function<typename std::decay<T>::type>::value &&
         is_printable<typename std::decay<T>::type>::value>::type
     repr(T &&value, std::ostream &os = std::cout)
@@ -163,8 +163,8 @@ namespace console
     template <class T>
     typename std::enable_if<
         !std::is_same<typename std::decay<T>::type, std::nullptr_t>::value &&
-        !is_string<T>::value &&
-        !is_char<T>::value &&
+        !is_string<typename std::decay<T>::type>::value &&
+        !is_char<typename std::decay<T>::type>::value &&
         !is_printable<typename std::decay<T>::type>::value>::type
     repr(T &&value, std::ostream &os = std::cout)
     {
