@@ -1588,5 +1588,45 @@ namespace console
         return outputArr;
     }
 
+    /**
+     * @brief @brief 就地版本的 multiarray_cast，仅视图，不拷贝（可变版本）
+     * @tparam OutArrDims 目标维度包。
+     * @tparam VarType 元素类型。
+     * @tparam InArrDims 源维度包。
+     * @param inputArr 源数组。
+     * @return MultiArray<VarType, OutArrDims...> & 转换后的数组引用。
+     * @note 编译期检查元素总数是否一致。
+     */
+    template <size_t... OutArrDims, class VarType, size_t... InArrDims>
+    MultiArray<VarType, OutArrDims...> &inplace_multiarray_cast(
+        MultiArray<VarType, InArrDims...> &inputArr)
+    {
+        static_assert(MultiArray<VarType, OutArrDims...>::size() ==
+                          MultiArray<VarType, InArrDims...>::size(),
+                      "Bad inplace_multiarray_cast: Mismatch Size");
+        auto p = (MultiArray<VarType, OutArrDims...> *)&input;
+        return *p;
+    }
+
+    /**
+     * @brief @brief 就地版本的 multiarray_cast，仅视图，不拷贝（常量版本）
+     * @tparam OutArrDims 目标维度包。
+     * @tparam VarType 元素类型。
+     * @tparam InArrDims 源维度包。
+     * @param inputArr 源数组。
+     * @return const MultiArray<VarType, OutArrDims...> & 转换后的数组引用。
+     * @note 编译期检查元素总数是否一致。
+     */
+    template <size_t... OutArrDims, class VarType, size_t... InArrDims>
+    const MultiArray<VarType, OutArrDims...> &inplace_multiarray_cast(
+        const MultiArray<VarType, InArrDims...> &inputArr)
+    {
+        static_assert(MultiArray<VarType, OutArrDims...>::size() ==
+                          MultiArray<VarType, InArrDims...>::size(),
+                      "Bad inplace_multiarray_cast: Mismatch Size");
+        auto p = (const MultiArray<VarType, OutArrDims...> *)&input;
+        return *p;
+    }
+
     /** @} */ // end of multiarray_cast
 }

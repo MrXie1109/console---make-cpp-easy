@@ -105,14 +105,14 @@ SOFTWARE.)";
      */
     inline std::string version()
     {
-        return "console v4.0.0";
+        return "console v3.12.4";
     }
 
     /**
      * @brief 返回库的作者。
      * @return std::string "MrXie1109"。
      */
-    inline std::string anthor()
+    inline std::string author()
     {
         return "MrXie1109";
     }
