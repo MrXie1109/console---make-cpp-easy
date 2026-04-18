@@ -975,36 +975,59 @@ namespace console
     }
 
     // 比较运算符（标量与数组）
+    /**
+     * @brief 标量 == 数组。
+     */
     template <class T, size_t... Dims, class U>
     MultiArray<bool, Dims...> operator==(const U &value,
                                          const MultiArray<T, Dims...> &a)
     {
         return a == value;
     }
+
+    /**
+     * @brief 标量 != 数组。
+     */
     template <class T, size_t... Dims, class U>
     MultiArray<bool, Dims...> operator!=(const U &value,
                                          const MultiArray<T, Dims...> &a)
     {
         return a != value;
     }
+
+    /**
+     * @brief 标量 < 数组。
+     */
     template <class T, size_t... Dims, class U>
     MultiArray<bool, Dims...> operator<(const U &value,
                                         const MultiArray<T, Dims...> &a)
     {
         return a > value;
     }
+
+    /**
+     * @brief 标量 > 数组。
+     */
     template <class T, size_t... Dims, class U>
     MultiArray<bool, Dims...> operator>(const U &value,
                                         const MultiArray<T, Dims...> &a)
     {
         return a < value;
     }
+
+    /**
+     * @brief 标量 <= 数组。
+     */
     template <class T, size_t... Dims, class U>
     MultiArray<bool, Dims...> operator<=(const U &value,
                                          const MultiArray<T, Dims...> &a)
     {
         return a >= value;
     }
+
+    /**
+     * @brief 标量 >= 数组。
+     */
     template <class T, size_t... Dims, class U>
     MultiArray<bool, Dims...> operator>=(const U &value,
                                          const MultiArray<T, Dims...> &a)
@@ -1046,6 +1069,9 @@ namespace console
     }
 
     // 逻辑运算符（数组与标量）
+    /**
+     * @brief 逻辑与（数组 && 标量）。
+     */
     template <class T, size_t... Dims, class U>
     MultiArray<bool, Dims...> operator&&(const MultiArray<T, Dims...> &a,
                                          const U &value)
@@ -1057,6 +1083,10 @@ namespace console
             *bi++ = *ai++ && value;
         return b;
     }
+
+    /**
+     * @brief 逻辑或（数组 || 标量）。
+     */
     template <class T, size_t... Dims, class U>
     MultiArray<bool, Dims...> operator||(const MultiArray<T, Dims...> &a,
                                          const U &value)
@@ -1068,12 +1098,20 @@ namespace console
             *bi++ = *ai++ || value;
         return b;
     }
+
+    /**
+     * @brief 逻辑与（标量 && 数组）。
+     */
     template <class T, size_t... Dims, class U>
     MultiArray<bool, Dims...> operator&&(const U &value,
                                          const MultiArray<T, Dims...> &a)
     {
         return a && value;
     }
+
+    /**
+     * @brief 逻辑或（标量 || 数组）。
+     */
     template <class T, size_t... Dims, class U>
     MultiArray<bool, Dims...> operator||(const U &value,
                                          const MultiArray<T, Dims...> &a)
