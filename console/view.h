@@ -128,7 +128,7 @@ namespace console
          * @brief 将视图中的元素复制到一个新的容器中。
          * @return Container 包含视图元素的新容器。
          */
-        Container collect() { return Container(begin_, end_); }
+        Container collect() const { return Container(begin_, end_); }
     };
 
     /**
