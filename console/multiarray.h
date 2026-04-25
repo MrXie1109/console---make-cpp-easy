@@ -190,6 +190,24 @@ namespace console
 
         /// @brief 常量版本。
         const T *fend() const { return this->data() + size(); }
+
+        /**
+         * @brief 扁平化视图（可变）。
+         * @note 这并非不安全，可以自行思考。
+         */
+        MultiArray &flatten()
+        {
+            return *this;
+        }
+
+        /**
+         * @brief 扁平化视图（常量）。
+         * @note 这并非不安全，可以自行思考。
+         */
+        const MultiArray &flatten() const
+        {
+            return *this;
+        }
     };
 
     /**
@@ -369,6 +387,24 @@ namespace console
 
         /// @brief 常量版本。
         const T *fend() const { return this->fbegin() + this->size(); }
+
+        /**
+         * @brief 扁平化视图（可变）。
+         * @note 这并非不安全，可以自行思考。
+         */
+        MultiArray<T, size()> &flatten()
+        {
+            return *(MultiArray<T, size()> *)this;
+        }
+
+        /**
+         * @brief 扁平化视图（常量）。
+         * @note 这并非不安全，可以自行思考。
+         */
+        const MultiArray<T, size()> &flatten() const
+        {
+            return *(const MultiArray<T, size()> *)this;
+        }
     };
 
     // ========================== 运算符重载（数组与数组） ==========================
@@ -1580,7 +1616,7 @@ namespace console
      */
     template <class OutType, size_t... OutArrDims,
               class InType, size_t... InArrDims>
-    MultiArray<InType, OutArrDims...> unsafe_multiarray_cast(
+    MultiArray<OutType, OutArrDims...> unsafe_multiarray_cast(
         const MultiArray<InType, InArrDims...> &inputArr)
     {
         MultiArray<OutType, OutArrDims...> outputArr;
@@ -1604,7 +1640,7 @@ namespace console
         static_assert(MultiArray<VarType, OutArrDims...>::size() ==
                           MultiArray<VarType, InArrDims...>::size(),
                       "Bad inplace_multiarray_cast: Mismatch Size");
-        auto p = (MultiArray<VarType, OutArrDims...> *)&input;
+        auto p = (MultiArray<VarType, OutArrDims...> *)&inputArr;
         return *p;
     }
 
@@ -1624,7 +1660,7 @@ namespace console
         static_assert(MultiArray<VarType, OutArrDims...>::size() ==
                           MultiArray<VarType, InArrDims...>::size(),
                       "Bad inplace_multiarray_cast: Mismatch Size");
-        auto p = (const MultiArray<VarType, OutArrDims...> *)&input;
+        auto p = (const MultiArray<VarType, OutArrDims...> *)&inputArr;
         return *p;
     }
 

@@ -218,9 +218,9 @@ namespace console
                                const MultiArray<T, N, K> &B)
     {
         MultiArray<T, M, K> C{};
-        for (size_t i = 0; i < M; i++)
-            for (size_t k = 0; k < K; k++)
-                for (size_t j = 0; j < N; j++)
+        for (size_t i = 0; i < M; ++i)
+            for (size_t j = 0; j < N; ++j)
+                for (size_t k = 0; k < K; ++k)
                     C[i][k] += A[i][j] * B[j][k];
         return C;
     }
@@ -346,7 +346,7 @@ namespace console
     template <class T, size_t... Dims>
     void randomize(MultiArray<T, Dims...> &arr, T min = 0, T max = 100)
     {
-        std::uniform_int_distribution<T> dis(min, max);
+        uniform_distribution_t<T> dis(min, max);
         arr.for_each([&](T &x)
                      { x = dis(default_gen()); });
     }

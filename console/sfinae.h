@@ -31,6 +31,7 @@ SOFTWARE.
 #pragma once
 #include <type_traits>
 #include <iterator>
+#include <random>
 #include "outfwd.h"
 
 namespace console
@@ -262,6 +263,30 @@ namespace console
     };
     /// @endcond
 
+    /**
+     * @struct uniform_distribution_impl
+     * @brief 取得适配分布的主模板。
+     * @tparam T 待检测的类型。
+     */
+    template <typename T, typename = void>
+    struct uniform_distribution_impl;
+
+    /// @cond INTERNAL
+    /// @brief 特化：整数类型 → uniform_int_distribution
+    template <typename T>
+    struct uniform_distribution_impl<T, typename std::enable_if<std::is_integral<T>::value>::type>
+    {
+        using type = std::uniform_int_distribution<T>;
+    };
+
+    /// @brief 特化：浮点类型 → uniform_real_distribution
+    template <typename T>
+    struct uniform_distribution_impl<T, typename std::enable_if<std::is_floating_point<T>::value>::type>
+    {
+        using type = std::uniform_real_distribution<T>;
+    };
+    /// @endcond
+
     // 便利别名模板（enable_if 快捷方式）
     /**
      * @brief 启用若 T 是容器。
@@ -348,6 +373,12 @@ namespace console
     template <class T>
     using enable_if_not_char = typename std::enable_if<!is_char<
         typename std::decay<T>::type>::value>::type;
+
+    /**
+     * @brief 取得对印类型所对应的均匀分布。
+     */
+    template <typename T>
+    using uniform_distribution_t = typename uniform_distribution_impl<T>::type;
 
     /** @} */ // end of sfinae group
 }
