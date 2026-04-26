@@ -4,6 +4,7 @@ var hierarchy =
       [ "console::MultiArray< T, D >", "classconsole_1_1_multi_array_3_01_t_00_01_d_01_4.html", null ],
       [ "console::MultiArray< T, First, Rest... >", "classconsole_1_1_multi_array_3_01_t_00_01_first_00_01_rest_8_8_8_01_4.html", null ]
     ] ],
+    [ "console::BasicRational&lt; T &gt;", "classconsole_1_1_basic_rational.html", null ],
     [ "console::Comprehension&lt; T &gt;", "classconsole_1_1_comprehension.html", null ],
     [ "console::cursor_ptr&lt; T &gt;", "classconsole_1_1cursor__ptr.html", null ],
     [ "console::cursor_ptr&lt; T[]&gt;", "classconsole_1_1cursor__ptr_3_01_t_0f_0e_4.html", null ],
@@ -28,6 +29,9 @@ var hierarchy =
     [ "console::MultiArray&lt; T, Dims &gt;", "classconsole_1_1_multi_array.html", null ],
     [ "console::Note", "structconsole_1_1_note.html", null ],
     [ "console::Output", "classconsole_1_1_output.html", null ],
+    [ "std::pair", null, [
+      [ "console::IteratorPair< Iter >", "structconsole_1_1_iterator_pair.html", null ]
+    ] ],
     [ "console::PartitionResult", "structconsole_1_1_partition_result.html", null ],
     [ "console::Path", "classconsole_1_1_path.html", null ],
     [ "console::Progress&lt; Iter &gt;", "classconsole_1_1_progress.html", null ],
@@ -39,6 +43,7 @@ var hierarchy =
         [ "console::bad_get", "classconsole_1_1bad__get.html", null ],
         [ "console::bad_maybe_access", "classconsole_1_1bad__maybe__access.html", null ],
         [ "console::container_error", "classconsole_1_1container__error.html", null ],
+        [ "console::domain_error", "classconsole_1_1domain__error.html", null ],
         [ "console::fatal_logging", "classconsole_1_1fatal__logging.html", null ],
         [ "console::file_error", "classconsole_1_1file__error.html", null ],
         [ "console::index_error", "classconsole_1_1index__error.html", null ],
@@ -48,6 +53,7 @@ var hierarchy =
     [ "std::string", null, [
       [ "console::f_string", "classconsole_1_1f__string.html", null ]
     ] ],
+    [ "console::TiedIterators&lt; It1, It2 &gt;", "classconsole_1_1_tied_iterators.html", null ],
     [ "console::Time", "classconsole_1_1_time.html", null ],
     [ "console::TuplePrinter&lt; Tuple, N &gt;", "structconsole_1_1_tuple_printer.html", null ],
     [ "console::TuplePrinter&lt; Tuple, 0 &gt;", "structconsole_1_1_tuple_printer_3_01_tuple_00_010_01_4.html", null ],

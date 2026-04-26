@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Console Library: console 库 / console Library</title>
+<title>Console Library: console – Make C++ Easy / 让 C++ 变简单</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.1.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.2.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -89,518 +89,259 @@ $(function(){initNavTree('md__r_e_a_d_m_e.html','',''); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">console 库 / console Library </div></div>
+  <div class="headertitle"><div class="title">console – Make C++ Easy / 让 C++ 变简单 </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md0"></a></p>
-<p><a href="https://en.cppreference.com/w/cpp/11"><img src="https://img.shields.io/badge/C++-11-blue.svg" alt="C++11" style="pointer-events: none;" class="inline"/></a> <a href="https://en.cppreference.com/w/cpp/14"><img src="https://img.shields.io/badge/C++-14-blue.svg" alt="C++14" style="pointer-events: none;" class="inline"/></a> <a href="https://en.cppreference.com/w/cpp/17"><img src="https://img.shields.io/badge/C++-17-blue.svg" alt="C++17" style="pointer-events: none;" class="inline"/></a> <a href="https://en.cppreference.com/w/cpp/20"><img src="https://img.shields.io/badge/C++-20-blue.svg" alt="C++20" style="pointer-events: none;" class="inline"/></a> <a href="https://en.cppreference.com/w/cpp/23"><img src="https://img.shields.io/badge/C++-23-blue.svg" alt="C++23" style="pointer-events: none;" class="inline"/></a> [<img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License" style="pointer-events: none;" class="inline"/>](LICENSE) [<img src="https://img.shields.io/badge/dependencies-none-brightgreen.svg" alt="No Dependencies" style="pointer-events: none;" class="inline"/>]()</p>
-<p><b>console</b> 是一个轻量级、零外部依赖的 C++ 控制台工具库，提供简洁的 API 用于输入输出、日志记录、时间测量、随机数、字符串处理、文件操作、多维数组等常见任务。所有组件位于 <span class="tt">namespace <a class="el" href="namespaceconsole.html" title="本库所有组件所在的顶层命名空间。">console</a></span>，核心模块可通过 <span class="tt">#include "<a class="el" href="all_8h.html" title="一键式包含头文件。">console/all.h</a>"</span> 一键引入。</p>
-<p><b>console</b> is a lightweight, zero‑dependency C++ console utility library offering simple APIs for common tasks. All components are inside <span class="tt">namespace <a class="el" href="namespaceconsole.html" title="本库所有组件所在的顶层命名空间。">console</a></span>; include via <span class="tt">#include "<a class="el" href="all_8h.html" title="一键式包含头文件。">console/all.h</a>"</span>.</p>
+<p>A header‑only C++11 library that brings Python‑like productivity to C++. <b>一个纯头文件、兼容 C++11 的现代 C++ 库，让你写得像 Python 一样痛快。</b></p>
+<p>📖 Documentation / 文档: <a href="https://mrxie1109.github.io/console---make-cpp-easy">mrxie1109.github.io/console&mdash;make-cpp-easy</a></p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
-目录</h1>
-<ol type="1">
-<li>特性</li>
-<li>模块概览</li>
-<li>快速开始</li>
-<li>详细使用指南<ul>
-<li>输出</li>
-<li>输入</li>
-<li>日志</li>
-<li>时间</li>
-<li>随机数</li>
-<li>字符串处理</li>
-<li>颜色</li>
-<li>进度条</li>
-<li>文件操作</li>
-<li>异构容器</li>
-<li>多维数组</li>
-<li>双指针游标</li>
-<li>字面量</li>
-<li>容器视图</li>
-<li>列表推导</li>
-<li>SFINAE 工具</li>
-<li>正则表达式</li>
-<li>系统信息</li>
-<li>可选值</li>
-<li>数学工具</li>
-<li>异常类</li>
-<li>格式化表示</li>
-<li>Windows MIDI</li>
+Quick Index / 快速索引</h1>
+<ul>
+<li>Core Utilities / 核心工具</li>
+<li>String Processing / 字符串处理</li>
+<li>Input &amp; Output / 输入与输出</li>
+<li>Console Styling / 控制台样式</li>
+<li>Logging / 日志</li>
+<li>Time &amp; Timing / 时间与计时</li>
+<li>Random Numbers / 随机数</li>
+<li>Regular Expressions / 正则表达式</li>
+<li>File System / 文件系统</li>
+<li>Progress Bar / 进度条</li>
+<li>Multi‑dimensional Arrays / 多维数组</li>
+<li>Optional Value / 可选值</li>
+<li>Heterogeneous Container / 异构容器</li>
+<li>Rational Numbers / 有理数</li>
+<li>Views &amp; Iterators / 视图与迭代器</li>
+<li>Functional Comprehension / 函数式推导</li>
+<li>Cursor Pointer / 游标指针</li>
+<li>User‑defined Literals / 自定义字面量</li>
+<li>Win32 MIDI / Win32 MIDI 音乐</li>
 </ul>
-</li>
-<li>编译要求</li>
-<li>许可证</li>
-</ol>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
-特性</h1>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">说明  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">🚀 <b>多标准支持</b>  </td><td class="markdownTableBodyNone">兼容 C++11/14/17/20/23  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">📦 <b>零外部依赖</b>  </td><td class="markdownTableBodyNone">仅使用 C++ 标准库  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">🎯 <b>简洁 API</b>  </td><td class="markdownTableBodyNone">直观命名，减少样板代码  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">🎨 <b>彩色输出</b>  </td><td class="markdownTableBodyNone">ANSI 颜色常量，支持样式  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">📝 <b>日志系统</b>  </td><td class="markdownTableBodyNone">5 级别，时间戳，彩色，FATAL 抛异常  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">⏱️ <b>时间工具</b>  </td><td class="markdownTableBodyNone"><span class="tt">Time</span> 类自动单位，计时器 <span class="tt">timer()</span>，休眠 <span class="tt">sleep()</span>，日期格式化  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">🔢 <b>随机数</b>  </td><td class="markdownTableBodyNone">Mersenne Twister，<span class="tt">randint</span>, <span class="tt">uniform</span>, <span class="tt">choice</span>, <span class="tt">shuffle</span>  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">📄 <b>文件操作</b>  </td><td class="markdownTableBodyNone"><span class="tt">Path</span> 类，文本/二进制/POD 读写，路径拼接  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">🎭 <b>类型擦除</b>  </td><td class="markdownTableBodyNone"><span class="tt">Item</span> 存储任意类型，<span class="tt">Box</span> 异构容器  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">🔷 <b>多维数组</b>  </td><td class="markdownTableBodyNone"><span class="tt">MultiArray&lt;T, Dims...&gt;</span>，连续存储，逐元素运算，统计函数  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">👁️ <b>容器视图</b>  </td><td class="markdownTableBodyNone"><span class="tt">View&lt;Container&gt;</span> 非拥有视图，切片，边界检查  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">🧵 <b>字符串处理</b>  </td><td class="markdownTableBodyNone">修剪、大小写、分割、连接、<span class="tt">f_string</span> 格式化  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">📊 <b>进度条</b>  </td><td class="markdownTableBodyNone"><span class="tt">Progress</span> 迭代器包装，自动显示，节流刷新  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">🧩 <b>列表推导</b>  </td><td class="markdownTableBodyNone"><span class="tt">Comprehension&lt;T&gt;</span>，<span class="tt">map</span>/<span class="tt">filter</span> 链式操作  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">🔍 <b>SFINAE 工具</b>  </td><td class="markdownTableBodyNone">类型特征：<span class="tt">is_container</span>, <span class="tt">is_callable</span>, <span class="tt">is_printable</span> 等  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">🔤 <b>正则表达式</b>  </td><td class="markdownTableBodyNone"><span class="tt">Regex</span> 类，类似 Python <span class="tt"><a class="el" href="namespacere.html" title="函数式正则表达式接口，模仿 Python 的 re 模块。">re</a></span> 模块  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">ℹ️ <b>系统信息</b>  </td><td class="markdownTableBodyNone"><span class="tt">version()</span>, <span class="tt">platform()</span>, <span class="tt">compiler()</span>  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">✨ <b>可选值</b>  </td><td class="markdownTableBodyNone"><span class="tt">Maybe&lt;T&gt;</span>，类似 <span class="tt">std::optional</span>  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">🛠️ <b>数学工具</b>  </td><td class="markdownTableBodyNone">统计、线性代数、元素级函数、卷积等  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">🎵 <b>MIDI 播放</b>  </td><td class="markdownTableBodyNone">Windows 专用，封装 winmm，支持 GM 乐器  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">🧰 <b>一站式头文件</b>  </td><td class="markdownTableBodyNone"><span class="tt"><a class="el" href="std_8h.html" title="聚合包含所有 C++ 标准库头文件（根据语言标准版本条件包含）。">std.h</a></span> 聚合标准库，<span class="tt"><a class="el" href="all_8h.html" title="一键式包含头文件。">all.h</a></span> 包含全部模块  </td></tr>
-</table>
+Core Utilities / 核心工具</h1>
+<p><b><a class="el" href="std_8h.html" title="聚合包含所有 C++ 标准库头文件（根据语言标准版本条件包含）。">std.h</a></b> includes almost all C++ standard headers (C++11 and up). <b><a class="el" href="std_8h.html" title="聚合包含所有 C++ 标准库头文件（根据语言标准版本条件包含）。">std.h</a></b> 帮你一次性包含几乎所有标准库头文件，从 C++11 开始全支持。</p>
+<p><b><a class="el" href="csexc_8h.html" title="定义 console 库使用的自定义异常类层次结构。">csexc.h</a></b> defines exception classes derived from <span class="tt">std::runtime_error</span> (<span class="tt">file_error</span>, <span class="tt">bad_get</span>, <span class="tt">bad_maybe_access</span>, etc.). <b><a class="el" href="csexc_8h.html" title="定义 console 库使用的自定义异常类层次结构。">csexc.h</a></b> 定义了继承自 <span class="tt">std::runtime_error</span> 的异常体系（比如文件错误、类型获取错误、空 Maybe 访问等）。</p>
+<p><b><a class="el" href="sfinae_8h.html" title="提供编译期类型特征检测（SFINAE 工具），用于判断容器、可调用对象、迭代器、下标访问、字符串、可打印类型、字符类型等。">sfinae.h</a></b> provides compile‑time type traits: <span class="tt">is_container</span>, <span class="tt">is_printable</span>, <span class="tt">is_string</span>, <span class="tt">is_char</span>, <span class="tt">has_subscript</span> and more. <b><a class="el" href="sfinae_8h.html" title="提供编译期类型特征检测（SFINAE 工具），用于判断容器、可调用对象、迭代器、下标访问、字符串、可打印类型、字符类型等。">sfinae.h</a></b> 提供编译期类型检测：是不是容器？能不能打印？是不是字符串？有没有下标访问？全都帮你判断好。</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
-模块概览</h1>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">头文件  </th><th class="markdownTableHeadNone">功能  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="output_8h.html" title="提供 STL 容器的格式化输出和灵活的输出控制工具。">output.h</a></span>  </td><td class="markdownTableBodyNone">STL 容器输出、<span class="tt">print</span> 函数  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="input_8h.html" title="提供丰富的控制台输入函数，支持类型安全输入、范围检查、行读取、确认输入等。">input.h</a></span>  </td><td class="markdownTableBodyNone">类型安全输入、范围检查  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="time_8h.html" title="提供时间度量、计时、休眠和日期时间格式化功能。">time.h</a></span>  </td><td class="markdownTableBodyNone">时间量、计时、休眠、日期时间  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="random_8h.html" title="提供随机数生成、随机选择、随机打乱等实用工具。">random.h</a></span>  </td><td class="markdownTableBodyNone">随机数生成、选择、打乱  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="strpp_8h.html" title="提供字符串处理工具函数和格式化类。">strpp.h</a></span>  </td><td class="markdownTableBodyNone">字符串处理、<span class="tt">f_string</span> 格式化  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="colorful_8h.html" title="提供控制台颜色和样式修饰的 ANSI 转义序列常量。">colorful.h</a></span>  </td><td class="markdownTableBodyNone">ANSI 颜色常量  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="logging_8h.html" title="提供带颜色和级别的日志记录功能。">logging.h</a></span>  </td><td class="markdownTableBodyNone">多级别日志  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="progress_8h.html" title="提供非侵入式的容器遍历进度条显示。">progress.h</a></span>  </td><td class="markdownTableBodyNone">进度条显示  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="file_8h.html" title="提供跨平台的文件路径封装和文件 I/O 操作。">file.h</a></span>  </td><td class="markdownTableBodyNone">跨平台文件路径和 I/O  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="box_8h.html" title="提供可存储任意类型的异构容器（Box）和类型擦除包装器（Item）。">box.h</a></span>  </td><td class="markdownTableBodyNone">异构容器 <span class="tt">Item</span> / <span class="tt">Box</span>  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="multiarray_8h.html" title="提供编译期维度固定的多维数组容器 MultiArray，支持任意维度和元素级算术/逻辑/位运算。">multiarray.h</a></span>  </td><td class="markdownTableBodyNone">编译期多维数组  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="cursor__ptr_8h.html" title="提供双指针游标智能指针，分离所有权与访问位置。">cursor_ptr.h</a></span>  </td><td class="markdownTableBodyNone">双指针智能指针  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="literals_8h.html" title="提供自定义字面量运算符，包括字符串字面量、时间字面量和格式化字符串字面量。">literals.h</a></span>  </td><td class="markdownTableBodyNone">用户定义字面量  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="view_8h.html" title="提供容器的非拥有视图（View），支持区间切片和便捷的工厂函数。">view.h</a></span>  </td><td class="markdownTableBodyNone">容器非拥有视图  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="compre_8h.html" title="提供类似 Python 列表推导式的容器适配器，支持 map/filter 等函数式操作。">compre.h</a></span>  </td><td class="markdownTableBodyNone">列表推导式  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="sfinae_8h.html" title="提供编译期类型特征检测（SFINAE 工具），用于判断容器、可调用对象、迭代器、下标访问、字符串、可打印类型、字符类型等。">sfinae.h</a></span>  </td><td class="markdownTableBodyNone">编译期类型特征  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="re_8h.html" title="提供正则表达式匹配、搜索、替换、分割等操作，接口类似 Python 的 re 模块。">re.h</a></span>  </td><td class="markdownTableBodyNone">正则表达式  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="info_8h.html" title="提供库的版本信息、许可证、编译器及平台识别函数。">info.h</a></span>  </td><td class="markdownTableBodyNone">系统信息  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="maybe_8h.html" title="提供类似 std::optional 的可选值容器 Maybe，支持空状态（nothing）。">maybe.h</a></span>  </td><td class="markdownTableBodyNone">可选值包装  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="matools_8h.html" title="提供 MultiArray 多维数组的数学工具函数。">matools.h</a></span>  </td><td class="markdownTableBodyNone">多维数组数学工具  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="csexc_8h.html" title="定义 console 库使用的自定义异常类层次结构。">csexc.h</a></span>  </td><td class="markdownTableBodyNone">自定义异常  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="repr_8h.html" title="提供类似 Python 的 repr() 函数，用于生成对象的可读字符串表示。">repr.h</a></span>  </td><td class="markdownTableBodyNone">值的字符串表示  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="melody_8h.html" title="Windows 平台 MIDI 音乐播放库，支持乐器选择、音符播放和 BPM 控制。">win/melody.h</a></span>  </td><td class="markdownTableBodyNone">Windows MIDI 播放  </td></tr>
-</table>
+String Processing / 字符串处理</h1>
+<p><b><a class="el" href="strpp_8h.html" title="提供字符串处理工具函数和格式化类。">strpp.h</a></b> gives you Python‑style string tools: <b><a class="el" href="strpp_8h.html" title="提供字符串处理工具函数和格式化类。">strpp.h</a></b> 提供 Python 风格的字符串处理：</p>
+<ul>
+<li><span class="tt">trim</span> / <span class="tt">ltrim</span> / <span class="tt">rtrim</span> (remove whitespace or custom characters) 去除空白或自定义字符</li>
+<li><span class="tt">upper</span> / <span class="tt">lower</span> / <span class="tt">title</span> – case conversion 大小写转换、标题格式</li>
+<li><span class="tt">split</span> / <span class="tt">join</span> / <span class="tt">partition</span> 分割、连接、三分区</li>
+<li><span class="tt">uni_to_str(...)</span> – convert any arguments to string 将任意数量、任意类型的参数拼接成字符串</li>
+<li><span class="tt">f_string</span> – format with <span class="tt">{}</span> placeholder: <span class="tt">"Hello {}"_f % "world"</span> 用 <span class="tt">{}</span> 占位符格式化字符串</li>
+</ul>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
-快速开始</h1>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="all_8h.html">console/all.h</a>&quot;</span></div>
-<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceconsole.html">console</a>;</div>
-<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceconsole_1_1literals.html">console::literals</a>;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main() {</div>
-<div class="line">    <a class="code hl_variable" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe">print</a>(<span class="stringliteral">&quot;Hello, World!&quot;</span>);</div>
-<div class="line"> </div>
-<div class="line">    std::string name = <a class="code hl_function" href="namespaceconsole.html#acefe608cce2aafb5da8d5e7a4a3cd4b6">inputLine</a>(<span class="stringliteral">&quot;Your name? &quot;</span>);</div>
-<div class="line">    <span class="keywordtype">int</span> age = <a class="code hl_function" href="namespaceconsole.html#a4b13f338c16af509d1896fc6689f6fd3">input&lt;int&gt;</a>(<span class="stringliteral">&quot;Age? &quot;</span>);</div>
-<div class="line">    <a class="code hl_function" href="namespaceconsole.html#acbaf475571fc302bb67a313117b3ddcd">logger</a>.info(<span class="stringliteral">&quot;User:&quot;</span>, name, <span class="stringliteral">&quot;age:&quot;</span>, age);</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">auto</span> t = <a class="code hl_function" href="namespaceconsole.html#a7a7013e6ffcb7a903210303ca185f71e">timer</a>([]{ <a class="code hl_function" href="namespaceconsole.html#a051357a08d9c4700e4b6a4eafa3f4958">sleep</a>(500_ms); });</div>
-<div class="line">    <a class="code hl_variable" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe">print</a>(<span class="stringliteral">&quot;Slept for:&quot;</span>, t);   <span class="comment">// 自动输出 &quot;500ms&quot;</span></div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordtype">int</span> lucky = <a class="code hl_function" href="group__random.html#gab75c4537508546dd98c955bc44c4081e">randint</a>(1, 100);</div>
-<div class="line">    <a class="code hl_variable" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe">print</a>(<span class="stringliteral">&quot;Lucky:&quot;</span>, lucky);</div>
-<div class="line"> </div>
-<div class="line">    std::string msg = <a class="code hl_class" href="classconsole_1_1f__string.html">f_string</a>(<span class="stringliteral">&quot;Hello, {}!&quot;</span>) % name;</div>
-<div class="line">    <a class="code hl_variable" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe">print</a>(msg);</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">auto</span> match = <a class="code hl_function" href="namespaceconsole_1_1re.html#ad5d8c7e69138f3518032bb824ec06c77">re::search</a>(R<span class="stringliteral">&quot;(\d+)&quot;, msg);</span></div>
-<div class="line"><span class="stringliteral">    </span><span class="keywordflow">if</span> (match) <a class="code hl_variable" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe">print</a>(<span class="stringliteral">&quot;Found number:&quot;</span>, match.<a class="code hl_function" href="classconsole_1_1_regex_1_1_match.html#afd2b38abd5ee5ab5c886932c19fad38f">group</a>());</div>
-<div class="line"> </div>
-<div class="line">    <a class="code hl_class" href="classconsole_1_1_multi_array.html">MultiArray&lt;int, 2, 2&gt;</a> mat{{1,2},{3,4}};</div>
-<div class="line">    <a class="code hl_variable" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe">print</a>(<span class="stringliteral">&quot;Matrix:&quot;</span>, mat);</div>
-<div class="line"> </div>
-<div class="line">    <a class="code hl_class" href="classconsole_1_1_path.html">Path</a>(<span class="stringliteral">&quot;output.txt&quot;</span>).<a class="code hl_function" href="classconsole_1_1_path.html#a14568ca3a9fb750a9c178a95e5576834">write_text</a>(msg);</div>
-<div class="line"> </div>
-<div class="line">    <a class="code hl_class" href="classconsole_1_1_maybe.html">Maybe&lt;int&gt;</a> m = 42;</div>
-<div class="line">    <a class="code hl_variable" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe">print</a>(<span class="stringliteral">&quot;Maybe:&quot;</span>, m);</div>
-<div class="line"> </div>
-<div class="line">    <a class="code hl_variable" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe">print</a>(<span class="stringliteral">&quot;Version:&quot;</span>, <a class="code hl_function" href="namespaceconsole.html#a6ccd5681285a96076ea9f1c469d46133">version</a>());</div>
-<div class="line">    <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="aall_8h_html"><div class="ttname"><a href="all_8h.html">all.h</a></div><div class="ttdoc">一键式包含头文件。</div></div>
-<div class="ttc" id="aclassconsole_1_1_maybe_html"><div class="ttname"><a href="classconsole_1_1_maybe.html">console::Maybe</a></div><div class="ttdoc">可选值容器，可包含一个值或为空。</div><div class="ttdef"><b>Definition</b> maybe.h:57</div></div>
-<div class="ttc" id="aclassconsole_1_1_multi_array_html"><div class="ttname"><a href="classconsole_1_1_multi_array.html">console::MultiArray</a></div><div class="ttdoc">编译期固定维度的多维数组。</div><div class="ttdef"><b>Definition</b> multiarray.h:57</div></div>
-<div class="ttc" id="aclassconsole_1_1_path_html"><div class="ttname"><a href="classconsole_1_1_path.html">console::Path</a></div><div class="ttdoc">文件路径封装类，提供便捷的文件读写和路径操作。</div><div class="ttdef"><b>Definition</b> file.h:51</div></div>
-<div class="ttc" id="aclassconsole_1_1_path_html_a14568ca3a9fb750a9c178a95e5576834"><div class="ttname"><a href="classconsole_1_1_path.html#a14568ca3a9fb750a9c178a95e5576834">console::Path::write_text</a></div><div class="ttdeci">void write_text(const std::string &amp;text)</div><div class="ttdoc">以文本模式写入字符串到文件（覆盖模式）。</div><div class="ttdef"><b>Definition</b> file.h:179</div></div>
-<div class="ttc" id="aclassconsole_1_1_regex_1_1_match_html_afd2b38abd5ee5ab5c886932c19fad38f"><div class="ttname"><a href="classconsole_1_1_regex_1_1_match.html#afd2b38abd5ee5ab5c886932c19fad38f">console::Regex::Match::group</a></div><div class="ttdeci">std::string group(int n=0) const</div><div class="ttdoc">获取指定捕获组的内容。</div><div class="ttdef"><b>Definition</b> re.h:82</div></div>
-<div class="ttc" id="aclassconsole_1_1f__string_html"><div class="ttname"><a href="classconsole_1_1f__string.html">console::f_string</a></div><div class="ttdoc">格式化字符串类，支持使用 % 运算符进行占位符 {} 替换。</div><div class="ttdef"><b>Definition</b> strpp.h:302</div></div>
-<div class="ttc" id="agroup__random_html_gab75c4537508546dd98c955bc44c4081e"><div class="ttname"><a href="group__random.html#gab75c4537508546dd98c955bc44c4081e">console::randint</a></div><div class="ttdeci">T randint(T min=0, T max=32767, std::mt19937 &amp;gen=default_gen())</div><div class="ttdoc">生成一个指定范围内的随机整数（均匀分布）。</div><div class="ttdef"><b>Definition</b> random.h:69</div></div>
-<div class="ttc" id="anamespaceconsole_1_1literals_html"><div class="ttname"><a href="namespaceconsole_1_1literals.html">console::literals</a></div><div class="ttdoc">包含自定义字面量运算符的命名空间。</div></div>
-<div class="ttc" id="anamespaceconsole_1_1re_html_ad5d8c7e69138f3518032bb824ec06c77"><div class="ttname"><a href="namespaceconsole_1_1re.html#ad5d8c7e69138f3518032bb824ec06c77">console::re::search</a></div><div class="ttdeci">Regex::Match search(const std::string &amp;pattern, const std::string &amp;text)</div><div class="ttdoc">搜索第一个匹配（函数式接口）。</div><div class="ttdef"><b>Definition</b> re.h:394</div></div>
-<div class="ttc" id="anamespaceconsole_html"><div class="ttname"><a href="namespaceconsole.html">console</a></div><div class="ttdoc">本库所有组件所在的顶层命名空间。</div></div>
-<div class="ttc" id="anamespaceconsole_html_a051357a08d9c4700e4b6a4eafa3f4958"><div class="ttname"><a href="namespaceconsole.html#a051357a08d9c4700e4b6a4eafa3f4958">console::sleep</a></div><div class="ttdeci">void sleep(const Time &amp;tr)</div><div class="ttdoc">休眠指定时间。</div><div class="ttdef"><b>Definition</b> time.h:155</div></div>
-<div class="ttc" id="anamespaceconsole_html_a1658ddfe71dc7f388938391c9a8db3fe"><div class="ttname"><a href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe">console::print</a></div><div class="ttdeci">class console::Output print</div><div class="ttdoc">全局输出对象，模仿 Python 的 print 函数。</div></div>
-<div class="ttc" id="anamespaceconsole_html_a4b13f338c16af509d1896fc6689f6fd3"><div class="ttname"><a href="namespaceconsole.html#a4b13f338c16af509d1896fc6689f6fd3">console::input</a></div><div class="ttdeci">T input(const std::string &amp;prompt=&quot;&quot;, const InputSettings &amp;is=inputSettings)</div><div class="ttdoc">从标准输入读取一个值，支持类型模板。</div><div class="ttdef"><b>Definition</b> input.h:61</div></div>
-<div class="ttc" id="anamespaceconsole_html_a6ccd5681285a96076ea9f1c469d46133"><div class="ttname"><a href="namespaceconsole.html#a6ccd5681285a96076ea9f1c469d46133">console::version</a></div><div class="ttdeci">std::string version()</div><div class="ttdoc">返回库的版本字符串。</div><div class="ttdef"><b>Definition</b> info.h:88</div></div>
-<div class="ttc" id="anamespaceconsole_html_a7a7013e6ffcb7a903210303ca185f71e"><div class="ttname"><a href="namespaceconsole.html#a7a7013e6ffcb7a903210303ca185f71e">console::timer</a></div><div class="ttdeci">Time timer(F &amp;&amp;f, Args &amp;&amp;...args)</div><div class="ttdoc">测量函数调用的执行时间。</div><div class="ttdef"><b>Definition</b> time.h:144</div></div>
-<div class="ttc" id="anamespaceconsole_html_acbaf475571fc302bb67a313117b3ddcd"><div class="ttname"><a href="namespaceconsole.html#acbaf475571fc302bb67a313117b3ddcd">console::logger</a></div><div class="ttdeci">class console::Logging logger(std::cout, true, Logging::Level::INFO)</div><div class="ttdoc">全局默认 logger 实例，启用颜色，级别 INFO。</div></div>
-<div class="ttc" id="anamespaceconsole_html_acefe608cce2aafb5da8d5e7a4a3cd4b6"><div class="ttname"><a href="namespaceconsole.html#acefe608cce2aafb5da8d5e7a4a3cd4b6">console::inputLine</a></div><div class="ttdeci">std::string inputLine(const std::string &amp;prompt=&quot;Type a line string: &quot;, const InputSettings &amp;is=inputSettings)</div><div class="ttdoc">读取一整行字符串（包含空格）。</div><div class="ttdef"><b>Definition</b> input.h:100</div></div>
-</div><!-- fragment --><hr  />
+Input &amp; Output / 输入与输出</h1>
+<p><b><a class="el" href="output_8h.html" title="提供 STL 容器的格式化输出和灵活的输出控制工具。">output.h</a></b> gives <span class="tt"><a class="el" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe" title="全局输出对象，模仿 Python 的 print 函数。">console::print</a></span> (works like Python’s <span class="tt">print</span>), and a customizable <span class="tt">Output</span> class. <b><a class="el" href="output_8h.html" title="提供 STL 容器的格式化输出和灵活的输出控制工具。">output.h</a></b> 提供了 <span class="tt"><a class="el" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe" title="全局输出对象，模仿 Python 的 print 函数。">console::print</a></span>，用法和 Python 的 <span class="tt">print</span> 一模一样，还可以自定义分隔符、结尾符和是否刷新。</p>
+<p>All common STL containers (<span class="tt">vector</span>, <span class="tt">list</span>, <span class="tt">map</span>, <span class="tt"><a class="el" href="logging_8h.html#a9cd02249b1fd62dff7d5b07a3bca4371" title="设置最低日志级别（低于该级别的日志将被忽略）。">set</a></span>, <span class="tt">tuple</span>, <span class="tt">pair</span>, <span class="tt">valarray</span>, …) can be printed directly – no extra code. 所有常见 STL 容器（<span class="tt">vector</span>、<span class="tt">list</span>、<span class="tt">map</span>、<span class="tt"><a class="el" href="logging_8h.html#a9cd02249b1fd62dff7d5b07a3bca4371" title="设置最低日志级别（低于该级别的日志将被忽略）。">set</a></span>、<span class="tt">tuple</span>、<span class="tt">pair</span>、<span class="tt">valarray</span> ……）都支持直接输出，不需要写任何循环。</p>
+<p><b><a class="el" href="repr_8h.html" title="提供类似 Python 的 repr() 函数，用于生成对象的可读字符串表示。">repr.h</a></b> generates readable representations (like Python’s <span class="tt"><a class="el" href="group__repr.html" title="提供类型名称和值的可读表示。">类型表示</a></span>) and demangles type names. <b><a class="el" href="repr_8h.html" title="提供类似 Python 的 repr() 函数，用于生成对象的可读字符串表示。">repr.h</a></b> 可以生成对象的可读表示（类似 Python 的 <span class="tt"><a class="el" href="group__repr.html" title="提供类型名称和值的可读表示。">类型表示</a></span>），还能输出经过 demangle 的类型名。</p>
+<p><b><a class="el" href="input_8h.html" title="提供丰富的控制台输入函数，支持类型安全输入、范围检查、行读取、确认输入等。">input.h</a></b> provides type‑safe input: <span class="tt">input&lt;T&gt;("prompt")</span>, <span class="tt">inputLine</span>, <span class="tt">inputNumber</span>, <span class="tt">inputYesOrNo</span>, and <span class="tt">inputAll</span>. <b><a class="el" href="input_8h.html" title="提供丰富的控制台输入函数，支持类型安全输入、范围检查、行读取、确认输入等。">input.h</a></b> 提供类型安全的输入：<span class="tt">input&lt;T&gt;</span>、整行读取、数字输入、问 yes/no、读取所有内容等。</p>
+<hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
-详细使用指南</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
-输出 (output.h)</h2>
-<p>重载 STL 容器 <span class="tt">operator&lt;&lt;</span>，提供 <span class="tt">print</span> 函数（默认空格分隔，换行，自动刷新）。</p>
-<div class="fragment"><div class="line">std::vector&lt;int&gt; vec = {1,2,3};</div>
-<div class="line">std::cout &lt;&lt; vec;                     <span class="comment">// [1, 2, 3]</span></div>
-<div class="line"><a class="code hl_variable" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe">print</a>(<span class="stringliteral">&quot;Value:&quot;</span>, 42, vec);             <span class="comment">// Value: 42 [1, 2, 3]</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code hl_class" href="classconsole_1_1_output.html">Output</a> err(std::cerr, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;\n&quot;</span>, <span class="keyword">true</span>); <span class="comment">// 自定义输出</span></div>
-<div class="line">err(<span class="stringliteral">&quot;Error:&quot;</span>, <span class="stringliteral">&quot;msg&quot;</span>);</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> carr[] = {10,20,30};</div>
-<div class="line"><span class="keyword">auto</span> arr = <a class="code hl_function" href="group__array__conversion.html#ga06143e5b1305ddc6184ff5539b7dd9fc">to_array</a>(carr);            <span class="comment">// std::array&lt;int,3&gt;</span></div>
-<div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="group__array__conversion.html#ga37f2589e9a16b5646e8b2faeaa053dbe">to_vector</a>(carr);             <span class="comment">// std::vector&lt;int&gt;</span></div>
-<div class="ttc" id="aclassconsole_1_1_output_html"><div class="ttname"><a href="classconsole_1_1_output.html">console::Output</a></div><div class="ttdoc">灵活的输出控制类，支持链式调用和多种参数。</div><div class="ttdef"><b>Definition</b> output.h:371</div></div>
-<div class="ttc" id="agroup__array__conversion_html_ga06143e5b1305ddc6184ff5539b7dd9fc"><div class="ttname"><a href="group__array__conversion.html#ga06143e5b1305ddc6184ff5539b7dd9fc">console::to_array</a></div><div class="ttdeci">std::array&lt; T, N &gt; to_array(const T(&amp;ar)[N])</div><div class="ttdoc">将 C 风格数组转换为 std::array。</div><div class="ttdef"><b>Definition</b> output.h:331</div></div>
-<div class="ttc" id="agroup__array__conversion_html_ga37f2589e9a16b5646e8b2faeaa053dbe"><div class="ttname"><a href="group__array__conversion.html#ga37f2589e9a16b5646e8b2faeaa053dbe">console::to_vector</a></div><div class="ttdeci">std::vector&lt; T &gt; to_vector(const T(&amp;ar)[N])</div><div class="ttdoc">将 C 风格数组转换为 std::vector。</div><div class="ttdef"><b>Definition</b> output.h:346</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
-输入 (input.h)</h2>
-<p>类型安全输入，自动重试。</p>
-<div class="fragment"><div class="line">std::string s = <a class="code hl_function" href="namespaceconsole.html#a4b13f338c16af509d1896fc6689f6fd3">input</a>(<span class="stringliteral">&quot;Enter: &quot;</span>);</div>
-<div class="line"><span class="keywordtype">int</span> age = <a class="code hl_function" href="namespaceconsole.html#a4b13f338c16af509d1896fc6689f6fd3">input&lt;int&gt;</a>(<span class="stringliteral">&quot;Age: &quot;</span>);</div>
-<div class="line"><span class="keywordtype">double</span> temp = <a class="code hl_function" href="namespaceconsole.html#a5a8e9e11f78e52a7b73f734712d9ce54">inputWithRange</a>(<span class="stringliteral">&quot;Temp (-50~50): &quot;</span>, -50.0, 50.0);</div>
-<div class="line"><span class="keywordtype">char</span> ch = <a class="code hl_function" href="namespaceconsole.html#afec5042e6c698ef95319ddbc3d1b9544">inputChar</a>(<span class="stringliteral">&quot;Press any key: &quot;</span>);</div>
-<div class="line"><span class="keywordtype">bool</span> ok = <a class="code hl_function" href="namespaceconsole.html#a9a62f97aafac8e6eb9a54d3cffc2f01e">inputYesOrNo</a>(<span class="stringliteral">&quot;Continue? &quot;</span>);</div>
-<div class="line">std::string line = <a class="code hl_function" href="namespaceconsole.html#acefe608cce2aafb5da8d5e7a4a3cd4b6">inputLine</a>(<span class="stringliteral">&quot;Line: &quot;</span>);</div>
-<div class="line">std::string <a class="code hl_function" href="group__multiarray__stats.html#ga098f089920a165b93d045817a3fef167">all</a> = <a class="code hl_function" href="namespaceconsole.html#a4022716f3b9231c1fe414f243ddf2e39">inputAll</a>(<span class="stringliteral">&quot;Input (EOF to end):\n&quot;</span>);</div>
-<div class="ttc" id="agroup__multiarray__stats_html_ga098f089920a165b93d045817a3fef167"><div class="ttname"><a href="group__multiarray__stats.html#ga098f089920a165b93d045817a3fef167">console::all</a></div><div class="ttdeci">bool all(const MultiArray&lt; T, Dims... &gt; &amp;a)</div><div class="ttdoc">检查所有元素是否都为 true（逻辑与归约）。</div><div class="ttdef"><b>Definition</b> multiarray.h:1555</div></div>
-<div class="ttc" id="anamespaceconsole_html_a4022716f3b9231c1fe414f243ddf2e39"><div class="ttname"><a href="namespaceconsole.html#a4022716f3b9231c1fe414f243ddf2e39">console::inputAll</a></div><div class="ttdeci">std::string inputAll(const std::string &amp;prompt=&quot;&quot;, const InputSettings &amp;is=inputSettings)</div><div class="ttdoc">读取输入流中剩余的全部内容（直到 EOF）。</div><div class="ttdef"><b>Definition</b> input.h:190</div></div>
-<div class="ttc" id="anamespaceconsole_html_a5a8e9e11f78e52a7b73f734712d9ce54"><div class="ttname"><a href="namespaceconsole.html#a5a8e9e11f78e52a7b73f734712d9ce54">console::inputWithRange</a></div><div class="ttdeci">long double inputWithRange(const std::string &amp;prompt=&quot;Type a number: &quot;, long double min=DBL_MIN, long double max=DBL_MAX, const InputSettings &amp;is=inputSettings)</div><div class="ttdoc">读取一个在指定范围内的数字。</div><div class="ttdef"><b>Definition</b> input.h:120</div></div>
-<div class="ttc" id="anamespaceconsole_html_a9a62f97aafac8e6eb9a54d3cffc2f01e"><div class="ttname"><a href="namespaceconsole.html#a9a62f97aafac8e6eb9a54d3cffc2f01e">console::inputYesOrNo</a></div><div class="ttdeci">bool inputYesOrNo(const std::string &amp;prompt=&quot;Type yes or no: &quot;, const InputSettings &amp;is=inputSettings)</div><div class="ttdoc">读取一个 y/n 确认，返回布尔值。</div><div class="ttdef"><b>Definition</b> input.h:167</div></div>
-<div class="ttc" id="anamespaceconsole_html_afec5042e6c698ef95319ddbc3d1b9544"><div class="ttname"><a href="namespaceconsole.html#afec5042e6c698ef95319ddbc3d1b9544">console::inputChar</a></div><div class="ttdeci">char inputChar(const std::string &amp;prompt=&quot;Type a character: &quot;, const InputSettings &amp;is=inputSettings)</div><div class="ttdoc">读取一个字符（忽略前导空白，但不跳过换行符？实际使用 get()）。</div><div class="ttdef"><b>Definition</b> input.h:151</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
-日志 (logging.h)</h2>
-<p>5 个级别，全局 <span class="tt">logger</span>。</p>
-<div class="fragment"><div class="line"><a class="code hl_function" href="namespaceconsole.html#acbaf475571fc302bb67a313117b3ddcd">logger</a>.set(<a class="code hl_enumvalue" href="classconsole_1_1_logging.html#adbe10800d06e6c74c22849f7f210d5e8adc30ec20708ef7b0f641ef78b7880a15">Logging::Level::DEBUG</a>);</div>
-<div class="line"><a class="code hl_function" href="namespaceconsole.html#acbaf475571fc302bb67a313117b3ddcd">logger</a>.debug(<span class="stringliteral">&quot;Debug:&quot;</span>, 42);</div>
-<div class="line"><a class="code hl_function" href="namespaceconsole.html#acbaf475571fc302bb67a313117b3ddcd">logger</a>.info(<span class="stringliteral">&quot;Started&quot;</span>);</div>
-<div class="line"><a class="code hl_function" href="namespaceconsole.html#acbaf475571fc302bb67a313117b3ddcd">logger</a>.warn(<span class="stringliteral">&quot;Low disk&quot;</span>);</div>
-<div class="line"><a class="code hl_function" href="namespaceconsole.html#acbaf475571fc302bb67a313117b3ddcd">logger</a>.error(<span class="stringliteral">&quot;File not found&quot;</span>);</div>
-<div class="line"><span class="keywordflow">try</span> { <a class="code hl_function" href="namespaceconsole.html#acbaf475571fc302bb67a313117b3ddcd">logger</a>.fatal(<span class="stringliteral">&quot;Critical&quot;</span>); } <span class="keywordflow">catch</span> (<span class="keyword">const</span> <a class="code hl_class" href="classconsole_1_1fatal__logging.html">fatal_logging</a>&amp; e) {}</div>
-<div class="ttc" id="aclassconsole_1_1_logging_html_adbe10800d06e6c74c22849f7f210d5e8adc30ec20708ef7b0f641ef78b7880a15"><div class="ttname"><a href="classconsole_1_1_logging.html#adbe10800d06e6c74c22849f7f210d5e8adc30ec20708ef7b0f641ef78b7880a15">console::Logging::Level::DEBUG</a></div><div class="ttdeci">@ DEBUG</div><div class="ttdef"><b>Definition</b> logging.h:65</div></div>
-<div class="ttc" id="aclassconsole_1_1fatal__logging_html"><div class="ttname"><a href="classconsole_1_1fatal__logging.html">console::fatal_logging</a></div><div class="ttdoc">表示致命日志错误，通常会导致程序终止。</div><div class="ttdef"><b>Definition</b> csexc.h:59</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
-时间 (time.h)</h2>
-<p><span class="tt">Time</span> 类，纳秒存储，自动选择单位。字面量 <span class="tt">_ns</span>, <span class="tt">_us</span>, <span class="tt">_ms</span>, <span class="tt">_s</span>, <span class="tt">_min</span>, <span class="tt">_hr</span>。</p>
-<div class="fragment"><div class="line"><a class="code hl_class" href="classconsole_1_1_time.html">Time</a> t1 = 100_ns, t2 = 2.5_us, t3 = 500_ms;</div>
-<div class="line">std::cout &lt;&lt; t1 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; t2 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; t3; <span class="comment">// 100ns, 2.5μs, 500ms</span></div>
-<div class="line"><a class="code hl_function" href="namespaceconsole.html#a051357a08d9c4700e4b6a4eafa3f4958">sleep</a>(200_ms);</div>
-<div class="line"><span class="keyword">auto</span> elapsed = <a class="code hl_function" href="namespaceconsole.html#a7a7013e6ffcb7a903210303ca185f71e">timer</a>([]{ <a class="code hl_function" href="namespaceconsole.html#a051357a08d9c4700e4b6a4eafa3f4958">sleep</a>(1_s); });</div>
-<div class="line"><a class="code hl_variable" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe">print</a>(<a class="code hl_function" href="namespaceconsole.html#a79c8a9f9c5c22d66e53a598a3090f679">datetime</a>());              <span class="comment">// 2026-04-18 12:34:56</span></div>
-<div class="line"><a class="code hl_variable" href="namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe">print</a>(<a class="code hl_function" href="namespaceconsole.html#a79c8a9f9c5c22d66e53a598a3090f679">datetime</a>(<span class="stringliteral">&quot;%Y年%m月%d日&quot;</span>));</div>
-<div class="ttc" id="aclassconsole_1_1_time_html"><div class="ttname"><a href="classconsole_1_1_time.html">console::Time</a></div><div class="ttdoc">表示以纳秒为单位的时间量，支持单位转换、算术运算和自动选择合适的输出单位。</div><div class="ttdef"><b>Definition</b> time.h:52</div></div>
-<div class="ttc" id="anamespaceconsole_html_a79c8a9f9c5c22d66e53a598a3090f679"><div class="ttname"><a href="namespaceconsole.html#a79c8a9f9c5c22d66e53a598a3090f679">console::datetime</a></div><div class="ttdeci">std::string datetime(const std::string &amp;fmt=&quot;%Y-%m-%d %H:%M:%S&quot;)</div><div class="ttdoc">获取当前日期时间字符串。</div><div class="ttdef"><b>Definition</b> time.h:166</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
-随机数 (random.h)</h2>
-<p>全局 Mersenne Twister 引擎。</p>
-<div class="fragment"><div class="line"><span class="keywordtype">int</span> dice = <a class="code hl_function" href="group__random.html#gab75c4537508546dd98c955bc44c4081e">randint</a>(1, 6);</div>
-<div class="line"><span class="keywordtype">double</span> prob = <a class="code hl_function" href="group__random.html#ga58f1316a460a953a3e8ce7cd2c05c875">uniform</a>();        <span class="comment">// [0.0, 1.0]</span></div>
-<div class="line"><span class="keywordtype">double</span> temp = <a class="code hl_function" href="group__random.html#ga58f1316a460a953a3e8ce7cd2c05c875">uniform</a>(-10.0, 40.0);</div>
-<div class="line"><span class="keywordtype">int</span> selected = <a class="code hl_function" href="group__random.html#ga3627903f9bb6060f98cdd649405933fa">choice</a>({10,20,30});</div>
-<div class="line">std::vector&lt;int&gt; vec = {1,2,3,4,5};</div>
-<div class="line"><a class="code hl_function" href="group__random.html#ga9bfc03e8332620166066cb4c84e82be2">shuffle</a>(vec);</div>
-<div class="ttc" id="agroup__random_html_ga3627903f9bb6060f98cdd649405933fa"><div class="ttname"><a href="group__random.html#ga3627903f9bb6060f98cdd649405933fa">console::choice</a></div><div class="ttdeci">auto choice(C &amp;&amp;c, std::mt19937 &amp;gen=default_gen()) -&gt; decltype(*std::begin(c))</div><div class="ttdoc">从容器中随机选择一个元素。</div><div class="ttdef"><b>Definition</b> random.h:99</div></div>
-<div class="ttc" id="agroup__random_html_ga58f1316a460a953a3e8ce7cd2c05c875"><div class="ttname"><a href="group__random.html#ga58f1316a460a953a3e8ce7cd2c05c875">console::uniform</a></div><div class="ttdeci">T uniform(T min=0.0, T max=1.0, std::mt19937 &amp;gen=default_gen())</div><div class="ttdoc">生成一个指定范围内的随机浮点数（均匀分布）。</div><div class="ttdef"><b>Definition</b> random.h:84</div></div>
-<div class="ttc" id="agroup__random_html_ga9bfc03e8332620166066cb4c84e82be2"><div class="ttname"><a href="group__random.html#ga9bfc03e8332620166066cb4c84e82be2">console::shuffle</a></div><div class="ttdeci">void shuffle(C &amp;&amp;c, std::mt19937 &amp;gen=default_gen())</div><div class="ttdoc">随机打乱容器中元素的顺序（Fisher-Yates 洗牌算法）。</div><div class="ttdef"><b>Definition</b> random.h:132</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
-字符串处理 (strpp.h)</h2>
-<div class="fragment"><div class="line"><a class="code hl_function" href="group__strpp.html#gab9c219f8107af63d17ec5616fe430891">trim</a>(<span class="stringliteral">&quot;  hello  &quot;</span>);               <span class="comment">// &quot;hello&quot;</span></div>
-<div class="line"><a class="code hl_function" href="group__strpp.html#ga9b8e55a0a5c1eafc84ec0b3b53c77170">upper</a>(<span class="stringliteral">&quot;Hello&quot;</span>);                  <span class="comment">// &quot;HELLO&quot;</span></div>
-<div class="line"><a class="code hl_function" href="group__strpp.html#ga245794143f8fbcc1baec9b5d8309846f">lower</a>(<span class="stringliteral">&quot;Hello&quot;</span>);                  <span class="comment">// &quot;hello&quot;</span></div>
-<div class="line"><a class="code hl_function" href="group__strpp.html#ga7f55de957c5fa0975647a4530b75c61c">title</a>(<span class="stringliteral">&quot;hello world&quot;</span>);            <span class="comment">// &quot;Hello World&quot;</span></div>
-<div class="line"><a class="code hl_function" href="group__strpp.html#ga60b86273d02abf33f057e1e86325f455">split</a>(<span class="stringliteral">&quot;a,b,c&quot;</span>, <span class="stringliteral">&quot;,&quot;</span>);             <span class="comment">// [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</span></div>
-<div class="line"><a class="code hl_function" href="group__strpp.html#gaac7a5894d7d6708ea4912fea49a3d622">join</a>(parts, <span class="stringliteral">&quot;-&quot;</span>);                <span class="comment">// &quot;a-b-c&quot;</span></div>
-<div class="line"><span class="keyword">auto</span> [l,m,r] = <a class="code hl_function" href="group__strpp.html#ga32e13326520876f61cb8a33c74dc973f">partition</a>(<span class="stringliteral">&quot;key=value&quot;</span>, <span class="stringliteral">&quot;=&quot;</span>);</div>
-<div class="line"><a class="code hl_function" href="group__strpp.html#ga45446910af9711d79bebe59665b6cd8a">uni_to_str</a>(42, <span class="stringliteral">&quot; + &quot;</span>, 3.14);     <span class="comment">// &quot;42 + 3.14&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code hl_class" href="classconsole_1_1f__string.html">f_string</a> fmt = <span class="stringliteral">&quot;Hello, {}!&quot;</span>_f;</div>
-<div class="line">std::string result = fmt % name;</div>
-<div class="ttc" id="agroup__strpp_html_ga245794143f8fbcc1baec9b5d8309846f"><div class="ttname"><a href="group__strpp.html#ga245794143f8fbcc1baec9b5d8309846f">console::lower</a></div><div class="ttdeci">std::string lower(std::string str)</div><div class="ttdoc">将字符串转换为小写。</div><div class="ttdef"><b>Definition</b> strpp.h:155</div></div>
-<div class="ttc" id="agroup__strpp_html_ga32e13326520876f61cb8a33c74dc973f"><div class="ttname"><a href="group__strpp.html#ga32e13326520876f61cb8a33c74dc973f">console::partition</a></div><div class="ttdeci">PartitionResult partition(const std::string &amp;text, const std::string &amp;sep)</div><div class="ttdoc">在字符串中查找第一个分隔符，并返回分隔符之前、分隔符本身、分隔符之后的三部分。</div><div class="ttdef"><b>Definition</b> strpp.h:218</div></div>
-<div class="ttc" id="agroup__strpp_html_ga45446910af9711d79bebe59665b6cd8a"><div class="ttname"><a href="group__strpp.html#ga45446910af9711d79bebe59665b6cd8a">console::uni_to_str</a></div><div class="ttdeci">std::string uni_to_str(Args &amp;&amp;...args)</div><div class="ttdoc">将任意多个参数转换为字符串并拼接（无分隔符）。</div><div class="ttdef"><b>Definition</b> strpp.h:281</div></div>
-<div class="ttc" id="agroup__strpp_html_ga60b86273d02abf33f057e1e86325f455"><div class="ttname"><a href="group__strpp.html#ga60b86273d02abf33f057e1e86325f455">console::split</a></div><div class="ttdeci">std::vector&lt; std::string &gt; split(std::string text, const std::string &amp;sep=&quot; &quot;)</div><div class="ttdoc">以分隔符分割字符串（类似 Python 的 split，默认按空格分割）。</div><div class="ttdef"><b>Definition</b> strpp.h:237</div></div>
-<div class="ttc" id="agroup__strpp_html_ga7f55de957c5fa0975647a4530b75c61c"><div class="ttname"><a href="group__strpp.html#ga7f55de957c5fa0975647a4530b75c61c">console::title</a></div><div class="ttdeci">std::string title(std::string str)</div><div class="ttdoc">将字符串转换为标题格式（每个单词首字母大写，其余小写）。</div><div class="ttdef"><b>Definition</b> strpp.h:170</div></div>
-<div class="ttc" id="agroup__strpp_html_ga9b8e55a0a5c1eafc84ec0b3b53c77170"><div class="ttname"><a href="group__strpp.html#ga9b8e55a0a5c1eafc84ec0b3b53c77170">console::upper</a></div><div class="ttdeci">std::string upper(std::string str)</div><div class="ttdoc">将字符串转换为大写。</div><div class="ttdef"><b>Definition</b> strpp.h:140</div></div>
-<div class="ttc" id="agroup__strpp_html_gaac7a5894d7d6708ea4912fea49a3d622"><div class="ttname"><a href="group__strpp.html#gaac7a5894d7d6708ea4912fea49a3d622">console::join</a></div><div class="ttdeci">std::string join(const std::vector&lt; T &gt; &amp;vec, const std::string &amp;sep=&quot;&quot;)</div><div class="ttdoc">以分隔符连接容器中的字符串元素。</div><div class="ttdef"><b>Definition</b> strpp.h:259</div></div>
-<div class="ttc" id="agroup__strpp_html_gab9c219f8107af63d17ec5616fe430891"><div class="ttname"><a href="group__strpp.html#gab9c219f8107af63d17ec5616fe430891">console::trim</a></div><div class="ttdeci">std::string trim(std::string str)</div><div class="ttdoc">移除字符串两侧的空白字符。</div><div class="ttdef"><b>Definition</b> strpp.h:85</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
-颜色 (colorful.h)</h2>
-<div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceconsole_1_1color.html">console::color</a>;</div>
-<div class="line">std::cout &lt;&lt; <a class="code hl_variable" href="namespaceconsole_1_1color.html#a384e1a17e4c2cc6c76dbb7b639ebfb1a">Red</a> &lt;&lt; <span class="stringliteral">&quot;Error&quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceconsole_1_1color.html#aed61bfb193c5c64c0ac4aed09b033c33">Reset</a> &lt;&lt; std::endl;</div>
-<div class="line">std::cout &lt;&lt; <a class="code hl_variable" href="namespaceconsole_1_1color.html#a1dfb10aea5647c1c039da43f79871f43">Bold</a> &lt;&lt; <a class="code hl_variable" href="namespaceconsole_1_1color.html#af0edce01b0636394afa3d0c17cde5ec5">Blue</a> &lt;&lt; <span class="stringliteral">&quot;Bold blue&quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceconsole_1_1color.html#aed61bfb193c5c64c0ac4aed09b033c33">Reset</a>;</div>
-<div class="ttc" id="anamespaceconsole_1_1color_html"><div class="ttname"><a href="namespaceconsole_1_1color.html">console::color</a></div><div class="ttdoc">包含控制台颜色、背景色和文本样式的 ANSI 转义序列常量。</div></div>
-<div class="ttc" id="anamespaceconsole_1_1color_html_a1dfb10aea5647c1c039da43f79871f43"><div class="ttname"><a href="namespaceconsole_1_1color.html#a1dfb10aea5647c1c039da43f79871f43">console::color::Bold</a></div><div class="ttdeci">const char * Bold</div><div class="ttdoc">粗体</div><div class="ttdef"><b>Definition</b> colorful.h:114</div></div>
-<div class="ttc" id="anamespaceconsole_1_1color_html_a384e1a17e4c2cc6c76dbb7b639ebfb1a"><div class="ttname"><a href="namespaceconsole_1_1color.html#a384e1a17e4c2cc6c76dbb7b639ebfb1a">console::color::Red</a></div><div class="ttdeci">const char * Red</div><div class="ttdoc">红色前景</div><div class="ttdef"><b>Definition</b> colorful.h:46</div></div>
-<div class="ttc" id="anamespaceconsole_1_1color_html_aed61bfb193c5c64c0ac4aed09b033c33"><div class="ttname"><a href="namespaceconsole_1_1color.html#aed61bfb193c5c64c0ac4aed09b033c33">console::color::Reset</a></div><div class="ttdeci">const char * Reset</div><div class="ttdoc">重置所有颜色/样式</div><div class="ttdef"><b>Definition</b> colorful.h:76</div></div>
-<div class="ttc" id="anamespaceconsole_1_1color_html_af0edce01b0636394afa3d0c17cde5ec5"><div class="ttname"><a href="namespaceconsole_1_1color.html#af0edce01b0636394afa3d0c17cde5ec5">console::color::Blue</a></div><div class="ttdeci">const char * Blue</div><div class="ttdoc">蓝色前景</div><div class="ttdef"><b>Definition</b> colorful.h:52</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
-进度条 (progress.h)</h2>
-<div class="fragment"><div class="line">std::vector&lt;int&gt; data(100);</div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; x : <a class="code hl_function" href="namespaceconsole.html#a01ca524918c855ebc0295b3d956e1df3">progress</a>(data, <a class="code hl_function" href="namespaceconsole_1_1_progress_style.html#aacd7d65694d887d7e988c4669e5d4621">ProgressStyle::normal</a>())) {</div>
-<div class="line">    <span class="comment">// 处理，自动刷新进度条</span></div>
+Console Styling / 控制台样式</h1>
+<p><b><a class="el" href="colorful_8h.html" title="提供控制台颜色和样式修饰的 ANSI 转义序列常量。">colorful.h</a></b> contains ANSI escape codes for foreground/background colors and text styles (bold, italic, underline, blink, etc.). <b><a class="el" href="colorful_8h.html" title="提供控制台颜色和样式修饰的 ANSI 转义序列常量。">colorful.h</a></b> 提供了 ANSI 转义码，可以设置前景色、背景色、粗体、斜体、下划线、闪烁等样式。</p>
+<p>Just output <span class="tt">color::Red &lt;&lt; "text" &lt;&lt; color::Reset</span>. 直接输出 <span class="tt">color::Red &lt;&lt; "文本" &lt;&lt; color::Reset</span> 就能带颜色。</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
+Logging / 日志</h1>
+<p><b><a class="el" href="logging_8h.html" title="提供带颜色和级别的日志记录功能。">logging.h</a></b> offers a multilevel logger (<span class="tt">DEBUG</span>, <span class="tt">INFO</span>, <span class="tt">WARN</span>, <span class="tt">ERROR</span>, <span class="tt">FATAL</span>) with automatic timestamps, optional colors, and stream output. <b><a class="el" href="logging_8h.html" title="提供带颜色和级别的日志记录功能。">logging.h</a></b> 是一个多级别日志器，自带时间戳、可选彩色输出，支持流式输出。</p>
+<p>You can set the minimum level or enable/disable each level individually. <span class="tt">FATAL</span> throws a <span class="tt">fatal_logging</span> exception. 可以设置最低级别，也可以单独开关每个级别。<span class="tt">FATAL</span> 级别会抛出异常。</p>
+<p>A global instance <span class="tt"><a class="el" href="namespaceconsole.html#acbaf475571fc302bb67a313117b3ddcd" title="全局默认 logger 实例，启用颜色，级别 INFO。">console::logger</a></span> is ready to use. 全局实例 <span class="tt"><a class="el" href="namespaceconsole.html#acbaf475571fc302bb67a313117b3ddcd" title="全局默认 logger 实例，启用颜色，级别 INFO。">console::logger</a></span> 开箱即用。</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+Time &amp; Timing / 时间与计时</h1>
+<p><b><a class="el" href="time_8h.html" title="提供时间度量、计时、休眠和日期时间格式化功能。">time.h</a></b> defines a <span class="tt">Time</span> class that stores nanoseconds, with conversions to <span class="tt">us</span>, <span class="tt">ms</span>, <span class="tt">s</span>, <span class="tt">min</span>, <span class="tt">hr</span>. <b><a class="el" href="time_8h.html" title="提供时间度量、计时、休眠和日期时间格式化功能。">time.h</a></b> 定义了 <span class="tt">Time</span> 类，内部用纳秒存储，可以方便地转换成微秒、毫秒、秒、分、小时。</p>
+<ul>
+<li><span class="tt">now()</span> returns the current time point. 获取当前时间点</li>
+<li><span class="tt">timer(func, args...)</span> measures execution time. 测量函数执行时间</li>
+<li><span class="tt">sleep(Time)</span> sleeps for the given duration. 睡眠指定时长</li>
+<li><span class="tt">datetime()</span> returns a formatted local time string. 返回格式化的本地时间字符串</li>
+</ul>
+<p><b><a class="el" href="literals_8h.html" title="提供自定义字面量运算符，包括字符串字面量、时间字面量和格式化字符串字面量。">literals.h</a></b> adds user‑defined literals like <span class="tt">1_s</span>, <span class="tt">500_ms</span>, <span class="tt">3_min</span> (both integer and floating‑point). <b><a class="el" href="literals_8h.html" title="提供自定义字面量运算符，包括字符串字面量、时间字面量和格式化字符串字面量。">literals.h</a></b> 提供了自定义字面量：<span class="tt">1_s</span>、<span class="tt">500_ms</span>、<span class="tt">3_min</span>，整数和浮点数都支持。</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
+Random Numbers / 随机数</h1>
+<p><b><a class="el" href="random_8h.html" title="提供随机数生成、随机选择、随机打乱等实用工具。">random.h</a></b> provides a seeded Mersenne Twister engine. <b><a class="el" href="random_8h.html" title="提供随机数生成、随机选择、随机打乱等实用工具。">random.h</a></b> 提供了一个以真随机数种子初始化的梅森旋转引擎。</p>
+<ul>
+<li><span class="tt">randint&lt;T&gt;(min, max)</span> – uniform integer 均匀整数</li>
+<li><span class="tt">uniform&lt;T&gt;(min, max)</span> – uniform floating‑point 均匀浮点数</li>
+<li><span class="tt">choice(container)</span> – pick a random element 随机选择元素</li>
+<li><span class="tt">shuffle(container)</span> – Fisher‑Yates shuffle 随机打乱</li>
+</ul>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
+Regular Expressions / 正则表达式</h1>
+<p><b><a class="el" href="re_8h.html" title="提供正则表达式匹配、搜索、替换、分割等操作，接口类似 Python 的 re 模块。">re.h</a></b> emulates Python’s <span class="tt"><a class="el" href="namespacere.html" title="函数式正则表达式接口，模仿 Python 的 re 模块。">re</a></span> module. <b><a class="el" href="re_8h.html" title="提供正则表达式匹配、搜索、替换、分割等操作，接口类似 Python 的 re 模块。">re.h</a></b> 模仿了 Python 的 <span class="tt"><a class="el" href="namespacere.html" title="函数式正则表达式接口，模仿 Python 的 re 模块。">re</a></span> 模块。</p>
+<ul>
+<li><span class="tt">Regex</span> class (compiled pattern) with methods: <span class="tt">search</span>, <span class="tt">match</span>, <span class="tt">fullmatch</span>, <span class="tt">findall</span>, <span class="tt">finditer</span>, <span class="tt">split</span>, <span class="tt">sub</span>, <span class="tt">subn</span>. <span class="tt">Regex</span> 类（编译后的模式）支持搜索、全匹配、查找全部、分割、替换等。</li>
+<li>Namespace <span class="tt"><a class="el" href="namespacere.html" title="函数式正则表达式接口，模仿 Python 的 re 模块。">re</a></span> provides functional versions: <span class="tt">re::search</span>, <span class="tt">re::sub</span>, etc. 命名空间 <span class="tt"><a class="el" href="namespacere.html" title="函数式正则表达式接口，模仿 Python 的 re 模块。">re</a></span> 提供了函数式接口，用起来和 Python 基本一样。</li>
+<li><span class="tt">re::escape</span> escapes regex metacharacters. 自动转义特殊字符。</li>
+</ul>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> m = re::search(R<span class="stringliteral">&quot;(\d+)&quot;, </span><span class="stringliteral">&quot;price: 123&quot;</span>);</div>
+<div class="line"><span class="keywordflow">if</span> (m) cout &lt;&lt; m.group();   <span class="comment">// &quot;123&quot;</span></div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
+File System / 文件系统</h1>
+<p><b><a class="el" href="file_8h.html" title="提供跨平台的文件路径封装和文件 I/O 操作。">file.h</a></b> provides a <span class="tt">Path</span> class with automatic path separator conversion on Windows. <b><a class="el" href="file_8h.html" title="提供跨平台的文件路径封装和文件 I/O 操作。">file.h</a></b> 提供了 <span class="tt">Path</span> 类，在 Windows 上会自动转换路径分隔符。</p>
+<ul>
+<li><span class="tt">read_text()</span> / <span class="tt">write_text()</span> – text mode 文本读写</li>
+<li><span class="tt">read_binary()</span> / <span class="tt">write_binary()</span> – binary mode 二进制读写</li>
+<li><span class="tt">read_lines()</span> / <span class="tt">write_lines()</span> – line‑oriented 按行读写</li>
+<li><span class="tt">read_POD&lt;T&gt;()</span> / <span class="tt">write_POD()</span> – read/write trivially copyable types (with <span class="tt">static_assert</span> safety) 读写平凡可复制类型，编译时检查类型安全性</li>
+<li><span class="tt">exists()</span>, <span class="tt">touch()</span>, <span class="tt">ensure()</span> – file existence and creation utilities 检查存在、创建空文件、确保文件存在</li>
+</ul>
+<p>All I/O operations throw <span class="tt">file_error</span> on failure. 所有文件操作失败都会抛出 <span class="tt">file_error</span>。</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
+Progress Bar / 进度条</h1>
+<p><b><a class="el" href="progress_8h.html" title="提供非侵入式的容器遍历进度条显示。">progress.h</a></b> lets you wrap any container and automatically display a progress bar while iterating. <b><a class="el" href="progress_8h.html" title="提供非侵入式的容器遍历进度条显示。">progress.h</a></b> 可以包装任何容器，在遍历时自动显示进度条。</p>
+<p>Customizable appearance: width, fill character, empty character, prefix/suffix, percentage on/off. 可以自定义宽度、填充字符、空字符、前缀后缀、是否显示百分比。</p>
+<p>Pre‑defined styles: <span class="tt">ProgressStyle::normal()</span>, <span class="tt">simple()</span>, <span class="tt">beautiful()</span> (uses Unicode block characters). 内置了几种风格：常规、简洁、美观（使用 Unicode 方块字符）。</p>
+<div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; x : progress(my_vector)) {</div>
+<div class="line">    <span class="comment">// your code</span></div>
 <div class="line">}</div>
-<div class="line"><span class="comment">// 内置样式：normal(), beautiful() (Unicode块)</span></div>
-<div class="ttc" id="anamespaceconsole_1_1_progress_style_html_aacd7d65694d887d7e988c4669e5d4621"><div class="ttname"><a href="namespaceconsole_1_1_progress_style.html#aacd7d65694d887d7e988c4669e5d4621">console::ProgressStyle::normal</a></div><div class="ttdeci">const ProgressConfig &amp; normal()</div><div class="ttdoc">普通样式：宽度 50，填充 &#39;#&#39;，空白 &#39;.&#39;，前后缀 &quot;[]&quot;，显示百分比。</div><div class="ttdef"><b>Definition</b> progress.h:252</div></div>
-<div class="ttc" id="anamespaceconsole_html_a01ca524918c855ebc0295b3d956e1df3"><div class="ttname"><a href="namespaceconsole.html#a01ca524918c855ebc0295b3d956e1df3">console::progress</a></div><div class="ttdeci">auto progress(Cont &amp;&amp;cont, const ProgressConfig &amp;pc={}) -&gt; Progress&lt; decltype(std::begin(cont))&gt;</div><div class="ttdoc">创建进度条对象的辅助函数（自动推导容器类型）。</div><div class="ttdef"><b>Definition</b> progress.h:296</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
-文件操作 (file.h)</h2>
-<p><span class="tt">Path</span> 类，自动处理 Windows 分隔符。</p>
-<div class="fragment"><div class="line"><a class="code hl_class" href="classconsole_1_1_path.html">Path</a> file(<span class="stringliteral">&quot;data.txt&quot;</span>);</div>
-<div class="line">file.write_text(<span class="stringliteral">&quot;Hello&quot;</span>);</div>
-<div class="line">std::string s = file.read_text();</div>
-<div class="line">file.write_lines({<span class="stringliteral">&quot;line1&quot;</span>,<span class="stringliteral">&quot;line2&quot;</span>});</div>
-<div class="line"><span class="keyword">auto</span> lines = file.read_lines();</div>
-<div class="line">file.write_binary({0x01,0x02});</div>
-<div class="line"><span class="keyword">auto</span> bin = file.read_binary();</div>
-<div class="line"><span class="keyword">struct </span>Point { <span class="keywordtype">int</span> x,y; };</div>
-<div class="line">file.write_POD(Point{10,20});</div>
-<div class="line"><span class="keyword">auto</span> p = file.read_POD&lt;Point&gt;();</div>
-<div class="line"><a class="code hl_class" href="classconsole_1_1_path.html">Path</a> backup = <a class="code hl_class" href="classconsole_1_1_path.html">Path</a>(<span class="stringliteral">&quot;backup&quot;</span>) / <span class="stringliteral">&quot;data.txt&quot;</span>;</div>
-<div class="line"><span class="keywordflow">if</span> (!file.exists()) file.<a class="code hl_function" href="classconsole_1_1_path.html#a2f51647c813e4eb3b600ec49197537da">touch</a>();</div>
-<div class="ttc" id="aclassconsole_1_1_path_html_a2f51647c813e4eb3b600ec49197537da"><div class="ttname"><a href="classconsole_1_1_path.html#a2f51647c813e4eb3b600ec49197537da">console::Path::touch</a></div><div class="ttdeci">void touch()</div><div class="ttdoc">创建空文件（若已存在则更新访问和修改时间）。</div><div class="ttdef"><b>Definition</b> file.h:277</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
-异构容器 (box.h)</h2>
-<p><span class="tt">Item</span> 擦除类型，<span class="tt">Box</span> 是 <span class="tt">vector&lt;Item&gt;</span>。</p>
-<div class="fragment"><div class="line"><a class="code hl_class" href="classconsole_1_1_box.html">Box</a> box(42, 3.14, <span class="stringliteral">&quot;hello&quot;</span>);</div>
-<div class="line"><span class="keywordtype">int</span> i = box.get&lt;<span class="keywordtype">int</span>&gt;(0);        <span class="comment">// 42，类型不匹配抛 bad_get</span></div>
-<div class="line"><span class="keywordtype">double</span> d = box.get&lt;<span class="keywordtype">double</span>&gt;(1);</div>
-<div class="line"><span class="keywordtype">int</span> a; <span class="keywordtype">double</span> b; std::string c;</div>
-<div class="line">box.unpack(a, b, c);            <span class="comment">// 解包</span></div>
-<div class="line">std::cout &lt;&lt; box;               <span class="comment">// (42, 3.14, &quot;hello&quot;)</span></div>
-<div class="ttc" id="aclassconsole_1_1_box_html"><div class="ttname"><a href="classconsole_1_1_box.html">console::Box</a></div><div class="ttdoc">存储多个 Item 的异构容器。</div><div class="ttdef"><b>Definition</b> box.h:281</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
-多维数组 (multiarray.h)</h2>
-<p><span class="tt">MultiArray&lt;T, Dims...&gt;</span> 编译期固定维度，连续存储。</p>
-<div class="fragment"><div class="line"><a class="code hl_class" href="classconsole_1_1_multi_array.html">MultiArray&lt;int, 2, 2&gt;</a> mat{1,2,3,4};   <span class="comment">// [[1,2],[3,4]]</span></div>
-<div class="line">mat[0][1] = 99;</div>
-<div class="line"><span class="keywordtype">int</span> val = mat(1,1);                    <span class="comment">// 边界检查</span></div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> it = mat.fbegin(); it != mat.fend(); ++it) *it *= 2;</div>
-<div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="group__multiarray__stats.html#gac77dd17c6c6aabf513856c4e41f2aa51">sum</a> = mat + mat;                  <span class="comment">// 逐元素</span></div>
-<div class="line"><span class="keyword">auto</span> cmp = mat == 42;                  <span class="comment">// MultiArray&lt;bool,2,2&gt;</span></div>
-<div class="line"><span class="keywordtype">int</span> total = <a class="code hl_function" href="group__multiarray__stats.html#gac77dd17c6c6aabf513856c4e41f2aa51">sum</a>(mat);</div>
-<div class="line"><span class="keywordtype">int</span> minv = <a class="code hl_function" href="group__multiarray__stats.html#ga3c082110bc9f1bccd134f037cbc80d2b">min</a>(mat);</div>
-<div class="line"><span class="keyword">auto</span> flat = <a class="code hl_function" href="group__multiarray__cast.html#ga458d4b0a19e6e7a191174b83abe92006">multiarray_cast&lt;4&gt;</a>(mat);   <span class="comment">// 形状转换</span></div>
-<div class="ttc" id="agroup__multiarray__cast_html_ga458d4b0a19e6e7a191174b83abe92006"><div class="ttname"><a href="group__multiarray__cast.html#ga458d4b0a19e6e7a191174b83abe92006">console::multiarray_cast</a></div><div class="ttdeci">MultiArray&lt; VarType, OutArrDims... &gt; multiarray_cast(const MultiArray&lt; VarType, InArrDims... &gt; &amp;inputArr)</div><div class="ttdoc">改变 MultiArray 的维度形状（元素类型不变），要求总元素数相同。</div><div class="ttdef"><b>Definition</b> multiarray.h:1595</div></div>
-<div class="ttc" id="agroup__multiarray__stats_html_ga3c082110bc9f1bccd134f037cbc80d2b"><div class="ttname"><a href="group__multiarray__stats.html#ga3c082110bc9f1bccd134f037cbc80d2b">console::min</a></div><div class="ttdeci">T min(const MultiArray&lt; T, Dims... &gt; &amp;a)</div><div class="ttdoc">求最小值。</div><div class="ttdef"><b>Definition</b> multiarray.h:1535</div></div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md24"></a>
+Multi‑dimensional Arrays / 多维数组</h1>
+<p><b><a class="el" href="multiarray_8h.html" title="提供编译期维度固定的多维数组容器 MultiArray，支持任意维度和元素级算术/逻辑/位运算。">multiarray.h</a></b> provides <span class="tt">MultiArray&lt;T, Dims...&gt;</span> – a fixed‑size multidimensional array built from recursive <span class="tt">std::array</span>. <b><a class="el" href="multiarray_8h.html" title="提供编译期维度固定的多维数组容器 MultiArray，支持任意维度和元素级算术/逻辑/位运算。">multiarray.h</a></b> 提供了 <span class="tt">MultiArray&lt;T, Dims...&gt;</span>，一个编译期固定维度的多维数组，内部递归继承自 <span class="tt">std::array</span>。</p>
+<ul>
+<li>Bounds‑checked access with <span class="tt">operator()</span>. 用 <span class="tt">operator()</span> 进行带边界检查的访问</li>
+<li>Element‑wise arithmetic, comparison, logical, bitwise operators (array‑array and array‑scalar). 支持逐元素的算术、比较、逻辑、位运算，既可以是两个数组，也可以是数组和标量。</li>
+<li><span class="tt">flatten()</span>, <span class="tt">fbegin()</span>, <span class="tt">fend()</span> for linear iteration. 可以将多维数组展平为一维迭代。</li>
+<li><b><a class="el" href="matools_8h.html" title="提供 MultiArray 多维数组的数学工具函数。">matools.h</a></b> provides statistics (<span class="tt">mean</span>, <span class="tt">variance</span>, <span class="tt">stddev</span>), linear algebra (<span class="tt">dot</span>, <span class="tt">norm</span>, <span class="tt">matmul</span>, <span class="tt">transpose</span>, <span class="tt">cross</span>), trigonometry, exponent/log, random initialization, convolution, and more. <b><a class="el" href="matools_8h.html" title="提供 MultiArray 多维数组的数学工具函数。">matools.h</a></b> 提供了大量数学工具：统计、线性代数、三角函数、指数对数、随机初始化、卷积等。</li>
+</ul>
+<div class="fragment"><div class="line">MultiArray&lt;int, 3, 4&gt; mat;</div>
+<div class="line">mat(1,2) = 42;</div>
+<div class="line"><span class="keyword">auto</span> sum = <a class="code hl_function" href="group__multiarray__stats.html#gac77dd17c6c6aabf513856c4e41f2aa51">console::sum</a>(mat);</div>
 <div class="ttc" id="agroup__multiarray__stats_html_gac77dd17c6c6aabf513856c4e41f2aa51"><div class="ttname"><a href="group__multiarray__stats.html#gac77dd17c6c6aabf513856c4e41f2aa51">console::sum</a></div><div class="ttdeci">T sum(const MultiArray&lt; T, Dims... &gt; &amp;a)</div><div class="ttdoc">求和所有元素。</div><div class="ttdef"><b>Definition</b> multiarray.h:1522</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
-双指针游标 (cursor_ptr.h)</h2>
-<p>管理单个对象或数组，拥有原始指针和游标指针。</p>
-<div class="fragment"><div class="line"><a class="code hl_class" href="classconsole_1_1cursor__ptr.html">cursor_ptr&lt;int&gt;</a> p(<span class="keyword">new</span> <span class="keywordtype">int</span>(42));</div>
-<div class="line">*p = 100;</div>
-<div class="line"><a class="code hl_class" href="classconsole_1_1cursor__ptr.html">cursor_ptr&lt;int[]&gt;</a> arr(<span class="keyword">new</span> <span class="keywordtype">int</span>[5]{10,20,30,40,50});</div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;5; ++i) std::cout &lt;&lt; *arr++ &lt;&lt; <span class="charliteral">&#39; &#39;</span>;</div>
-<div class="line">arr -= 5;   <span class="comment">// 复位</span></div>
-<div class="ttc" id="aclassconsole_1_1cursor__ptr_html"><div class="ttname"><a href="classconsole_1_1cursor__ptr.html">console::cursor_ptr</a></div><div class="ttdoc">双指针游标智能指针（非数组版本）。</div><div class="ttdef"><b>Definition</b> cursor_ptr.h:50</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
-字面量 (literals.h)</h2>
-<div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceconsole_1_1literals.html">console::literals</a>;</div>
-<div class="line"><span class="keyword">auto</span> t = 100_ns;          <span class="comment">// Time</span></div>
-<div class="line"><span class="keyword">auto</span> fmt = <span class="stringliteral">&quot;Value: {}&quot;</span>_f; <span class="comment">// f_string</span></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md24"></a>
-容器视图 (view.h)</h2>
-<p>非拥有视图，保存迭代器对，支持切片和 <span class="tt">at()</span> 边界检查。</p>
-<div class="fragment"><div class="line">std::vector&lt;int&gt; vec = {0,1,2,3,4,5};</div>
-<div class="line"><a class="code hl_class" href="classconsole_1_1_view.html">View</a> v_all(vec);</div>
-<div class="line"><a class="code hl_class" href="classconsole_1_1_view.html">View</a> v_sub(vec, 1, 4);     <span class="comment">// 索引 1,2,3</span></div>
-<div class="line">std::cout &lt;&lt; v_sub[2];     <span class="comment">// 3</span></div>
-<div class="line">std::cout &lt;&lt; v_sub.at(10); <span class="comment">// 抛 index_error</span></div>
-<div class="line"><span class="keyword">auto</span> new_vec = v_sub.collect(); <span class="comment">// 复制到 vector</span></div>
-<div class="ttc" id="aclassconsole_1_1_view_html"><div class="ttname"><a href="classconsole_1_1_view.html">console::View</a></div><div class="ttdoc">容器的非拥有视图（可变版本）。</div><div class="ttdef"><b>Definition</b> view.h:54</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md25"></a>
-列表推导 (compre.h)</h2>
-<p><span class="tt">Comprehension&lt;T&gt;</span> 包装 <span class="tt">vector</span>，支持 <span class="tt">map</span>/<span class="tt">filter</span> 立即求值。</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> result = <a class="code hl_function" href="namespaceconsole.html#a783b1141168975de7c5a74ddc622313b">compre</a>({1,2,3,4,5,6,7,8,9})</div>
-<div class="line">    .filter([](<span class="keywordtype">int</span> x){ <span class="keywordflow">return</span> x%2==1; })</div>
-<div class="line">    .map([](<span class="keywordtype">int</span> x){ <span class="keywordflow">return</span> x*x; });</div>
-<div class="line">std::vector&lt;int&gt; squares = result.to&lt;std::vector&lt;int&gt;&gt;();</div>
-<div class="ttc" id="anamespaceconsole_html_a783b1141168975de7c5a74ddc622313b"><div class="ttname"><a href="namespaceconsole.html#a783b1141168975de7c5a74ddc622313b">console::compre</a></div><div class="ttdeci">auto compre(const Cont &amp;cont) -&gt; Comprehension&lt; typename Cont::value_type &gt;</div><div class="ttdoc">从容器（左值）创建 Comprehension。</div><div class="ttdef"><b>Definition</b> compre.h:194</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md26"></a>
-SFINAE 工具 (sfinae.h)</h2>
-<p>编译期类型特征。</p>
-<div class="fragment"><div class="line"><a class="code hl_struct" href="structconsole_1_1is__container.html">is_container&lt;std::vector&lt;int&gt;</a>&gt;::value;      <span class="comment">// true</span></div>
-<div class="line"><a class="code hl_struct" href="structconsole_1_1is__callable.html">is_callable</a>&lt;<span class="keyword">decltype</span>([](int){}), <span class="keywordtype">int</span>&gt;::value;</div>
-<div class="line"><a class="code hl_struct" href="structconsole_1_1is__string.html">is_string&lt;std::string&gt;::value</a>;              <span class="comment">// true</span></div>
-<div class="line"><a class="code hl_struct" href="structconsole_1_1is__printable.html">is_printable&lt;int&gt;::value</a>;</div>
-<div class="line"><a class="code hl_typedef" href="group__sfinae.html#ga82c89e246da9bcf5d1cc583c45955b3d">enable_if_string&lt;T&gt;</a> foo(T&amp;&amp; s);             <span class="comment">// 只接受字符串</span></div>
-<div class="ttc" id="agroup__sfinae_html_ga82c89e246da9bcf5d1cc583c45955b3d"><div class="ttname"><a href="group__sfinae.html#ga82c89e246da9bcf5d1cc583c45955b3d">console::enable_if_string</a></div><div class="ttdeci">typename std::enable_if&lt; is_string&lt; typename std::decay&lt; T &gt;::type &gt;::value &gt;::type enable_if_string</div><div class="ttdoc">启用若 T（decay 后）是字符串类型。</div><div class="ttdef"><b>Definition</b> sfinae.h:337</div></div>
-<div class="ttc" id="astructconsole_1_1is__callable_html"><div class="ttname"><a href="structconsole_1_1is__callable.html">console::is_callable</a></div><div class="ttdoc">检测类型是否可作为函数对象以给定参数调用（返回 void 或可转换为 void）。</div><div class="ttdef"><b>Definition</b> sfinae.h:74</div></div>
-<div class="ttc" id="astructconsole_1_1is__container_html"><div class="ttname"><a href="structconsole_1_1is__container.html">console::is_container</a></div><div class="ttdoc">检测类型是否为容器（支持 std::begin 和 std::end）。</div><div class="ttdef"><b>Definition</b> sfinae.h:52</div></div>
-<div class="ttc" id="astructconsole_1_1is__printable_html"><div class="ttname"><a href="structconsole_1_1is__printable.html">console::is_printable</a></div><div class="ttdoc">检测类型是否支持输出到 std::ostream（即定义了 operator&lt;&lt;）。</div><div class="ttdef"><b>Definition</b> sfinae.h:214</div></div>
-<div class="ttc" id="astructconsole_1_1is__string_html"><div class="ttname"><a href="structconsole_1_1is__string.html">console::is_string</a></div><div class="ttdoc">检测类型是否为字符串类型（char*、stdstring、std::string_view 等）。</div><div class="ttdef"><b>Definition</b> sfinae.h:140</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md27"></a>
-正则表达式 (re.h)</h2>
-<p><span class="tt">Regex</span> 类，接口类似 Python <span class="tt"><a class="el" href="namespacere.html" title="函数式正则表达式接口，模仿 Python 的 re 模块。">re</a></span>。</p>
-<div class="fragment"><div class="line"><a class="code hl_class" href="classconsole_1_1_regex.html">Regex</a> <a class="code hl_namespace" href="namespacere.html">re</a>(R<span class="stringliteral">&quot;(\d+)&quot;);</span></div>
-<div class="line"><span class="stringliteral"></span><span class="keyword">auto</span> m = <a class="code hl_namespace" href="namespacere.html">re</a>.search(<span class="stringliteral">&quot;abc123def&quot;</span>);</div>
-<div class="line"><span class="keywordflow">if</span> (m) std::cout &lt;&lt; m.group();           <span class="comment">// &quot;123&quot;</span></div>
-<div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="group__multiarray__stats.html#ga098f089920a165b93d045817a3fef167">all</a> = <a class="code hl_namespace" href="namespacere.html">re</a>.findall(<span class="stringliteral">&quot;a1b2c3&quot;</span>);         <span class="comment">// [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;]</span></div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> match : <a class="code hl_namespace" href="namespacere.html">re</a>.finditer(<span class="stringliteral">&quot;a1b2c3&quot;</span>)) { <span class="comment">/* ... */</span> }</div>
-<div class="line"><span class="keyword">auto</span> parts = <a class="code hl_class" href="classconsole_1_1_regex.html">Regex</a>(R<span class="stringliteral">&quot;(\s+)&quot;).<a class="code hl_function" href="classconsole_1_1_regex.html#aa62abfe42c5c4557a777dcb255f9d26f">split</a>(</span><span class="stringliteral">&quot;a b  c&quot;</span>);  <span class="comment">// [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</span></div>
-<div class="line">std::string replaced = <a class="code hl_namespace" href="namespacere.html">re</a>.sub(<span class="stringliteral">&quot;X&quot;</span>, <span class="stringliteral">&quot;abc123def&quot;</span>); <span class="comment">// &quot;abcXdef&quot;</span></div>
-<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacere.html">re</a>;</div>
-<div class="line"><span class="keyword">auto</span> m2 = search(R<span class="stringliteral">&quot;(\d+)&quot;, </span><span class="stringliteral">&quot;hello 42&quot;</span>);</div>
-<div class="ttc" id="aclassconsole_1_1_regex_html"><div class="ttname"><a href="classconsole_1_1_regex.html">console::Regex</a></div><div class="ttdoc">正则表达式对象，封装编译后的模式，提供匹配、搜索、替换等功能。</div><div class="ttdef"><b>Definition</b> re.h:45</div></div>
-<div class="ttc" id="aclassconsole_1_1_regex_html_aa62abfe42c5c4557a777dcb255f9d26f"><div class="ttname"><a href="classconsole_1_1_regex.html#aa62abfe42c5c4557a777dcb255f9d26f">console::Regex::split</a></div><div class="ttdeci">std::vector&lt; std::string &gt; split(const std::string &amp;text, int maxsplit=0) const</div><div class="ttdoc">使用正则表达式分割字符串。</div><div class="ttdef"><b>Definition</b> re.h:263</div></div>
-<div class="ttc" id="anamespacere_html"><div class="ttname"><a href="namespacere.html">re</a></div><div class="ttdoc">函数式正则表达式接口，模仿 Python 的 re 模块。</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md28"></a>
-系统信息 (info.h)</h2>
-<div class="fragment"><div class="line"><a class="code hl_function" href="namespaceconsole.html#a6ccd5681285a96076ea9f1c469d46133">version</a>();   <span class="comment">// &quot;console v3.12.4&quot;</span></div>
-<div class="line"><a class="code hl_function" href="namespaceconsole.html#abc7ef1377ea73b6f5fbbd0d3f160a08a">platform</a>();  <span class="comment">// &quot;Windows&quot;, &quot;Linux&quot;, &quot;macOS&quot;</span></div>
-<div class="line"><a class="code hl_function" href="namespaceconsole.html#ac5b690be06e783e08433655fe48343ad">compiler</a>();  <span class="comment">// &quot;GCC 12.2&quot;, &quot;MSVC 1934&quot;</span></div>
-<div class="line"><a class="code hl_function" href="namespaceconsole.html#a102f3ee79a0df7c77068a3a3dc55b576">license</a>();   <span class="comment">// MIT 许可证文本</span></div>
-<div class="ttc" id="anamespaceconsole_html_a102f3ee79a0df7c77068a3a3dc55b576"><div class="ttname"><a href="namespaceconsole.html#a102f3ee79a0df7c77068a3a3dc55b576">console::license</a></div><div class="ttdeci">std::string license()</div><div class="ttdoc">返回 MIT 许可证全文。</div><div class="ttdef"><b>Definition</b> info.h:40</div></div>
-<div class="ttc" id="anamespaceconsole_html_abc7ef1377ea73b6f5fbbd0d3f160a08a"><div class="ttname"><a href="namespaceconsole.html#abc7ef1377ea73b6f5fbbd0d3f160a08a">console::platform</a></div><div class="ttdeci">std::string platform()</div><div class="ttdoc">返回当前操作系统平台名称。</div><div class="ttdef"><b>Definition</b> info.h:50</div></div>
-<div class="ttc" id="anamespaceconsole_html_ac5b690be06e783e08433655fe48343ad"><div class="ttname"><a href="namespaceconsole.html#ac5b690be06e783e08433655fe48343ad">console::compiler</a></div><div class="ttdeci">std::string compiler()</div><div class="ttdoc">返回当前使用的编译器名称和版本。</div><div class="ttdef"><b>Definition</b> info.h:68</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md29"></a>
-可选值 (maybe.h)</h2>
-<p><span class="tt">Maybe&lt;T&gt;</span> 类似 <span class="tt">std::optional</span>。</p>
-<div class="fragment"><div class="line"><a class="code hl_class" href="classconsole_1_1_maybe.html">Maybe&lt;int&gt;</a> m1;              <span class="comment">// 空</span></div>
-<div class="line"><a class="code hl_class" href="classconsole_1_1_maybe.html">Maybe&lt;int&gt;</a> m2(42);</div>
-<div class="line"><span class="keywordflow">if</span> (m2) std::cout &lt;&lt; m2.value();</div>
-<div class="line"><span class="keywordtype">int</span> y = m1.<a class="code hl_function" href="classconsole_1_1_maybe.html#a5bee084fa0c10c5101c9196688ec6bbc">value_or</a>(0);</div>
-<div class="line">m1 = <a class="code hl_variable" href="namespaceconsole.html#aab10e888085cc7484f384e43f187dbaf">nothing</a>;               <span class="comment">// 清空</span></div>
-<div class="line">std::cout &lt;&lt; m1;            <span class="comment">// &quot;(nothing)&quot;</span></div>
-<div class="line">std::cin &gt;&gt; m2;</div>
-<div class="ttc" id="aclassconsole_1_1_maybe_html_a5bee084fa0c10c5101c9196688ec6bbc"><div class="ttname"><a href="classconsole_1_1_maybe.html#a5bee084fa0c10c5101c9196688ec6bbc">console::Maybe::value_or</a></div><div class="ttdeci">T value_or(U &amp;&amp;default_value) const</div><div class="ttdoc">返回当前值，若为空则返回提供的默认值。</div><div class="ttdef"><b>Definition</b> maybe.h:258</div></div>
-<div class="ttc" id="anamespaceconsole_html_aab10e888085cc7484f384e43f187dbaf"><div class="ttname"><a href="namespaceconsole.html#aab10e888085cc7484f384e43f187dbaf">console::nothing</a></div><div class="ttdeci">struct console::@002045325103255016017112205301031250312272036216 nothing</div><div class="ttdoc">空状态标记对象，用于显式构造空的 Maybe。</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
-数学工具 (matools.h)</h2>
-<p>为 <span class="tt">MultiArray</span> 提供统计、线性代数、元素级函数等。</p>
-<div class="fragment"><div class="line"><a class="code hl_class" href="classconsole_1_1_multi_array.html">MultiArray&lt;double, 3&gt;</a> vec = {1,2,3};</div>
-<div class="line"><span class="keywordtype">double</span> s = <a class="code hl_function" href="group__multiarray__stats.html#gac77dd17c6c6aabf513856c4e41f2aa51">sum</a>(vec);           <span class="comment">// 6</span></div>
-<div class="line"><span class="keywordtype">double</span> m = <a class="code hl_function" href="group__matools.html#gaa52523dce981db3d239cf22aee9a6cbf">mean</a>(vec);          <span class="comment">// 2</span></div>
-<div class="line"><span class="keywordtype">double</span> dp = <a class="code hl_function" href="group__matools.html#gac196bcb3c6f61ad0f788689b4bcdf3b3">dot</a>(vec, vec);     <span class="comment">// 14</span></div>
-<div class="line"><span class="keywordtype">double</span> norm_v = <a class="code hl_function" href="group__matools.html#ga382ff09658ec0d2142668371c657ccfb">norm</a>(vec);     <span class="comment">// sqrt(14)</span></div>
-<div class="line"><span class="keyword">auto</span> unit = <a class="code hl_function" href="group__matools.html#gac584ebac4595db3dd177f9546d954127">normalize</a>(vec);</div>
-<div class="line"><a class="code hl_class" href="classconsole_1_1_multi_array.html">MultiArray&lt;double, 2,2&gt;</a> A = {1,2,3,4};</div>
-<div class="line"><span class="keyword">auto</span> I = <a class="code hl_function" href="group__matools.html#ga240d6f98b7a0488ddfa21abf6773c107">identity&lt;double, 2&gt;</a>(); <span class="comment">// 单位矩阵</span></div>
-<div class="line"><span class="keyword">auto</span> At = <a class="code hl_function" href="group__matools.html#gab151caaf2813dbb7bdc313eda4b0984c">transpose</a>(A);</div>
-<div class="line"><span class="keyword">auto</span> C = <a class="code hl_function" href="group__matools.html#ga5c6aa2e681a6e63242251494000eb7b0">matmul</a>(A, A);</div>
-<div class="line"><span class="keyword">auto</span> clipped = <a class="code hl_function" href="group__matools.html#ga5b0bf2dfbf953481a46f20253d613f19">clamp</a>(vec, 1.0, 2.0);</div>
-<div class="line"><a class="code hl_function" href="group__matools.html#ga1927ce38f336a9e66d62a5e0d1cd9175">randomize</a>(A, 0, 100);           <span class="comment">// 均匀随机整数</span></div>
-<div class="line"><a class="code hl_function" href="group__matools.html#gafbbc5c8f3eb35b682e9e993008158eeb">randomize_normal</a>(A, 0.0, 1.0);  <span class="comment">// 正态分布</span></div>
-<div class="line"><a class="code hl_function" href="group__matools.html#gac0e485c9d3bc0fa8d921ef04fbaa01d1">linspace</a>(vec, 0.0, 10.0);</div>
-<div class="line"><span class="keyword">auto</span> conv = <a class="code hl_function" href="group__matools.html#ga80745699b4fb096132d9e30c98e28d81">convolve1d</a>(vec, <a class="code hl_class" href="classconsole_1_1_multi_array.html">MultiArray&lt;double,3&gt;</a>{1,0,-1});</div>
-<div class="ttc" id="agroup__matools_html_ga1927ce38f336a9e66d62a5e0d1cd9175"><div class="ttname"><a href="group__matools.html#ga1927ce38f336a9e66d62a5e0d1cd9175">console::randomize</a></div><div class="ttdeci">void randomize(MultiArray&lt; T, Dims... &gt; &amp;arr, T min=0, T max=100)</div><div class="ttdoc">用均匀分布随机数填充数组。</div><div class="ttdef"><b>Definition</b> matools.h:347</div></div>
-<div class="ttc" id="agroup__matools_html_ga240d6f98b7a0488ddfa21abf6773c107"><div class="ttname"><a href="group__matools.html#ga240d6f98b7a0488ddfa21abf6773c107">console::identity</a></div><div class="ttdeci">MultiArray&lt; T, N, N &gt; identity()</div><div class="ttdoc">生成 N×N 的单位矩阵。</div><div class="ttdef"><b>Definition</b> matools.h:253</div></div>
-<div class="ttc" id="agroup__matools_html_ga382ff09658ec0d2142668371c657ccfb"><div class="ttname"><a href="group__matools.html#ga382ff09658ec0d2142668371c657ccfb">console::norm</a></div><div class="ttdeci">double norm(const MultiArray&lt; T, N &gt; &amp;a)</div><div class="ttdoc">计算向量的欧几里得范数（L2 范数）。</div><div class="ttdef"><b>Definition</b> matools.h:124</div></div>
-<div class="ttc" id="agroup__matools_html_ga5b0bf2dfbf953481a46f20253d613f19"><div class="ttname"><a href="group__matools.html#ga5b0bf2dfbf953481a46f20253d613f19">console::clamp</a></div><div class="ttdeci">MultiArray&lt; T, Dims... &gt; clamp(const MultiArray&lt; T, Dims... &gt; &amp;arr, T low, T high)</div><div class="ttdoc">将数组每个元素限制在 [low, high] 范围内。</div><div class="ttdef"><b>Definition</b> matools.h:304</div></div>
-<div class="ttc" id="agroup__matools_html_ga5c6aa2e681a6e63242251494000eb7b0"><div class="ttname"><a href="group__matools.html#ga5c6aa2e681a6e63242251494000eb7b0">console::matmul</a></div><div class="ttdeci">MultiArray&lt; T, M, K &gt; matmul(const MultiArray&lt; T, M, N &gt; &amp;A, const MultiArray&lt; T, N, K &gt; &amp;B)</div><div class="ttdoc">矩阵乘法（二维）。</div><div class="ttdef"><b>Definition</b> matools.h:217</div></div>
-<div class="ttc" id="agroup__matools_html_ga80745699b4fb096132d9e30c98e28d81"><div class="ttname"><a href="group__matools.html#ga80745699b4fb096132d9e30c98e28d81">console::convolve1d</a></div><div class="ttdeci">MultiArray&lt; T, N+K - 1 &gt; convolve1d(const MultiArray&lt; T, N &gt; &amp;signal, const MultiArray&lt; T, K &gt; &amp;kernel)</div><div class="ttdoc">一维卷积。</div><div class="ttdef"><b>Definition</b> matools.h:427</div></div>
-<div class="ttc" id="agroup__matools_html_gaa52523dce981db3d239cf22aee9a6cbf"><div class="ttname"><a href="group__matools.html#gaa52523dce981db3d239cf22aee9a6cbf">console::mean</a></div><div class="ttdeci">double mean(const MultiArray&lt; T, Dims... &gt; &amp;arr)</div><div class="ttdoc">计算 MultiArray 中所有元素的算术平均值。</div><div class="ttdef"><b>Definition</b> matools.h:62</div></div>
-<div class="ttc" id="agroup__matools_html_gab151caaf2813dbb7bdc313eda4b0984c"><div class="ttname"><a href="group__matools.html#gab151caaf2813dbb7bdc313eda4b0984c">console::transpose</a></div><div class="ttdeci">MultiArray&lt; T, N, M &gt; transpose(const MultiArray&lt; T, M, N &gt; &amp;A)</div><div class="ttdoc">矩阵转置。</div><div class="ttdef"><b>Definition</b> matools.h:237</div></div>
-<div class="ttc" id="agroup__matools_html_gac0e485c9d3bc0fa8d921ef04fbaa01d1"><div class="ttname"><a href="group__matools.html#gac0e485c9d3bc0fa8d921ef04fbaa01d1">console::linspace</a></div><div class="ttdeci">void linspace(MultiArray&lt; T, Dims... &gt; &amp;arr, T start, T end)</div><div class="ttdoc">用线性等间距值填充数组。</div><div class="ttdef"><b>Definition</b> matools.h:379</div></div>
-<div class="ttc" id="agroup__matools_html_gac196bcb3c6f61ad0f788689b4bcdf3b3"><div class="ttname"><a href="group__matools.html#gac196bcb3c6f61ad0f788689b4bcdf3b3">console::dot</a></div><div class="ttdeci">T dot(const MultiArray&lt; T, N &gt; &amp;a, const MultiArray&lt; T, N &gt; &amp;b)</div><div class="ttdoc">计算两个一维向量的点积。</div><div class="ttdef"><b>Definition</b> matools.h:111</div></div>
-<div class="ttc" id="agroup__matools_html_gac584ebac4595db3dd177f9546d954127"><div class="ttname"><a href="group__matools.html#gac584ebac4595db3dd177f9546d954127">console::normalize</a></div><div class="ttdeci">MultiArray&lt; T, N &gt; normalize(const MultiArray&lt; T, N &gt; &amp;a)</div><div class="ttdoc">将向量归一化为单位向量。</div><div class="ttdef"><b>Definition</b> matools.h:151</div></div>
-<div class="ttc" id="agroup__matools_html_gafbbc5c8f3eb35b682e9e993008158eeb"><div class="ttname"><a href="group__matools.html#gafbbc5c8f3eb35b682e9e993008158eeb">console::randomize_normal</a></div><div class="ttdeci">void randomize_normal(MultiArray&lt; T, Dims... &gt; &amp;arr, T mean=0, T stddev=1)</div><div class="ttdoc">用正态分布随机数填充数组。</div><div class="ttdef"><b>Definition</b> matools.h:363</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
-异常类 (csexc.h)</h2>
-<p>所有异常继承自 <span class="tt">console_error</span>（派生自 <span class="tt">std::runtime_error</span>）。</p>
-<div class="fragment"><div class="line"><span class="keywordflow">try</span> {</div>
-<div class="line">    <a class="code hl_class" href="classconsole_1_1_box.html">Box</a>().<a class="code hl_function" href="classconsole_1_1_box.html#a39d58dc89dbde6aeae54d5ad90056367">get</a>&lt;<span class="keywordtype">int</span>&gt;(0);</div>
-<div class="line">} <span class="keywordflow">catch</span> (<span class="keyword">const</span> <a class="code hl_class" href="classconsole_1_1bad__get.html">bad_get</a>&amp; e) {</div>
-<div class="line">} <span class="keywordflow">catch</span> (<span class="keyword">const</span> <a class="code hl_class" href="classconsole_1_1multiarray__error.html">multiarray_error</a>&amp; e) {</div>
-<div class="line">} <span class="keywordflow">catch</span> (<span class="keyword">const</span> <a class="code hl_class" href="classconsole_1_1file__error.html">file_error</a>&amp; e) {</div>
-<div class="line">} <span class="keywordflow">catch</span> (<span class="keyword">const</span> <a class="code hl_class" href="classconsole_1_1console__error.html">console_error</a>&amp; e) {</div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md26"></a>
+Optional Value / 可选值</h1>
+<p><b><a class="el" href="maybe_8h.html" title="提供类似 std::optional 的可选值容器 Maybe，支持空状态（nothing）。">maybe.h</a></b> gives <span class="tt">Maybe&lt;T&gt;</span> (similar to <span class="tt">std::optional</span>). <b><a class="el" href="maybe_8h.html" title="提供类似 std::optional 的可选值容器 Maybe，支持空状态（nothing）。">maybe.h</a></b> 提供了 <span class="tt">Maybe&lt;T&gt;</span>，类似 <span class="tt">std::optional</span>。</p>
+<ul>
+<li><span class="tt">nothing</span> tag to represent empty state. 用 <span class="tt">nothing</span> 表示空状态。</li>
+<li><span class="tt">value()</span> (throws <span class="tt">bad_maybe_access</span>), <span class="tt">value_or()</span>, <span class="tt">reset()</span>. 获取值（空时抛异常）、提供默认值、重置。</li>
+<li>Stream I/O is supported: reading an invalid value sets the <span class="tt">Maybe</span> to <span class="tt">nothing</span>. 支持流输入输出：输入失败时自动置为 <span class="tt">nothing</span>。</li>
+</ul>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md28"></a>
+Heterogeneous Container / 异构容器</h1>
+<p><b><a class="el" href="box_8h.html" title="提供可存储任意类型的异构容器（Box）和类型擦除包装器（Item）。">box.h</a></b> provides <span class="tt">Item</span> (type‑erased wrapper) and <span class="tt">Box</span> (a vector of <span class="tt">Item</span>). <b><a class="el" href="box_8h.html" title="提供可存储任意类型的异构容器（Box）和类型擦除包装器（Item）。">box.h</a></b> 提供了 <span class="tt">Item</span>（类型擦除包装器）和 <span class="tt">Box</span>（<span class="tt">Item</span> 的向量）。</p>
+<ul>
+<li><span class="tt">Item</span> can store any copyable type; <span class="tt">get&lt;T&gt;()</span> safely retrieves the value with type checking; <span class="tt">unsafe_get&lt;T&gt;</span> skips checks. <span class="tt">Item</span> 可以存储任意可拷贝类型；<span class="tt">get&lt;T&gt;()</span> 会检查类型是否匹配；<span class="tt">unsafe_get&lt;T&gt;</span> 不做检查。</li>
+<li><span class="tt">Box</span> can be constructed from mixed types, like <span class="tt">Box(1, "hello", 3.14)</span>. <span class="tt">Box</span> 可以用多种不同类型的值直接构造，例如 <span class="tt">Box(1, "hello", 3.14)</span>。</li>
+<li><span class="tt">unpack</span> extracts values into variables (type‑safe). <span class="tt">unpack</span> 可以把 <span class="tt">Box</span> 里的值按顺序解包到变量中，类型安全。</li>
+<li>Printing a <span class="tt">Box</span> looks like a tuple: <span class="tt">(1, hello, 3.14)</span>. 输出 <span class="tt">Box</span> 就像元组：<span class="tt">(1, hello, 3.14)</span>。</li>
+</ul>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
+Rational Numbers / 有理数</h1>
+<p><b><a class="el" href="rational_8h.html" title="提供运行时的分数运算。">rational.h</a></b> defines <span class="tt">BasicRational&lt;T&gt;</span> (requires signed integral <span class="tt">T</span>). <b><a class="el" href="rational_8h.html" title="提供运行时的分数运算。">rational.h</a></b> 定义了 <span class="tt">BasicRational&lt;T&gt;</span>，要求 <span class="tt">T</span> 是有符号整数类型。</p>
+<ul>
+<li>Arithmetic operators (<span class="tt">+</span>, <span class="tt">-</span>, <span class="tt">*</span>, <span class="tt">/</span>) with automatic reduction. 四则运算，自动约分。</li>
+<li>Comparison operators. 比较运算。</li>
+<li>Stream I/O (reads <span class="tt">a/b</span> or <span class="tt">a</span>). 支持流输入输出（可读 <span class="tt">a/b</span> 或 <span class="tt">a</span>）。</li>
+<li>Predefined aliases: <span class="tt">Rational</span> (<span class="tt">intmax_t</span>), <span class="tt">Rational_32</span>, <span class="tt">Rational_64</span>, etc. 预定义了常用别名，例如 <span class="tt">Rational</span>（用 <span class="tt">intmax_t</span>）、<span class="tt">Rational_32</span>、<span class="tt">Rational_64</span> 等。</li>
+</ul>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
+Views &amp; Iterators / 视图与迭代器</h1>
+<p><b><a class="el" href="view_8h.html" title="提供容器的非拥有视图（View），支持区间切片和便捷的工厂函数。">view.h</a></b> provides a non‑owning <span class="tt">View&lt;Container&gt;</span> representing a contiguous slice. <b><a class="el" href="view_8h.html" title="提供容器的非拥有视图（View），支持区间切片和便捷的工厂函数。">view.h</a></b> 提供了非拥有视图 <span class="tt">View&lt;Container&gt;</span>，表示容器的一个连续区间。</p>
+<ul>
+<li><span class="tt">size()</span>, <span class="tt">operator[]</span>, <span class="tt">at()</span> (bounds‑checked), <span class="tt">collect()</span> to copy into a new container. 支持大小、下标访问（带越界检查的 <span class="tt">at</span>）、<span class="tt">collect()</span> 复制到新容器。</li>
+<li>Factory <span class="tt">make_view</span> works with containers, iterator pairs, and raw pointers. 工厂函数 <span class="tt">make_view</span> 可以从容器、迭代器对、原生指针创建视图。</li>
+<li>Special printing for <span class="tt">View&lt;string&gt;</span> prints the concatenated string. <span class="tt">View&lt;string&gt;</span> 的输出会直接拼接所有字符串，不加中括号。</li>
+</ul>
+<p><b><a class="el" href="iter_8h.html" title="提供些许关于迭代器的拓展功能。">iter.h</a></b> provides <span class="tt">zip(c1, c2)</span> for parallel iteration (stops at the shorter sequence). <b><a class="el" href="iter_8h.html" title="提供些许关于迭代器的拓展功能。">iter.h</a></b> 提供了 <span class="tt">zip(c1, c2)</span>，可以同时遍历两个容器，在较短者结束时自动停止。</p>
+<ul>
+<li><span class="tt">IteratorPair</span> helps adapt iterator ranges for range‑based for loops. <span class="tt">IteratorPair</span> 可以把迭代器对包装成支持范围 for 循环的对象。</li>
+</ul>
+<div class="fragment"><div class="line">vector&lt;int&gt; a{1,2,3};</div>
+<div class="line">vector&lt;string&gt; b{<span class="stringliteral">&quot;a&quot;</span>,<span class="stringliteral">&quot;b&quot;</span>,<span class="stringliteral">&quot;c&quot;</span>};</div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> [x, y] : <a class="code hl_function" href="namespaceconsole.html#a9a28b8995980ff2e121a6f86eb76149f">zip</a>(a, b)) {</div>
+<div class="line">    <span class="comment">// x is int, y is string</span></div>
 <div class="line">}</div>
-<div class="ttc" id="aclassconsole_1_1_box_html_a39d58dc89dbde6aeae54d5ad90056367"><div class="ttname"><a href="classconsole_1_1_box.html#a39d58dc89dbde6aeae54d5ad90056367">console::Box::get</a></div><div class="ttdeci">T &amp; get(size_t index)</div><div class="ttdoc">类型安全地获取指定索引处的元素（非常量版本）。</div><div class="ttdef"><b>Definition</b> box.h:300</div></div>
-<div class="ttc" id="aclassconsole_1_1bad__get_html"><div class="ttname"><a href="classconsole_1_1bad__get.html">console::bad_get</a></div><div class="ttdoc">表示从 Item 或 Box 中获取类型不匹配或空值时发生的错误。</div><div class="ttdef"><b>Definition</b> csexc.h:105</div></div>
-<div class="ttc" id="aclassconsole_1_1console__error_html"><div class="ttname"><a href="classconsole_1_1console__error.html">console::console_error</a></div><div class="ttdoc">console 库所有异常的基类。</div><div class="ttdef"><b>Definition</b> csexc.h:44</div></div>
-<div class="ttc" id="aclassconsole_1_1file__error_html"><div class="ttname"><a href="classconsole_1_1file__error.html">console::file_error</a></div><div class="ttdoc">表示文件操作错误，如打开失败、读取失败等。</div><div class="ttdef"><b>Definition</b> csexc.h:89</div></div>
-<div class="ttc" id="aclassconsole_1_1multiarray__error_html"><div class="ttname"><a href="classconsole_1_1multiarray__error.html">console::multiarray_error</a></div><div class="ttdoc">表示 MultiArray 多维数组操作中的错误，如维度不匹配。</div><div class="ttdef"><b>Definition</b> csexc.h:120</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
-格式化表示 (repr.h)</h2>
-<div class="fragment"><div class="line"><a class="code hl_function" href="group__repr.html#gab16dfca7b068359547e9dbd3e9f8aca6">repr</a>(42);          <span class="comment">// &quot;42&quot;</span></div>
-<div class="line"><a class="code hl_function" href="group__repr.html#gab16dfca7b068359547e9dbd3e9f8aca6">repr</a>(<span class="stringliteral">&quot;hello&quot;</span>);     <span class="comment">// &quot;hello&quot; (带引号)</span></div>
-<div class="line"><a class="code hl_function" href="group__repr.html#gab16dfca7b068359547e9dbd3e9f8aca6">repr</a>(<span class="charliteral">&#39;a&#39;</span>);         <span class="comment">// &#39;a&#39;</span></div>
-<div class="line"><a class="code hl_function" href="group__repr.html#gab16dfca7b068359547e9dbd3e9f8aca6">repr</a>(<span class="keyword">nullptr</span>);     <span class="comment">// &quot;nullptr&quot;</span></div>
-<div class="line"><a class="code hl_function" href="group__repr.html#gac92082727845e0dceef09efcc1d8e953">tiname&lt;int&gt;</a>();     <span class="comment">// 可读类型名</span></div>
-<div class="ttc" id="agroup__repr_html_gab16dfca7b068359547e9dbd3e9f8aca6"><div class="ttname"><a href="group__repr.html#gab16dfca7b068359547e9dbd3e9f8aca6">console::repr</a></div><div class="ttdeci">enable_if_string&lt; T &gt; repr(T &amp;&amp;value, std::ostream &amp;os=std::cout)</div><div class="ttdoc">输出字符串类型（std::string, const char* 等）的表示，带双引号。</div><div class="ttdef"><b>Definition</b> repr.h:78</div></div>
-<div class="ttc" id="agroup__repr_html_gac92082727845e0dceef09efcc1d8e953"><div class="ttname"><a href="group__repr.html#gac92082727845e0dceef09efcc1d8e953">console::tiname</a></div><div class="ttdeci">std::string tiname(const std::type_info &amp;ti)</div><div class="ttdoc">获取类型信息的可读名称（跨平台 demangle）。</div><div class="ttdef"><b>Definition</b> repr.h:56</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
-Windows MIDI (win/melody.h)</h2>
-<p>需链接 <span class="tt">winmm</span>。</p>
-<div class="fragment"><div class="line"><a class="code hl_class" href="classconsole_1_1_m_i_d_i.html">MIDI</a> midi(<a class="code hl_enumvalue" href="namespaceconsole.html#ac3066e557db972dbb8670effba117592a122c178a05ade736c2cfdc2a6c2e4cc8">Instrument::AcousticGrandPiano</a>, 120, 100);</div>
-<div class="line">midi.play(<a class="code hl_struct" href="structconsole_1_1_note.html">Note</a>(<a class="code hl_variable" href="namespaceconsole_1_1pitches.html#afc2168f74980005c960a51f7d1ab6432">pitches::C4</a>, 1.0));      <span class="comment">// 同步</span></div>
-<div class="line">midi.nplay(<a class="code hl_struct" href="structconsole_1_1_note.html">Note</a>(<a class="code hl_variable" href="namespaceconsole_1_1pitches.html#a7257c4a12b9e9944f2029ed380129f38">pitches::E4</a>, 0.5));     <span class="comment">// 异步</span></div>
-<div class="line">midi.set_instrument(<a class="code hl_enumvalue" href="namespaceconsole.html#ac3066e557db972dbb8670effba117592a038810d0fea91e013692cedfdf517478">Instrument::Violin</a>);</div>
-<div class="line">midi.set_volume(80);</div>
-<div class="line">midi.set_bpm(140);</div>
+<div class="ttc" id="anamespaceconsole_html_a9a28b8995980ff2e121a6f86eb76149f"><div class="ttname"><a href="namespaceconsole.html#a9a28b8995980ff2e121a6f86eb76149f">console::zip</a></div><div class="ttdeci">IteratorPair&lt; TiedIterators&lt; typename C1::iterator, typename C2::iterator &gt; &gt; zip(C1 &amp;c1, C2 &amp;c2)</div><div class="ttdoc">将两个容器“拉链”式地绑定在一起，以便同时迭代。</div><div class="ttdef"><b>Definition</b> iter.h:168</div></div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
+Functional Comprehension / 函数式推导</h1>
+<p><b><a class="el" href="compre_8h.html" title="提供类似 Python 列表推导式的容器适配器，支持 map/filter 等函数式操作。">compre.h</a></b> gives <span class="tt">Comprehension&lt;T&gt;</span> – a container wrapper that supports <span class="tt">map</span>, <span class="tt">filter</span>, and conversion to other containers. **compre.h<span class="tt"> 提供了 </span>Comprehension&lt;T&gt;<span class="tt">，这是一个容器包装器，支持 </span>map<span class="tt">、</span>filter` 等操作，并可以转换成其他容器。</p>
+<ul>
+<li>Construct from any container, iterator pair, initializer list. 可以从任何容器、迭代器对、初始化列表构造。</li>
+<li><span class="tt">map(function)</span> applies transformation and returns a new <span class="tt">Comprehension</span>. <span class="tt">map</span> 对每个元素做变换，返回新的 <span class="tt">Comprehension</span>。</li>
+<li><span class="tt">filter(predicate)</span> keeps elements satisfying the condition. <span class="tt">filter</span> 筛选符合条件的元素。</li>
+<li><span class="tt">to&lt;Container&gt;()</span> moves elements into a new container (using move iterators). <span class="tt">to&lt;Container&gt;()</span> 将内部元素移动构造到目标容器。</li>
+<li><span class="tt">make()</span> copies elements. <span class="tt">make()</span> 拷贝元素到目标容器。</li>
+</ul>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> result = compre(vec)</div>
+<div class="line">                .map([](<span class="keywordtype">int</span> x){ <span class="keywordflow">return</span> x*2; })</div>
+<div class="line">                .filter([](<span class="keywordtype">int</span> x){ <span class="keywordflow">return</span> x&gt;5; })</div>
+<div class="line">                .to&lt;vector&lt;int&gt;&gt;();</div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
+Cursor Pointer / 游标指针</h1>
+<p><b><a class="el" href="cursor__ptr_8h.html" title="提供双指针游标智能指针，分离所有权与访问位置。">cursor_ptr.h</a></b> defines <span class="tt">cursor_ptr&lt;T&gt;</span> – a dual‑pointer smart pointer. <b><a class="el" href="cursor__ptr_8h.html" title="提供双指针游标智能指针，分离所有权与访问位置。">cursor_ptr.h</a></b> 定义了一个“双指针”智能指针 <span class="tt">cursor_ptr&lt;T&gt;</span>。</p>
+<ul>
+<li><span class="tt">original_ptr</span> owns the memory (deleted in destructor). <span class="tt">original_ptr</span> 持有内存所有权，析构时释放。</li>
+<li><span class="tt">current_ptr</span> points to the current position and supports pointer arithmetic. <span class="tt">current_ptr</span> 指向当前位置，支持指针运算。</li>
+<li>Copy constructor/assignment <b>do not</b> transfer ownership (only copy <span class="tt">current_ptr</span>). 拷贝构造/赋值**不转移所有权**，只复制 <span class="tt">current_ptr</span>。</li>
+<li>Move transfers ownership. 移动会转移所有权。</li>
+<li>Specialization for <span class="tt">T[]</span> uses <span class="tt">delete[]</span>. 对数组特化，使用 <span class="tt">delete[]</span>。</li>
+</ul>
+<p>Useful when you need separate ownership and view semantics. 适合需要分离所有权和游标访问的场景。</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
+User‑defined Literals / 自定义字面量</h1>
+<p><b><a class="el" href="literals_8h.html" title="提供自定义字面量运算符，包括字符串字面量、时间字面量和格式化字符串字面量。">literals.h</a></b> – inside <span class="tt">namespace <a class="el" href="namespaceconsole_1_1literals.html" title="包含自定义字面量运算符的命名空间。">console::literals</a></span>:</p>
+<ul>
+<li>Time literals: <span class="tt">_ns</span>, <span class="tt">_us</span>, <span class="tt">_ms</span>, <span class="tt">_s</span>, <span class="tt">_min</span>, <span class="tt">_hr</span> (both integer and floating‑point overloads). 时间字面量：纳秒、微秒、毫秒、秒、分钟、小时，整数和浮点数都支持。</li>
+<li>Format string literal: <span class="tt">"Hello {}"_f</span> returns an <span class="tt">f_string</span> that can be formatted with <span class="tt">%</span>. 格式化字符串字面量：返回 <span class="tt">f_string</span> 对象，可以用 <span class="tt">%</span> 替换 <span class="tt">{}</span> 占位符。</li>
+</ul>
+<div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceconsole_1_1literals.html">console::literals</a>;</div>
+<div class="line"><a class="code hl_class" href="classconsole_1_1_time.html">Time</a> t = 500_ms;</div>
+<div class="line"><span class="keyword">auto</span> msg = <span class="stringliteral">&quot;Value: {}&quot;</span>_f % 42;</div>
+<div class="ttc" id="aclassconsole_1_1_time_html"><div class="ttname"><a href="classconsole_1_1_time.html">console::Time</a></div><div class="ttdoc">表示以纳秒为单位的时间量，支持单位转换、算术运算和自动选择合适的输出单位。</div><div class="ttdef"><b>Definition</b> time.h:52</div></div>
+<div class="ttc" id="anamespaceconsole_1_1literals_html"><div class="ttname"><a href="namespaceconsole_1_1literals.html">console::literals</a></div><div class="ttdoc">包含自定义字面量运算符的命名空间。</div></div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md40"></a>
+Win32 MIDI / Win32 MIDI 音乐</h1>
+<p><b><a class="el" href="melody_8h.html" title="Windows 平台 MIDI 音乐播放库，支持乐器选择、音符播放和 BPM 控制。">win/melody.h</a></b> (Windows only, requires linking <span class="tt">winmm</span>). **win/melody.h**（仅 Windows，需要链接 <span class="tt">winmm</span> 库）。</p>
+<ul>
+<li><span class="tt">Instrument</span> enum (128 GM instruments). 枚举了 128 种 GM 标准乐器。</li>
+<li><span class="tt"><a class="el" href="namespacepitches.html" title="标准 MIDI 音高常量，包含中央 C4=60 的所有半音音高，以及休止符 REST。">pitches</a></span> namespace provides MIDI note numbers (C4 = 60, etc.) and <span class="tt">REST</span>. <span class="tt"><a class="el" href="namespacepitches.html" title="标准 MIDI 音高常量，包含中央 C4=60 的所有半音音高，以及休止符 REST。">pitches</a></span> 命名空间提供了 MIDI 音高常量（中央 C 是 60，还有休止符 <span class="tt">REST</span>）。</li>
+<li><span class="tt">Note</span> structure: pitch, duration (in quarter beats), velocity. <span class="tt">Note</span> 结构体：音高、时值（以四分音符为单位）、力度。</li>
+<li><span class="tt">MIDI</span> class: open device, set instrument/volume/BPM, play notes (synchronous <span class="tt">play</span> or asynchronous <span class="tt">nplay</span>). <span class="tt">MIDI</span> 类：打开设备、切换乐器、调节音量和速度、播放音符（同步 <span class="tt">play</span> 或异步 <span class="tt">nplay</span>）。</li>
+<li>Asynchronous play spawns a detached thread – be careful about object lifetime. 异步播放会启动分离线程，注意 MIDI 对象的生命周期要覆盖播放时间。</li>
+</ul>
+<div class="fragment"><div class="line"><a class="code hl_class" href="classconsole_1_1_m_i_d_i.html">MIDI</a> midi(<a class="code hl_enumvalue" href="namespaceconsole.html#ac3066e557db972dbb8670effba117592a122c178a05ade736c2cfdc2a6c2e4cc8">Instrument::AcousticGrandPiano</a>, 120);</div>
+<div class="line"><a class="code hl_struct" href="structconsole_1_1_note.html">Note</a> tune[] = {{<a class="code hl_variable" href="namespaceconsole_1_1pitches.html#afc2168f74980005c960a51f7d1ab6432">pitches::C4</a>, 1.0}, {<a class="code hl_variable" href="namespaceconsole_1_1pitches.html#a7257c4a12b9e9944f2029ed380129f38">pitches::E4</a>, 1.0}, {<a class="code hl_variable" href="namespaceconsole_1_1pitches.html#a70987caf38c1df9f84dcc62ed748356f">pitches::G4</a>, 2.0}};</div>
+<div class="line">midi.play(tune);</div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html">console::MIDI</a></div><div class="ttdoc">MIDI 输出设备控制器，支持乐器切换、音量调节、同步/异步播放音符序列。</div><div class="ttdef"><b>Definition</b> melody.h:254</div></div>
+<div class="ttc" id="anamespaceconsole_1_1pitches_html_a70987caf38c1df9f84dcc62ed748356f"><div class="ttname"><a href="namespaceconsole_1_1pitches.html#a70987caf38c1df9f84dcc62ed748356f">console::pitches::G4</a></div><div class="ttdeci">const int G4</div><div class="ttdef"><b>Definition</b> melody.h:199</div></div>
 <div class="ttc" id="anamespaceconsole_1_1pitches_html_a7257c4a12b9e9944f2029ed380129f38"><div class="ttname"><a href="namespaceconsole_1_1pitches.html#a7257c4a12b9e9944f2029ed380129f38">console::pitches::E4</a></div><div class="ttdeci">const int E4</div><div class="ttdef"><b>Definition</b> melody.h:199</div></div>
 <div class="ttc" id="anamespaceconsole_1_1pitches_html_afc2168f74980005c960a51f7d1ab6432"><div class="ttname"><a href="namespaceconsole_1_1pitches.html#afc2168f74980005c960a51f7d1ab6432">console::pitches::C4</a></div><div class="ttdeci">const int C4</div><div class="ttdef"><b>Definition</b> melody.h:199</div></div>
-<div class="ttc" id="anamespaceconsole_html_ac3066e557db972dbb8670effba117592a038810d0fea91e013692cedfdf517478"><div class="ttname"><a href="namespaceconsole.html#ac3066e557db972dbb8670effba117592a038810d0fea91e013692cedfdf517478">console::Instrument::Violin</a></div><div class="ttdeci">@ Violin</div><div class="ttdoc">小提琴</div><div class="ttdef"><b>Definition</b> melody.h:97</div></div>
 <div class="ttc" id="anamespaceconsole_html_ac3066e557db972dbb8670effba117592a122c178a05ade736c2cfdc2a6c2e4cc8"><div class="ttname"><a href="namespaceconsole.html#ac3066e557db972dbb8670effba117592a122c178a05ade736c2cfdc2a6c2e4cc8">console::Instrument::AcousticGrandPiano</a></div><div class="ttdeci">@ AcousticGrandPiano</div><div class="ttdoc">大钢琴 (默认)</div><div class="ttdef"><b>Definition</b> melody.h:57</div></div>
 <div class="ttc" id="astructconsole_1_1_note_html"><div class="ttname"><a href="structconsole_1_1_note.html">console::Note</a></div><div class="ttdoc">表示一个音符，包含音高、时值和力度。</div><div class="ttdef"><b>Definition</b> melody.h:230</div></div>
 </div><!-- fragment --><hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
-编译要求</h1>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md42"></a>
+Requirements / 要求</h1>
 <ul>
-<li>编译器：C++11 或更高（GCC 5+, Clang 3.6+, MSVC 2015+）</li>
-<li>仅依赖 C++ 标准库</li>
-<li>Windows MIDI 需要链接 <span class="tt">winmm</span>（如 <span class="tt">-lwinmm</span>）</li>
+<li><b>C++11</b> or later. 需要 C++11 或更高版本。</li>
+<li><b>Header‑only</b> – just include what you need. 纯头文件，包含即用。</li>
+<li><b>Cross‑platform</b> (MIDI part is Windows‑only, everything else works on Linux/macOS as well). 跨平台（MIDI 仅 Windows，其他模块在 Linux/macOS 也能用）。</li>
 </ul>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
-许可证</h1>
-<p>MIT License © 2026 MrXie1109</p>
-<p>完整文档：<a href="https://mrxie1109.github.io/console---make-cpp-easy/">console 库文档</a> </p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md44"></a>
+License / 许可证</h1>
+<p>MIT © MrXie1109</p>
+<p>For complete documentation, examples, and migration guides, visit: 完整文档、示例和迁移指南请访问： 👉 <a href="https://mrxie1109.github.io/console---make-cpp-easy">mrxie1109.github.io/console&mdash;make-cpp-easy</a> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

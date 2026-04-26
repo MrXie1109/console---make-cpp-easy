@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['sfinae_20工具_20sfinae_20h_0',['SFINAE 工具 (sfinae.h)',['../md__r_e_a_d_m_e.html#autotoc_md26',1,'']]],
-  ['sfinae_20h_1',['SFINAE 工具 (sfinae.h)',['../md__r_e_a_d_m_e.html#autotoc_md26',1,'']]],
-  ['strpp_20h_2',['字符串处理 (strpp.h)',['../md__r_e_a_d_m_e.html#autotoc_md16',1,'']]]
+  ['optional_20value_20可选值_0',['Optional Value / 可选值',['../md__r_e_a_d_m_e.html#autotoc_md26',1,'']]],
+  ['output_20输入与输出_1',['Input &amp;amp; Output / 输入与输出',['../md__r_e_a_d_m_e.html#autotoc_md8',1,'']]]
 ];

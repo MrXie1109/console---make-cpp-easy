@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yellow_0',['Yellow',['../namespaceconsole_1_1color.html#a8c24ae11d31fa9c6e9c95d8871c91d70',1,'console::color']]]
+  ['xylophone_0',['Xylophone',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592af18860f5f0fba9efa3b4c3c0a07edede',1,'console']]]
 ];

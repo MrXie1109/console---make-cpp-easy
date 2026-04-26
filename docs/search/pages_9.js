@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['random_20h_0',['随机数 (random.h)',['../md__r_e_a_d_m_e.html#autotoc_md15',1,'']]],
-  ['re_20h_1',['正则表达式 (re.h)',['../md__r_e_a_d_m_e.html#autotoc_md27',1,'']]],
-  ['repr_20h_2',['格式化表示 (repr.h)',['../md__r_e_a_d_m_e.html#autotoc_md32',1,'']]]
+  ['numbers_20有理数_0',['Rational Numbers / 有理数',['../md__r_e_a_d_m_e.html#autotoc_md30',1,'']]],
+  ['numbers_20随机数_1',['Random Numbers / 随机数',['../md__r_e_a_d_m_e.html#autotoc_md16',1,'']]]
 ];

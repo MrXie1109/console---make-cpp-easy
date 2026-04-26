@@ -25,38 +25,29 @@
 var NAVTREE =
 [
   [ "Console Library", "index.html", [
-    [ "console 库 / console Library", "md__r_e_a_d_m_e.html", [
-      [ "目录", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
-      [ "特性", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
-      [ "模块概览", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
-      [ "快速开始", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
-      [ "详细使用指南", "md__r_e_a_d_m_e.html#autotoc_md10", [
-        [ "输出 (output.h)", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
-        [ "输入 (input.h)", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
-        [ "日志 (logging.h)", "md__r_e_a_d_m_e.html#autotoc_md13", null ],
-        [ "时间 (time.h)", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
-        [ "随机数 (random.h)", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
-        [ "字符串处理 (strpp.h)", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
-        [ "颜色 (colorful.h)", "md__r_e_a_d_m_e.html#autotoc_md17", null ],
-        [ "进度条 (progress.h)", "md__r_e_a_d_m_e.html#autotoc_md18", null ],
-        [ "文件操作 (file.h)", "md__r_e_a_d_m_e.html#autotoc_md19", null ],
-        [ "异构容器 (box.h)", "md__r_e_a_d_m_e.html#autotoc_md20", null ],
-        [ "多维数组 (multiarray.h)", "md__r_e_a_d_m_e.html#autotoc_md21", null ],
-        [ "双指针游标 (cursor_ptr.h)", "md__r_e_a_d_m_e.html#autotoc_md22", null ],
-        [ "字面量 (literals.h)", "md__r_e_a_d_m_e.html#autotoc_md23", null ],
-        [ "容器视图 (view.h)", "md__r_e_a_d_m_e.html#autotoc_md24", null ],
-        [ "列表推导 (compre.h)", "md__r_e_a_d_m_e.html#autotoc_md25", null ],
-        [ "SFINAE 工具 (sfinae.h)", "md__r_e_a_d_m_e.html#autotoc_md26", null ],
-        [ "正则表达式 (re.h)", "md__r_e_a_d_m_e.html#autotoc_md27", null ],
-        [ "系统信息 (info.h)", "md__r_e_a_d_m_e.html#autotoc_md28", null ],
-        [ "可选值 (maybe.h)", "md__r_e_a_d_m_e.html#autotoc_md29", null ],
-        [ "数学工具 (matools.h)", "md__r_e_a_d_m_e.html#autotoc_md30", null ],
-        [ "异常类 (csexc.h)", "md__r_e_a_d_m_e.html#autotoc_md31", null ],
-        [ "格式化表示 (repr.h)", "md__r_e_a_d_m_e.html#autotoc_md32", null ],
-        [ "Windows MIDI (win/melody.h)", "md__r_e_a_d_m_e.html#autotoc_md33", null ]
-      ] ],
-      [ "编译要求", "md__r_e_a_d_m_e.html#autotoc_md35", null ],
-      [ "许可证", "md__r_e_a_d_m_e.html#autotoc_md37", null ]
+    [ "console – Make C++ Easy / 让 C++ 变简单", "md__r_e_a_d_m_e.html", [
+      [ "Quick Index / 快速索引", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
+      [ "Core Utilities / 核心工具", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
+      [ "String Processing / 字符串处理", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
+      [ "Input &amp; Output / 输入与输出", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
+      [ "Console Styling / 控制台样式", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
+      [ "Logging / 日志", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
+      [ "Time &amp; Timing / 时间与计时", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
+      [ "Random Numbers / 随机数", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
+      [ "Regular Expressions / 正则表达式", "md__r_e_a_d_m_e.html#autotoc_md18", null ],
+      [ "File System / 文件系统", "md__r_e_a_d_m_e.html#autotoc_md20", null ],
+      [ "Progress Bar / 进度条", "md__r_e_a_d_m_e.html#autotoc_md22", null ],
+      [ "Multi‑dimensional Arrays / 多维数组", "md__r_e_a_d_m_e.html#autotoc_md24", null ],
+      [ "Optional Value / 可选值", "md__r_e_a_d_m_e.html#autotoc_md26", null ],
+      [ "Heterogeneous Container / 异构容器", "md__r_e_a_d_m_e.html#autotoc_md28", null ],
+      [ "Rational Numbers / 有理数", "md__r_e_a_d_m_e.html#autotoc_md30", null ],
+      [ "Views &amp; Iterators / 视图与迭代器", "md__r_e_a_d_m_e.html#autotoc_md32", null ],
+      [ "Functional Comprehension / 函数式推导", "md__r_e_a_d_m_e.html#autotoc_md34", null ],
+      [ "Cursor Pointer / 游标指针", "md__r_e_a_d_m_e.html#autotoc_md36", null ],
+      [ "User‑defined Literals / 自定义字面量", "md__r_e_a_d_m_e.html#autotoc_md38", null ],
+      [ "Win32 MIDI / Win32 MIDI 音乐", "md__r_e_a_d_m_e.html#autotoc_md40", null ],
+      [ "Requirements / 要求", "md__r_e_a_d_m_e.html#autotoc_md42", null ],
+      [ "License / 许可证", "md__r_e_a_d_m_e.html#autotoc_md44", null ]
     ] ],
     [ "Topics", "topics.html", "topics" ],
     [ "Namespaces", "namespaces.html", [
@@ -97,12 +88,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "all_8h.html",
-"classconsole_1_1_multi_array_3_01_t_00_01_first_00_01_rest_8_8_8_01_4.html#a1daded307ab327df97b833f4caa36ec4",
-"classconsole_1_1_view_3_01const_01_container_01_4.html#aadbc8e7c4920373ff2789b38b9eac8d1",
-"functions_vars.html",
-"md__r_e_a_d_m_e.html#autotoc_md17",
-"namespaceconsole_1_1literals.html#ac030ae4363661fe9729682a753f35c4a",
-"structconsole_1_1uniform__distribution__impl.html"
+"classconsole_1_1_multi_array_3_01_t_00_01_d_01_4.html#a2f12cb3aea8b2af68553270b888a09e7",
+"classconsole_1_1_time.html#a53616d1600f01f0f63cd297c615d27b3",
+"classconsole_1_1f__string.html#a01eb4d0742604322934a19151ebcd2fa",
+"group__sfinae.html",
+"namespaceconsole.html#ac3066e557db972dbb8670effba117592af967461dd5d56cbe2513f6579b7446df",
+"namespacemembers_t.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

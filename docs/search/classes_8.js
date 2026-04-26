@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['output_0',['Output',['../classconsole_1_1_output.html',1,'console']]]
+  ['note_0',['Note',['../structconsole_1_1_note.html',1,'console']]]
 ];

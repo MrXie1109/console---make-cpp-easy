@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['视图工厂函数_0',['视图工厂函数',['../group__view__factories.html',1,'']]]
+  ['视图与迭代器_0',['Views &amp;amp; Iterators / 视图与迭代器',['../md__r_e_a_d_m_e.html#autotoc_md32',1,'']]],
+  ['视图工厂函数_1',['视图工厂函数',['../group__view__factories.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['工具_20sfinae_20h_0',['SFINAE 工具 (sfinae.h)',['../md__r_e_a_d_m_e.html#autotoc_md26',1,'']]]
+  ['多维数组_0',['Multi‑dimensional Arrays / 多维数组',['../md__r_e_a_d_m_e.html#autotoc_md24',1,'']]]
 ];

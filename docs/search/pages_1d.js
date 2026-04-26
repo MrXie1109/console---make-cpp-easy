@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['模块概览_0',['模块概览',['../md__r_e_a_d_m_e.html#autotoc_md6',1,'']]]
+  ['日志_0',['Logging / 日志',['../md__r_e_a_d_m_e.html#autotoc_md12',1,'']]]
 ];

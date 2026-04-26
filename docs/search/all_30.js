@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['系统信息_20info_20h_0',['系统信息 (info.h)',['../md__r_e_a_d_m_e.html#autotoc_md28',1,'']]]
+  ['统计函数_0',['统计函数',['../group__multiarray__stats.html',1,'']]]
 ];

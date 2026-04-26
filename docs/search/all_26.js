@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['文件操作_20file_20h_0',['文件操作 (file.h)',['../md__r_e_a_d_m_e.html#autotoc_md19',1,'']]]
+  ['数学工具_0',['数学工具',['../group__matools.html',1,'']]],
+  ['数组转换函数_1',['数组转换函数',['../group__array__conversion.html',1,'']]]
 ];

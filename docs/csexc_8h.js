@@ -8,5 +8,6 @@ var csexc_8h =
     [ "console::multiarray_error", "classconsole_1_1multiarray__error.html", "classconsole_1_1multiarray__error" ],
     [ "console::container_error", "classconsole_1_1container__error.html", "classconsole_1_1container__error" ],
     [ "console::index_error", "classconsole_1_1index__error.html", "classconsole_1_1index__error" ],
-    [ "console::bad_maybe_access", "classconsole_1_1bad__maybe__access.html", "classconsole_1_1bad__maybe__access" ]
+    [ "console::bad_maybe_access", "classconsole_1_1bad__maybe__access.html", "classconsole_1_1bad__maybe__access" ],
+    [ "console::domain_error", "classconsole_1_1domain__error.html", "classconsole_1_1domain__error" ]
 ];

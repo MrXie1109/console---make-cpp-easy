@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['库_20console_20library_0',['console 库 / console Library',['../md__r_e_a_d_m_e.html',1,'']]]
+  ['变简单_0',['console – Make C++ Easy / 让 C++ 变简单',['../md__r_e_a_d_m_e.html',1,'']]]
 ];

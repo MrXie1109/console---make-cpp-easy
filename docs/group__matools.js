@@ -27,7 +27,7 @@ var group__matools =
     [ "console::normalize", "group__matools.html#gac584ebac4595db3dd177f9546d954127", null ],
     [ "console::pow", "group__matools.html#ga5ef56e29ea117d9e05932b912a6cee39", null ],
     [ "console::pow", "group__matools.html#gaa6df9cd9127ea0e526903a8187cee70a", null ],
-    [ "console::print_stats", "group__matools.html#ga4f5df4b3fe06a0dbd5277b89c0c55d7d", null ],
+    [ "console::print_stats", "group__matools.html#ga077f0404e8337b752d49b3e562c5d16e", null ],
     [ "console::product", "group__matools.html#ga774a7ae8a8ce1e7c73c68c5775374911", null ],
     [ "console::randomize", "group__matools.html#ga1927ce38f336a9e66d62a5e0d1cd9175", null ],
     [ "console::randomize_normal", "group__matools.html#gafbbc5c8f3eb35b682e9e993008158eeb", null ],

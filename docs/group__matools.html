@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.1.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.2.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -215,9 +215,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga19e7f7652aed68e69b6e8bd6a60394a4" id="r_ga19e7f7652aed68e69b6e8bd6a60394a4"><td class="memTemplParams" colspan="2">template&lt;class T, size_t... Dims&gt; </td></tr>
 <tr class="memitem:ga19e7f7652aed68e69b6e8bd6a60394a4 template"><td class="memItemLeft"><a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, Dims... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga19e7f7652aed68e69b6e8bd6a60394a4">console::round</a> (const <a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, Dims... &gt; &amp;arr)</td></tr>
 <tr class="memdesc:ga19e7f7652aed68e69b6e8bd6a60394a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">对数组每个元素四舍五入。  <br /></td></tr>
-<tr class="memitem:ga4f5df4b3fe06a0dbd5277b89c0c55d7d" id="r_ga4f5df4b3fe06a0dbd5277b89c0c55d7d"><td class="memTemplParams" colspan="2">template&lt;class T, size_t... Dims&gt; </td></tr>
-<tr class="memitem:ga4f5df4b3fe06a0dbd5277b89c0c55d7d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga4f5df4b3fe06a0dbd5277b89c0c55d7d">console::print_stats</a> (const <a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, Dims... &gt; &amp;arr, const char *name=&quot;&quot;)</td></tr>
-<tr class="memdesc:ga4f5df4b3fe06a0dbd5277b89c0c55d7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">打印数组的基本统计信息（和、均值、最小值、最大值、标准差）。  <br /></td></tr>
+<tr class="memitem:ga077f0404e8337b752d49b3e562c5d16e" id="r_ga077f0404e8337b752d49b3e562c5d16e"><td class="memTemplParams" colspan="2">template&lt;class T, size_t... Dims&gt; </td></tr>
+<tr class="memitem:ga077f0404e8337b752d49b3e562c5d16e template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga077f0404e8337b752d49b3e562c5d16e">console::print_stats</a> (std::ostream &amp;os, const <a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, Dims... &gt; &amp;arr, const char *name=&quot;&quot;)</td></tr>
+<tr class="memdesc:ga077f0404e8337b752d49b3e562c5d16e"><td class="mdescLeft">&#160;</td><td class="mdescRight">打印数组的基本统计信息（和、均值、最小值、最大值、标准差）。  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classconsole_1_1_multi_array.html" title="编译期固定维度的多维数组。">MultiArray</a> 的数学运算函数集合。 </p>
@@ -1234,8 +1234,8 @@ template&lt;class T, size_t... Dims&gt; </div>
 
 </div>
 </div>
-<a id="ga4f5df4b3fe06a0dbd5277b89c0c55d7d" name="ga4f5df4b3fe06a0dbd5277b89c0c55d7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4f5df4b3fe06a0dbd5277b89c0c55d7d">&#9670;&#160;</a></span>print_stats()</h2>
+<a id="ga077f0404e8337b752d49b3e562c5d16e" name="ga077f0404e8337b752d49b3e562c5d16e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga077f0404e8337b752d49b3e562c5d16e">&#9670;&#160;</a></span>print_stats()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1245,6 +1245,11 @@ template&lt;class T, size_t... Dims&gt; </div>
         <tr>
           <td class="memname">void console::print_stats </td>
           <td>(</td>
+          <td class="paramtype">std::ostream &amp;</td>          <td class="paramname"><span class="paramname"><em>os</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const <a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, Dims... &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>arr</em></span>, </td>
         </tr>
         <tr>
@@ -1265,6 +1270,7 @@ template&lt;class T, size_t... Dims&gt; </div>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">os</td><td>发送到的输出流。 </td></tr>
     <tr><td class="paramname">arr</td><td>输入数组。 </td></tr>
     <tr><td class="paramname">name</td><td>数组名称（可选），若提供则打印标题。 </td></tr>
   </table>

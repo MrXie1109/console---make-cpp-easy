@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['win_20melody_20h_0',['Windows MIDI (win/melody.h)',['../md__r_e_a_d_m_e.html#autotoc_md33',1,'']]],
-  ['windows_20midi_20win_20melody_20h_1',['Windows MIDI (win/melody.h)',['../md__r_e_a_d_m_e.html#autotoc_md33',1,'']]]
+  ['random_20numbers_20随机数_0',['Random Numbers / 随机数',['../md__r_e_a_d_m_e.html#autotoc_md16',1,'']]],
+  ['rational_20numbers_20有理数_1',['Rational Numbers / 有理数',['../md__r_e_a_d_m_e.html#autotoc_md30',1,'']]],
+  ['regular_20expressions_20正则表达式_2',['Regular Expressions / 正则表达式',['../md__r_e_a_d_m_e.html#autotoc_md18',1,'']]],
+  ['requirements_20要求_3',['Requirements / 要求',['../md__r_e_a_d_m_e.html#autotoc_md42',1,'']]]
 ];

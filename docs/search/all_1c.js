@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['可选值_20maybe_20h_0',['可选值 (maybe.h)',['../md__r_e_a_d_m_e.html#autotoc_md29',1,'']]]
+  ['–_20make_20c_20easy_20让_20c_20变简单_0',['console – Make C++ Easy / 让 C++ 变简单',['../md__r_e_a_d_m_e.html',1,'']]]
 ];

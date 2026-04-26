@@ -1,18 +1,18 @@
 var indexSectionsWithContent =
 {
-  0: "_abcdefghijklmnoprstuvwxy~列双可多字容工库异快打数文日时标格模正特目类系统编视许详输运进随颜",
-  1: "bcfhilmnoprtuv",
+  0: "_abcdefghijklmnopqrstuvwxyz~–函变可多字异快打控数文日时有标核正游类统自要视让许输运进随音",
+  1: "bcdfhilmnoprtuv",
   2: "cpr",
   3: "abcfilmoprstv",
-  4: "abcdefghijklmnoprstuvw~",
+  4: "abcdefghijklmnoprstuvwz~",
   5: "abcdefghilmnoprsuvwy",
-  6: "bceiruv",
+  6: "bcdeipruv",
   7: "il",
   8: "abcdefghiklmoprstvwx",
   9: "o",
   10: "_m",
   11: "t字打数标类统视输运随",
-  12: "bcfhilmoprstvw列双可多字容工库异快数文日时格模正特目系编许详输进随颜"
+  12: "abcefhilmnopqrstuvw–函变可多字异快控文日时有核正游自要视让许输进随音"
 };
 
 var indexSectionNames =

@@ -14,5 +14,6 @@ var searchData=
   ['item_11',['Item',['../classconsole_1_1_item.html#a4f6e179d460d0f144daf2c348360a911',1,'console::Item::Item()'],['../classconsole_1_1_item.html#adfe14fc67ea0d6c957f649cf56b3a80c',1,'console::Item::Item(T &amp;&amp;value)'],['../classconsole_1_1_item.html#a5919667b9a9564421d4d7a3b2a0bb15d',1,'console::Item::Item(const Item &amp;other)'],['../classconsole_1_1_item.html#a0a1acfbe991e91943d0e161938621886',1,'console::Item::Item(Item &amp;&amp;other) noexcept']]],
   ['iterator_12',['Iterator',['../classconsole_1_1_regex_1_1_iterator.html#a161ef9ffcf381d3200032168727affc4',1,'console::Regex::Iterator']]],
   ['iterator_13',['iterator',['../classconsole_1_1_progress_1_1iterator.html#a39cfc794c3c6e7641844ba82bfe4767a',1,'console::Progress::iterator']]],
-  ['iteratorpair_14',['IteratorPair',['../classconsole_1_1_regex_1_1_iterator_pair.html#a08506a12bac790f3d69cb05bb8f163fa',1,'console::Regex::IteratorPair']]]
+  ['iteratorpair_14',['IteratorPair',['../structconsole_1_1_iterator_pair.html#ae66d47b18b04aa181fd52f8cbd8b1878',1,'console::IteratorPair::IteratorPair()'],['../classconsole_1_1_regex_1_1_iterator_pair.html#a08506a12bac790f3d69cb05bb8f163fa',1,'console::Regex::IteratorPair::IteratorPair()']]],
+  ['iterpair_15',['iterpair',['../namespaceconsole.html#ab296619d313567188019dc73cc0a4759',1,'console']]]
 ];
