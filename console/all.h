@@ -54,6 +54,8 @@ SOFTWARE.
 #include "outfwd.h"
 #include "maybe.h"
 #include "matools.h"
+#include "iter.h"
+#include "rational.h"
 
 /**
  * @namespace console

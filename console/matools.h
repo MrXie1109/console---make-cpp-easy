@@ -751,19 +751,23 @@ namespace console
      * @brief 打印数组的基本统计信息（和、均值、最小值、最大值、标准差）。
      * @tparam T 元素类型。
      * @tparam Dims 维度包。
+     * @param os 发送到的输出流。
      * @param arr 输入数组。
      * @param name 数组名称（可选），若提供则打印标题。
      */
     template <class T, size_t... Dims>
-    void print_stats(const MultiArray<T, Dims...> &arr, const char *name = "")
+    void print_stats(
+        std::ostream &os,
+        const MultiArray<T, Dims...> &arr,
+        const char *name = "")
     {
         if (name && *name)
-            std::cout << "=== " << name << " ===" << '\n';
-        std::cout << "  sum   : " << sum(arr) << '\n';
-        std::cout << "  mean  : " << mean(arr) << '\n';
-        std::cout << "  min   : " << min(arr) << '\n';
-        std::cout << "  max   : " << max(arr) << '\n';
-        std::cout << "  stddev: " << stddev(arr) << std::endl;
+            os << "=== " << name << " ===" << '\n';
+        os << "  sum   : " << sum(arr) << '\n';
+        os << "  mean  : " << mean(arr) << '\n';
+        os << "  min   : " << min(arr) << '\n';
+        os << "  max   : " << max(arr) << '\n';
+        os << "  stddev: " << stddev(arr) << std::endl;
     }
 
     /** @} */ // end of matools group

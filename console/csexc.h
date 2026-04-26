@@ -172,4 +172,20 @@ namespace console
         bad_maybe_access(const std::string &msg)
             : console_error(msg) {}
     };
+
+    /**
+     * @class domain_error
+     * @brief 表示试图对无效的数学值域进行操作时抛出的异常。
+     * @see std::domain_error
+     */
+    class domain_error : public console_error
+    {
+    public:
+        /**
+         * @brief 构造 domain_error。
+         * @param msg 错误描述信息。
+         */
+        domain_error(const std::string &msg)
+            : console_error(msg) {}
+    };
 }
