@@ -366,12 +366,10 @@ namespace console
             if (ma.begin() == ma.end())
                 return os << "[]";
             auto it = ma.begin();
-            os << '[';
-            repr(*it, os);
+            os << '[' << *it;
             while (++it != ma.end())
             {
-                os << ", ";
-                repr(*it, os);
+                os << ", " << *it;
             }
             return os << ']';
         }

@@ -384,29 +384,29 @@ namespace console
         }
 
         /**
-         * @brief 同步播放一个音符数组（阻塞）。
-         * @tparam N 数组长度（由编译器推导）。
-         * @param notes 音符数组。
+         * @brief 同步播放一个音符范围（阻塞）。
+         * @tparam Iter 迭代器类型。
+         * @param begin 首迭代器
+         * @param end 超尾迭代器
          */
-        template <size_t N>
-        void play(const Note (&notes)[N])
+        template <class Iter>
+        void play(Iter begin, Iter end)
         {
-            for (Note note : notes)
-                play(note);
+            for (; begin != end; ++begin)
+                play(*begin);
         }
 
         /**
-         * @brief 异步播放一个音符数组（非阻塞）。
-         * @tparam N 数组长度。
-         * @param notes 音符数组。
-         * @details 启动新线程执行 play(notes) 并立即返回。
-         * @warning 线程被分离，需确保 MIDI 对象生命周期覆盖播放时长。
+         * @brief 异步步播放一个音符范围（非阻塞）。
+         * @tparam Iter 迭代器类型。
+         * @param begin 首迭代器
+         * @param end 超尾迭代器
          */
-        template <size_t N>
-        void nplay(const Note (&notes)[N])
+        template <class Iter>
+        void nplay(Iter begin, Iter end)
         {
-            std::thread([this, &notes]()
-                        { play(notes); })
+            std::thread([=]()
+                        { play(begin, end); })
                 .detach();
         }
     };

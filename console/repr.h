@@ -68,6 +68,7 @@ namespace console
 #endif
     }
 
+#ifndef CONSOLE_PLAIN_REPR
     /**
      * @brief 输出字符串类型（std::string, const char* 等）的表示，带双引号。
      * @tparam T 字符串类型（由 enable_if_string 约束）。
@@ -174,6 +175,13 @@ namespace console
            << &value
            << '>';
     }
+#else
+    template <class T>
+    void repr(T &&value, std::ostream &os = std::cout)
+    {
+        os << std::forward<T>(value);
+    }
+#endif
 
     /** @} */ // end of repr group
 }
