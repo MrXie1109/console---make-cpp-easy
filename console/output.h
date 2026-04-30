@@ -165,7 +165,7 @@ namespace console
     template <class Tuple>
     struct TuplePrinter<Tuple, 0>
     {
-        static void print(std::ostream &os, const Tuple &t) {}
+        static void print(std::ostream &, const Tuple &) {}
     };
 
     /** @} */

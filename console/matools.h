@@ -61,7 +61,7 @@ namespace console
     template <class T, size_t... Dims>
     double mean(const MultiArray<T, Dims...> &arr)
     {
-        return double(sum(arr)) / arr.size();
+        return double(sum(arr)) / arr.fsize();
     }
 
     /**
@@ -81,7 +81,7 @@ namespace console
                      {
             double d = double(x) - m;
             sq_sum += d * d; });
-        return sq_sum / (arr.size() - (sample ? 1 : 0));
+        return sq_sum / (arr.fsize() - (sample ? 1 : 0));
     }
 
     /**
@@ -371,14 +371,14 @@ namespace console
      * @brief 用线性等间距值填充数组。
      * @tparam T 元素类型。
      * @tparam Dims 维度包。
-     * @param arr 目标数组（其 size() 决定点数）。
+     * @param arr 目标数组（其 fsize() 决定点数）。
      * @param start 起始值。
      * @param end 结束值（包含）。
      */
     template <class T, size_t... Dims>
     void linspace(MultiArray<T, Dims...> &arr, T start, T end)
     {
-        size_t n = arr.size();
+        size_t n = arr.fsize();
         for (size_t i = 0; i < n; i++)
             arr.fbegin()[i] = start + (end - start) * i / (n - 1);
     }
@@ -408,8 +408,8 @@ namespace console
     template <class T, size_t... Dims>
     T kth_smallest(MultiArray<T, Dims...> arr, size_t k)
     {
-        if (k >= arr.size())
-            k = arr.size() - 1;
+        if (k >= arr.fsize())
+            k = arr.fsize() - 1;
         std::nth_element(arr.fbegin(), arr.fbegin() + k, arr.fend());
         return arr.fbegin()[k];
     }

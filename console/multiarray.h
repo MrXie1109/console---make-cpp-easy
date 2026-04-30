@@ -38,9 +38,9 @@ SOFTWARE.
 #include <type_traits>
 #include <initializer_list>
 #include <algorithm>
+#include <cstring>
 #include "csexc.h"
 #include "repr.h"
-#include <cstring>
 
 namespace console
 {
@@ -99,7 +99,7 @@ namespace console
         static constexpr size_t rank() { return 1; }
 
         /// @brief 返回元素总数。
-        static constexpr size_t size() { return D; }
+        static constexpr size_t fsize() { return D; }
 
         /// @brief 用给定值填充所有元素。
         void fill(const T &value)
@@ -186,10 +186,10 @@ namespace console
         const T *fbegin() const { return this->data(); }
 
         /// @brief 返回指向扁平化数据末尾的指针（非常量）。
-        T *fend() { return this->data() + size(); }
+        T *fend() { return this->data() + fsize(); }
 
         /// @brief 常量版本。
-        const T *fend() const { return this->data() + size(); }
+        const T *fend() const { return this->data() + fsize(); }
 
         /**
          * @brief 扁平化视图（可变）。
@@ -207,6 +207,15 @@ namespace console
         const MultiArray &flatten() const
         {
             return *this;
+        }
+
+        /**
+         * @brief 返回包含维度信息的数组。
+         * @return std::array 包含数组各维度的大小，长度为 1。
+         */
+        static constexpr std::array<size_t, 1> dims()
+        {
+            return {D};
         }
     };
 
@@ -255,9 +264,9 @@ namespace console
         static constexpr size_t rank() { return 1 + sizeof...(Rest); }
 
         /// @brief 返回元素总数。
-        static constexpr size_t size()
+        static constexpr size_t fsize()
         {
-            return First * MultiArray<T, Rest...>::size();
+            return First * MultiArray<T, Rest...>::fsize();
         }
 
         /// @brief 递归填充所有元素。
@@ -381,27 +390,36 @@ namespace console
         const T *fbegin() const { return this->data()->fbegin(); }
 
         /// @brief 扁平化结束迭代器（非常量）。
-        T *fend() { return this->fbegin() + this->size(); }
+        T *fend() { return this->fbegin() + this->fsize(); }
 
         /// @brief 常量版本。
-        const T *fend() const { return this->fbegin() + this->size(); }
+        const T *fend() const { return this->fbegin() + this->fsize(); }
 
         /**
          * @brief 扁平化视图（可变）。
          * @note 这并非不安全，可以自行思考。
          */
-        MultiArray<T, size()> &flatten()
+        MultiArray<T, fsize()> &flatten()
         {
-            return *(MultiArray<T, size()> *)this;
+            return *(MultiArray<T, fsize()> *)this;
         }
 
         /**
          * @brief 扁平化视图（常量）。
          * @note 这并非不安全，可以自行思考。
          */
-        const MultiArray<T, size()> &flatten() const
+        const MultiArray<T, fsize()> &flatten() const
         {
-            return *(const MultiArray<T, size()> *)this;
+            return *(const MultiArray<T, fsize()> *)this;
+        }
+
+        /**
+         * @brief 返回包含维度信息的向量。
+         * @return std::array 包含数组各维度的大小，长度为 rank()。
+         */
+        static constexpr std::array<size_t, rank()> dims()
+        {
+            return {First, Rest...};
         }
     };
 
@@ -1593,8 +1611,8 @@ namespace console
     MultiArray<VarType, OutArrDims...> multiarray_cast(
         const MultiArray<VarType, InArrDims...> &inputArr)
     {
-        static_assert(MultiArray<VarType, OutArrDims...>::size() ==
-                          MultiArray<VarType, InArrDims...>::size(),
+        static_assert(MultiArray<VarType, OutArrDims...>::fsize() ==
+                          MultiArray<VarType, InArrDims...>::fsize(),
                       "Bad multiarray_cast: Mismatch Size");
         MultiArray<VarType, OutArrDims...> outputArr;
         std::copy(inputArr.fbegin(), inputArr.fend(), outputArr.fbegin());
@@ -1635,8 +1653,8 @@ namespace console
     MultiArray<VarType, OutArrDims...> &inplace_multiarray_cast(
         MultiArray<VarType, InArrDims...> &inputArr)
     {
-        static_assert(MultiArray<VarType, OutArrDims...>::size() ==
-                          MultiArray<VarType, InArrDims...>::size(),
+        static_assert(MultiArray<VarType, OutArrDims...>::fsize() ==
+                          MultiArray<VarType, InArrDims...>::fsize(),
                       "Bad inplace_multiarray_cast: Mismatch Size");
         auto p = (MultiArray<VarType, OutArrDims...> *)&inputArr;
         return *p;
@@ -1655,8 +1673,8 @@ namespace console
     const MultiArray<VarType, OutArrDims...> &inplace_multiarray_cast(
         const MultiArray<VarType, InArrDims...> &inputArr)
     {
-        static_assert(MultiArray<VarType, OutArrDims...>::size() ==
-                          MultiArray<VarType, InArrDims...>::size(),
+        static_assert(MultiArray<VarType, OutArrDims...>::fsize() ==
+                          MultiArray<VarType, InArrDims...>::fsize(),
                       "Bad inplace_multiarray_cast: Mismatch Size");
         auto p = (const MultiArray<VarType, OutArrDims...> *)&inputArr;
         return *p;
