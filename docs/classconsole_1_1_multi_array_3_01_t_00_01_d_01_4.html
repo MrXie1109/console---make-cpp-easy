@@ -149,8 +149,10 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac55412e81ffd44c24b1254624a4ca06a" id="r_ac55412e81ffd44c24b1254624a4ca06a"><td class="memItemLeft">static constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#ac55412e81ffd44c24b1254624a4ca06a">rank</a> ()</td></tr>
 <tr class="memdesc:ac55412e81ffd44c24b1254624a4ca06a"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回数组的维数（一维时为 1）。  <br /></td></tr>
-<tr class="memitem:acb832b4897f5cd217a38ee03d4d8f683" id="r_acb832b4897f5cd217a38ee03d4d8f683"><td class="memItemLeft">static constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#acb832b4897f5cd217a38ee03d4d8f683">size</a> ()</td></tr>
-<tr class="memdesc:acb832b4897f5cd217a38ee03d4d8f683"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回元素总数。  <br /></td></tr>
+<tr class="memitem:ae6b130e4faed7efe492d07bc1c5204f2" id="r_ae6b130e4faed7efe492d07bc1c5204f2"><td class="memItemLeft">static constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#ae6b130e4faed7efe492d07bc1c5204f2">fsize</a> ()</td></tr>
+<tr class="memdesc:ae6b130e4faed7efe492d07bc1c5204f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回元素总数。  <br /></td></tr>
+<tr class="memitem:ac515592807c68d94e414c8f80aff9aec" id="r_ac515592807c68d94e414c8f80aff9aec"><td class="memItemLeft">static constexpr std::array&lt; size_t, 1 &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac515592807c68d94e414c8f80aff9aec">dims</a> ()</td></tr>
+<tr class="memdesc:ac515592807c68d94e414c8f80aff9aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回包含维度信息的数组。  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -346,6 +348,36 @@ template&lt;class T, size_t D&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="ac515592807c68d94e414c8f80aff9aec" name="ac515592807c68d94e414c8f80aff9aec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac515592807c68d94e414c8f80aff9aec">&#9670;&#160;</a></span>dims()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, size_t D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::array&lt; size_t, 1 &gt; <a class="el" href="classconsole_1_1_multi_array.html">console::MultiArray</a>&lt; T, D &gt;::dims </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>返回包含维度信息的数组。 </p>
+<dl class="section return"><dt>Returns</dt><dd>std::array 包含数组各维度的大小，长度为 1。 </dd></dl>
+
+</div>
+</div>
 <a id="a9408bbc04355e1e732715acf9fa4bd39" name="a9408bbc04355e1e732715acf9fa4bd39"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9408bbc04355e1e732715acf9fa4bd39">&#9670;&#160;</a></span>fbegin() <span class="overload">[1/2]</span></h2>
 
@@ -637,6 +669,35 @@ template&lt;class F&gt; </div>
 
 </div>
 </div>
+<a id="ae6b130e4faed7efe492d07bc1c5204f2" name="ae6b130e4faed7efe492d07bc1c5204f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6b130e4faed7efe492d07bc1c5204f2">&#9670;&#160;</a></span>fsize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, size_t D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t <a class="el" href="classconsole_1_1_multi_array.html">console::MultiArray</a>&lt; T, D &gt;::fsize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>返回元素总数。 </p>
+
+</div>
+</div>
 <a id="a49d023c4a7d46fcfa41ab5295d950a3b" name="a49d023c4a7d46fcfa41ab5295d950a3b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a49d023c4a7d46fcfa41ab5295d950a3b">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
@@ -734,35 +795,6 @@ template&lt;class T, size_t D&gt; </div>
 </div><div class="memdoc">
 
 <p>返回数组的维数（一维时为 1）。 </p>
-
-</div>
-</div>
-<a id="acb832b4897f5cd217a38ee03d4d8f683" name="acb832b4897f5cd217a38ee03d4d8f683"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb832b4897f5cd217a38ee03d4d8f683">&#9670;&#160;</a></span>size()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T, size_t D&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr size_t <a class="el" href="classconsole_1_1_multi_array.html">console::MultiArray</a>&lt; T, D &gt;::size </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>返回元素总数。 </p>
 
 </div>
 </div>

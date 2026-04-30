@@ -17,7 +17,7 @@ var searchData=
   ['sin_14',['sin',['../group__matools.html#gab4b74fa8f585ef0e4d9a77ec5f19f9ee',1,'console']]],
   ['sinh_15',['sinh',['../group__matools.html#ga9bf49dc0efcab448be6b1553228e4b16',1,'console']]],
   ['sitar_16',['Sitar',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592aa7f8b3381f38f76d8a32fdedcf770a3e',1,'console']]],
-  ['size_17',['size',['../classconsole_1_1_multi_array_3_01_t_00_01_d_01_4.html#acb832b4897f5cd217a38ee03d4d8f683',1,'console::MultiArray&lt; T, D &gt;::size()'],['../classconsole_1_1_multi_array_3_01_t_00_01_first_00_01_rest_8_8_8_01_4.html#a07b0454dd24daa73a7a4c94b47d89e4d',1,'console::MultiArray&lt; T, First, Rest... &gt;::size()'],['../classconsole_1_1_view.html#ab47e45983a7058a78a100f0aaef8fb1a',1,'console::View::size()'],['../classconsole_1_1_view_3_01const_01_container_01_4.html#abdd091d0c9a28af3bd548938af56e550',1,'console::View&lt; const Container &gt;::size()']]],
+  ['size_17',['size',['../classconsole_1_1_view.html#ab47e45983a7058a78a100f0aaef8fb1a',1,'console::View::size()'],['../classconsole_1_1_view_3_01const_01_container_01_4.html#abdd091d0c9a28af3bd548938af56e550',1,'console::View&lt; const Container &gt;::size()']]],
   ['slapbass1_18',['SlapBass1',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a3b511b3f8f6a36c9c2b9a72c78edcba4',1,'console']]],
   ['slapbass2_19',['SlapBass2',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592afa6c4f9335143692dc097d0dd4ab0d88',1,'console']]],
   ['sleep_20',['sleep',['../namespaceconsole.html#a051357a08d9c4700e4b6a4eafa3f4958',1,'console']]],

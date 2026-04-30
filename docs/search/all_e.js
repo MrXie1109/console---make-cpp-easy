@@ -6,7 +6,7 @@ var searchData=
   ['note_3',['Note',['../structconsole_1_1_note.html',1,'console::Note'],['../structconsole_1_1_note.html#a8dd4f6a89fded66cfe17c52d0c159fff',1,'console::Note::Note()']]],
   ['nothing_4',['nothing',['../namespaceconsole.html#aab10e888085cc7484f384e43f187dbaf',1,'console']]],
   ['now_5',['now',['../namespaceconsole.html#a8929153db641cb041bea419d109b08a1',1,'console']]],
-  ['nplay_6',['nplay',['../classconsole_1_1_m_i_d_i.html#a1d0732235c968bd7de330afaabdfb9ab',1,'console::MIDI::nplay(Note note)'],['../classconsole_1_1_m_i_d_i.html#ae72fc61dac42a9092b8129bbfea8535e',1,'console::MIDI::nplay(const Note(&amp;notes)[N])']]],
+  ['nplay_6',['nplay',['../classconsole_1_1_m_i_d_i.html#a1d0732235c968bd7de330afaabdfb9ab',1,'console::MIDI::nplay(Note note)'],['../classconsole_1_1_m_i_d_i.html#a76f4e925b4abf523dd3e0c1d8c331749',1,'console::MIDI::nplay(Iter begin, Iter end)']]],
   ['ns_7',['ns',['../classconsole_1_1_time.html#adc6c0ec80d046f13a3fcc92c9f9caa12',1,'console::Time']]],
   ['numbers_20有理数_8',['Rational Numbers / 有理数',['../md__r_e_a_d_m_e.html#autotoc_md30',1,'']]],
   ['numbers_20随机数_9',['Random Numbers / 随机数',['../md__r_e_a_d_m_e.html#autotoc_md16',1,'']]],

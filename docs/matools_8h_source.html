@@ -136,7 +136,7 @@ $(function(){initNavTree('matools_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="group__matools.html#gaa52523dce981db3d239cf22aee9a6cbf">   62</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="group__matools.html#gaa52523dce981db3d239cf22aee9a6cbf">mean</a>(<span class="keyword">const</span> <a class="code hl_class" href="classconsole_1_1_multi_array.html">MultiArray&lt;T, Dims...&gt;</a> &amp;arr)</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    {</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">return</span> double(<a class="code hl_function" href="group__multiarray__stats.html#gac77dd17c6c6aabf513856c4e41f2aa51">sum</a>(arr)) / arr.size();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">return</span> double(<a class="code hl_function" href="group__multiarray__stats.html#gac77dd17c6c6aabf513856c4e41f2aa51">sum</a>(arr)) / arr.fsize();</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
 </div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span></div>
@@ -150,7 +150,7 @@ $(function(){initNavTree('matools_8h_source.html','',''); });
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                     {</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="keywordtype">double</span> d = double(x) - m;</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            sq_sum += d * d; });</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">return</span> sq_sum / (arr.size() - (sample ? 1 : 0));</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">return</span> sq_sum / (arr.fsize() - (sample ? 1 : 0));</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    }</div>
 </div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span></div>
@@ -349,7 +349,7 @@ $(function(){initNavTree('matools_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00379" data-start="{" data-end="}">
 <div class="line"><a id="l00379" name="l00379"></a><span class="lineno"><a class="line" href="group__matools.html#gac0e485c9d3bc0fa8d921ef04fbaa01d1">  379</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group__matools.html#gac0e485c9d3bc0fa8d921ef04fbaa01d1">linspace</a>(<a class="code hl_class" href="classconsole_1_1_multi_array.html">MultiArray&lt;T, Dims...&gt;</a> &amp;arr, T start, T end)</div>
 <div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    {</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>        <span class="keywordtype">size_t</span> n = arr.size();</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>        <span class="keywordtype">size_t</span> n = arr.fsize();</div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; i++)</div>
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>            arr.fbegin()[i] = start + (end - start) * i / (n - 1);</div>
 <div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    }</div>
@@ -368,8 +368,8 @@ $(function(){initNavTree('matools_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00409" data-start="{" data-end="}">
 <div class="line"><a id="l00409" name="l00409"></a><span class="lineno"><a class="line" href="group__matools.html#ga3c5845a0e4b9136f472deaddf3bd4dea">  409</a></span>    T <a class="code hl_function" href="group__matools.html#ga3c5845a0e4b9136f472deaddf3bd4dea">kth_smallest</a>(<a class="code hl_class" href="classconsole_1_1_multi_array.html">MultiArray&lt;T, Dims...&gt;</a> arr, <span class="keywordtype">size_t</span> k)</div>
 <div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>    {</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>        <span class="keywordflow">if</span> (k &gt;= arr.size())</div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>            k = arr.size() - 1;</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>        <span class="keywordflow">if</span> (k &gt;= arr.fsize())</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>            k = arr.fsize() - 1;</div>
 <div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>        std::nth_element(arr.fbegin(), arr.fbegin() + k, arr.fend());</div>
 <div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>        <span class="keywordflow">return</span> arr.fbegin()[k];</div>
 <div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>    }</div>
@@ -672,9 +672,9 @@ $(function(){initNavTree('matools_8h_source.html','',''); });
 <div class="ttc" id="agroup__matools_html_gadd13c1a86f6f78a979a6b05eca1f1807"><div class="ttname"><a href="group__matools.html#gadd13c1a86f6f78a979a6b05eca1f1807">console::cosine</a></div><div class="ttdeci">double cosine(const MultiArray&lt; T, N &gt; &amp;a, const MultiArray&lt; T, N &gt; &amp;b)</div><div class="ttdoc">计算两个向量的余弦相似度。</div><div class="ttdef"><b>Definition</b> matools.h:138</div></div>
 <div class="ttc" id="agroup__matools_html_gae88badc0104c05d50f0a8a3d2b75ec60"><div class="ttname"><a href="group__matools.html#gae88badc0104c05d50f0a8a3d2b75ec60">console::exp</a></div><div class="ttdeci">MultiArray&lt; T, Dims... &gt; exp(const MultiArray&lt; T, Dims... &gt; &amp;arr)</div><div class="ttdoc">对数组每个元素应用 std::exp。</div><div class="ttdef"><b>Definition</b> matools.h:609</div></div>
 <div class="ttc" id="agroup__matools_html_gafbbc5c8f3eb35b682e9e993008158eeb"><div class="ttname"><a href="group__matools.html#gafbbc5c8f3eb35b682e9e993008158eeb">console::randomize_normal</a></div><div class="ttdeci">void randomize_normal(MultiArray&lt; T, Dims... &gt; &amp;arr, T mean=0, T stddev=1)</div><div class="ttdoc">用正态分布随机数填充数组。</div><div class="ttdef"><b>Definition</b> matools.h:363</div></div>
-<div class="ttc" id="agroup__multiarray__stats_html_ga3c082110bc9f1bccd134f037cbc80d2b"><div class="ttname"><a href="group__multiarray__stats.html#ga3c082110bc9f1bccd134f037cbc80d2b">console::min</a></div><div class="ttdeci">T min(const MultiArray&lt; T, Dims... &gt; &amp;a)</div><div class="ttdoc">求最小值。</div><div class="ttdef"><b>Definition</b> multiarray.h:1535</div></div>
-<div class="ttc" id="agroup__multiarray__stats_html_ga4d151dd74a5c86383bbc2526fefe2988"><div class="ttname"><a href="group__multiarray__stats.html#ga4d151dd74a5c86383bbc2526fefe2988">console::max</a></div><div class="ttdeci">T max(const MultiArray&lt; T, Dims... &gt; &amp;a)</div><div class="ttdoc">求最大值。</div><div class="ttdef"><b>Definition</b> multiarray.h:1545</div></div>
-<div class="ttc" id="agroup__multiarray__stats_html_gac77dd17c6c6aabf513856c4e41f2aa51"><div class="ttname"><a href="group__multiarray__stats.html#gac77dd17c6c6aabf513856c4e41f2aa51">console::sum</a></div><div class="ttdeci">T sum(const MultiArray&lt; T, Dims... &gt; &amp;a)</div><div class="ttdoc">求和所有元素。</div><div class="ttdef"><b>Definition</b> multiarray.h:1522</div></div>
+<div class="ttc" id="agroup__multiarray__stats_html_ga3c082110bc9f1bccd134f037cbc80d2b"><div class="ttname"><a href="group__multiarray__stats.html#ga3c082110bc9f1bccd134f037cbc80d2b">console::min</a></div><div class="ttdeci">T min(const MultiArray&lt; T, Dims... &gt; &amp;a)</div><div class="ttdoc">求最小值。</div><div class="ttdef"><b>Definition</b> multiarray.h:1551</div></div>
+<div class="ttc" id="agroup__multiarray__stats_html_ga4d151dd74a5c86383bbc2526fefe2988"><div class="ttname"><a href="group__multiarray__stats.html#ga4d151dd74a5c86383bbc2526fefe2988">console::max</a></div><div class="ttdeci">T max(const MultiArray&lt; T, Dims... &gt; &amp;a)</div><div class="ttdoc">求最大值。</div><div class="ttdef"><b>Definition</b> multiarray.h:1561</div></div>
+<div class="ttc" id="agroup__multiarray__stats_html_gac77dd17c6c6aabf513856c4e41f2aa51"><div class="ttname"><a href="group__multiarray__stats.html#gac77dd17c6c6aabf513856c4e41f2aa51">console::sum</a></div><div class="ttdeci">T sum(const MultiArray&lt; T, Dims... &gt; &amp;a)</div><div class="ttdoc">求和所有元素。</div><div class="ttdef"><b>Definition</b> multiarray.h:1538</div></div>
 <div class="ttc" id="agroup__random_html_gaa96466336c14e8c6088c7d8ce4a4e6ca"><div class="ttname"><a href="group__random.html#gaa96466336c14e8c6088c7d8ce4a4e6ca">console::default_gen</a></div><div class="ttdeci">std::mt19937 &amp; default_gen()</div><div class="ttdoc">获取一个全局的、以当前时间戳为种子的 Mersenne Twister 随机数引擎。</div><div class="ttdef"><b>Definition</b> random.h:52</div></div>
 <div class="ttc" id="agroup__sfinae_html_ga29604a11a1b23e0ee1982a9b087aabc5"><div class="ttname"><a href="group__sfinae.html#ga29604a11a1b23e0ee1982a9b087aabc5">console::uniform_distribution_t</a></div><div class="ttdeci">typename uniform_distribution_impl&lt; T &gt;::type uniform_distribution_t</div><div class="ttdoc">取得对印类型所对应的均匀分布。</div><div class="ttdef"><b>Definition</b> sfinae.h:381</div></div>
 <div class="ttc" id="amultiarray_8h_html"><div class="ttname"><a href="multiarray_8h.html">multiarray.h</a></div><div class="ttdoc">提供编译期维度固定的多维数组容器 MultiArray，支持任意维度和元素级算术/逻辑/位运算。</div></div>

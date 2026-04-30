@@ -116,12 +116,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a5246d97c3e9f0ca97b69fabc8d3baa66"><td class="mdescLeft">&#160;</td><td class="mdescRight">同步播放一个音符（阻塞）。  <br /></td></tr>
 <tr class="memitem:a1d0732235c968bd7de330afaabdfb9ab" id="r_a1d0732235c968bd7de330afaabdfb9ab"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1d0732235c968bd7de330afaabdfb9ab">nplay</a> (<a class="el" href="structconsole_1_1_note.html">Note</a> note)</td></tr>
 <tr class="memdesc:a1d0732235c968bd7de330afaabdfb9ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步播放一个音符（非阻塞）。  <br /></td></tr>
-<tr class="memitem:aa9f0beec0792b11640468e18699c4733" id="r_aa9f0beec0792b11640468e18699c4733"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
-<tr class="memitem:aa9f0beec0792b11640468e18699c4733 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa9f0beec0792b11640468e18699c4733">play</a> (const <a class="el" href="structconsole_1_1_note.html">Note</a>(&amp;notes)[N])</td></tr>
-<tr class="memdesc:aa9f0beec0792b11640468e18699c4733"><td class="mdescLeft">&#160;</td><td class="mdescRight">同步播放一个音符数组（阻塞）。  <br /></td></tr>
-<tr class="memitem:ae72fc61dac42a9092b8129bbfea8535e" id="r_ae72fc61dac42a9092b8129bbfea8535e"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
-<tr class="memitem:ae72fc61dac42a9092b8129bbfea8535e template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae72fc61dac42a9092b8129bbfea8535e">nplay</a> (const <a class="el" href="structconsole_1_1_note.html">Note</a>(&amp;notes)[N])</td></tr>
-<tr class="memdesc:ae72fc61dac42a9092b8129bbfea8535e"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步播放一个音符数组（非阻塞）。  <br /></td></tr>
+<tr class="memitem:a53b743162cb98c556d5d7f72de82d633" id="r_a53b743162cb98c556d5d7f72de82d633"><td class="memTemplParams" colspan="2">template&lt;class Iter&gt; </td></tr>
+<tr class="memitem:a53b743162cb98c556d5d7f72de82d633 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a53b743162cb98c556d5d7f72de82d633">play</a> (Iter begin, Iter end)</td></tr>
+<tr class="memdesc:a53b743162cb98c556d5d7f72de82d633"><td class="mdescLeft">&#160;</td><td class="mdescRight">同步播放一个音符范围（阻塞）。  <br /></td></tr>
+<tr class="memitem:a76f4e925b4abf523dd3e0c1d8c331749" id="r_a76f4e925b4abf523dd3e0c1d8c331749"><td class="memTemplParams" colspan="2">template&lt;class Iter&gt; </td></tr>
+<tr class="memitem:a76f4e925b4abf523dd3e0c1d8c331749 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a76f4e925b4abf523dd3e0c1d8c331749">nplay</a> (Iter begin, Iter end)</td></tr>
+<tr class="memdesc:a76f4e925b4abf523dd3e0c1d8c331749"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步步播放一个音符范围（非阻塞）。  <br /></td></tr>
 <tr id="pub-methods-0" class="groupHeader"><td colspan="2"><div class="groupHeader">属性访问</div></td></tr>
 <tr><td colspan="2" class="ititle"><div class="groupText"><p>获取当前 BPM。 </p>
 </div></td></tr>
@@ -355,13 +355,13 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae72fc61dac42a9092b8129bbfea8535e" name="ae72fc61dac42a9092b8129bbfea8535e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae72fc61dac42a9092b8129bbfea8535e">&#9670;&#160;</a></span>nplay() <span class="overload">[1/2]</span></h2>
+<a id="a76f4e925b4abf523dd3e0c1d8c331749" name="a76f4e925b4abf523dd3e0c1d8c331749"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76f4e925b4abf523dd3e0c1d8c331749">&#9670;&#160;</a></span>nplay() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;size_t N&gt; </div>
+template&lt;class Iter&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -369,8 +369,12 @@ template&lt;size_t N&gt; </div>
         <tr>
           <td class="memname">void console::MIDI::nplay </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structconsole_1_1_note.html">Note</a>(&amp;)</td>          <td class="paramname"><span class="paramname"><em>notes</em></span>[N]</td><td>)</td>
+          <td class="paramtype">Iter</td>          <td class="paramname"><span class="paramname"><em>begin</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">Iter</td>          <td class="paramname"><span class="paramname"><em>end</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -380,20 +384,20 @@ template&lt;size_t N&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>异步播放一个音符数组（非阻塞）。 </p>
+<p>异步步播放一个音符范围（非阻塞）。 </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">N</td><td>数组长度。 </td></tr>
+    <tr><td class="paramname">Iter</td><td>迭代器类型。 </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">notes</td><td>音符数组。</td></tr>
+    <tr><td class="paramname">begin</td><td>首迭代器 </td></tr>
+    <tr><td class="paramname">end</td><td>超尾迭代器 </td></tr>
   </table>
   </dd>
 </dl>
-<p>启动新线程执行 play(notes) 并立即返回。 </p><dl class="section warning"><dt>Warning</dt><dd>线程被分离，需确保 <a class="el" href="classconsole_1_1_m_i_d_i.html" title="MIDI 输出设备控制器，支持乐器切换、音量调节、同步/异步播放音符序列。">MIDI</a> 对象生命周期覆盖播放时长。 </dd></dl>
 
 </div>
 </div>
@@ -485,13 +489,13 @@ template&lt;size_t N&gt; </div>
 
 </div>
 </div>
-<a id="aa9f0beec0792b11640468e18699c4733" name="aa9f0beec0792b11640468e18699c4733"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9f0beec0792b11640468e18699c4733">&#9670;&#160;</a></span>play() <span class="overload">[1/2]</span></h2>
+<a id="a53b743162cb98c556d5d7f72de82d633" name="a53b743162cb98c556d5d7f72de82d633"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53b743162cb98c556d5d7f72de82d633">&#9670;&#160;</a></span>play() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;size_t N&gt; </div>
+template&lt;class Iter&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -499,8 +503,12 @@ template&lt;size_t N&gt; </div>
         <tr>
           <td class="memname">void console::MIDI::play </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structconsole_1_1_note.html">Note</a>(&amp;)</td>          <td class="paramname"><span class="paramname"><em>notes</em></span>[N]</td><td>)</td>
+          <td class="paramtype">Iter</td>          <td class="paramname"><span class="paramname"><em>begin</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">Iter</td>          <td class="paramname"><span class="paramname"><em>end</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -510,16 +518,17 @@ template&lt;size_t N&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>同步播放一个音符数组（阻塞）。 </p>
+<p>同步播放一个音符范围（阻塞）。 </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">N</td><td>数组长度（由编译器推导）。 </td></tr>
+    <tr><td class="paramname">Iter</td><td>迭代器类型。 </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">notes</td><td>音符数组。 </td></tr>
+    <tr><td class="paramname">begin</td><td>首迭代器 </td></tr>
+    <tr><td class="paramname">end</td><td>超尾迭代器 </td></tr>
   </table>
   </dd>
 </dl>

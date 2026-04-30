@@ -959,7 +959,7 @@ Functions</h2></td></tr>
 <tr class="memitem:gab16dfca7b068359547e9dbd3e9f8aca6 template"><td class="memItemLeft">std::enable_if&lt; std::is_same&lt; typenamestd::decay&lt; T &gt;::type, bool &gt;::value &gt;::type&#160;</td><td class="memItemRight"><a class="el" href="#gab16dfca7b068359547e9dbd3e9f8aca6">repr</a> (T &amp;&amp;value, std::ostream &amp;os=std::cout)</td></tr>
 <tr class="memdesc:gab16dfca7b068359547e9dbd3e9f8aca6"><td class="mdescLeft">&#160;</td><td class="mdescRight">输出布尔值的表示（"true" 或 "false"）。  <br /></td></tr>
 <tr class="memitem:gab16dfca7b068359547e9dbd3e9f8aca6" id="r_gab16dfca7b068359547e9dbd3e9f8aca6"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
-<tr class="memitem:gab16dfca7b068359547e9dbd3e9f8aca6 template"><td class="memItemLeft">std::enable_if&lt; std::is_same&lt; typenamestd::decay&lt; T &gt;::type, std::nullptr_t &gt;::value &gt;::type&#160;</td><td class="memItemRight"><a class="el" href="#gab16dfca7b068359547e9dbd3e9f8aca6">repr</a> (T &amp;&amp;value, std::ostream &amp;os=std::cout)</td></tr>
+<tr class="memitem:gab16dfca7b068359547e9dbd3e9f8aca6 template"><td class="memItemLeft">std::enable_if&lt; std::is_same&lt; typenamestd::decay&lt; T &gt;::type, std::nullptr_t &gt;::value &gt;::type&#160;</td><td class="memItemRight"><a class="el" href="#gab16dfca7b068359547e9dbd3e9f8aca6">repr</a> (T &amp;&amp;, std::ostream &amp;os=std::cout)</td></tr>
 <tr class="memdesc:gab16dfca7b068359547e9dbd3e9f8aca6"><td class="mdescLeft">&#160;</td><td class="mdescRight">输出 nullptr 的表示。  <br /></td></tr>
 <tr class="memitem:ga4b98f9cb12f97585aca122e5ca781dc3" id="r_ga4b98f9cb12f97585aca122e5ca781dc3"><td class="memTemplParams" colspan="2">template&lt;class Ret, class... Args&gt; </td></tr>
 <tr class="memitem:ga4b98f9cb12f97585aca122e5ca781dc3 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__repr.html#ga4b98f9cb12f97585aca122e5ca781dc3">repr</a> (Ret(*f)(Args...), std::ostream &amp;os=std::cout)</td></tr>
@@ -2238,6 +2238,44 @@ template&lt;class Cont&gt; </div>
 template&lt;class T&gt; </div>
       <table class="memname">
         <tr>
+          <td class="memname">std::enable_if&lt; std::is_same&lt; typenamestd::decay&lt; T &gt;::type, std::nullptr_t &gt;::value &gt;::type console::repr </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::ostream &amp;</td>          <td class="paramname"><span class="paramname"><em>os</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::cout</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>输出 nullptr 的表示。 </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>必须是 std::nullptr_t。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>nullptr。 </td></tr>
+    <tr><td class="paramname">os</td><td>输出流。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gab16dfca7b068359547e9dbd3e9f8aca6" name="gab16dfca7b068359547e9dbd3e9f8aca6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab16dfca7b068359547e9dbd3e9f8aca6">&#9670;&#160;</a></span>repr() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
           <td class="memname">std::enable_if&lt;!std::is_same&lt; typenamestd::decay&lt; T &gt;::type, std::nullptr_t &gt;::value &amp;&amp;!<a class="el" href="structconsole_1_1is__string.html">is_string</a>&lt; typenamestd::decay&lt; T &gt;::type &gt;::value &amp;&amp;!<a class="el" href="structconsole_1_1is__char.html">is_char</a>&lt; typenamestd::decay&lt; T &gt;::type &gt;::value &amp;&amp;!<a class="el" href="structconsole_1_1is__printable.html">is_printable</a>&lt; typenamestd::decay&lt; T &gt;::type &gt;::value &gt;::type console::repr </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
@@ -2268,7 +2306,7 @@ template&lt;class T&gt; </div>
 </div>
 </div>
 <a id="gab16dfca7b068359547e9dbd3e9f8aca6" name="gab16dfca7b068359547e9dbd3e9f8aca6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab16dfca7b068359547e9dbd3e9f8aca6">&#9670;&#160;</a></span>repr() <span class="overload">[2/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#gab16dfca7b068359547e9dbd3e9f8aca6">&#9670;&#160;</a></span>repr() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2298,44 +2336,6 @@ template&lt;class T&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>要输出的值。 </td></tr>
-    <tr><td class="paramname">os</td><td>输出流。 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="gab16dfca7b068359547e9dbd3e9f8aca6" name="gab16dfca7b068359547e9dbd3e9f8aca6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab16dfca7b068359547e9dbd3e9f8aca6">&#9670;&#160;</a></span>repr() <span class="overload">[3/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">std::enable_if&lt; std::is_same&lt; typenamestd::decay&lt; T &gt;::type, std::nullptr_t &gt;::value &gt;::type console::repr </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::ostream &amp;</td>          <td class="paramname"><span class="paramname"><em>os</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::cout</span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>输出 nullptr 的表示。 </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>必须是 std::nullptr_t。 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">value</td><td>nullptr。 </td></tr>
     <tr><td class="paramname">os</td><td>输出流。 </td></tr>
   </table>
   </dd>
