@@ -414,7 +414,7 @@ namespace console
         }
 
         /**
-         * @brief 返回包含维度信息的向量。
+         * @brief 返回包含维度信息的数组。
          * @return std::array 包含数组各维度的大小，长度为 rank()。
          */
         static constexpr std::array<size_t, rank()> dims()
