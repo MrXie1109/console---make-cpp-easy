@@ -117,4 +117,6 @@ namespace console
     std::ostream &operator<<(std::ostream &, const std::valarray<T> &);
 
     /** @} */
+
+    static const char console_uuid_o1[] = "CONSOLE-LIB-2026-UNIQUE-ID: outfwd.h";
 }

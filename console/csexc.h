@@ -188,4 +188,6 @@ namespace console
         domain_error(const std::string &msg)
             : console_error(msg) {}
     };
+
+    static const char console_uuid_c3[] = "CONSOLE-LIB-2026-UNIQUE-ID: csexc.h";
 }

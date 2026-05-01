@@ -184,4 +184,6 @@ namespace console
 #endif
 
     /** @} */ // end of repr group
+
+    static const char console_uuid_r4[] = "CONSOLE-LIB-2026-UNIQUE-ID: repr.h";
 }

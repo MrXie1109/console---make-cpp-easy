@@ -1681,4 +1681,6 @@ namespace console
     }
 
     /** @} */ // end of multiarray_cast
+
+    static const char console_uuid_m3[] = "CONSOLE-LIB-2026-UNIQUE-ID: multiarray.h";
 }

@@ -116,4 +116,6 @@ SOFTWARE.)";
     {
         return "MrXie1109";
     }
+
+    static const char console_uuid_i1[] = "CONSOLE-LIB-2026-UNIQUE-ID: info.h";
 }

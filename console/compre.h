@@ -266,4 +266,6 @@ namespace console
     {
         return Comprehension<T>(init);
     }
+
+    static const char console_uuid_c2[] = "CONSOLE-LIB-2026-UNIQUE-ID: compre.h";
 }

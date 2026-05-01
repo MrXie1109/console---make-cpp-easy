@@ -298,4 +298,6 @@ namespace console
     {
         return {std::forward<Cont>(cont), pc};
     }
+
+    static const char console_uuid_p1[] = "CONSOLE-LIB-2026-UNIQUE-ID: progress.h";
 }

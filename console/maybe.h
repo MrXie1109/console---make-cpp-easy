@@ -269,4 +269,6 @@ namespace console
             ptr.swap(other.ptr);
         }
     };
+
+    static const char console_uuid_m2[] = "CONSOLE-LIB-2026-UNIQUE-ID: maybe.h";
 }

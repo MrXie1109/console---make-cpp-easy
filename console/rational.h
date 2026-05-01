@@ -362,4 +362,6 @@ namespace console
     using Rational_16 = BasicRational<int16_t>; ///< 以 int16_t 为基的分数。
     using Rational_32 = BasicRational<int32_t>; ///< 以 int32_t 为基的分数。
     using Rational_64 = BasicRational<int64_t>; ///< 以 int64_t 为基的分数。
+
+    static const char console_uuid_r2[] = "CONSOLE-LIB-2026-UNIQUE-ID: rational.h";
 }

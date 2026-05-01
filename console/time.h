@@ -177,4 +177,6 @@ namespace console
         ss << std::put_time(&tm_buffer, fmt.c_str());
         return ss.str();
     }
+
+    static const char console_uuid_t1[] = "CONSOLE-LIB-2026-UNIQUE-ID: time.h";
 }

@@ -63,4 +63,5 @@ SOFTWARE.
  */
 namespace console
 {
+    static const char console_uuid_a1[] = "CONSOLE-LIB-2026-UNIQUE-ID: all.h";
 }

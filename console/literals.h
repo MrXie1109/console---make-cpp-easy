@@ -142,4 +142,6 @@ namespace console
          */
         f_string operator""_f(const char *str, size_t) { return str; }
     }
+
+    static const char console_uuid_i4[] = "CONSOLE-LIB-2026-UNIQUE-ID: literals.h";
 }

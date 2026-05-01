@@ -771,4 +771,6 @@ namespace console
     }
 
     /** @} */ // end of matools group
+
+    static const char console_uuid_m1[] = "CONSOLE-LIB-2026-UNIQUE-ID: matools.h";
 }

@@ -194,4 +194,6 @@ namespace console
         return {std::istreambuf_iterator<char>(is.is),
                 std::istreambuf_iterator<char>()};
     }
+
+    static const char console_uuid_i2[] = "CONSOLE-LIB-2026-UNIQUE-ID: input.h";
 }

@@ -360,4 +360,6 @@ namespace console
             return os << ')';
         }
     };
+
+    static const char console_uuid_b2[] = "CONSOLE-LIB-2026-UNIQUE-ID: box.h";
 }

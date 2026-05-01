@@ -381,4 +381,6 @@ namespace console
     using uniform_distribution_t = typename uniform_distribution_impl<T>::type;
 
     /** @} */ // end of sfinae group
+
+    static const char console_uuid_s1[] = "CONSOLE-LIB-2026-UNIQUE-ID: sfinae.h";
 }

@@ -438,4 +438,6 @@ namespace console
             cp.original_ptr = p2;
         }
     };
+
+    static const char console_uuid_c4[] = "CONSOLE-LIB-2026-UNIQUE-ID: cursor_ptr.h";
 }

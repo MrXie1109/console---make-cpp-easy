@@ -430,4 +430,6 @@ namespace console
             return operator()(args...);
         }
     } print; ///< 全局输出对象，模仿 Python 的 print 函数。
+
+    static const char console_uuid_o2[] = "CONSOLE-LIB-2026-UNIQUE-ID: output.h";
 }
