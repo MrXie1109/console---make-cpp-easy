@@ -208,6 +208,4 @@ namespace console
     {
         return {{std::begin(c1), std::begin(c2)}, {std::end(c1), std::end(c2)}};
     }
-
-    static const char console_uuid_i3[] = "CONSOLE-LIB-2026-UNIQUE-ID: iter.h";
 }

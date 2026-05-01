@@ -224,5 +224,4 @@ SOFTWARE.
 
 namespace console
 {
-    static const char console_uuid_s2[] = "CONSOLE-LIB-2026-UNIQUE-ID: std.h";
 }

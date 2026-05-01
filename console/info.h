@@ -101,11 +101,11 @@ SOFTWARE.)";
 
     /**
      * @brief 返回库的版本字符串。
-     * @return std::string 格式为 "console vX.Y.Z"。
+     * @return std::string 格式为 console version Major.Minor.Patch (YYYY-MM-DD) -- "Commit Information"。
      */
     inline std::string version()
     {
-        return "console v4.2.0";
+        return "console version 4.5.0 (2026-05-01) -- \"Remove Fingerprinting but Add screen.h\"";
     }
 
     /**
@@ -116,6 +116,4 @@ SOFTWARE.)";
     {
         return "MrXie1109";
     }
-
-    static const char console_uuid_i1[] = "CONSOLE-LIB-2026-UNIQUE-ID: info.h";
 }

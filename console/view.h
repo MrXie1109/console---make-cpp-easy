@@ -348,6 +348,4 @@ namespace console
     }
 
     /** @} */ // end of view_factories
-
-    static const char console_uuid_v1[] = "CONSOLE-LIB-2026-UNIQUE-ID: view.h";
 }

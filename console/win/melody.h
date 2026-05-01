@@ -410,6 +410,4 @@ namespace console
                 .detach();
         }
     };
-
-    static const char console_uuid_w_m1[] = "CONSOLE-LIB-2026-UNIQUE-ID: win/melody.h";
 }

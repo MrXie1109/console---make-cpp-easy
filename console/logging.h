@@ -214,6 +214,4 @@ namespace console
             throw fatal_logging("Fatal Error: " + error_info);
         }
     } logger(std::cout, true, Logging::Level::INFO); ///< 全局默认 logger 实例，启用颜色，级别 INFO。
-
-    static const char console_uuid_l1[] = "CONSOLE-LIB-2026-UNIQUE-ID: logging.h";
 }

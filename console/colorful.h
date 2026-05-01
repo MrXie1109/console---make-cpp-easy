@@ -127,6 +127,4 @@ namespace console
         /// @brief 删除线
         const char *Strikethrough = "\033[9m";
     }
-
-    static const char console_uuid_c1[] = "CONSOLE-LIB-2026-UNIQUE-ID: colorful.h";
 }

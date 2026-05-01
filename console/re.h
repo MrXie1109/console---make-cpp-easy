@@ -461,6 +461,4 @@ namespace console
             return std::regex_replace(s, special, R"(\$&)");
         }
     }
-
-    static const char console_uuid_r3[] = "CONSOLE-LIB-2026-UNIQUE-ID: re.h";
 }

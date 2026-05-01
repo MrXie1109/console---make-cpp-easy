@@ -323,6 +323,4 @@ namespace console
     };
 
     /** @} */ // end of strpp group
-
-    static const char console_uuid_s3[] = "CONSOLE-LIB-2026-UNIQUE-ID: strpp.h";
 }

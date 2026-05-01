@@ -142,6 +142,4 @@ namespace console
     }
 
     /** @} */ // end of random group
-
-    static const char console_uui_r1[] = "CONSOLE-LIB-2026-UNIQUE-ID: random.h";
 }

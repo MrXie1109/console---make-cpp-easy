@@ -288,6 +288,4 @@ namespace console
             std::ofstream{path, std::ios::app};
         }
     };
-
-    static const char console_uuid_f1[] = "CONSOLE-LIB-2026-UNIQUE-ID: file.h";
 }
