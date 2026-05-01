@@ -50,6 +50,7 @@ var hierarchy =
         [ "console::multiarray_error", "classconsole_1_1multiarray__error.html", null ]
       ] ]
     ] ],
+    [ "console::Screen&lt; COLS, ROWS &gt;", "classconsole_1_1_screen.html", null ],
     [ "std::string", null, [
       [ "console::f_string", "classconsole_1_1f__string.html", null ]
     ] ],

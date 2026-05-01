@@ -11,8 +11,9 @@ var searchData=
   ['unsafe_5fread_5fpod_8',['unsafe_read_POD',['../classconsole_1_1_path.html#a04326221ec3f2a0c34f6d35ef67c1582',1,'console::Path']]],
   ['unsafe_5funpack_9',['unsafe_unpack',['../classconsole_1_1_box.html#ae5de2496ddb421248c0cb305598d8f2c',1,'console::Box']]],
   ['unsafe_5fwrite_5fpod_10',['unsafe_write_POD',['../classconsole_1_1_path.html#acd878d0a826f4dce976d0690883c9619',1,'console::Path']]],
-  ['upper_11',['upper',['../group__strpp.html#ga9b8e55a0a5c1eafc84ec0b3b53c77170',1,'console']]],
-  ['us_12',['us',['../classconsole_1_1_time.html#a317cd6bd52c628afa37886796c453a2f',1,'console::Time']]],
-  ['user‑defined_20literals_20自定义字面量_13',['User‑defined Literals / 自定义字面量',['../md__r_e_a_d_m_e.html#autotoc_md38',1,'']]],
-  ['utilities_20核心工具_14',['Core Utilities / 核心工具',['../md__r_e_a_d_m_e.html#autotoc_md4',1,'']]]
+  ['update_11',['update',['../classconsole_1_1_screen.html#a9c34db74132c79d5a4e7e5dd8fb85dd1',1,'console::Screen']]],
+  ['upper_12',['upper',['../group__strpp.html#ga9b8e55a0a5c1eafc84ec0b3b53c77170',1,'console']]],
+  ['us_13',['us',['../classconsole_1_1_time.html#a317cd6bd52c628afa37886796c453a2f',1,'console::Time']]],
+  ['user‑defined_20literals_20自定义字面量_14',['User‑defined Literals / 自定义字面量',['../md__r_e_a_d_m_e.html#autotoc_md38',1,'']]],
+  ['utilities_20核心工具_15',['Core Utilities / 核心工具',['../md__r_e_a_d_m_e.html#autotoc_md4',1,'']]]
 ];

@@ -33,6 +33,7 @@ var annotated_dup =
       [ "Progress", "classconsole_1_1_progress.html", "classconsole_1_1_progress" ],
       [ "BasicRational", "classconsole_1_1_basic_rational.html", "classconsole_1_1_basic_rational" ],
       [ "Regex", "classconsole_1_1_regex.html", "classconsole_1_1_regex" ],
+      [ "Screen", "classconsole_1_1_screen.html", "classconsole_1_1_screen" ],
       [ "is_container", "structconsole_1_1is__container.html", null ],
       [ "is_callable", "structconsole_1_1is__callable.html", null ],
       [ "is_iterator", "structconsole_1_1is__iterator.html", null ],

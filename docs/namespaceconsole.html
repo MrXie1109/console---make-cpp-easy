@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.2.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.5.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -172,6 +172,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">用于表示分数的基础模板类。  <a href="classconsole_1_1_basic_rational.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Regex" id="r_Regex"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_regex.html">Regex</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">正则表达式对象，封装编译后的模式，提供匹配、搜索、替换等功能。  <a href="classconsole_1_1_regex.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Screen" id="r_Screen"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_screen.html">Screen</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">用于表示虚拟屏幕的类。  <a href="classconsole_1_1_screen.html#details">More...</a><br /></td></tr>
 <tr class="memitem:is_5Fcontainer" id="r_is_5Fcontainer"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structconsole_1_1is__container.html">is_container</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">检测类型是否为容器（支持 std::begin 和 std::end）。  <a href="structconsole_1_1is__container.html#details">More...</a><br /></td></tr>
 <tr class="memitem:is_5Fcallable" id="r_is_5Fcallable"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structconsole_1_1is__callable.html">is_callable</a></td></tr>
@@ -1039,6 +1041,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:ae13f7251e398c04ade0305d5507197cf" id="r_ae13f7251e398c04ade0305d5507197cf"><td class="memItemLeft">static const char&#160;</td><td class="memItemRight"><a class="el" href="#ae13f7251e398c04ade0305d5507197cf">meta</a> [] = &quot;CONSOLE-LIB-2026-5-1&quot;</td></tr>
 <tr class="memitem:ae2f73bcafcb4987aedc6b8e514540969" id="r_ae2f73bcafcb4987aedc6b8e514540969"><td class="memItemLeft">struct <a class="el" href="structconsole_1_1_input_settings.html">console::InputSettings</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae2f73bcafcb4987aedc6b8e514540969">cout</a></td></tr>
 <tr class="memitem:acf3c4705e4127e6be17633413764d049" id="r_acf3c4705e4127e6be17633413764d049"><td class="memItemLeft">struct <a class="el" href="structconsole_1_1_input_settings.html">console::InputSettings</a>&#160;</td><td class="memItemRight"><a class="el" href="#acf3c4705e4127e6be17633413764d049">cin</a></td></tr>
 <tr class="memdesc:acf3c4705e4127e6be17633413764d049"><td class="mdescLeft">&#160;</td><td class="mdescRight">全局默认输入设置  <br /></td></tr>
@@ -2508,7 +2511,7 @@ template&lt;class F, class... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>返回库的版本字符串。 </p>
-<dl class="section return"><dt>Returns</dt><dd>std::string 格式为 "console vX.Y.Z"。 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>std::string 格式为 console version Major.Minor.Patch (YYYY-MM-DD) &ndash; "Commit Information"。 </dd></dl>
 
 </div>
 </div>
@@ -2677,6 +2680,28 @@ template&lt;class C1, class C2&gt; </div>
           <td class="memname">struct <a class="el" href="structconsole_1_1_input_settings.html">console::InputSettings</a> console::cout</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae13f7251e398c04ade0305d5507197cf" name="ae13f7251e398c04ade0305d5507197cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae13f7251e398c04ade0305d5507197cf">&#9670;&#160;</a></span>meta</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char console::meta[] = &quot;CONSOLE-LIB-2026-5-1&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

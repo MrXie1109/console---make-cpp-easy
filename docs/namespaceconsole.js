@@ -223,6 +223,7 @@ var namespaceconsole =
     [ "Progress", "classconsole_1_1_progress.html", "classconsole_1_1_progress" ],
     [ "BasicRational", "classconsole_1_1_basic_rational.html", "classconsole_1_1_basic_rational" ],
     [ "Regex", "classconsole_1_1_regex.html", "classconsole_1_1_regex" ],
+    [ "Screen", "classconsole_1_1_screen.html", "classconsole_1_1_screen" ],
     [ "is_container", "structconsole_1_1is__container.html", null ],
     [ "is_callable", "structconsole_1_1is__callable.html", null ],
     [ "is_iterator", "structconsole_1_1is__iterator.html", null ],
@@ -602,6 +603,7 @@ var namespaceconsole =
     [ "zip", "namespaceconsole.html#ad98e0cce9eba2fb6d8aae2d19e1379f8", null ],
     [ "cin", "namespaceconsole.html#acf3c4705e4127e6be17633413764d049", null ],
     [ "cout", "namespaceconsole.html#ae2f73bcafcb4987aedc6b8e514540969", null ],
+    [ "meta", "namespaceconsole.html#ae13f7251e398c04ade0305d5507197cf", null ],
     [ "nothing", "namespaceconsole.html#aab10e888085cc7484f384e43f187dbaf", null ],
     [ "print", "namespaceconsole.html#a1658ddfe71dc7f388938391c9a8db3fe", null ]
 ];

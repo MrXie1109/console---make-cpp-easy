@@ -1,7 +1,7 @@
 var indexSectionsWithContent =
 {
   0: "_abcdefghijklmnopqrstuvwxyz~–函变可多字异快打控数文日时有标核正游类统自要视让许输运进随音",
-  1: "bcdfhilmnoprtuv",
+  1: "bcdfhilmnoprstuv",
   2: "cpr",
   3: "abcfilmoprstv",
   4: "abcdefghijklmnoprstuvwz~",

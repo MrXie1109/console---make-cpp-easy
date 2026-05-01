@@ -1,7 +1,7 @@
 var dir_9f97b40203d0b7782e2ba57c500dd0f3 =
 [
     [ "win", "dir_9130ef04951760d6fe1626d057912567.html", "dir_9130ef04951760d6fe1626d057912567" ],
-    [ "all.h", "all_8h.html", null ],
+    [ "all.h", "all_8h.html", "all_8h" ],
     [ "box.h", "box_8h.html", "box_8h" ],
     [ "colorful.h", "colorful_8h.html", "colorful_8h" ],
     [ "compre.h", "compre_8h.html", "compre_8h" ],
@@ -23,6 +23,7 @@ var dir_9f97b40203d0b7782e2ba57c500dd0f3 =
     [ "rational.h", "rational_8h.html", "rational_8h" ],
     [ "re.h", "re_8h.html", "re_8h" ],
     [ "repr.h", "repr_8h.html", "repr_8h" ],
+    [ "screen.h", "screen_8h.html", "screen_8h" ],
     [ "sfinae.h", "sfinae_8h.html", "sfinae_8h" ],
     [ "std.h", "std_8h.html", null ],
     [ "strpp.h", "strpp_8h.html", "strpp_8h" ],
