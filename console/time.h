@@ -177,4 +177,19 @@ namespace console
         ss << std::put_time(&tm_buffer, fmt.c_str());
         return ss.str();
     }
+
+    /**
+     * @brief 控制循环的帧率。
+     * @param target 目标帧率。
+     * @return double 实际帧率。
+     */
+    double fps(double target)
+    {
+        using namespace std::chrono;
+        thread_local auto last = steady_clock::now();
+        std::this_thread::sleep_until(last + duration<double>(1.0 / target));
+        double actual = 1.0 / duration<double>(steady_clock::now() - last).count();
+        last = steady_clock::now();
+        return actual;
+    }
 }

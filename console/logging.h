@@ -111,7 +111,7 @@ namespace console
          * @param cf 是否启用颜色，默认 false。
          * @param lvl 最低日志级别，默认 INFO。
          */
-        Logging(std::ostream &os = std::cout,
+        Logging(std::ostream &os = std::clog,
                 bool cf = false, Level lvl = Level::INFO)
             : output(os, "", "\n", true),
               colorful(cf) { set(lvl); }
@@ -213,5 +213,5 @@ namespace console
             }
             throw fatal_logging("Fatal Error: " + error_info);
         }
-    } logger(std::cout, true, Logging::Level::INFO); ///< 全局默认 logger 实例，启用颜色，级别 INFO。
+    } logger(std::clog, true, Logging::Level::INFO); ///< 全局默认 logger 实例，启用颜色，级别 INFO。
 }
