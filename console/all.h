@@ -56,6 +56,10 @@ SOFTWARE.
 #include "matools.h"
 #include "iter.h"
 #include "rational.h"
+#include "screen.h"
+#include "kb.h"
+
+// #include "win/melody.h"
 
 /**
  * @namespace console

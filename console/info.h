@@ -105,7 +105,7 @@ SOFTWARE.)";
      */
     inline std::string version()
     {
-        return "console version 4.6.0 (2026-05-03) -- \"Add kb.h for Watch Keyboard\"";
+        return "console version 4.6.1 (2026-05-03) -- \"Update all.h\"";
     }
 
     /**
