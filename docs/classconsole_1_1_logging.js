@@ -7,7 +7,7 @@ var classconsole_1_1_logging =
       [ "ERROR", "classconsole_1_1_logging.html#adbe10800d06e6c74c22849f7f210d5e8abb1ca97ec761fc37101737ba0aa2e7c5", null ],
       [ "FATAL", "classconsole_1_1_logging.html#adbe10800d06e6c74c22849f7f210d5e8a19da7170bea36556dde582519795f3fc", null ]
     ] ],
-    [ "Logging", "classconsole_1_1_logging.html#a74bf9dc29afdee4815a8a9e2d6e034af", null ],
+    [ "Logging", "classconsole_1_1_logging.html#a383b147c7864aae5a778631f88972ad0", null ],
     [ "debug", "classconsole_1_1_logging.html#a8c82e011912b9c12b82f6fad627f4130", null ],
     [ "error", "classconsole_1_1_logging.html#a45cce11639e8308a30eefe772fa48c42", null ],
     [ "fatal", "classconsole_1_1_logging.html#a65b46a9b1efad4ff786ab42162ba71e3", null ],

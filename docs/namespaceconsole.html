@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.5.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.6.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -146,6 +146,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储迭代器对，可以直接范围 for。  <a href="structconsole_1_1_iterator_pair.html#details">More...</a><br /></td></tr>
 <tr class="memitem:TiedIterators" id="r_TiedIterators"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_tied_iterators.html">TiedIterators</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定迭代器对，一齐迭代。  <a href="classconsole_1_1_tied_iterators.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Keyboard" id="r_Keyboard"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_keyboard.html">Keyboard</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">用于监视键盘键击情况的类。  <a href="classconsole_1_1_keyboard.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Logging" id="r_Logging"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_logging.html">Logging</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">日志记录器，支持多级别、颜色输出和自动时间戳。  <a href="classconsole_1_1_logging.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Maybe" id="r_Maybe"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_maybe.html">Maybe</a></td></tr>
@@ -259,6 +261,82 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:a506ee9cef0c6d79e2e87674233647f29" id="r_a506ee9cef0c6d79e2e87674233647f29"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a506ee9cef0c6d79e2e87674233647f29">Key</a> : int { <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a6adf97f83acf6453d4a6a4b1070f3754">None</a> = 0
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a7fc56270e7a70fa81a5935b72eacbe29">A</a> = 'A'
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a9d5ed678fe57bcca610140957afab571">B</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a0d61f8370cad1d412f80b84d143e1257">C</a>
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29af623e75af30e62bbd73d6df5b50bb7b5">D</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a3a3ea00cfc35332cedf6e5e9a32e94da">E</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012">F</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29adfcf28d0734569a6a693bc8194de62bf">G</a>
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ac1d9f50f86825a1a2302ec2449c17196">H</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29add7536794b63bf90eccfd37f9b147d7f">I</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29aff44570aca8241914870afbc310cdb85">J</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29aa5f3c6a11b03839d46af9fb43c97c188">K</a>
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ad20caec3b48a1eef164cb4ca81ba2587">L</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a69691c7bdcc3ce6d5d8a1361f22d04ac">M</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a8d9c307cb7f3c4a32822a51922d1ceaa">N</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29af186217753c37b9b9f958d906208506e">O</a>
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a44c29edb103a2872f519ad0c9a0fdaaa">P</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29af09564c9ca56850d4cd6b3319e541aee">Q</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ae1e1d3d40573127e9ee0480caf1283d6">R</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a5dbc98dcc983a70728bd082d1a47546e">S</a>
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a4c614360da93c0a041b22e537de151eb">U</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a5206560a306a2e085a437fd258eb57ce">V</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a61e9c06ea9a85a5088a499df6458d276">W</a>
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a02129bb861061d1a052c592e2dc6b383">X</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a57cec4137b614c87cb4e24a3d003a3e0">Y</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a21c2e59531c8710156d34a3c30ac81d5">Z</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a845787798a45b48e825e9b99a338537a">Num0</a> = '0'
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29abacb69a042a9fdc268a672919052d1f2">Num1</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a72bd76d6e2b68a539c8d1a77b564ed72">Num2</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29aa3a965b443a13522aa59fbdea31d00ce">Num3</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ae0af89b5f83c670e4cc584c73c4732ca">Num4</a>
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a7e89a79bbb017bfcaff80ff820a15d8a">Num5</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a0581cd1de881a0f697f3b46741fb326b">Num6</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a4911ceac5c68b5a3f1499d68b27b0938">Num7</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a894e7d9b7dcced78e8007ba2d38b8dd2">Num8</a>
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ad7b1dbe22119bc7acf6e4a1afcc06e46">Num9</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ad511f8439ecde36647437fbba67a4394">Space</a> = ' '
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29af1851d5600eae616ee802a31ac74701b">Enter</a> = 13
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a91f4253ca587ca8ac4e63b9ceb351f5d">Esc</a> = 27
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29acd7d13ceea728b08555f7c818cfb13ef">Backspace</a> = 127
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a5c6ba25104401c9ee0650230fc6ba413">Tab</a> = 9
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a258f49887ef8d14ac268c92b02503aaa">Up</a> = 1000
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a08a38277b0309070706f6652eeae9a53">Down</a>
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a945d5e233cf7d6240f6b783b36a374ff">Left</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a92b09c7c48c520c3c55e497875da437c">Right</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ae1dffc8709f31a4987c8a88334107e89">F1</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29afe5c3684dce76cdd9f7f42430868aa74">F2</a>
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a4b6bf4b531770872d4328ce69bef5627">F3</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ae7e0e72401a9f2718ed0f39f2861d702">F4</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a37f438df6a6d5ba4c17ef8ca58562f00">F5</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a1faf42f2823f184eb2c9f0dffe5d73f2">F6</a>
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a47489eb597b7db34caa24b1fc78fc839">F7</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a4787509ad9f9d747a81a30e9dde3d4a7">F8</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a892a245e287c163080b23db737d3c4c9">F9</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ab213ce22ca6ad4eda8db82966b9b6e5a">F10</a>
+, <br />
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a643b0662422d1d0dffa3fca2e2bf28a8">F11</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ae902674982fc99aa343cdd94da7476c3">F12</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a506ee9cef0c6d79e2e87674233647f29"><td class="mdescLeft">&#160;</td><td class="mdescRight">用于表示常用按键的枚举。  <a href="#a506ee9cef0c6d79e2e87674233647f29">More...</a><br /></td></tr>
 <tr class="memitem:ac3066e557db972dbb8670effba117592" id="r_ac3066e557db972dbb8670effba117592"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ac3066e557db972dbb8670effba117592">Instrument</a> : unsigned char { <br />
 &#160;&#160;<a class="el" href="#ac3066e557db972dbb8670effba117592a122c178a05ade736c2cfdc2a6c2e4cc8">AcousticGrandPiano</a> = 0
 , <a class="el" href="#ac3066e557db972dbb8670effba117592a52f4df6d1aa7843b40b36e85263817c1">BrightAcousticPiano</a> = 1
@@ -483,8 +561,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a9a32e56df12d007a866a8c50e78ff3aa" id="r_a9a32e56df12d007a866a8c50e78ff3aa"><td class="memTemplParams" colspan="2">template&lt;class C1, class C2&gt; </td></tr>
 <tr class="memitem:a9a32e56df12d007a866a8c50e78ff3aa template"><td class="memItemLeft"><a class="el" href="structconsole_1_1_iterator_pair.html">IteratorPair</a>&lt; <a class="el" href="classconsole_1_1_tied_iterators.html">TiedIterators</a>&lt; typename C1::iterator, typename C2::const_iterator &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9a32e56df12d007a866a8c50e78ff3aa">zip</a> (C1 &amp;c1, const C2 &amp;c2)</td></tr>
 <tr class="memdesc:a9a32e56df12d007a866a8c50e78ff3aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">针对第一个容器为非常量、第二个容器为常量的 zip 版本。  <br /></td></tr>
-<tr class="memitem:acbaf475571fc302bb67a313117b3ddcd" id="r_acbaf475571fc302bb67a313117b3ddcd"><td class="memItemLeft">class <a class="el" href="classconsole_1_1_logging.html">console::Logging</a>&#160;</td><td class="memItemRight"><a class="el" href="#acbaf475571fc302bb67a313117b3ddcd">logger</a> (std::cout, true, <a class="el" href="classconsole_1_1_logging.html#adbe10800d06e6c74c22849f7f210d5e8a551b723eafd6a31d444fcb2f5920fbd3">Logging::Level::INFO</a>)</td></tr>
-<tr class="memdesc:acbaf475571fc302bb67a313117b3ddcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">全局默认 logger 实例，启用颜色，级别 INFO。  <br /></td></tr>
+<tr class="memitem:aebb75438fb8382ebc7174554b3614f07" id="r_aebb75438fb8382ebc7174554b3614f07"><td class="memItemLeft">class <a class="el" href="classconsole_1_1_logging.html">console::Logging</a>&#160;</td><td class="memItemRight"><a class="el" href="#aebb75438fb8382ebc7174554b3614f07">logger</a> (std::clog, true, <a class="el" href="classconsole_1_1_logging.html#adbe10800d06e6c74c22849f7f210d5e8a551b723eafd6a31d444fcb2f5920fbd3">Logging::Level::INFO</a>)</td></tr>
+<tr class="memdesc:aebb75438fb8382ebc7174554b3614f07"><td class="mdescLeft">&#160;</td><td class="mdescRight">全局默认 logger 实例，启用颜色，级别 INFO。  <br /></td></tr>
 <tr class="memitem:gaa52523dce981db3d239cf22aee9a6cbf" id="r_gaa52523dce981db3d239cf22aee9a6cbf"><td class="memTemplParams" colspan="2">template&lt;class T, size_t... Dims&gt; </td></tr>
 <tr class="memitem:gaa52523dce981db3d239cf22aee9a6cbf template"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="group__matools.html#gaa52523dce981db3d239cf22aee9a6cbf">mean</a> (const <a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, Dims... &gt; &amp;arr)</td></tr>
 <tr class="memdesc:gaa52523dce981db3d239cf22aee9a6cbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算 <a class="el" href="classconsole_1_1_multi_array.html" title="编译期固定维度的多维数组。">MultiArray</a> 中所有元素的算术平均值。  <br /></td></tr>
@@ -1009,6 +1087,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a051357a08d9c4700e4b6a4eafa3f4958"><td class="mdescLeft">&#160;</td><td class="mdescRight">休眠指定时间。  <br /></td></tr>
 <tr class="memitem:a79c8a9f9c5c22d66e53a598a3090f679" id="r_a79c8a9f9c5c22d66e53a598a3090f679"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a79c8a9f9c5c22d66e53a598a3090f679">datetime</a> (const std::string &amp;fmt=&quot;%Y-%m-%d %H:%M:%S&quot;)</td></tr>
 <tr class="memdesc:a79c8a9f9c5c22d66e53a598a3090f679"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前日期时间字符串。  <br /></td></tr>
+<tr class="memitem:aed028175b47f9e2fa4b21b5cfd036471" id="r_aed028175b47f9e2fa4b21b5cfd036471"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#aed028175b47f9e2fa4b21b5cfd036471">fps</a> (double target)</td></tr>
+<tr class="memdesc:aed028175b47f9e2fa4b21b5cfd036471"><td class="mdescLeft">&#160;</td><td class="mdescRight">控制循环的帧率。  <br /></td></tr>
 <tr class="memitem:ac202c83668858c78f9e639529b6e842a" id="r_ac202c83668858c78f9e639529b6e842a"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac202c83668858c78f9e639529b6e842a">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classconsole_1_1_view.html">View</a>&lt; std::string &gt; &amp;sv)</td></tr>
 <tr class="memdesc:ac202c83668858c78f9e639529b6e842a"><td class="mdescLeft">&#160;</td><td class="mdescRight">输出 std::string 视图的内容（直接输出字符串，不添加额外格式）。  <br /></td></tr>
 <tr class="memitem:a0fd2bea58eef8588960e5c03cb5450cf" id="r_a0fd2bea58eef8588960e5c03cb5450cf"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
@@ -1418,6 +1498,90 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a506ee9cef0c6d79e2e87674233647f29" name="a506ee9cef0c6d79e2e87674233647f29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a506ee9cef0c6d79e2e87674233647f29">&#9670;&#160;</a></span>Key</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29">console::Key</a> : int</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>用于表示常用按键的枚举。 </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a6adf97f83acf6453d4a6a4b1070f3754" name="a506ee9cef0c6d79e2e87674233647f29a6adf97f83acf6453d4a6a4b1070f3754"></a>None&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a7fc56270e7a70fa81a5935b72eacbe29" name="a506ee9cef0c6d79e2e87674233647f29a7fc56270e7a70fa81a5935b72eacbe29"></a>A&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a9d5ed678fe57bcca610140957afab571" name="a506ee9cef0c6d79e2e87674233647f29a9d5ed678fe57bcca610140957afab571"></a>B&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a0d61f8370cad1d412f80b84d143e1257" name="a506ee9cef0c6d79e2e87674233647f29a0d61f8370cad1d412f80b84d143e1257"></a>C&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29af623e75af30e62bbd73d6df5b50bb7b5" name="a506ee9cef0c6d79e2e87674233647f29af623e75af30e62bbd73d6df5b50bb7b5"></a>D&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a3a3ea00cfc35332cedf6e5e9a32e94da" name="a506ee9cef0c6d79e2e87674233647f29a3a3ea00cfc35332cedf6e5e9a32e94da"></a>E&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012" name="a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012"></a>F&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29adfcf28d0734569a6a693bc8194de62bf" name="a506ee9cef0c6d79e2e87674233647f29adfcf28d0734569a6a693bc8194de62bf"></a>G&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29ac1d9f50f86825a1a2302ec2449c17196" name="a506ee9cef0c6d79e2e87674233647f29ac1d9f50f86825a1a2302ec2449c17196"></a>H&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29add7536794b63bf90eccfd37f9b147d7f" name="a506ee9cef0c6d79e2e87674233647f29add7536794b63bf90eccfd37f9b147d7f"></a>I&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29aff44570aca8241914870afbc310cdb85" name="a506ee9cef0c6d79e2e87674233647f29aff44570aca8241914870afbc310cdb85"></a>J&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29aa5f3c6a11b03839d46af9fb43c97c188" name="a506ee9cef0c6d79e2e87674233647f29aa5f3c6a11b03839d46af9fb43c97c188"></a>K&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29ad20caec3b48a1eef164cb4ca81ba2587" name="a506ee9cef0c6d79e2e87674233647f29ad20caec3b48a1eef164cb4ca81ba2587"></a>L&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a69691c7bdcc3ce6d5d8a1361f22d04ac" name="a506ee9cef0c6d79e2e87674233647f29a69691c7bdcc3ce6d5d8a1361f22d04ac"></a>M&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a8d9c307cb7f3c4a32822a51922d1ceaa" name="a506ee9cef0c6d79e2e87674233647f29a8d9c307cb7f3c4a32822a51922d1ceaa"></a>N&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29af186217753c37b9b9f958d906208506e" name="a506ee9cef0c6d79e2e87674233647f29af186217753c37b9b9f958d906208506e"></a>O&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a44c29edb103a2872f519ad0c9a0fdaaa" name="a506ee9cef0c6d79e2e87674233647f29a44c29edb103a2872f519ad0c9a0fdaaa"></a>P&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29af09564c9ca56850d4cd6b3319e541aee" name="a506ee9cef0c6d79e2e87674233647f29af09564c9ca56850d4cd6b3319e541aee"></a>Q&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29ae1e1d3d40573127e9ee0480caf1283d6" name="a506ee9cef0c6d79e2e87674233647f29ae1e1d3d40573127e9ee0480caf1283d6"></a>R&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a5dbc98dcc983a70728bd082d1a47546e" name="a506ee9cef0c6d79e2e87674233647f29a5dbc98dcc983a70728bd082d1a47546e"></a>S&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3" name="a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3"></a>T&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a4c614360da93c0a041b22e537de151eb" name="a506ee9cef0c6d79e2e87674233647f29a4c614360da93c0a041b22e537de151eb"></a>U&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a5206560a306a2e085a437fd258eb57ce" name="a506ee9cef0c6d79e2e87674233647f29a5206560a306a2e085a437fd258eb57ce"></a>V&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a61e9c06ea9a85a5088a499df6458d276" name="a506ee9cef0c6d79e2e87674233647f29a61e9c06ea9a85a5088a499df6458d276"></a>W&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a02129bb861061d1a052c592e2dc6b383" name="a506ee9cef0c6d79e2e87674233647f29a02129bb861061d1a052c592e2dc6b383"></a>X&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a57cec4137b614c87cb4e24a3d003a3e0" name="a506ee9cef0c6d79e2e87674233647f29a57cec4137b614c87cb4e24a3d003a3e0"></a>Y&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a21c2e59531c8710156d34a3c30ac81d5" name="a506ee9cef0c6d79e2e87674233647f29a21c2e59531c8710156d34a3c30ac81d5"></a>Z&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a845787798a45b48e825e9b99a338537a" name="a506ee9cef0c6d79e2e87674233647f29a845787798a45b48e825e9b99a338537a"></a>Num0&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29abacb69a042a9fdc268a672919052d1f2" name="a506ee9cef0c6d79e2e87674233647f29abacb69a042a9fdc268a672919052d1f2"></a>Num1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a72bd76d6e2b68a539c8d1a77b564ed72" name="a506ee9cef0c6d79e2e87674233647f29a72bd76d6e2b68a539c8d1a77b564ed72"></a>Num2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29aa3a965b443a13522aa59fbdea31d00ce" name="a506ee9cef0c6d79e2e87674233647f29aa3a965b443a13522aa59fbdea31d00ce"></a>Num3&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29ae0af89b5f83c670e4cc584c73c4732ca" name="a506ee9cef0c6d79e2e87674233647f29ae0af89b5f83c670e4cc584c73c4732ca"></a>Num4&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a7e89a79bbb017bfcaff80ff820a15d8a" name="a506ee9cef0c6d79e2e87674233647f29a7e89a79bbb017bfcaff80ff820a15d8a"></a>Num5&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a0581cd1de881a0f697f3b46741fb326b" name="a506ee9cef0c6d79e2e87674233647f29a0581cd1de881a0f697f3b46741fb326b"></a>Num6&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a4911ceac5c68b5a3f1499d68b27b0938" name="a506ee9cef0c6d79e2e87674233647f29a4911ceac5c68b5a3f1499d68b27b0938"></a>Num7&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a894e7d9b7dcced78e8007ba2d38b8dd2" name="a506ee9cef0c6d79e2e87674233647f29a894e7d9b7dcced78e8007ba2d38b8dd2"></a>Num8&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29ad7b1dbe22119bc7acf6e4a1afcc06e46" name="a506ee9cef0c6d79e2e87674233647f29ad7b1dbe22119bc7acf6e4a1afcc06e46"></a>Num9&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29ad511f8439ecde36647437fbba67a4394" name="a506ee9cef0c6d79e2e87674233647f29ad511f8439ecde36647437fbba67a4394"></a>Space&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29af1851d5600eae616ee802a31ac74701b" name="a506ee9cef0c6d79e2e87674233647f29af1851d5600eae616ee802a31ac74701b"></a>Enter&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a91f4253ca587ca8ac4e63b9ceb351f5d" name="a506ee9cef0c6d79e2e87674233647f29a91f4253ca587ca8ac4e63b9ceb351f5d"></a>Esc&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29acd7d13ceea728b08555f7c818cfb13ef" name="a506ee9cef0c6d79e2e87674233647f29acd7d13ceea728b08555f7c818cfb13ef"></a>Backspace&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a5c6ba25104401c9ee0650230fc6ba413" name="a506ee9cef0c6d79e2e87674233647f29a5c6ba25104401c9ee0650230fc6ba413"></a>Tab&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a258f49887ef8d14ac268c92b02503aaa" name="a506ee9cef0c6d79e2e87674233647f29a258f49887ef8d14ac268c92b02503aaa"></a>Up&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a08a38277b0309070706f6652eeae9a53" name="a506ee9cef0c6d79e2e87674233647f29a08a38277b0309070706f6652eeae9a53"></a>Down&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a945d5e233cf7d6240f6b783b36a374ff" name="a506ee9cef0c6d79e2e87674233647f29a945d5e233cf7d6240f6b783b36a374ff"></a>Left&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a92b09c7c48c520c3c55e497875da437c" name="a506ee9cef0c6d79e2e87674233647f29a92b09c7c48c520c3c55e497875da437c"></a>Right&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29ae1dffc8709f31a4987c8a88334107e89" name="a506ee9cef0c6d79e2e87674233647f29ae1dffc8709f31a4987c8a88334107e89"></a>F1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29afe5c3684dce76cdd9f7f42430868aa74" name="a506ee9cef0c6d79e2e87674233647f29afe5c3684dce76cdd9f7f42430868aa74"></a>F2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a4b6bf4b531770872d4328ce69bef5627" name="a506ee9cef0c6d79e2e87674233647f29a4b6bf4b531770872d4328ce69bef5627"></a>F3&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29ae7e0e72401a9f2718ed0f39f2861d702" name="a506ee9cef0c6d79e2e87674233647f29ae7e0e72401a9f2718ed0f39f2861d702"></a>F4&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a37f438df6a6d5ba4c17ef8ca58562f00" name="a506ee9cef0c6d79e2e87674233647f29a37f438df6a6d5ba4c17ef8ca58562f00"></a>F5&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a1faf42f2823f184eb2c9f0dffe5d73f2" name="a506ee9cef0c6d79e2e87674233647f29a1faf42f2823f184eb2c9f0dffe5d73f2"></a>F6&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a47489eb597b7db34caa24b1fc78fc839" name="a506ee9cef0c6d79e2e87674233647f29a47489eb597b7db34caa24b1fc78fc839"></a>F7&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a4787509ad9f9d747a81a30e9dde3d4a7" name="a506ee9cef0c6d79e2e87674233647f29a4787509ad9f9d747a81a30e9dde3d4a7"></a>F8&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a892a245e287c163080b23db737d3c4c9" name="a506ee9cef0c6d79e2e87674233647f29a892a245e287c163080b23db737d3c4c9"></a>F9&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29ab213ce22ca6ad4eda8db82966b9b6e5a" name="a506ee9cef0c6d79e2e87674233647f29ab213ce22ca6ad4eda8db82966b9b6e5a"></a>F10&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a643b0662422d1d0dffa3fca2e2bf28a8" name="a506ee9cef0c6d79e2e87674233647f29a643b0662422d1d0dffa3fca2e2bf28a8"></a>F11&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29ae902674982fc99aa343cdd94da7476c3" name="a506ee9cef0c6d79e2e87674233647f29ae902674982fc99aa343cdd94da7476c3"></a>F12&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a32d08b45883b34bc03e245d2695eeb74" name="a32d08b45883b34bc03e245d2695eeb74"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a32d08b45883b34bc03e245d2695eeb74">&#9670;&#160;</a></span>author()</h2>
@@ -1733,6 +1897,32 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
+<a id="aed028175b47f9e2fa4b21b5cfd036471" name="aed028175b47f9e2fa4b21b5cfd036471"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed028175b47f9e2fa4b21b5cfd036471">&#9670;&#160;</a></span>fps()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double console::fps </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>target</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>控制循环的帧率。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>目标帧率。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double 实际帧率。 </dd></dl>
+
+</div>
+</div>
 <a id="a4b13f338c16af509d1896fc6689f6fd3" name="a4b13f338c16af509d1896fc6689f6fd3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4b13f338c16af509d1896fc6689f6fd3">&#9670;&#160;</a></span>input()</h2>
 
@@ -2041,8 +2231,8 @@ template&lt;class Iter&gt; </div>
 
 </div>
 </div>
-<a id="acbaf475571fc302bb67a313117b3ddcd" name="acbaf475571fc302bb67a313117b3ddcd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbaf475571fc302bb67a313117b3ddcd">&#9670;&#160;</a></span>logger()</h2>
+<a id="aebb75438fb8382ebc7174554b3614f07" name="aebb75438fb8382ebc7174554b3614f07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebb75438fb8382ebc7174554b3614f07">&#9670;&#160;</a></span>logger()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2050,7 +2240,7 @@ template&lt;class Iter&gt; </div>
         <tr>
           <td class="memname">class <a class="el" href="classconsole_1_1_logging.html">console::Logging</a> console::logger </td>
           <td>(</td>
-          <td class="paramtype">std::cout</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype">std::clog</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

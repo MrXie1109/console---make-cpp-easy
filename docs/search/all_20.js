@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['多维数组_0',['Multi‑dimensional Arrays / 多维数组',['../md__r_e_a_d_m_e.html#autotoc_md24',1,'']]]
+  ['类型特征_0',['类型特征',['../group__sfinae.html',1,'']]],
+  ['类型表示_1',['类型表示',['../group__repr.html',1,'']]],
+  ['类型转换_2',['类型转换',['../group__multiarray__cast.html',1,'']]]
 ];

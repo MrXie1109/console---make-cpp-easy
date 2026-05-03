@@ -12,8 +12,8 @@ var logging_8h =
     [ "error", "logging_8h.html#ae4d0fb185a06dab2b1bed05021de591e", null ],
     [ "fatal", "logging_8h.html#ae63b1dba15144247db1fdc4dc580e457", null ],
     [ "info", "logging_8h.html#a8eb09349d642180ea5bb6497c6e357a5", null ],
-    [ "console::logger", "namespaceconsole.html#acbaf475571fc302bb67a313117b3ddcd", null ],
-    [ "Logging", "logging_8h.html#a3b751b1535ebaf9e04af98197e970932", null ],
+    [ "console::logger", "namespaceconsole.html#aebb75438fb8382ebc7174554b3614f07", null ],
+    [ "Logging", "logging_8h.html#af8258a4c54dc5e8eeef77cfa9405ac8a", null ],
     [ "set", "logging_8h.html#a498014e8e626590c276f5bd07ea45254", null ],
     [ "set", "logging_8h.html#a9cd02249b1fd62dff7d5b07a3bca4371", null ],
     [ "warn", "logging_8h.html#ac11dfb3028df55ba569287e66c243ecf", null ]

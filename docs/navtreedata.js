@@ -25,30 +25,6 @@
 var NAVTREE =
 [
   [ "Console Library", "index.html", [
-    [ "console – Make C++ Easy / 让 C++ 变简单", "md__r_e_a_d_m_e.html", [
-      [ "Quick Index / 快速索引", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
-      [ "Core Utilities / 核心工具", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
-      [ "String Processing / 字符串处理", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
-      [ "Input &amp; Output / 输入与输出", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
-      [ "Console Styling / 控制台样式", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
-      [ "Logging / 日志", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
-      [ "Time &amp; Timing / 时间与计时", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
-      [ "Random Numbers / 随机数", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
-      [ "Regular Expressions / 正则表达式", "md__r_e_a_d_m_e.html#autotoc_md18", null ],
-      [ "File System / 文件系统", "md__r_e_a_d_m_e.html#autotoc_md20", null ],
-      [ "Progress Bar / 进度条", "md__r_e_a_d_m_e.html#autotoc_md22", null ],
-      [ "Multi‑dimensional Arrays / 多维数组", "md__r_e_a_d_m_e.html#autotoc_md24", null ],
-      [ "Optional Value / 可选值", "md__r_e_a_d_m_e.html#autotoc_md26", null ],
-      [ "Heterogeneous Container / 异构容器", "md__r_e_a_d_m_e.html#autotoc_md28", null ],
-      [ "Rational Numbers / 有理数", "md__r_e_a_d_m_e.html#autotoc_md30", null ],
-      [ "Views &amp; Iterators / 视图与迭代器", "md__r_e_a_d_m_e.html#autotoc_md32", null ],
-      [ "Functional Comprehension / 函数式推导", "md__r_e_a_d_m_e.html#autotoc_md34", null ],
-      [ "Cursor Pointer / 游标指针", "md__r_e_a_d_m_e.html#autotoc_md36", null ],
-      [ "User‑defined Literals / 自定义字面量", "md__r_e_a_d_m_e.html#autotoc_md38", null ],
-      [ "Win32 MIDI / Win32 MIDI 音乐", "md__r_e_a_d_m_e.html#autotoc_md40", null ],
-      [ "Requirements / 要求", "md__r_e_a_d_m_e.html#autotoc_md42", null ],
-      [ "License / 许可证", "md__r_e_a_d_m_e.html#autotoc_md44", null ]
-    ] ],
     [ "Topics", "topics.html", "topics" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -88,12 +64,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "all_8h.html",
-"classconsole_1_1_multi_array_3_01_t_00_01_d_01_4.html#a2f12cb3aea8b2af68553270b888a09e7",
-"classconsole_1_1_tied_iterators.html#a39a0fb44b375f9aee415d9bc3d0daaba",
-"classconsole_1_1cursor__ptr_3_01_t_0f_0e_4.html#a778d293f249b1e47303bf554d398bbe2",
-"group__output__forward__decl.html#ga9b604a7073f209728406bb8affe874af",
-"namespaceconsole.html#ac3066e557db972dbb8670effba117592ab15538ac288ae9d5e397f9be619bef0d",
-"namespacemembers_func_j.html"
+"classconsole_1_1_maybe.html#abaa55b465fdd456abee7e2398fbe6203",
+"classconsole_1_1_screen.html#a8cdd038ef534e1464088a28cda007953",
+"classconsole_1_1cursor__ptr_3_01_t_0f_0e_4.html#a34491bc3559c68e0a9b183ccf1d7842a",
+"group__multiarray__ops.html#gaf419fd79a0bd369b1babd9fc1caf9a44",
+"namespaceconsole.html#ac3066e557db972dbb8670effba117592a3dedf1f5028874c14044ac996831fda5",
+"namespaceconsole_1_1pitches.html#aa88c2b2c7dd4daf8edb48f8a7eb45565"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

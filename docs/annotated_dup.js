@@ -20,6 +20,7 @@ var annotated_dup =
       [ "InputSettings", "structconsole_1_1_input_settings.html", "structconsole_1_1_input_settings" ],
       [ "IteratorPair", "structconsole_1_1_iterator_pair.html", "structconsole_1_1_iterator_pair" ],
       [ "TiedIterators", "classconsole_1_1_tied_iterators.html", "classconsole_1_1_tied_iterators" ],
+      [ "Keyboard", "classconsole_1_1_keyboard.html", "classconsole_1_1_keyboard" ],
       [ "Logging", "classconsole_1_1_logging.html", "classconsole_1_1_logging" ],
       [ "Maybe", "classconsole_1_1_maybe.html", "classconsole_1_1_maybe" ],
       [ "MultiArray", "classconsole_1_1_multi_array.html", null ],

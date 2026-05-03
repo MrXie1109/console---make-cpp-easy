@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.5.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.6.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -136,10 +136,10 @@ $(function(){initNavTree('input_8h_source.html','',''); });
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T = std::<span class="keywordtype">string</span>&gt;</div>
 <div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="namespaceconsole.html#a4b13f338c16af509d1896fc6689f6fd3">   61</a></span>    T <a class="code hl_function" href="namespaceconsole.html#a4b13f338c16af509d1896fc6689f6fd3">input</a>(<span class="keyword">const</span> std::string &amp;prompt = <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="namespaceconsole.html#a4b13f338c16af509d1896fc6689f6fd3">   61</a></span>    <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> <a class="code hl_function" href="namespaceconsole.html#a4b13f338c16af509d1896fc6689f6fd3">input</a>(<span class="keyword">const</span> std::string &amp;prompt = <span class="stringliteral">&quot;&quot;</span>,</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keyword">const</span> <a class="code hl_struct" href="structconsole_1_1_input_settings.html">InputSettings</a> &amp;is = inputSettings)</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    {</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        T tmp;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> tmp;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        std::string message;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">while</span> (<span class="keyword">true</span>)</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        {</div>
@@ -249,6 +249,7 @@ $(function(){initNavTree('input_8h_source.html','',''); });
 <div class="ttc" id="anamespaceconsole_html"><div class="ttname"><a href="namespaceconsole.html">console</a></div><div class="ttdoc">本库所有组件所在的顶层命名空间。</div></div>
 <div class="ttc" id="anamespaceconsole_html_a4022716f3b9231c1fe414f243ddf2e39"><div class="ttname"><a href="namespaceconsole.html#a4022716f3b9231c1fe414f243ddf2e39">console::inputAll</a></div><div class="ttdeci">std::string inputAll(const std::string &amp;prompt=&quot;&quot;, const InputSettings &amp;is=inputSettings)</div><div class="ttdoc">读取输入流中剩余的全部内容（直到 EOF）。</div><div class="ttdef"><b>Definition</b> input.h:190</div></div>
 <div class="ttc" id="anamespaceconsole_html_a4b13f338c16af509d1896fc6689f6fd3"><div class="ttname"><a href="namespaceconsole.html#a4b13f338c16af509d1896fc6689f6fd3">console::input</a></div><div class="ttdeci">T input(const std::string &amp;prompt=&quot;&quot;, const InputSettings &amp;is=inputSettings)</div><div class="ttdoc">从标准输入读取一个值，支持类型模板。</div><div class="ttdef"><b>Definition</b> input.h:61</div></div>
+<div class="ttc" id="anamespaceconsole_html_a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3"><div class="ttname"><a href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">console::Key::T</a></div><div class="ttdeci">@ T</div><div class="ttdef"><b>Definition</b> kb.h:72</div></div>
 <div class="ttc" id="anamespaceconsole_html_a5a8e9e11f78e52a7b73f734712d9ce54"><div class="ttname"><a href="namespaceconsole.html#a5a8e9e11f78e52a7b73f734712d9ce54">console::inputWithRange</a></div><div class="ttdeci">long double inputWithRange(const std::string &amp;prompt=&quot;Type a number: &quot;, long double min=DBL_MIN, long double max=DBL_MAX, const InputSettings &amp;is=inputSettings)</div><div class="ttdoc">读取一个在指定范围内的数字。</div><div class="ttdef"><b>Definition</b> input.h:120</div></div>
 <div class="ttc" id="anamespaceconsole_html_a9a62f97aafac8e6eb9a54d3cffc2f01e"><div class="ttname"><a href="namespaceconsole.html#a9a62f97aafac8e6eb9a54d3cffc2f01e">console::inputYesOrNo</a></div><div class="ttdeci">bool inputYesOrNo(const std::string &amp;prompt=&quot;Type yes or no: &quot;, const InputSettings &amp;is=inputSettings)</div><div class="ttdoc">读取一个 y/n 确认，返回布尔值。</div><div class="ttdef"><b>Definition</b> input.h:167</div></div>
 <div class="ttc" id="anamespaceconsole_html_acefe608cce2aafb5da8d5e7a4a3cd4b6"><div class="ttname"><a href="namespaceconsole.html#acefe608cce2aafb5da8d5e7a4a3cd4b6">console::inputLine</a></div><div class="ttdeci">std::string inputLine(const std::string &amp;prompt=&quot;Type a line string: &quot;, const InputSettings &amp;is=inputSettings)</div><div class="ttdoc">读取一整行字符串（包含空格）。</div><div class="ttdef"><b>Definition</b> input.h:100</div></div>

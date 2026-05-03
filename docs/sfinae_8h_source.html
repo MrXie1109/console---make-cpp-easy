@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.5.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.6.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -134,22 +134,22 @@ $(function(){initNavTree('sfinae_8h_source.html','',''); });
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structconsole_1_1is__container.html">is_container</a>&lt;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        T, typename std::enable_if&lt;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a>, typename std::enable_if&lt;</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>               sizeof(decltype(std::begin(std::declval&lt;T&gt;()))) &amp;&amp;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>               sizeof(decltype(std::end(std::declval&lt;T&gt;())))&gt;::type&gt;</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        : std::true_type</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    {</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    };</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keyword">template</span> &lt;<span class="keyword">class </span>F, <span class="keyword">class </span>= void, <span class="keyword">class</span>... Args&gt;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keyword">template</span> &lt;<span class="keyword">class </span><a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012">F</a>, <span class="keyword">class </span>= void, <span class="keyword">class</span>... Args&gt;</div>
 <div class="foldopen" id="foldopen00073" data-start="{" data-end="};">
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="structconsole_1_1is__callable.html">   73</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structconsole_1_1is__callable.html">is_callable</a> : std::false_type</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    {</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    };</div>
 </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">template</span> &lt;<span class="keyword">class </span>F, <span class="keyword">class</span>... Args&gt;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structconsole_1_1is__callable.html">is_callable</a>&lt;F,</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">template</span> &lt;<span class="keyword">class </span><a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012">F</a>, <span class="keyword">class</span>... Args&gt;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structconsole_1_1is__callable.html">is_callable</a>&lt;<a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012">F</a>,</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                       typename std::enable_if&lt;</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                           std::is_convertible&lt;</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                               decltype(std::declval&lt;F&gt;()(std::declval&lt;Args&gt;()...)),</div>
@@ -167,7 +167,7 @@ $(function(){initNavTree('sfinae_8h_source.html','',''); });
 </div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structconsole_1_1is__iterator.html">is_iterator</a>&lt;T, typename std::enable_if&lt;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structconsole_1_1is__iterator.html">is_iterator</a>&lt;<a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a>, typename std::enable_if&lt;</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                              sizeof(</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                                  typename std::iterator_traits&lt;T&gt;::</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                                      iterator_category)&gt;::type&gt;</div>
@@ -183,7 +183,7 @@ $(function(){initNavTree('sfinae_8h_source.html','',''); });
 </div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span></div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Idx&gt;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structconsole_1_1has__subscript.html">has_subscript</a>&lt;T, Idx,</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structconsole_1_1has__subscript.html">has_subscript</a>&lt;<a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a>, Idx,</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                         typename std::enable_if&lt;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                             sizeof(decltype(std::declval&lt;T&gt;()</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                                                 [std::declval&lt;Idx&gt;()]))&gt;::type&gt;</div>
@@ -268,7 +268,7 @@ $(function(){initNavTree('sfinae_8h_source.html','',''); });
 </div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span></div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structconsole_1_1is__printable.html">is_printable</a>&lt;T, typename std::enable_if&lt;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structconsole_1_1is__printable.html">is_printable</a>&lt;<a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a>, typename std::enable_if&lt;</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                               sizeof(</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                                   decltype(std::declval&lt;std::ostream &amp;&gt;()</div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                                            &lt;&lt; std::declval&lt;T&gt;()))&gt;::type&gt;</div>
@@ -380,6 +380,8 @@ $(function(){initNavTree('sfinae_8h_source.html','',''); });
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> <span class="comment">// end of sfinae group</span></div>
 <div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>}</div>
 <div class="ttc" id="anamespaceconsole_html"><div class="ttname"><a href="namespaceconsole.html">console</a></div><div class="ttdoc">本库所有组件所在的顶层命名空间。</div></div>
+<div class="ttc" id="anamespaceconsole_html_a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012"><div class="ttname"><a href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012">console::Key::F</a></div><div class="ttdeci">@ F</div><div class="ttdef"><b>Definition</b> kb.h:58</div></div>
+<div class="ttc" id="anamespaceconsole_html_a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3"><div class="ttname"><a href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">console::Key::T</a></div><div class="ttdeci">@ T</div><div class="ttdef"><b>Definition</b> kb.h:72</div></div>
 <div class="ttc" id="aoutfwd_8h_html"><div class="ttname"><a href="outfwd_8h.html">outfwd.h</a></div><div class="ttdoc">为 STL 容器提供输出流运算符的前向声明。</div></div>
 <div class="ttc" id="astructconsole_1_1has__subscript_html"><div class="ttname"><a href="structconsole_1_1has__subscript.html">console::has_subscript</a></div><div class="ttdoc">检测类型是否支持下标操作符（如 T[Idx]）。</div><div class="ttdef"><b>Definition</b> sfinae.h:119</div></div>
 <div class="ttc" id="astructconsole_1_1is__callable_html"><div class="ttname"><a href="structconsole_1_1is__callable.html">console::is_callable</a></div><div class="ttdoc">检测类型是否可作为函数对象以给定参数调用（返回 void 或可转换为 void）。</div><div class="ttdef"><b>Definition</b> sfinae.h:74</div></div>

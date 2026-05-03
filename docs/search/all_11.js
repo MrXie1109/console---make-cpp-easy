@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quick_20index_20快速索引_0',['Quick Index / 快速索引',['../md__r_e_a_d_m_e.html#autotoc_md2',1,'']]]
+  ['q_0',['Q',['../namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29af09564c9ca56850d4cd6b3319e541aee',1,'console']]]
 ];

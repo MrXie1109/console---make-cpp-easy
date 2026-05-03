@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.5.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.6.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -321,7 +321,7 @@ $(function(){initNavTree('strpp_8h_source.html','',''); });
 <div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span></div>
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
 <div class="foldopen" id="foldopen00314" data-start="{" data-end="}">
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno"><a class="line" href="classconsole_1_1f__string.html#a01eb4d0742604322934a19151ebcd2fa">  314</a></span>        <a class="code hl_class" href="classconsole_1_1f__string.html">f_string</a> <a class="code hl_function" href="classconsole_1_1f__string.html#a01eb4d0742604322934a19151ebcd2fa">operator%</a>(<span class="keyword">const</span> T &amp;t)</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno"><a class="line" href="classconsole_1_1f__string.html#a01eb4d0742604322934a19151ebcd2fa">  314</a></span>        <a class="code hl_class" href="classconsole_1_1f__string.html">f_string</a> <a class="code hl_function" href="classconsole_1_1f__string.html#a01eb4d0742604322934a19151ebcd2fa">operator%</a>(<span class="keyword">const</span> <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &amp;t)</div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        {</div>
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>            <span class="keyword">auto</span> result = <a class="code hl_function" href="group__strpp.html#ga32e13326520876f61cb8a33c74dc973f">partition</a>(*<span class="keyword">this</span>, <span class="stringliteral">&quot;{}&quot;</span>);</div>
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>            <span class="keywordflow">if</span> (result.middle == <span class="stringliteral">&quot;{}&quot;</span>)</div>
@@ -350,6 +350,7 @@ $(function(){initNavTree('strpp_8h_source.html','',''); });
 <div class="ttc" id="agroup__strpp_html_gaac7a5894d7d6708ea4912fea49a3d622"><div class="ttname"><a href="group__strpp.html#gaac7a5894d7d6708ea4912fea49a3d622">console::join</a></div><div class="ttdeci">std::string join(const std::vector&lt; T &gt; &amp;vec, const std::string &amp;sep=&quot;&quot;)</div><div class="ttdoc">以分隔符连接容器中的字符串元素。</div><div class="ttdef"><b>Definition</b> strpp.h:259</div></div>
 <div class="ttc" id="agroup__strpp_html_gab9c219f8107af63d17ec5616fe430891"><div class="ttname"><a href="group__strpp.html#gab9c219f8107af63d17ec5616fe430891">console::trim</a></div><div class="ttdeci">std::string trim(std::string str)</div><div class="ttdoc">移除字符串两侧的空白字符。</div><div class="ttdef"><b>Definition</b> strpp.h:85</div></div>
 <div class="ttc" id="anamespaceconsole_html"><div class="ttname"><a href="namespaceconsole.html">console</a></div><div class="ttdoc">本库所有组件所在的顶层命名空间。</div></div>
+<div class="ttc" id="anamespaceconsole_html_a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3"><div class="ttname"><a href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">console::Key::T</a></div><div class="ttdeci">@ T</div><div class="ttdef"><b>Definition</b> kb.h:72</div></div>
 <div class="ttc" id="aoutput_8h_html"><div class="ttname"><a href="output_8h.html">output.h</a></div><div class="ttdoc">提供 STL 容器的格式化输出和灵活的输出控制工具。</div></div>
 <div class="ttc" id="astructconsole_1_1_partition_result_html"><div class="ttname"><a href="structconsole_1_1_partition_result.html">console::PartitionResult</a></div><div class="ttdoc">字符串分区结果，包含左部分、分隔符、右部分。</div><div class="ttdef"><b>Definition</b> strpp.h:192</div></div>
 <div class="ttc" id="astructconsole_1_1_partition_result_html_a02a3ba14574e8a2533d43f03639027fd"><div class="ttname"><a href="structconsole_1_1_partition_result.html#a02a3ba14574e8a2533d43f03639027fd">console::PartitionResult::operator&lt;&lt;</a></div><div class="ttdeci">friend std::ostream &amp; operator&lt;&lt;(std::ostream &amp;os, const PartitionResult &amp;pr)</div><div class="ttdoc">输出分区结果到流，格式为 (&quot;left&quot;, &quot;middle&quot;, &quot;right&quot;)。</div><div class="ttdef"><b>Definition</b> strpp.h:203</div></div>

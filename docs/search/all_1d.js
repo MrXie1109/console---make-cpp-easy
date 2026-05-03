@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['函数式推导_0',['Functional Comprehension / 函数式推导',['../md__r_e_a_d_m_e.html#autotoc_md34',1,'']]]
+  ['打印辅助_0',['Tuple 打印辅助',['../group__tuple__printer.html',1,'']]]
 ];

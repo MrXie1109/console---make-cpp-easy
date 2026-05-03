@@ -11,6 +11,7 @@ var dir_9f97b40203d0b7782e2ba57c500dd0f3 =
     [ "info.h", "info_8h.html", "info_8h" ],
     [ "input.h", "input_8h.html", "input_8h" ],
     [ "iter.h", "iter_8h.html", "iter_8h" ],
+    [ "kb.h", "kb_8h.html", "kb_8h" ],
     [ "literals.h", "literals_8h.html", "literals_8h" ],
     [ "logging.h", "logging_8h.html", "logging_8h" ],
     [ "matools.h", "matools_8h.html", "matools_8h" ],

@@ -22,6 +22,7 @@ var hierarchy =
     [ "console::Regex::Iterator", "classconsole_1_1_regex_1_1_iterator.html", null ],
     [ "console::Progress&lt; Iter &gt;::iterator", "classconsole_1_1_progress_1_1iterator.html", null ],
     [ "console::Regex::IteratorPair", "classconsole_1_1_regex_1_1_iterator_pair.html", null ],
+    [ "console::Keyboard", "classconsole_1_1_keyboard.html", null ],
     [ "console::Logging", "classconsole_1_1_logging.html", null ],
     [ "console::Regex::Match", "classconsole_1_1_regex_1_1_match.html", null ],
     [ "console::Maybe&lt; T &gt;", "classconsole_1_1_maybe.html", null ],

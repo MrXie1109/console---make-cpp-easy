@@ -1,18 +1,17 @@
 var indexSectionsWithContent =
 {
-  0: "_abcdefghijklmnopqrstuvwxyz~–函变可多字异快打控数文日时有标核正游类统自要视让许输运进随音",
-  1: "bcdfhilmnoprstuv",
+  0: "_abcdefghijklmnopqrstuvwxyz~字打数标类统视输运随",
+  1: "bcdfhiklmnoprstuv",
   2: "cpr",
-  3: "abcfilmoprstv",
+  3: "abcfiklmoprstv",
   4: "abcdefghijklmnoprstuvwz~",
   5: "abcdefghilmnoprsuvwy",
   6: "bcdeipruv",
-  7: "il",
-  8: "abcdefghiklmoprstvwx",
+  7: "ikl",
+  8: "abcdefghijklmnopqrstuvwxyz",
   9: "o",
   10: "_m",
-  11: "t字打数标类统视输运随",
-  12: "abcefhilmnopqrstuvw–函变可多字异快控文日时有核正游自要视让许输进随音"
+  11: "t字打数标类统视输运随"
 };
 
 var indexSectionNames =
@@ -28,8 +27,7 @@ var indexSectionNames =
   8: "enumvalues",
   9: "related",
   10: "defines",
-  11: "groups",
-  12: "pages"
+  11: "groups"
 };
 
 var indexSectionLabels =
@@ -45,7 +43,6 @@ var indexSectionLabels =
   8: "Enumerator",
   9: "Friends",
   10: "Macros",
-  11: "Modules",
-  12: "Pages"
+  11: "Modules"
 };
 

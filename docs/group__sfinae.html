@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.5.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.6.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -174,7 +174,8 @@ template&lt;class F, class... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
-<div class="line"><span class="keyword">typename</span> std::enable_if&lt;<a class="code hl_struct" href="structconsole_1_1is__callable.html">is_callable</a>&lt;F, Args...&gt;::value&gt;::type</div>
+<div class="line"><span class="keyword">typename</span> std::enable_if&lt;<a class="code hl_struct" href="structconsole_1_1is__callable.html">is_callable</a>&lt;<a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012">F</a>, Args...&gt;::value&gt;::type</div>
+<div class="ttc" id="anamespaceconsole_html_a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012"><div class="ttname"><a href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012">console::Key::F</a></div><div class="ttdeci">@ F</div><div class="ttdef"><b>Definition</b> kb.h:58</div></div>
 <div class="ttc" id="astructconsole_1_1is__callable_html"><div class="ttname"><a href="structconsole_1_1is__callable.html">console::is_callable</a></div><div class="ttdoc">检测类型是否可作为函数对象以给定参数调用（返回 void 或可转换为 void）。</div><div class="ttdef"><b>Definition</b> sfinae.h:74</div></div>
 </div><!-- fragment -->
 <p>启用若 F 可以 Args... 参数调用。 </p>
@@ -256,7 +257,7 @@ template&lt;class F, class... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
-<div class="line"><span class="keyword">typename</span> std::enable_if&lt;!<a class="code hl_struct" href="structconsole_1_1is__callable.html">is_callable</a>&lt;F, Args...&gt;::value&gt;::type</div>
+<div class="line"><span class="keyword">typename</span> std::enable_if&lt;!<a class="code hl_struct" href="structconsole_1_1is__callable.html">is_callable</a>&lt;<a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012">F</a>, Args...&gt;::value&gt;::type</div>
 </div><!-- fragment -->
 <p>启用若 F 不可以 Args... 参数调用。 </p>
 

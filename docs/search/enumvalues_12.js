@@ -1,6 +1,24 @@
 var searchData=
 [
-  ['warn_0',['WARN',['../classconsole_1_1_logging.html#adbe10800d06e6c74c22849f7f210d5e8a32bd8a1db2275458673903bdb84cb277',1,'console::Logging::WARN'],['../logging_8h.html#a540aae996af47330f7fb73552763680fa32bd8a1db2275458673903bdb84cb277',1,'WARN:&#160;logging.h']]],
-  ['whistle_1',['Whistle',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592ad62f8789d640fc4bf972663ddd10b77a',1,'console']]],
-  ['woodblock_2',['Woodblock',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a4879e6805d2709c81caa7c260cf3c7c6',1,'console']]]
+  ['s_0',['S',['../namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a5dbc98dcc983a70728bd082d1a47546e',1,'console']]],
+  ['seashore_1',['Seashore',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a345a706578f8e459b29409e577d15981',1,'console']]],
+  ['shakuhachi_2',['Shakuhachi',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a8b8807a921f25347ae869f2894939258',1,'console']]],
+  ['shamisen_3',['Shamisen',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592abbcad49b7f9436e9daf770484cbec3d6',1,'console']]],
+  ['shanai_4',['Shanai',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592afa31ce8901272d59bed58e7cfda61c17',1,'console']]],
+  ['sitar_5',['Sitar',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592aa7f8b3381f38f76d8a32fdedcf770a3e',1,'console']]],
+  ['slapbass1_6',['SlapBass1',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a3b511b3f8f6a36c9c2b9a72c78edcba4',1,'console']]],
+  ['slapbass2_7',['SlapBass2',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592afa6c4f9335143692dc097d0dd4ab0d88',1,'console']]],
+  ['sopranosax_8',['SopranoSax',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a4cbb0957047293f9a4d245af97f0ad31',1,'console']]],
+  ['space_9',['Space',['../namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ad511f8439ecde36647437fbba67a4394',1,'console']]],
+  ['steeldrums_10',['SteelDrums',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592ae32d75a9ad4e6b39aeb5d6caa3f4fd83',1,'console']]],
+  ['stringensemble1_11',['StringEnsemble1',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a128a509b2cafae2e77a2f7f059891ddb',1,'console']]],
+  ['stringensemble2_12',['StringEnsemble2',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a29029a804b7bb0b64d4ac0abe38c1d4e',1,'console']]],
+  ['synthbass1_13',['SynthBass1',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a8607572fff28a0b77c62cc86d7685f73',1,'console']]],
+  ['synthbass2_14',['SynthBass2',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592af967461dd5d56cbe2513f6579b7446df',1,'console']]],
+  ['synthbrass1_15',['SynthBrass1',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a59554916185048f5c2093833390dcddd',1,'console']]],
+  ['synthbrass2_16',['SynthBrass2',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a2e64d83c3afc4eb0f4aa0d8d6de3ade0',1,'console']]],
+  ['synthdrum_17',['SynthDrum',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a27eddd5941a0aed4ee33a58150ae1c08',1,'console']]],
+  ['synthstrings1_18',['SynthStrings1',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592ab15538ac288ae9d5e397f9be619bef0d',1,'console']]],
+  ['synthstrings2_19',['SynthStrings2',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a45938e24ab397c922cd3e9a4451ae584',1,'console']]],
+  ['synthvoice_20',['SynthVoice',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592ae72a5463148f0b9ba606a0d31d2a588b',1,'console']]]
 ];

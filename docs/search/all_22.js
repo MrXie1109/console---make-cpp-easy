@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['异构容器_0',['Heterogeneous Container / 异构容器',['../md__r_e_a_d_m_e.html#autotoc_md28',1,'']]]
+  ['视图工厂函数_0',['视图工厂函数',['../group__view__factories.html',1,'']]]
 ];

@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.5.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.6.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -134,16 +134,16 @@ $(function(){initNavTree('rational_8h_source.html','',''); });
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                          std::is_signed&lt;T&gt;::value,</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                      <span class="stringliteral">&quot;T must be signed integral type&quot;</span>); </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        T num; </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        T den; </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> num; </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> den; </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keyword">static</span> T gcd(T a, T b)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keyword">static</span> <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> gcd(<a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> a, <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> b)</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        {</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            a = std::abs(a);</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            b = std::abs(b);</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keywordflow">while</span> (b != 0)</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            {</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                T temp = b;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> temp = b;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                b = a % b;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                a = temp;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            }</div>
@@ -161,7 +161,7 @@ $(function(){initNavTree('rational_8h_source.html','',''); });
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                num = -num;</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                den = -den;</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            }</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            T g = gcd(num, den);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> g = gcd(num, den);</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            num /= g;</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            den /= g;</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        }</div>
@@ -169,16 +169,16 @@ $(function(){initNavTree('rational_8h_source.html','',''); });
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classconsole_1_1_basic_rational.html#a13cdc639423ac762844a60c90bda5ef0">  100</a></span>        <span class="keyword">constexpr</span> <a class="code hl_function" href="classconsole_1_1_basic_rational.html#a13cdc639423ac762844a60c90bda5ef0">BasicRational</a>() : num(0), den(1) {}</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classconsole_1_1_basic_rational.html#af3fa985f5801876fb651573594d22635">  106</a></span>        <span class="keyword">constexpr</span> <a class="code hl_function" href="classconsole_1_1_basic_rational.html#af3fa985f5801876fb651573594d22635">BasicRational</a>(T n) : num(n), den(1) {}</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classconsole_1_1_basic_rational.html#af3fa985f5801876fb651573594d22635">  106</a></span>        <span class="keyword">constexpr</span> <a class="code hl_function" href="classconsole_1_1_basic_rational.html#af3fa985f5801876fb651573594d22635">BasicRational</a>(<a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> n) : num(n), den(1) {}</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classconsole_1_1_basic_rational.html#a7c38995f3cc6f7e9d33451b2d601942b">  115</a></span>        <a class="code hl_function" href="classconsole_1_1_basic_rational.html#a7c38995f3cc6f7e9d33451b2d601942b">BasicRational</a>(T n, T d) : num(n), den(d) { reduce(); }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classconsole_1_1_basic_rational.html#a7c38995f3cc6f7e9d33451b2d601942b">  115</a></span>        <a class="code hl_function" href="classconsole_1_1_basic_rational.html#a7c38995f3cc6f7e9d33451b2d601942b">BasicRational</a>(<a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> n, <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> d) : num(n), den(d) { reduce(); }</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classconsole_1_1_basic_rational.html#a13224a933142a39eaea2ea7f373445d6">  121</a></span>        T <a class="code hl_function" href="classconsole_1_1_basic_rational.html#a13224a933142a39eaea2ea7f373445d6">numerator</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> num; }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classconsole_1_1_basic_rational.html#a13224a933142a39eaea2ea7f373445d6">  121</a></span>        <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> <a class="code hl_function" href="classconsole_1_1_basic_rational.html#a13224a933142a39eaea2ea7f373445d6">numerator</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> num; }</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span></div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="classconsole_1_1_basic_rational.html#a6a48238d0ea0f53996d8b52d2b50b8ce">  127</a></span>        T <a class="code hl_function" href="classconsole_1_1_basic_rational.html#a6a48238d0ea0f53996d8b52d2b50b8ce">denominator</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> den; }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="classconsole_1_1_basic_rational.html#a6a48238d0ea0f53996d8b52d2b50b8ce">  127</a></span>        <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> <a class="code hl_function" href="classconsole_1_1_basic_rational.html#a6a48238d0ea0f53996d8b52d2b50b8ce">denominator</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> den; }</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span></div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keyword">template</span> &lt;<span class="keyword">class</span> U&gt;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="classconsole_1_1_basic_rational.html#a519401f2af64e78e6dbf6a244783d74b">  135</a></span>        <span class="keyword">explicit</span> <span class="keyword">operator</span> U()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> U(num) / den; }</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="classconsole_1_1_basic_rational.html#a519401f2af64e78e6dbf6a244783d74b">  135</a></span>        <span class="keyword">explicit</span> <span class="keyword">operator</span> <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a4c614360da93c0a041b22e537de151eb">U</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a4c614360da93c0a041b22e537de151eb">U</a>(num) / den; }</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span></div>
 <div class="foldopen" id="foldopen00144" data-start="{" data-end="}">
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="classconsole_1_1_basic_rational.html#af69b7bb30bf75ebcae3a2cc12bafac32">  144</a></span>        <span class="keyword">friend</span> <a class="code hl_function" href="classconsole_1_1_basic_rational.html#a13cdc639423ac762844a60c90bda5ef0">BasicRational</a> <a class="code hl_friend" href="classconsole_1_1_basic_rational.html#af69b7bb30bf75ebcae3a2cc12bafac32">operator+</a>(</div>
@@ -363,6 +363,8 @@ $(function(){initNavTree('rational_8h_source.html','',''); });
 <div class="ttc" id="acsexc_8h_html"><div class="ttname"><a href="csexc_8h.html">csexc.h</a></div><div class="ttdoc">定义 console 库使用的自定义异常类层次结构。</div></div>
 <div class="ttc" id="anamespaceconsole_html"><div class="ttname"><a href="namespaceconsole.html">console</a></div><div class="ttdoc">本库所有组件所在的顶层命名空间。</div></div>
 <div class="ttc" id="anamespaceconsole_html_a007dcce1ff152f70ce35d2e0e3e73b3c"><div class="ttname"><a href="namespaceconsole.html#a007dcce1ff152f70ce35d2e0e3e73b3c">console::Rational_8</a></div><div class="ttdeci">BasicRational&lt; int8_t &gt; Rational_8</div><div class="ttdoc">以 int8_t 为基的分数。</div><div class="ttdef"><b>Definition</b> rational.h:361</div></div>
+<div class="ttc" id="anamespaceconsole_html_a506ee9cef0c6d79e2e87674233647f29a4c614360da93c0a041b22e537de151eb"><div class="ttname"><a href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a4c614360da93c0a041b22e537de151eb">console::Key::U</a></div><div class="ttdeci">@ U</div><div class="ttdef"><b>Definition</b> kb.h:73</div></div>
+<div class="ttc" id="anamespaceconsole_html_a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3"><div class="ttname"><a href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">console::Key::T</a></div><div class="ttdeci">@ T</div><div class="ttdef"><b>Definition</b> kb.h:72</div></div>
 <div class="ttc" id="anamespaceconsole_html_a659caf7859fc257ce105a3a8acaac296"><div class="ttname"><a href="namespaceconsole.html#a659caf7859fc257ce105a3a8acaac296">console::Rational_16</a></div><div class="ttdeci">BasicRational&lt; int16_t &gt; Rational_16</div><div class="ttdoc">以 int16_t 为基的分数。</div><div class="ttdef"><b>Definition</b> rational.h:362</div></div>
 <div class="ttc" id="anamespaceconsole_html_a723acee8b52028a6e5d523eb863daa06"><div class="ttname"><a href="namespaceconsole.html#a723acee8b52028a6e5d523eb863daa06">console::Rational_32</a></div><div class="ttdeci">BasicRational&lt; int32_t &gt; Rational_32</div><div class="ttdoc">以 int32_t 为基的分数。</div><div class="ttdef"><b>Definition</b> rational.h:363</div></div>
 <div class="ttc" id="anamespaceconsole_html_a84eef0875f5f296f6687f7e40419a5f4"><div class="ttname"><a href="namespaceconsole.html#a84eef0875f5f296f6687f7e40419a5f4">console::Rational_64</a></div><div class="ttdeci">BasicRational&lt; int64_t &gt; Rational_64</div><div class="ttdoc">以 int64_t 为基的分数。</div><div class="ttdef"><b>Definition</b> rational.h:364</div></div>
