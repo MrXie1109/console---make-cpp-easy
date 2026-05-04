@@ -62,7 +62,7 @@ namespace console
         /**
          * @brief 在屏幕上绘制一个点。
          * @param x 点的 X 坐标，向右为正。
-         * @param y 点的 y 坐标，向左为正。
+         * @param y 点的 y 坐标，向下为正。
          * @param on 绘制 or 擦除？
          */
         void point(unsigned x, unsigned y, bool on = true)
@@ -94,8 +94,8 @@ namespace console
          */
         void line(int x0, int y0, int x1, int y1, bool on = true)
         {
-            int dx = abs(x1 - x0);
-            int dy = -abs(y1 - y0);
+            int dx = std::abs(x1 - x0);
+            int dy = -std::abs(y1 - y0);
             int sx = x0 < x1 ? 1 : -1;
             int sy = y0 < y1 ? 1 : -1;
             int err = dx + dy;

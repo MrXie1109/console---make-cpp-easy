@@ -57,7 +57,7 @@ SOFTWARE.
 #include "iter.h"
 #include "rational.h"
 #include "screen.h"
-#include "kb.h"
+#include "kb.h" // windows.h
 
 // #include "win/melody.h"
 
@@ -67,5 +67,5 @@ SOFTWARE.
  */
 namespace console
 {
-    static const char meta[] = "CONSOLE-LIB-2026-5-1";
+    static constexpr char meta[] = "CONSOLE-LIB-2026-5-4";
 }
