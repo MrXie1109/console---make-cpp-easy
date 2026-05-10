@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.6.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.7.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -161,8 +161,8 @@ $(function(){initNavTree('screen_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00095" data-start="{" data-end="}">
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classconsole_1_1_screen.html#a8cdd038ef534e1464088a28cda007953">   95</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classconsole_1_1_screen.html#a8cdd038ef534e1464088a28cda007953">line</a>(<span class="keywordtype">int</span> x0, <span class="keywordtype">int</span> y0, <span class="keywordtype">int</span> x1, <span class="keywordtype">int</span> y1, <span class="keywordtype">bool</span> on = <span class="keyword">true</span>)</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        {</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <span class="keywordtype">int</span> dx = <a class="code hl_function" href="group__matools.html#ga2fc5cf1c7e6c6ca8a78b95ec35a52b64">abs</a>(x1 - x0);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keywordtype">int</span> dy = -<a class="code hl_function" href="group__matools.html#ga2fc5cf1c7e6c6ca8a78b95ec35a52b64">abs</a>(y1 - y0);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <span class="keywordtype">int</span> dx = std::abs(x1 - x0);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keywordtype">int</span> dy = -std::abs(y1 - y0);</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <span class="keywordtype">int</span> sx = x0 &lt; x1 ? 1 : -1;</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="keywordtype">int</span> sy = y0 &lt; y1 ? 1 : -1;</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="keywordtype">int</span> err = dx + dy;</div>
@@ -303,7 +303,6 @@ $(function(){initNavTree('screen_8h_source.html','',''); });
 <div class="ttc" id="aclassconsole_1_1_screen_html_a9c34db74132c79d5a4e7e5dd8fb85dd1"><div class="ttname"><a href="classconsole_1_1_screen.html#a9c34db74132c79d5a4e7e5dd8fb85dd1">console::Screen::update</a></div><div class="ttdeci">void update(std::ostream &amp;os=std::cout, bool clear=false) const</div><div class="ttdoc">将 Screen 存储的虚拟屏幕输出到指定流。</div><div class="ttdef"><b>Definition</b> screen.h:234</div></div>
 <div class="ttc" id="aclassconsole_1_1_screen_html_ae05b067b89a0697bee15cf10571f3d8f"><div class="ttname"><a href="classconsole_1_1_screen.html#ae05b067b89a0697bee15cf10571f3d8f">console::Screen::Screen</a></div><div class="ttdeci">Screen()</div><div class="ttdoc">默认构造函数，构造一个空白的 Screen</div><div class="ttdef"><b>Definition</b> screen.h:60</div></div>
 <div class="ttc" id="aclassconsole_1_1_screen_html_af897da756bf4eacadb45e4474bf87b06"><div class="ttname"><a href="classconsole_1_1_screen.html#af897da756bf4eacadb45e4474bf87b06">console::Screen::fillCircle</a></div><div class="ttdeci">void fillCircle(int cx, int cy, int r, bool on=true)</div><div class="ttdoc">在屏幕上绘制实心圆。</div><div class="ttdef"><b>Definition</b> screen.h:190</div></div>
-<div class="ttc" id="agroup__matools_html_ga2fc5cf1c7e6c6ca8a78b95ec35a52b64"><div class="ttname"><a href="group__matools.html#ga2fc5cf1c7e6c6ca8a78b95ec35a52b64">console::abs</a></div><div class="ttdeci">MultiArray&lt; T, Dims... &gt; abs(const MultiArray&lt; T, Dims... &gt; &amp;arr)</div><div class="ttdoc">计算数组中每个元素的绝对值。</div><div class="ttdef"><b>Definition</b> matools.h:327</div></div>
 <div class="ttc" id="anamespaceconsole_html"><div class="ttname"><a href="namespaceconsole.html">console</a></div><div class="ttdoc">本库所有组件所在的顶层命名空间。</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
