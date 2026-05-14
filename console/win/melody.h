@@ -32,6 +32,35 @@ SOFTWARE.
 */
 
 #pragma once
+#define WIN32_LEAN_AND_MEAN // 可以排除大量不需要的 Windows 组件
+#define NOMINMAX 1          // 避免 min/max 宏污染
+#define NOSERVICE           // 不需要 Windows 服务
+#define NOMCX               // 不需要媒体中心扩展
+#define NOHELP              // 不需要 WinHelp
+#define NOSOUND             // 不需要波形音频
+#define NOCOMM              // 不需要串口通信
+#define NOKANJI             // 不需要日文字符支持
+#define NOCLIPBOARD         // 不需要剪贴板
+#define NOCOLOR             // 不需要颜色表
+#define NODRAWTEXT          // 不需要 DrawText
+#define NOGDI               // 不需要 GDI 图形接口
+#define NOUSER              // 不需要 USER 模块（窗口管理）
+#define NOMENUS             // 不需要菜单
+#define NOICONS             // 不需要图标
+#define NOSYSCOMMANDS       // 不需要系统命令
+#define NORASTEROPS         // 不需要光栅操作
+#define NOSHOWWINDOW        // 不需要 ShowWindow
+#define NOATOM              // 不需要原子表
+#define NOCTLMGR            // 不需要控件管理器
+#define NOMETAFILE          // 不需要元文件
+#define NOOPENFILE          // 不需要 OpenFile
+#define NOSCROLL            // 不需要滚动条
+#define NOSERVICE           // 不需要服务
+#define NOTEXTMETRIC        // 不需要文本度量
+#define NOWH                // 不需要 Windows 挂钩
+#define NOWINOFFSETS        // 不需要窗口偏移量
+#define NOPROFILER          // 不需要性能分析器
+#define NODEFERWINDOWPOS    // 不需要 DeferWindowPos
 #include <windows.h>
 #include <mmsystem.h>
 #include <thread>

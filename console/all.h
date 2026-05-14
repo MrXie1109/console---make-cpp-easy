@@ -58,6 +58,7 @@ SOFTWARE.
 #include "rational.h"
 #include "screen.h"
 #include "kb.h" // windows.h
+#include "adapter.h"
 
 // #include "win/melody.h"
 
@@ -67,5 +68,5 @@ SOFTWARE.
  */
 namespace console
 {
-    static constexpr char meta[] = "CONSOLE-LIB-2026-5-4";
+    static constexpr char meta[] = "CONSOLE-LIB-2026-05-14";
 }

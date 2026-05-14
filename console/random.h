@@ -35,8 +35,8 @@ SOFTWARE.
 #include <utility>
 #include <initializer_list>
 #include <numeric>
-#include "sfinae.h" //for uniform_distribution_t
-#include "csexc.h"
+#include "sfinae.h" // for uniform_distribution_t
+#include "csexc.h"  // for container_error
 
 namespace console
 {
@@ -61,7 +61,7 @@ namespace console
 
     /**
      * @brief 修改 default_gen 提供的随机数引擎的种子。
-     * @param 新的种子。
+     * @param seed 新的种子。
      */
     inline void seed(unsigned int seed)
     {
@@ -103,12 +103,29 @@ namespace console
      * @tparam C 容器类型，必须支持 std::begin 和 std::end 迭代器以及 size() 方法。
      * @param c 要从中选择的容器（左值）。
      * @param gen 使用的随机数引擎，默认为 default_gen()。
-     * @return decltype(*std::begin(c)) 所选元素的引用。
+     * @return typename C::reference 所选元素的引用。
      * @throw container_error 如果容器为空。
      */
     template <class C>
-    auto choice(C &c, std::mt19937 &gen = default_gen())
-        -> decltype(*std::begin(c))
+    typename C::reference choice(C &c, std::mt19937 &gen = default_gen())
+    {
+        if (std::begin(c) == std::end(c))
+            throw container_error("Empty container");
+        return *std::next(std::begin(c),
+                          randint<size_t>(0, c.size() - 1, gen));
+    }
+
+    /**
+     * @brief 从容器中随机选择一个元素（常量左值版本，返回 const 引用）。
+     * @tparam C 容器类型，必须支持 std::begin 和 std::end 迭代器以及 size() 方法。
+     * @param c 要从中选择的容器（左值）。
+     * @param gen 使用的随机数引擎，默认为 default_gen()。
+     * @return typename C::const_reference 所选元素的引用。
+     * @throw container_error 如果容器为空。
+     */
+    template <class C>
+    typename C::const_reference choice(
+        const C &c, std::mt19937 &gen = default_gen())
     {
         if (std::begin(c) == std::end(c))
             throw container_error("Empty container");
@@ -121,12 +138,11 @@ namespace console
      * @tparam C 容器类型，必须支持 std::begin 和 std::end 迭代器以及 size() 方法。
      * @param c 要从中选择的容器（右值）。
      * @param gen 使用的随机数引擎，默认为 default_gen()。
-     * @return std::decay_t<decltype(*std::begin(c))> 所选元素的副本。
+     * @return typename C::value_type 所选元素的副本。
      * @throw container_error 如果容器为空。
      */
     template <class C>
-    auto choice(C &&c, std::mt19937 &gen = default_gen())
-        -> typename std::remove_reference<decltype(*std::begin(c))>::type
+    typename C::value_type choice(C &&c, std::mt19937 &gen = default_gen())
     {
         if (std::begin(c) == std::end(c))
             throw container_error("Empty container");
@@ -139,20 +155,20 @@ namespace console
      * @tparam T 元素类型。
      * @param init 初始化列表。
      * @param gen 使用的随机数引擎，默认为 default_gen()。
-     * @return decltype(*std::begin(init)) 所选元素的引用。
+     * @return T 所选元素的引值。
      * @throw container_error 如果初始化列表为空。
      */
     template <class T>
-    auto choice(std::initializer_list<T> init,
-                std::mt19937 &gen = default_gen())
-        -> decltype(*std::begin(init))
+    T choice(std::initializer_list<T> init,
+             std::mt19937 &gen = default_gen())
     {
-        return choice<std::initializer_list<T>>((init), gen);
+        return choice<std::initializer_list<T>>(init, gen);
     }
 
     /**
      * @brief 随机打乱容器中元素的顺序（Fisher-Yates 洗牌算法）。
-     * @tparam C 容器类型，必须支持 std::begin 和 std::end 迭代器、size() 以及 swap 操作。
+     * @tparam C 容器类型，必须支持 std::begin 和 std::end 迭代器、size()，
+     *         以及存储的元素类型支持 swap 操作。
      * @param c 要打乱的容器（支持左值或右值引用）。
      * @param gen 使用的随机数引擎，默认为 default_gen()。
      */
@@ -296,8 +312,7 @@ namespace console
      * @param shape2 β 形状参数，shape2 > 0。
      * @param gen 使用的随机数引擎，默认为 default_gen()。
      * @return std::vector<T> 包含 n 个随机数的向量。
-     * @note 使用 Gamma 分布的关系：Beta(a, b) = Gamma(a, 1) / (Gamma(a, 1) + Gamma(b, 1))
-     *       这样可以兼容低版本的 C++，而不要求用户升级版本。
+     * @note 使用 Gamma 分布的关系：Beta(a, b) = Gamma(a, 1) / (Gamma(a, 1) + Gamma(b, 1))。
      */
 
     template <class T = double>
@@ -418,16 +433,16 @@ namespace console
      * @param size 抽取的元素数量。
      * @param replace 是否允许重复抽取（有放回），默认为 false。
      * @param gen 使用的随机数引擎，默认为 default_gen()。
-     * @return std::vector<typename std::remove_reference_t<decltype(*std::begin(c))>> 抽取结果的向量。
+     * @return std::vector<typename C::value_type> 抽取结果的向量。
      * @throw container_error 如果容器为空，或 size 超过容器大小且 replace==false。
      * @note 对非随机访问容器效果不佳，这并非设计缺陷。
      */
     template <class C>
-    auto sample(C &&c, size_t size, bool replace = false,
-                std::mt19937 &gen = default_gen())
-        -> std::vector<typename std::iterator_traits<decltype(std::begin(c))>::value_type>
+    std::vector<typename C::value_type>
+    sample(C &&c, size_t size, bool replace = false,
+           std::mt19937 &gen = default_gen())
     {
-        using value_type = typename std::iterator_traits<decltype(std::begin(c))>::value_type;
+        using value_type = typename C::value_type;
         std::vector<value_type> result;
         result.reserve(size);
         auto it_begin = std::begin(c);

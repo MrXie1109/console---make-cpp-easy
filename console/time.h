@@ -116,6 +116,66 @@ namespace console
         friend bool operator<=(Time t1, Time t2) { return t1.ns_ <= t2.ns_; }
         friend bool operator>=(Time t1, Time t2) { return t1.ns_ >= t2.ns_; }
         /// @}
+
+        /**
+         * @brief 静态函数，构造纳秒。
+         * @param n 纳秒数。
+         * @return Time 构造而来的纳秒。
+         */
+        static Time nanosecond(double n)
+        {
+            return Time(n);
+        }
+
+        /**
+         * @brief 静态函数，构造微秒。
+         * @param n 微秒数。
+         * @return Time 构造而来的微秒。
+         */
+        static Time microsecond(double n)
+        {
+            return Time(n * 1e3);
+        }
+
+        /**
+         * @brief 静态函数，构造毫秒。
+         * @param n 毫秒数。
+         * @return Time 构造而来的毫秒。
+         */
+        static Time millisecond(double n)
+        {
+            return Time(n * 1e6);
+        }
+
+        /**
+         * @brief 静态函数，构造秒。
+         * @param n 秒数。
+         * @return Time 构造而来的秒。
+         */
+        static Time second(double n)
+        {
+            return Time(n * 1e9);
+        }
+
+        /**
+         * @brief 静态函数，构造分钟。
+         * @param n 分钟数。
+         * @return Time 构造而来的分钟。
+         */
+        static Time minute(double n)
+        {
+            return Time(n * 6e10);
+        }
+
+        /**
+         * @brief 静态函数，构造小时。
+         * @param n 小时数。
+         * @return Time 构造而来的小时。
+         */
+        static Time hour(double n)
+        {
+            return Time(n * 3.6e12);
+        }
     };
 
     /**
