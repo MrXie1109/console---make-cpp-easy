@@ -66,6 +66,7 @@ SOFTWARE.
 #include <unistd.h>
 #include <poll.h>
 #endif
+#include <iostream>
 
 namespace console
 {
@@ -140,6 +141,62 @@ namespace console
         F11,
         F12,
     };
+
+    /**
+     * @brief 让 Key 可以被打印。
+     * @param os 输出流。
+     * @param k 要打印的 Key。
+     * @return os 输出流的引用。
+     */
+    std::ostream &operator<<(std::ostream &os, Key k)
+    {
+        if ((k >= Key::A && k <= Key::Z) || (k >= Key::Num0 && k <= Key::Num9))
+        {
+            os << static_cast<char>(k);
+            return os;
+        }
+        switch (k)
+        {
+        case Key::Space:
+            os << "<space>";
+            break;
+        case Key::Enter:
+            os << "<enter>";
+            break;
+        case Key::Esc:
+            os << "<esc>";
+            break;
+        case Key::Backspace:
+            os << "<backspace>";
+            break;
+        case Key::Tab:
+            os << "<tab>";
+            break;
+        case Key::Up:
+            os << "<up>";
+            break;
+        case Key::Down:
+            os << "<down>";
+            break;
+        case Key::Left:
+            os << "<left>";
+            break;
+        case Key::Right:
+            os << "<right>";
+            break;
+        default:
+            if (k >= Key::F1 && k <= Key::F12)
+            {
+                os << "<F"
+                   << static_cast<int>(k) - static_cast<int>(Key::F1) + 1
+                   << '>';
+            }
+            else
+                os << "<none>";
+            break;
+        }
+        return os;
+    }
 
     /**
      * @class Keyboard

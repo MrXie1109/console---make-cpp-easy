@@ -68,5 +68,5 @@ SOFTWARE.
  */
 namespace console
 {
-    static constexpr char meta[] = "CONSOLE-LIB-2026-05-14";
+    static constexpr char meta[] = "CONSOLE-LIB-2026-05-15";
 }
