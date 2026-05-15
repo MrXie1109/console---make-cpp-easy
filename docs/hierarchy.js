@@ -35,8 +35,14 @@ var hierarchy =
     ] ],
     [ "console::PartitionResult", "structconsole_1_1_partition_result.html", null ],
     [ "console::Path", "classconsole_1_1_path.html", null ],
+    [ "std::priority_queue", null, [
+      [ "console::PriorityQueue< T, Container, Compare >", "classconsole_1_1_priority_queue.html", null ]
+    ] ],
     [ "console::Progress&lt; Iter &gt;", "classconsole_1_1_progress.html", null ],
     [ "console::ProgressConfig", "structconsole_1_1_progress_config.html", null ],
+    [ "std::queue", null, [
+      [ "console::Queue< T, Container >", "classconsole_1_1_queue.html", null ]
+    ] ],
     [ "console::Regex", "classconsole_1_1_regex.html", null ],
     [ "std::runtime_error", null, [
       [ "console::console_error", "classconsole_1_1console__error.html", [
@@ -52,6 +58,9 @@ var hierarchy =
       ] ]
     ] ],
     [ "console::Screen&lt; COLS, ROWS &gt;", "classconsole_1_1_screen.html", null ],
+    [ "std::stack", null, [
+      [ "console::Stack< T, Container >", "classconsole_1_1_stack.html", null ]
+    ] ],
     [ "std::string", null, [
       [ "console::f_string", "classconsole_1_1f__string.html", null ]
     ] ],

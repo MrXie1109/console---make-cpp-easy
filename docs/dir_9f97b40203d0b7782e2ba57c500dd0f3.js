@@ -1,6 +1,7 @@
 var dir_9f97b40203d0b7782e2ba57c500dd0f3 =
 [
     [ "win", "dir_9130ef04951760d6fe1626d057912567.html", "dir_9130ef04951760d6fe1626d057912567" ],
+    [ "adapter.h", "adapter_8h.html", "adapter_8h" ],
     [ "all.h", "all_8h.html", "all_8h" ],
     [ "box.h", "box_8h.html", "box_8h" ],
     [ "colorful.h", "colorful_8h.html", "colorful_8h" ],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['screen_0',['Screen',['../classconsole_1_1_screen.html',1,'console']]]
+  ['regex_0',['Regex',['../classconsole_1_1_regex.html',1,'console']]]
 ];

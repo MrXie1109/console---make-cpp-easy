@@ -7,9 +7,10 @@ var searchData=
   ['whistle_4',['Whistle',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592ad62f8789d640fc4bf972663ddd10b77a',1,'console']]],
   ['white_5',['White',['../namespaceconsole_1_1color.html#a80940048f2649764f34f506cd33156f6',1,'console::color']]],
   ['width_6',['width',['../structconsole_1_1_progress_config.html#af8fe2774e5484ef8714055700aec87d4',1,'console::ProgressConfig']]],
-  ['woodblock_7',['Woodblock',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a4879e6805d2709c81caa7c260cf3c7c6',1,'console']]],
-  ['write_5fbinary_8',['write_binary',['../classconsole_1_1_path.html#aec0c0642ab4dde0a84dda26149c0fac5',1,'console::Path']]],
-  ['write_5flines_9',['write_lines',['../classconsole_1_1_path.html#a2080488b10cd1fc26938e337e7bdb57f',1,'console::Path']]],
-  ['write_5fpod_10',['write_POD',['../classconsole_1_1_path.html#a32079706205b910e7ab805782c4e3b53',1,'console::Path']]],
-  ['write_5ftext_11',['write_text',['../classconsole_1_1_path.html#a14568ca3a9fb750a9c178a95e5576834',1,'console::Path']]]
+  ['win32_5flean_5fand_5fmean_7',['WIN32_LEAN_AND_MEAN',['../melody_8h.html#ac7bef5d85e3dcd73eef56ad39ffc84a9',1,'melody.h']]],
+  ['woodblock_8',['Woodblock',['../namespaceconsole.html#ac3066e557db972dbb8670effba117592a4879e6805d2709c81caa7c260cf3c7c6',1,'console']]],
+  ['write_5fbinary_9',['write_binary',['../classconsole_1_1_path.html#aec0c0642ab4dde0a84dda26149c0fac5',1,'console::Path']]],
+  ['write_5flines_10',['write_lines',['../classconsole_1_1_path.html#a2080488b10cd1fc26938e337e7bdb57f',1,'console::Path']]],
+  ['write_5fpod_11',['write_POD',['../classconsole_1_1_path.html#a32079706205b910e7ab805782c4e3b53',1,'console::Path']]],
+  ['write_5ftext_12',['write_text',['../classconsole_1_1_path.html#a14568ca3a9fb750a9c178a95e5576834',1,'console::Path']]]
 ];

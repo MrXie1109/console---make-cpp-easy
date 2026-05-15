@@ -1,6 +1,9 @@
 var annotated_dup =
 [
     [ "console", "namespaceconsole.html", [
+      [ "Stack", "classconsole_1_1_stack.html", "classconsole_1_1_stack" ],
+      [ "Queue", "classconsole_1_1_queue.html", "classconsole_1_1_queue" ],
+      [ "PriorityQueue", "classconsole_1_1_priority_queue.html", "classconsole_1_1_priority_queue" ],
       [ "Item", "classconsole_1_1_item.html", "classconsole_1_1_item" ],
       [ "Box", "classconsole_1_1_box.html", "classconsole_1_1_box" ],
       [ "Comprehension", "classconsole_1_1_comprehension.html", "classconsole_1_1_comprehension" ],

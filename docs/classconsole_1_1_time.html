@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.7.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.8.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -117,6 +117,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6c6dd15926e6f3c12118e3faf37133c5" id="r_a6c6dd15926e6f3c12118e3faf37133c5"><td class="memItemLeft">long double&#160;</td><td class="memItemRight"><a class="el" href="#a6c6dd15926e6f3c12118e3faf37133c5">hr</a> () const</td></tr>
 <tr class="memdesc:a6c6dd15926e6f3c12118e3faf37133c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回小时数。  <br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ac226ddee62e7921bddc244ba2cb2fc51" id="r_ac226ddee62e7921bddc244ba2cb2fc51"><td class="memItemLeft">static <a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac226ddee62e7921bddc244ba2cb2fc51">nanosecond</a> (double n)</td></tr>
+<tr class="memdesc:ac226ddee62e7921bddc244ba2cb2fc51"><td class="mdescLeft">&#160;</td><td class="mdescRight">静态函数，构造纳秒。  <br /></td></tr>
+<tr class="memitem:a30c6b4e85662522bb9df69c527f55641" id="r_a30c6b4e85662522bb9df69c527f55641"><td class="memItemLeft">static <a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a>&#160;</td><td class="memItemRight"><a class="el" href="#a30c6b4e85662522bb9df69c527f55641">microsecond</a> (double n)</td></tr>
+<tr class="memdesc:a30c6b4e85662522bb9df69c527f55641"><td class="mdescLeft">&#160;</td><td class="mdescRight">静态函数，构造微秒。  <br /></td></tr>
+<tr class="memitem:a1e214f45070e80c3064bd4d7b98e84c7" id="r_a1e214f45070e80c3064bd4d7b98e84c7"><td class="memItemLeft">static <a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1e214f45070e80c3064bd4d7b98e84c7">millisecond</a> (double n)</td></tr>
+<tr class="memdesc:a1e214f45070e80c3064bd4d7b98e84c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">静态函数，构造毫秒。  <br /></td></tr>
+<tr class="memitem:a4720449798b4531c7284a55053dafb86" id="r_a4720449798b4531c7284a55053dafb86"><td class="memItemLeft">static <a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4720449798b4531c7284a55053dafb86">second</a> (double n)</td></tr>
+<tr class="memdesc:a4720449798b4531c7284a55053dafb86"><td class="mdescLeft">&#160;</td><td class="mdescRight">静态函数，构造秒。  <br /></td></tr>
+<tr class="memitem:a9f47846873579071772a1fc4697a2d51" id="r_a9f47846873579071772a1fc4697a2d51"><td class="memItemLeft">static <a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9f47846873579071772a1fc4697a2d51">minute</a> (double n)</td></tr>
+<tr class="memdesc:a9f47846873579071772a1fc4697a2d51"><td class="mdescLeft">&#160;</td><td class="mdescRight">静态函数，构造分钟。  <br /></td></tr>
+<tr class="memitem:a6cf3bab8b47c3f111568fff2c1584245" id="r_a6cf3bab8b47c3f111568fff2c1584245"><td class="memItemLeft">static <a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6cf3bab8b47c3f111568fff2c1584245">hour</a> (double n)</td></tr>
+<tr class="memdesc:a6cf3bab8b47c3f111568fff2c1584245"><td class="mdescLeft">&#160;</td><td class="mdescRight">静态函数，构造小时。  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a6d6aba51975c87271515c99830cc335b" id="r_a6d6aba51975c87271515c99830cc335b"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6d6aba51975c87271515c99830cc335b">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a> t)</td></tr>
@@ -174,6 +189,40 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a6cf3bab8b47c3f111568fff2c1584245" name="a6cf3bab8b47c3f111568fff2c1584245"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cf3bab8b47c3f111568fff2c1584245">&#9670;&#160;</a></span>hour()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a> console::Time::hour </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>静态函数，构造小时。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>小时数。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classconsole_1_1_time.html" title="表示以纳秒为单位的时间量，支持单位转换、算术运算和自动选择合适的输出单位。">Time</a> 构造而来的小时。 </dd></dl>
+
+</div>
+</div>
 <a id="a6c6dd15926e6f3c12118e3faf37133c5" name="a6c6dd15926e6f3c12118e3faf37133c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6c6dd15926e6f3c12118e3faf37133c5">&#9670;&#160;</a></span>hr()</h2>
 
@@ -198,6 +247,74 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>返回小时数。 </p>
+
+</div>
+</div>
+<a id="a30c6b4e85662522bb9df69c527f55641" name="a30c6b4e85662522bb9df69c527f55641"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30c6b4e85662522bb9df69c527f55641">&#9670;&#160;</a></span>microsecond()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a> console::Time::microsecond </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>静态函数，构造微秒。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>微秒数。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classconsole_1_1_time.html" title="表示以纳秒为单位的时间量，支持单位转换、算术运算和自动选择合适的输出单位。">Time</a> 构造而来的微秒。 </dd></dl>
+
+</div>
+</div>
+<a id="a1e214f45070e80c3064bd4d7b98e84c7" name="a1e214f45070e80c3064bd4d7b98e84c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e214f45070e80c3064bd4d7b98e84c7">&#9670;&#160;</a></span>millisecond()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a> console::Time::millisecond </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>静态函数，构造毫秒。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>毫秒数。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classconsole_1_1_time.html" title="表示以纳秒为单位的时间量，支持单位转换、算术运算和自动选择合适的输出单位。">Time</a> 构造而来的毫秒。 </dd></dl>
 
 </div>
 </div>
@@ -228,6 +345,40 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a9f47846873579071772a1fc4697a2d51" name="a9f47846873579071772a1fc4697a2d51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f47846873579071772a1fc4697a2d51">&#9670;&#160;</a></span>minute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a> console::Time::minute </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>静态函数，构造分钟。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>分钟数。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classconsole_1_1_time.html" title="表示以纳秒为单位的时间量，支持单位转换、算术运算和自动选择合适的输出单位。">Time</a> 构造而来的分钟。 </dd></dl>
+
+</div>
+</div>
 <a id="adb529c9327ae6f2935cbad2d650ae920" name="adb529c9327ae6f2935cbad2d650ae920"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adb529c9327ae6f2935cbad2d650ae920">&#9670;&#160;</a></span>ms()</h2>
 
@@ -252,6 +403,40 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>返回毫秒数。 </p>
+
+</div>
+</div>
+<a id="ac226ddee62e7921bddc244ba2cb2fc51" name="ac226ddee62e7921bddc244ba2cb2fc51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac226ddee62e7921bddc244ba2cb2fc51">&#9670;&#160;</a></span>nanosecond()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a> console::Time::nanosecond </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>静态函数，构造纳秒。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>纳秒数。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classconsole_1_1_time.html" title="表示以纳秒为单位的时间量，支持单位转换、算术运算和自动选择合适的输出单位。">Time</a> 构造而来的纳秒。 </dd></dl>
 
 </div>
 </div>
@@ -383,6 +568,40 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>返回秒数。 </p>
+
+</div>
+</div>
+<a id="a4720449798b4531c7284a55053dafb86" name="a4720449798b4531c7284a55053dafb86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4720449798b4531c7284a55053dafb86">&#9670;&#160;</a></span>second()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3ebc152babe9d73e1b140a7e08cc5aa3">Time</a> console::Time::second </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>静态函数，构造秒。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>秒数。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classconsole_1_1_time.html" title="表示以纳秒为单位的时间量，支持单位转换、算术运算和自动选择合适的输出单位。">Time</a> 构造而来的秒。 </dd></dl>
 
 </div>
 </div>

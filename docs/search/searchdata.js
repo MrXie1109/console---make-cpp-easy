@@ -1,7 +1,7 @@
 var indexSectionsWithContent =
 {
   0: "_abcdefghijklmnopqrstuvwxyz~字打数标类统视输运随",
-  1: "bcdfhiklmnoprstuv",
+  1: "bcdfhiklmnopqrstuv",
   2: "cpr",
   3: "abcfiklmoprstv",
   4: "abcdefghijklmnoprstuvwz~",
@@ -10,7 +10,7 @@ var indexSectionsWithContent =
   7: "ikl",
   8: "abcdefghijklmnopqrstuvwxyz",
   9: "o",
-  10: "_m",
+  10: "_mnw",
   11: "t字打数标类统视输运随"
 };
 

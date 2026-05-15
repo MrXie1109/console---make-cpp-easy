@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['regex_0',['Regex',['../classconsole_1_1_regex.html',1,'console']]]
+  ['queue_0',['Queue',['../classconsole_1_1_queue.html',1,'console']]]
 ];

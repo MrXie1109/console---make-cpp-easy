@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.7.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.8.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -108,15 +108,18 @@ Functions</h2></td></tr>
 <tr class="memitem:ga58f1316a460a953a3e8ce7cd2c05c875" id="r_ga58f1316a460a953a3e8ce7cd2c05c875"><td class="memTemplParams" colspan="2">template&lt;class T = double&gt; </td></tr>
 <tr class="memitem:ga58f1316a460a953a3e8ce7cd2c05c875 template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#ga58f1316a460a953a3e8ce7cd2c05c875">console::uniform</a> (T <a class="el" href="group__multiarray__stats.html#ga3c082110bc9f1bccd134f037cbc80d2b">min</a>=0.0, T <a class="el" href="group__multiarray__stats.html#ga4d151dd74a5c86383bbc2526fefe2988">max</a>=1.0, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
 <tr class="memdesc:ga58f1316a460a953a3e8ce7cd2c05c875"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成一个指定范围内的随机浮点数（均匀分布）。  <br /></td></tr>
-<tr class="memitem:ga658e7e0c83e62b07cd07e260c3ecf523" id="r_ga658e7e0c83e62b07cd07e260c3ecf523"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
-<tr class="memitem:ga658e7e0c83e62b07cd07e260c3ecf523 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ga658e7e0c83e62b07cd07e260c3ecf523">console::choice</a> (C &amp;c, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()) -&gt; decltype(*std::begin(c))</td></tr>
-<tr class="memdesc:ga658e7e0c83e62b07cd07e260c3ecf523"><td class="mdescLeft">&#160;</td><td class="mdescRight">从容器中随机选择一个元素（左值版本，返回引用）。  <br /></td></tr>
-<tr class="memitem:gaee0c18e781a558ac85221f0aac30ab4d" id="r_gaee0c18e781a558ac85221f0aac30ab4d"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
-<tr class="memitem:gaee0c18e781a558ac85221f0aac30ab4d template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#gaee0c18e781a558ac85221f0aac30ab4d">console::choice</a> (C &amp;&amp;c, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()) -&gt; std::remove_reference&lt; decltype(*std::begin(c))&gt;::type</td></tr>
-<tr class="memdesc:gaee0c18e781a558ac85221f0aac30ab4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">从容器中随机选择一个元素（右值版本，返回值）。  <br /></td></tr>
-<tr class="memitem:ga63dbd61c575fe8c9b02f321f6f3eaecc" id="r_ga63dbd61c575fe8c9b02f321f6f3eaecc"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
-<tr class="memitem:ga63dbd61c575fe8c9b02f321f6f3eaecc template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ga63dbd61c575fe8c9b02f321f6f3eaecc">console::choice</a> (std::initializer_list&lt; T &gt; init, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()) -&gt; decltype(*std::begin(init))</td></tr>
-<tr class="memdesc:ga63dbd61c575fe8c9b02f321f6f3eaecc"><td class="mdescLeft">&#160;</td><td class="mdescRight">从 std::initializer_list 中随机选择一个元素（重载版本）。  <br /></td></tr>
+<tr class="memitem:gaf6cf5db4ed276a39dec214c94b54471e" id="r_gaf6cf5db4ed276a39dec214c94b54471e"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
+<tr class="memitem:gaf6cf5db4ed276a39dec214c94b54471e template"><td class="memItemLeft">C::reference&#160;</td><td class="memItemRight"><a class="el" href="#gaf6cf5db4ed276a39dec214c94b54471e">console::choice</a> (C &amp;c, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
+<tr class="memdesc:gaf6cf5db4ed276a39dec214c94b54471e"><td class="mdescLeft">&#160;</td><td class="mdescRight">从容器中随机选择一个元素（左值版本，返回引用）。  <br /></td></tr>
+<tr class="memitem:ga506c1a381dbb4f496bbca659a2bcd5d2" id="r_ga506c1a381dbb4f496bbca659a2bcd5d2"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
+<tr class="memitem:ga506c1a381dbb4f496bbca659a2bcd5d2 template"><td class="memItemLeft">C::const_reference&#160;</td><td class="memItemRight"><a class="el" href="#ga506c1a381dbb4f496bbca659a2bcd5d2">console::choice</a> (const C &amp;c, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
+<tr class="memdesc:ga506c1a381dbb4f496bbca659a2bcd5d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">从容器中随机选择一个元素（常量左值版本，返回 const 引用）。  <br /></td></tr>
+<tr class="memitem:ga74c36c341190d9a9f68f48d764a3c517" id="r_ga74c36c341190d9a9f68f48d764a3c517"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
+<tr class="memitem:ga74c36c341190d9a9f68f48d764a3c517 template"><td class="memItemLeft">C::value_type&#160;</td><td class="memItemRight"><a class="el" href="#ga74c36c341190d9a9f68f48d764a3c517">console::choice</a> (C &amp;&amp;c, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
+<tr class="memdesc:ga74c36c341190d9a9f68f48d764a3c517"><td class="mdescLeft">&#160;</td><td class="mdescRight">从容器中随机选择一个元素（右值版本，返回值）。  <br /></td></tr>
+<tr class="memitem:ga5683a6d94de57b45467300c028178271" id="r_ga5683a6d94de57b45467300c028178271"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:ga5683a6d94de57b45467300c028178271 template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#ga5683a6d94de57b45467300c028178271">console::choice</a> (std::initializer_list&lt; T &gt; init, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
+<tr class="memdesc:ga5683a6d94de57b45467300c028178271"><td class="mdescLeft">&#160;</td><td class="mdescRight">从 std::initializer_list 中随机选择一个元素（重载版本）。  <br /></td></tr>
 <tr class="memitem:ga9bfc03e8332620166066cb4c84e82be2" id="r_ga9bfc03e8332620166066cb4c84e82be2"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
 <tr class="memitem:ga9bfc03e8332620166066cb4c84e82be2 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga9bfc03e8332620166066cb4c84e82be2">console::shuffle</a> (C &amp;&amp;c, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
 <tr class="memdesc:ga9bfc03e8332620166066cb4c84e82be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">随机打乱容器中元素的顺序（Fisher-Yates 洗牌算法）。  <br /></td></tr>
@@ -156,9 +159,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gae37cf6bc23b7aa22a753df79a4a330c8" id="r_gae37cf6bc23b7aa22a753df79a4a330c8"><td class="memTemplParams" colspan="2">template&lt;class T = double&gt; </td></tr>
 <tr class="memitem:gae37cf6bc23b7aa22a753df79a4a330c8 template"><td class="memItemLeft">std::vector&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gae37cf6bc23b7aa22a753df79a4a330c8">console::rweibull</a> (size_t n, T shape, T scale=1.0, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
 <tr class="memdesc:gae37cf6bc23b7aa22a753df79a4a330c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成 n 个服从韦布尔分布（Weibull Distribution）的随机数。  <br /></td></tr>
-<tr class="memitem:ga21c98ec5f2e8cb9214bb1480fb01f34b" id="r_ga21c98ec5f2e8cb9214bb1480fb01f34b"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
-<tr class="memitem:ga21c98ec5f2e8cb9214bb1480fb01f34b template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ga21c98ec5f2e8cb9214bb1480fb01f34b">console::sample</a> (C &amp;&amp;c, size_t size, bool replace=false, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()) -&gt; std::vector&lt; typename std::iterator_traits&lt; decltype(std::begin(c))&gt;::value_type &gt;</td></tr>
-<tr class="memdesc:ga21c98ec5f2e8cb9214bb1480fb01f34b"><td class="mdescLeft">&#160;</td><td class="mdescRight">从容器中随机抽取指定数量的元素（有放回或无放回）。  <br /></td></tr>
+<tr class="memitem:ga779aaa804c4e95ffa31bd3b813977032" id="r_ga779aaa804c4e95ffa31bd3b813977032"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
+<tr class="memitem:ga779aaa804c4e95ffa31bd3b813977032 template"><td class="memItemLeft">std::vector&lt; typename C::value_type &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga779aaa804c4e95ffa31bd3b813977032">console::sample</a> (C &amp;&amp;c, size_t size, bool replace=false, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
+<tr class="memdesc:ga779aaa804c4e95ffa31bd3b813977032"><td class="mdescLeft">&#160;</td><td class="mdescRight">从容器中随机抽取指定数量的元素（有放回或无放回）。  <br /></td></tr>
 <tr class="memitem:gac5d4baec5248d35418123f4cc0ef3b97" id="r_gac5d4baec5248d35418123f4cc0ef3b97"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
 <tr class="memitem:gac5d4baec5248d35418123f4cc0ef3b97 template"><td class="memItemLeft">std::vector&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gac5d4baec5248d35418123f4cc0ef3b97">console::sample</a> (std::initializer_list&lt; T &gt; init, size_t size, bool replace=false, std::mt19937 &amp;gen=<a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
 <tr class="memdesc:gac5d4baec5248d35418123f4cc0ef3b97"><td class="mdescLeft">&#160;</td><td class="mdescRight">从 std::initializer_list 中随机抽样（重载版本）。  <br /></td></tr>
@@ -166,8 +169,8 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>随机数生成、随机选择、随机打乱等实用函数。 </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="gaee0c18e781a558ac85221f0aac30ab4d" name="gaee0c18e781a558ac85221f0aac30ab4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaee0c18e781a558ac85221f0aac30ab4d">&#9670;&#160;</a></span>choice() <span class="overload">[1/3]</span></h2>
+<a id="ga74c36c341190d9a9f68f48d764a3c517" name="ga74c36c341190d9a9f68f48d764a3c517"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga74c36c341190d9a9f68f48d764a3c517">&#9670;&#160;</a></span>choice() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -175,14 +178,14 @@ Functions</h2></td></tr>
 template&lt;class C&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto console::choice </td>
+          <td class="memname">C::value_type console::choice </td>
           <td>(</td>
           <td class="paramtype">C &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::mt19937 &amp;</td>          <td class="paramname"><span class="paramname"><em>gen</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()</span>&#160;) -&gt; std::remove_reference&lt; decltype(*std::begin(c))&gt;::type</td>
+          <td class="paramtype">std::mt19937 &amp;</td>          <td class="paramname"><span class="paramname"><em>gen</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -201,7 +204,7 @@ template&lt;class C&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>std::decay_t&lt;decltype(*std::begin(c))&gt; 所选元素的副本。 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>typename C::value_type 所选元素的副本。 </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="classconsole_1_1container__error.html" title="表示通用容器操作错误。">container_error</a></td><td>如果容器为空。 </td></tr>
@@ -211,8 +214,8 @@ template&lt;class C&gt; </div>
 
 </div>
 </div>
-<a id="ga658e7e0c83e62b07cd07e260c3ecf523" name="ga658e7e0c83e62b07cd07e260c3ecf523"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga658e7e0c83e62b07cd07e260c3ecf523">&#9670;&#160;</a></span>choice() <span class="overload">[2/3]</span></h2>
+<a id="gaf6cf5db4ed276a39dec214c94b54471e" name="gaf6cf5db4ed276a39dec214c94b54471e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf6cf5db4ed276a39dec214c94b54471e">&#9670;&#160;</a></span>choice() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -220,14 +223,14 @@ template&lt;class C&gt; </div>
 template&lt;class C&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto console::choice </td>
+          <td class="memname">C::reference console::choice </td>
           <td>(</td>
           <td class="paramtype">C &amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::mt19937 &amp;</td>          <td class="paramname"><span class="paramname"><em>gen</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()</span>&#160;) -&gt; decltype(*std::begin(c))</td>
+          <td class="paramtype">std::mt19937 &amp;</td>          <td class="paramname"><span class="paramname"><em>gen</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -246,7 +249,7 @@ template&lt;class C&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>decltype(*std::begin(c)) 所选元素的引用。 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>typename C::reference 所选元素的引用。 </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="classconsole_1_1container__error.html" title="表示通用容器操作错误。">container_error</a></td><td>如果容器为空。 </td></tr>
@@ -256,8 +259,53 @@ template&lt;class C&gt; </div>
 
 </div>
 </div>
-<a id="ga63dbd61c575fe8c9b02f321f6f3eaecc" name="ga63dbd61c575fe8c9b02f321f6f3eaecc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga63dbd61c575fe8c9b02f321f6f3eaecc">&#9670;&#160;</a></span>choice() <span class="overload">[3/3]</span></h2>
+<a id="ga506c1a381dbb4f496bbca659a2bcd5d2" name="ga506c1a381dbb4f496bbca659a2bcd5d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga506c1a381dbb4f496bbca659a2bcd5d2">&#9670;&#160;</a></span>choice() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class C&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">C::const_reference console::choice </td>
+          <td>(</td>
+          <td class="paramtype">const C &amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::mt19937 &amp;</td>          <td class="paramname"><span class="paramname"><em>gen</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>从容器中随机选择一个元素（常量左值版本，返回 const 引用）。 </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>容器类型，必须支持 std::begin 和 std::end 迭代器以及 size() 方法。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>要从中选择的容器（左值）。 </td></tr>
+    <tr><td class="paramname">gen</td><td>使用的随机数引擎，默认为 <a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca" title="获取一个全局的、以当前时间戳为种子的 Mersenne Twister 随机数引擎。">default_gen()</a>。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>typename C::const_reference 所选元素的引用。 </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classconsole_1_1container__error.html" title="表示通用容器操作错误。">container_error</a></td><td>如果容器为空。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga5683a6d94de57b45467300c028178271" name="ga5683a6d94de57b45467300c028178271"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5683a6d94de57b45467300c028178271">&#9670;&#160;</a></span>choice() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -265,14 +313,14 @@ template&lt;class C&gt; </div>
 template&lt;class T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto console::choice </td>
+          <td class="memname">T console::choice </td>
           <td>(</td>
           <td class="paramtype">std::initializer_list&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>init</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::mt19937 &amp;</td>          <td class="paramname"><span class="paramname"><em>gen</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()</span>&#160;) -&gt; decltype(*std::begin(init))</td>
+          <td class="paramtype">std::mt19937 &amp;</td>          <td class="paramname"><span class="paramname"><em>gen</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -291,7 +339,7 @@ template&lt;class T&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>decltype(*std::begin(init)) 所选元素的引用。 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>T 所选元素的引值。 </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="classconsole_1_1container__error.html" title="表示通用容器操作错误。">container_error</a></td><td>如果初始化列表为空。 </td></tr>
@@ -422,6 +470,7 @@ template&lt;class T = double&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;T&gt; 包含 n 个随机数的向量。 </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>使用 Gamma 分布的关系：Beta(a, b) = Gamma(a, 1) / (Gamma(a, 1) + Gamma(b, 1))。 </dd></dl>
 
 </div>
 </div>
@@ -964,8 +1013,8 @@ template&lt;class T = double&gt; </div>
 
 </div>
 </div>
-<a id="ga21c98ec5f2e8cb9214bb1480fb01f34b" name="ga21c98ec5f2e8cb9214bb1480fb01f34b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga21c98ec5f2e8cb9214bb1480fb01f34b">&#9670;&#160;</a></span>sample() <span class="overload">[1/2]</span></h2>
+<a id="ga779aaa804c4e95ffa31bd3b813977032" name="ga779aaa804c4e95ffa31bd3b813977032"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga779aaa804c4e95ffa31bd3b813977032">&#9670;&#160;</a></span>sample() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -973,7 +1022,7 @@ template&lt;class T = double&gt; </div>
 template&lt;class C&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto console::sample </td>
+          <td class="memname">std::vector&lt; typename C::value_type &gt; console::sample </td>
           <td>(</td>
           <td class="paramtype">C &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span>, </td>
         </tr>
@@ -990,7 +1039,7 @@ template&lt;class C&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::mt19937 &amp;</td>          <td class="paramname"><span class="paramname"><em>gen</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()</span>&#160;) -&gt; std::vector&lt; typename std::iterator_traits&lt; decltype(std::begin(c))&gt;::value_type &gt;</td>
+          <td class="paramtype">std::mt19937 &amp;</td>          <td class="paramname"><span class="paramname"><em>gen</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>()</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1011,7 +1060,7 @@ template&lt;class C&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;typename std::remove_reference_t&lt;decltype(*std::begin(c))&gt;&gt; 抽取结果的向量。 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;typename C::value_type&gt; 抽取结果的向量。 </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="classconsole_1_1container__error.html" title="表示通用容器操作错误。">container_error</a></td><td>如果容器为空，或 size 超过容器大小且 replace==false。 </td></tr>
@@ -1099,7 +1148,7 @@ template&lt;class T&gt; </div>
 <p>修改 default_gen 提供的随机数引擎的种子。 </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">新的种子。</td><td></td></tr>
+    <tr><td class="paramname"><a class="el" href="#ga71ad035c75b9d2bfa5f02d45874ec65c" title="修改 default_gen 提供的随机数引擎的种子。">seed</a></td><td>新的种子。 </td></tr>
   </table>
   </dd>
 </dl>
@@ -1130,7 +1179,7 @@ template&lt;class C&gt; </div>
 <p>随机打乱容器中元素的顺序（Fisher-Yates 洗牌算法）。 </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">C</td><td>容器类型，必须支持 std::begin 和 std::end 迭代器、size() 以及 swap 操作。 </td></tr>
+    <tr><td class="paramname">C</td><td>容器类型，必须支持 std::begin 和 std::end 迭代器、size()， 以及存储的元素类型支持 swap 操作。 </td></tr>
   </table>
   </dd>
 </dl>
