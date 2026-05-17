@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.8.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.9.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -109,8 +109,11 @@ Namespaces</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:Stack" id="r_Stack"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_stack.html">Stack</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">栈容器适配器，扩展自 std::stack。  <a href="classconsole_1_1_stack.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Queue" id="r_Queue"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_queue.html">Queue</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">队列容器适配器，扩展自 std::queue。  <a href="classconsole_1_1_queue.html#details">More...</a><br /></td></tr>
 <tr class="memitem:PriorityQueue" id="r_PriorityQueue"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_priority_queue.html">PriorityQueue</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">优先队列容器适配器，扩展自 std::priority_queue。  <a href="classconsole_1_1_priority_queue.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Item" id="r_Item"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_item.html">Item</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">可存储任意类型单个对象的类型擦除包装器。  <a href="classconsole_1_1_item.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Box" id="r_Box"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_box.html">Box</a></td></tr>
@@ -199,6 +202,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">字符串分区结果，包含左部分、分隔符、右部分。  <a href="structconsole_1_1_partition_result.html#details">More...</a><br /></td></tr>
 <tr class="memitem:f_5Fstring" id="r_f_5Fstring"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1f__string.html">f_string</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">格式化字符串类，支持使用 <span class="tt">%</span> 运算符进行占位符 <span class="tt">{}</span> 替换。  <a href="classconsole_1_1f__string.html#details">More...</a><br /></td></tr>
+<tr class="memitem:CmdResult" id="r_CmdResult"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_cmd_result.html">CmdResult</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">命令执行结果封装类。  <a href="classconsole_1_1_cmd_result.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Time" id="r_Time"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_time.html">Time</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">表示以纳秒为单位的时间量，支持单位转换、算术运算和自动选择合适的输出单位。  <a href="classconsole_1_1_time.html#details">More...</a><br /></td></tr>
 <tr class="memitem:View" id="r_View"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_view.html">View</a></td></tr>
@@ -266,76 +271,77 @@ Typedefs</h2></td></tr>
 Enumerations</h2></td></tr>
 <tr class="memitem:a506ee9cef0c6d79e2e87674233647f29" id="r_a506ee9cef0c6d79e2e87674233647f29"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a506ee9cef0c6d79e2e87674233647f29">Key</a> : int { <br />
 &#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a6adf97f83acf6453d4a6a4b1070f3754">None</a> = 0
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a88183b946cc5f0e8c96b2e66e1c74a7e">Unknown</a> = 1
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a7fc56270e7a70fa81a5935b72eacbe29">A</a> = 'A'
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a9d5ed678fe57bcca610140957afab571">B</a>
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a0d61f8370cad1d412f80b84d143e1257">C</a>
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29af623e75af30e62bbd73d6df5b50bb7b5">D</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a0d61f8370cad1d412f80b84d143e1257">C</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29af623e75af30e62bbd73d6df5b50bb7b5">D</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a3a3ea00cfc35332cedf6e5e9a32e94da">E</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a800618943025315f869e4e1f09471012">F</a>
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29adfcf28d0734569a6a693bc8194de62bf">G</a>
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ac1d9f50f86825a1a2302ec2449c17196">H</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29adfcf28d0734569a6a693bc8194de62bf">G</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ac1d9f50f86825a1a2302ec2449c17196">H</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29add7536794b63bf90eccfd37f9b147d7f">I</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29aff44570aca8241914870afbc310cdb85">J</a>
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29aa5f3c6a11b03839d46af9fb43c97c188">K</a>
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ad20caec3b48a1eef164cb4ca81ba2587">L</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29aa5f3c6a11b03839d46af9fb43c97c188">K</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ad20caec3b48a1eef164cb4ca81ba2587">L</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a69691c7bdcc3ce6d5d8a1361f22d04ac">M</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a8d9c307cb7f3c4a32822a51922d1ceaa">N</a>
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29af186217753c37b9b9f958d906208506e">O</a>
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a44c29edb103a2872f519ad0c9a0fdaaa">P</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29af186217753c37b9b9f958d906208506e">O</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a44c29edb103a2872f519ad0c9a0fdaaa">P</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29af09564c9ca56850d4cd6b3319e541aee">Q</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ae1e1d3d40573127e9ee0480caf1283d6">R</a>
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a5dbc98dcc983a70728bd082d1a47546e">S</a>
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a5dbc98dcc983a70728bd082d1a47546e">S</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a4c614360da93c0a041b22e537de151eb">U</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a5206560a306a2e085a437fd258eb57ce">V</a>
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a61e9c06ea9a85a5088a499df6458d276">W</a>
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a02129bb861061d1a052c592e2dc6b383">X</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a61e9c06ea9a85a5088a499df6458d276">W</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a02129bb861061d1a052c592e2dc6b383">X</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a57cec4137b614c87cb4e24a3d003a3e0">Y</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a21c2e59531c8710156d34a3c30ac81d5">Z</a>
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a845787798a45b48e825e9b99a338537a">Num0</a> = '0'
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29abacb69a042a9fdc268a672919052d1f2">Num1</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a845787798a45b48e825e9b99a338537a">Num0</a> = '0'
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29abacb69a042a9fdc268a672919052d1f2">Num1</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a72bd76d6e2b68a539c8d1a77b564ed72">Num2</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29aa3a965b443a13522aa59fbdea31d00ce">Num3</a>
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ae0af89b5f83c670e4cc584c73c4732ca">Num4</a>
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a7e89a79bbb017bfcaff80ff820a15d8a">Num5</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ae0af89b5f83c670e4cc584c73c4732ca">Num4</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a7e89a79bbb017bfcaff80ff820a15d8a">Num5</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a0581cd1de881a0f697f3b46741fb326b">Num6</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a4911ceac5c68b5a3f1499d68b27b0938">Num7</a>
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a894e7d9b7dcced78e8007ba2d38b8dd2">Num8</a>
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ad7b1dbe22119bc7acf6e4a1afcc06e46">Num9</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a894e7d9b7dcced78e8007ba2d38b8dd2">Num8</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ad7b1dbe22119bc7acf6e4a1afcc06e46">Num9</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ad511f8439ecde36647437fbba67a4394">Space</a> = ' '
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29af1851d5600eae616ee802a31ac74701b">Enter</a> = 13
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a91f4253ca587ca8ac4e63b9ceb351f5d">Esc</a> = 27
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29acd7d13ceea728b08555f7c818cfb13ef">Backspace</a> = 127
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a91f4253ca587ca8ac4e63b9ceb351f5d">Esc</a> = 27
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29acd7d13ceea728b08555f7c818cfb13ef">Backspace</a> = 127
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a5c6ba25104401c9ee0650230fc6ba413">Tab</a> = 9
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a258f49887ef8d14ac268c92b02503aaa">Up</a> = 1000
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a08a38277b0309070706f6652eeae9a53">Down</a>
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a945d5e233cf7d6240f6b783b36a374ff">Left</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a08a38277b0309070706f6652eeae9a53">Down</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a945d5e233cf7d6240f6b783b36a374ff">Left</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a92b09c7c48c520c3c55e497875da437c">Right</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ae1dffc8709f31a4987c8a88334107e89">F1</a>
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29afe5c3684dce76cdd9f7f42430868aa74">F2</a>
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a4b6bf4b531770872d4328ce69bef5627">F3</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29afe5c3684dce76cdd9f7f42430868aa74">F2</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a4b6bf4b531770872d4328ce69bef5627">F3</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ae7e0e72401a9f2718ed0f39f2861d702">F4</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a37f438df6a6d5ba4c17ef8ca58562f00">F5</a>
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a1faf42f2823f184eb2c9f0dffe5d73f2">F6</a>
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a47489eb597b7db34caa24b1fc78fc839">F7</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a1faf42f2823f184eb2c9f0dffe5d73f2">F6</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a47489eb597b7db34caa24b1fc78fc839">F7</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a4787509ad9f9d747a81a30e9dde3d4a7">F8</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a892a245e287c163080b23db737d3c4c9">F9</a>
-, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ab213ce22ca6ad4eda8db82966b9b6e5a">F10</a>
 , <br />
-&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a643b0662422d1d0dffa3fca2e2bf28a8">F11</a>
+&#160;&#160;<a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ab213ce22ca6ad4eda8db82966b9b6e5a">F10</a>
+, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29a643b0662422d1d0dffa3fca2e2bf28a8">F11</a>
 , <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29ae902674982fc99aa343cdd94da7476c3">F12</a>
 <br />
  }</td></tr>
@@ -564,16 +570,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a9a32e56df12d007a866a8c50e78ff3aa" id="r_a9a32e56df12d007a866a8c50e78ff3aa"><td class="memTemplParams" colspan="2">template&lt;class C1, class C2&gt; </td></tr>
 <tr class="memitem:a9a32e56df12d007a866a8c50e78ff3aa template"><td class="memItemLeft"><a class="el" href="structconsole_1_1_iterator_pair.html">IteratorPair</a>&lt; <a class="el" href="classconsole_1_1_tied_iterators.html">TiedIterators</a>&lt; typename C1::iterator, typename C2::const_iterator &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9a32e56df12d007a866a8c50e78ff3aa">zip</a> (C1 &amp;c1, const C2 &amp;c2)</td></tr>
 <tr class="memdesc:a9a32e56df12d007a866a8c50e78ff3aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">针对第一个容器为非常量、第二个容器为常量的 zip 版本。  <br /></td></tr>
+<tr class="memitem:ab52cbf6e3e95c829e2756a3447695f6d" id="r_ab52cbf6e3e95c829e2756a3447695f6d"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab52cbf6e3e95c829e2756a3447695f6d">operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29">Key</a> k)</td></tr>
+<tr class="memdesc:ab52cbf6e3e95c829e2756a3447695f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">让 <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29" title="用于表示常用按键的枚举。">Key</a> 可以被打印。  <br /></td></tr>
 <tr class="memitem:aebb75438fb8382ebc7174554b3614f07" id="r_aebb75438fb8382ebc7174554b3614f07"><td class="memItemLeft">class <a class="el" href="classconsole_1_1_logging.html">console::Logging</a>&#160;</td><td class="memItemRight"><a class="el" href="#aebb75438fb8382ebc7174554b3614f07">logger</a> (std::clog, true, <a class="el" href="classconsole_1_1_logging.html#adbe10800d06e6c74c22849f7f210d5e8a551b723eafd6a31d444fcb2f5920fbd3">Logging::Level::INFO</a>)</td></tr>
 <tr class="memdesc:aebb75438fb8382ebc7174554b3614f07"><td class="mdescLeft">&#160;</td><td class="mdescRight">全局默认 logger 实例，启用颜色，级别 INFO。  <br /></td></tr>
 <tr class="memitem:gaa52523dce981db3d239cf22aee9a6cbf" id="r_gaa52523dce981db3d239cf22aee9a6cbf"><td class="memTemplParams" colspan="2">template&lt;class T, size_t... Dims&gt; </td></tr>
 <tr class="memitem:gaa52523dce981db3d239cf22aee9a6cbf template"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="group__matools.html#gaa52523dce981db3d239cf22aee9a6cbf">mean</a> (const <a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, Dims... &gt; &amp;arr)</td></tr>
 <tr class="memdesc:gaa52523dce981db3d239cf22aee9a6cbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算 <a class="el" href="classconsole_1_1_multi_array.html" title="编译期固定维度的多维数组。">MultiArray</a> 中所有元素的算术平均值。  <br /></td></tr>
 <tr class="memitem:gad0e28e6cfd9c4981c7454d5df90652a4" id="r_gad0e28e6cfd9c4981c7454d5df90652a4"><td class="memTemplParams" colspan="2">template&lt;class T, size_t... Dims&gt; </td></tr>
-<tr class="memitem:gad0e28e6cfd9c4981c7454d5df90652a4 template"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="group__matools.html#gad0e28e6cfd9c4981c7454d5df90652a4">variance</a> (const <a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, Dims... &gt; &amp;arr, bool <a class="el" href="group__random.html#ga779aaa804c4e95ffa31bd3b813977032">sample</a>=true)</td></tr>
+<tr class="memitem:gad0e28e6cfd9c4981c7454d5df90652a4 template"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="group__matools.html#gad0e28e6cfd9c4981c7454d5df90652a4">variance</a> (const <a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, Dims... &gt; &amp;arr, bool <a class="el" href="group__random.html#gacb660498d8104da35f7f0b41e487ca0f">sample</a>=true)</td></tr>
 <tr class="memdesc:gad0e28e6cfd9c4981c7454d5df90652a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算方差。  <br /></td></tr>
 <tr class="memitem:gad6de46e49fce431f3f9e66cde68c0746" id="r_gad6de46e49fce431f3f9e66cde68c0746"><td class="memTemplParams" colspan="2">template&lt;class T, size_t... Dims&gt; </td></tr>
-<tr class="memitem:gad6de46e49fce431f3f9e66cde68c0746 template"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="group__matools.html#gad6de46e49fce431f3f9e66cde68c0746">stddev</a> (const <a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, Dims... &gt; &amp;arr, bool <a class="el" href="group__random.html#ga779aaa804c4e95ffa31bd3b813977032">sample</a>=true)</td></tr>
+<tr class="memitem:gad6de46e49fce431f3f9e66cde68c0746 template"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="group__matools.html#gad6de46e49fce431f3f9e66cde68c0746">stddev</a> (const <a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, Dims... &gt; &amp;arr, bool <a class="el" href="group__random.html#gacb660498d8104da35f7f0b41e487ca0f">sample</a>=true)</td></tr>
 <tr class="memdesc:gad6de46e49fce431f3f9e66cde68c0746"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算标准差。  <br /></td></tr>
 <tr class="memitem:gac196bcb3c6f61ad0f788689b4bcdf3b3" id="r_gac196bcb3c6f61ad0f788689b4bcdf3b3"><td class="memTemplParams" colspan="2">template&lt;class T, size_t N&gt; </td></tr>
 <tr class="memitem:gac196bcb3c6f61ad0f788689b4bcdf3b3 template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="group__matools.html#gac196bcb3c6f61ad0f788689b4bcdf3b3">dot</a> (const <a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, N &gt; &amp;a, const <a class="el" href="classconsole_1_1_multi_array.html">MultiArray</a>&lt; T, N &gt; &amp;b)</td></tr>
@@ -1074,9 +1082,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gae37cf6bc23b7aa22a753df79a4a330c8" id="r_gae37cf6bc23b7aa22a753df79a4a330c8"><td class="memTemplParams" colspan="2">template&lt;class T = double&gt; </td></tr>
 <tr class="memitem:gae37cf6bc23b7aa22a753df79a4a330c8 template"><td class="memItemLeft">std::vector&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="group__random.html#gae37cf6bc23b7aa22a753df79a4a330c8">rweibull</a> (size_t n, T shape, T scale=1.0, std::mt19937 &amp;gen=<a class="el" href="group__random.html#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
 <tr class="memdesc:gae37cf6bc23b7aa22a753df79a4a330c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成 n 个服从韦布尔分布（Weibull Distribution）的随机数。  <br /></td></tr>
-<tr class="memitem:ga779aaa804c4e95ffa31bd3b813977032" id="r_ga779aaa804c4e95ffa31bd3b813977032"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
-<tr class="memitem:ga779aaa804c4e95ffa31bd3b813977032 template"><td class="memItemLeft">std::vector&lt; typename C::value_type &gt;&#160;</td><td class="memItemRight"><a class="el" href="group__random.html#ga779aaa804c4e95ffa31bd3b813977032">sample</a> (C &amp;&amp;c, size_t size, bool replace=false, std::mt19937 &amp;gen=<a class="el" href="group__random.html#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
-<tr class="memdesc:ga779aaa804c4e95ffa31bd3b813977032"><td class="mdescLeft">&#160;</td><td class="mdescRight">从容器中随机抽取指定数量的元素（有放回或无放回）。  <br /></td></tr>
+<tr class="memitem:gacb660498d8104da35f7f0b41e487ca0f" id="r_gacb660498d8104da35f7f0b41e487ca0f"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
+<tr class="memitem:gacb660498d8104da35f7f0b41e487ca0f template"><td class="memItemLeft">std::vector&lt; typename C::value_type &gt;&#160;</td><td class="memItemRight"><a class="el" href="group__random.html#gacb660498d8104da35f7f0b41e487ca0f">sample</a> (const C &amp;c, size_t size, bool replace=false, std::mt19937 &amp;gen=<a class="el" href="group__random.html#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
+<tr class="memdesc:gacb660498d8104da35f7f0b41e487ca0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">从容器中随机抽取指定数量的元素（有放回或无放回）。  <br /></td></tr>
 <tr class="memitem:gac5d4baec5248d35418123f4cc0ef3b97" id="r_gac5d4baec5248d35418123f4cc0ef3b97"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
 <tr class="memitem:gac5d4baec5248d35418123f4cc0ef3b97 template"><td class="memItemLeft">std::vector&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="group__random.html#gac5d4baec5248d35418123f4cc0ef3b97">sample</a> (std::initializer_list&lt; T &gt; init, size_t size, bool replace=false, std::mt19937 &amp;gen=<a class="el" href="group__random.html#gaa96466336c14e8c6088c7d8ce4a4e6ca">default_gen</a>())</td></tr>
 <tr class="memdesc:gac5d4baec5248d35418123f4cc0ef3b97"><td class="mdescLeft">&#160;</td><td class="mdescRight">从 std::initializer_list 中随机抽样（重载版本）。  <br /></td></tr>
@@ -1131,6 +1139,8 @@ Functions</h2></td></tr>
 <tr class="memitem:ga45446910af9711d79bebe59665b6cd8a" id="r_ga45446910af9711d79bebe59665b6cd8a"><td class="memTemplParams" colspan="2">template&lt;class... Args&gt; </td></tr>
 <tr class="memitem:ga45446910af9711d79bebe59665b6cd8a template"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="group__strpp.html#ga45446910af9711d79bebe59665b6cd8a">uni_to_str</a> (Args &amp;&amp;...args)</td></tr>
 <tr class="memdesc:ga45446910af9711d79bebe59665b6cd8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">将任意多个参数转换为字符串并拼接（无分隔符）。  <br /></td></tr>
+<tr class="memitem:aad2c41385d8bd75abcee825fc7f30e07" id="r_aad2c41385d8bd75abcee825fc7f30e07"><td class="memItemLeft"><a class="el" href="classconsole_1_1_cmd_result.html">CmdResult</a>&#160;</td><td class="memItemRight"><a class="el" href="#aad2c41385d8bd75abcee825fc7f30e07">syscmd</a> (const std::string &amp;exe, const std::vector&lt; std::string &gt; &amp;args, const std::map&lt; std::string, std::string &gt; &amp;kwargs)</td></tr>
+<tr class="memdesc:aad2c41385d8bd75abcee825fc7f30e07"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行系统命令并捕获输出。  <br /></td></tr>
 <tr class="memitem:a8929153db641cb041bea419d109b08a1" id="r_a8929153db641cb041bea419d109b08a1"><td class="memItemLeft"><a class="el" href="classconsole_1_1_time.html">Time</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8929153db641cb041bea419d109b08a1">now</a> ()</td></tr>
 <tr class="memdesc:a8929153db641cb041bea419d109b08a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前时间点（自纪元以来的纳秒数）。  <br /></td></tr>
 <tr class="memitem:a7a7013e6ffcb7a903210303ca185f71e" id="r_a7a7013e6ffcb7a903210303ca185f71e"><td class="memTemplParams" colspan="2">template&lt;class F, class... Args&gt; </td></tr>
@@ -1174,7 +1184,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a961f78601d0d038fd5c3ffba6bfd6e37" id="r_a961f78601d0d038fd5c3ffba6bfd6e37"><td class="memItemLeft">static constexpr char&#160;</td><td class="memItemRight"><a class="el" href="#a961f78601d0d038fd5c3ffba6bfd6e37">meta</a> [] = &quot;CONSOLE-LIB-2026-05-14&quot;</td></tr>
+<tr class="memitem:a961f78601d0d038fd5c3ffba6bfd6e37" id="r_a961f78601d0d038fd5c3ffba6bfd6e37"><td class="memItemLeft">static constexpr char&#160;</td><td class="memItemRight"><a class="el" href="#a961f78601d0d038fd5c3ffba6bfd6e37">meta</a> [] = &quot;CONSOLE-LIB-2026-05-17&quot;</td></tr>
 <tr class="memitem:ae2f73bcafcb4987aedc6b8e514540969" id="r_ae2f73bcafcb4987aedc6b8e514540969"><td class="memItemLeft">struct <a class="el" href="structconsole_1_1_input_settings.html">console::InputSettings</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae2f73bcafcb4987aedc6b8e514540969">cout</a></td></tr>
 <tr class="memitem:acf3c4705e4127e6be17633413764d049" id="r_acf3c4705e4127e6be17633413764d049"><td class="memItemLeft">struct <a class="el" href="structconsole_1_1_input_settings.html">console::InputSettings</a>&#160;</td><td class="memItemRight"><a class="el" href="#acf3c4705e4127e6be17633413764d049">cin</a></td></tr>
 <tr class="memdesc:acf3c4705e4127e6be17633413764d049"><td class="mdescLeft">&#160;</td><td class="mdescRight">全局默认输入设置  <br /></td></tr>
@@ -1574,6 +1584,7 @@ Variables</h2></td></tr>
 <p>用于表示常用按键的枚举。 </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a6adf97f83acf6453d4a6a4b1070f3754" name="a506ee9cef0c6d79e2e87674233647f29a6adf97f83acf6453d4a6a4b1070f3754"></a>None&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a88183b946cc5f0e8c96b2e66e1c74a7e" name="a506ee9cef0c6d79e2e87674233647f29a88183b946cc5f0e8c96b2e66e1c74a7e"></a>Unknown&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a7fc56270e7a70fa81a5935b72eacbe29" name="a506ee9cef0c6d79e2e87674233647f29a7fc56270e7a70fa81a5935b72eacbe29"></a>A&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a9d5ed678fe57bcca610140957afab571" name="a506ee9cef0c6d79e2e87674233647f29a9d5ed678fe57bcca610140957afab571"></a>B&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a506ee9cef0c6d79e2e87674233647f29a0d61f8370cad1d412f80b84d143e1257" name="a506ee9cef0c6d79e2e87674233647f29a0d61f8370cad1d412f80b84d143e1257"></a>C&#160;</td><td class="fielddoc"></td></tr>
@@ -2333,7 +2344,7 @@ template&lt;class Iter&gt; </div>
 </div>
 </div>
 <a id="ac202c83668858c78f9e639529b6e842a" name="ac202c83668858c78f9e639529b6e842a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac202c83668858c78f9e639529b6e842a">&#9670;&#160;</a></span>operator&lt;&lt;() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac202c83668858c78f9e639529b6e842a">&#9670;&#160;</a></span>operator&lt;&lt;() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2364,7 +2375,7 @@ template&lt;class Iter&gt; </div>
 </div>
 </div>
 <a id="a0fd2bea58eef8588960e5c03cb5450cf" name="a0fd2bea58eef8588960e5c03cb5450cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0fd2bea58eef8588960e5c03cb5450cf">&#9670;&#160;</a></span>operator&lt;&lt;() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fd2bea58eef8588960e5c03cb5450cf">&#9670;&#160;</a></span>operator&lt;&lt;() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2400,6 +2411,37 @@ template&lt;class T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::ostream&amp; 流引用。 </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>有性能开销。 </dd></dl>
+
+</div>
+</div>
+<a id="ab52cbf6e3e95c829e2756a3447695f6d" name="ab52cbf6e3e95c829e2756a3447695f6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab52cbf6e3e95c829e2756a3447695f6d">&#9670;&#160;</a></span>operator&lt;&lt;() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; console::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;</td>          <td class="paramname"><span class="paramname"><em>os</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a506ee9cef0c6d79e2e87674233647f29">Key</a></td>          <td class="paramname"><span class="paramname"><em>k</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>让 <a class="el" href="#a506ee9cef0c6d79e2e87674233647f29" title="用于表示常用按键的枚举。">Key</a> 可以被打印。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>输出流。 </td></tr>
+    <tr><td class="paramname">k</td><td>要打印的 Key。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>os 输出流的引用。 </dd></dl>
 
 </div>
 </div>
@@ -2690,6 +2732,50 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
+<a id="aad2c41385d8bd75abcee825fc7f30e07" name="aad2c41385d8bd75abcee825fc7f30e07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad2c41385d8bd75abcee825fc7f30e07">&#9670;&#160;</a></span>syscmd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classconsole_1_1_cmd_result.html">CmdResult</a> console::syscmd </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>exe</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>args</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::map&lt; std::string, std::string &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>kwargs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>执行系统命令并捕获输出。 </p>
+<p>友元声明，仅允许 syscmd 创建实例。</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">exe</td><td>可执行文件路径或命令名。 </td></tr>
+    <tr><td class="paramname">args</td><td>命令行参数列表。 </td></tr>
+    <tr><td class="paramname">kwargs</td><td>关键字参数字典（格式：key value）。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classconsole_1_1_cmd_result.html" title="命令执行结果封装类。">CmdResult</a> 包含执行结果的对象。</dd></dl>
+<p>自动合并 stderr 到 stdout，使用 256 字节缓冲区读取输出。 </p><div class="fragment"><div class="line"><span class="keyword">auto</span> result = <a class="code hl_function" href="#aad2c41385d8bd75abcee825fc7f30e07">syscmd</a>(<span class="stringliteral">&quot;ls&quot;</span>, {<span class="stringliteral">&quot;-la&quot;</span>, <span class="stringliteral">&quot;/tmp&quot;</span>}, {});</div>
+<div class="line"><span class="keywordflow">if</span> (result.ok()) {</div>
+<div class="line">    std::cout &lt;&lt; result.output();</div>
+<div class="line">}</div>
+<div class="ttc" id="anamespaceconsole_html_aad2c41385d8bd75abcee825fc7f30e07"><div class="ttname"><a href="#aad2c41385d8bd75abcee825fc7f30e07">console::syscmd</a></div><div class="ttdeci">CmdResult syscmd(const std::string &amp;exe, const std::vector&lt; std::string &gt; &amp;args, const std::map&lt; std::string, std::string &gt; &amp;kwargs)</div><div class="ttdoc">执行系统命令并捕获输出。</div><div class="ttdef"><b>Definition</b> syscmd.h:123</div></div>
+</div><!-- fragment --> <dl class="section warning"><dt>Warning</dt><dd>函数阻塞直到命令执行完毕。 </dd></dl>
+
+</div>
+</div>
 <a id="a7a7013e6ffcb7a903210303ca185f71e" name="a7a7013e6ffcb7a903210303ca185f71e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7a7013e6ffcb7a903210303ca185f71e">&#9670;&#160;</a></span>timer()</h2>
 
@@ -2937,7 +3023,7 @@ template&lt;class C1, class C2&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">char console::meta[] = &quot;CONSOLE-LIB-2026-05-14&quot;</td>
+          <td class="memname">char console::meta[] = &quot;CONSOLE-LIB-2026-05-17&quot;</td>
         </tr>
       </table>
   </td>

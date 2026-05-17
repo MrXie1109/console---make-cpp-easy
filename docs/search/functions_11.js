@@ -1,7 +1,7 @@
 var searchData=
 [
   ['s_0',['s',['../classconsole_1_1_time.html#a02f59b0029dbdd92f290cff6e05b8703',1,'console::Time']]],
-  ['sample_1',['sample',['../group__random.html#ga779aaa804c4e95ffa31bd3b813977032',1,'console::sample(C &amp;&amp;c, size_t size, bool replace=false, std::mt19937 &amp;gen=default_gen())'],['../group__random.html#gac5d4baec5248d35418123f4cc0ef3b97',1,'console::sample(std::initializer_list&lt; T &gt; init, size_t size, bool replace=false, std::mt19937 &amp;gen=default_gen())']]],
+  ['sample_1',['sample',['../group__random.html#gacb660498d8104da35f7f0b41e487ca0f',1,'console::sample(const C &amp;c, size_t size, bool replace=false, std::mt19937 &amp;gen=default_gen())'],['../group__random.html#gac5d4baec5248d35418123f4cc0ef3b97',1,'console::sample(std::initializer_list&lt; T &gt; init, size_t size, bool replace=false, std::mt19937 &amp;gen=default_gen())']]],
   ['screen_2',['Screen',['../classconsole_1_1_screen.html#ae05b067b89a0697bee15cf10571f3d8f',1,'console::Screen']]],
   ['search_3',['search',['../classconsole_1_1_regex.html#a09864082776ac521e6038ec28f64afbe',1,'console::Regex::search()'],['../namespaceconsole_1_1re.html#ad5d8c7e69138f3518032bb824ec06c77',1,'console::re::search()']]],
   ['second_4',['second',['../classconsole_1_1_time.html#a4720449798b4531c7284a55053dafb86',1,'console::Time']]],
@@ -19,10 +19,12 @@ var searchData=
   ['span_16',['span',['../classconsole_1_1_regex_1_1_match.html#ac22ec90fd7b9e733c9e61d12c6aa7ca2',1,'console::Regex::Match']]],
   ['split_17',['split',['../classconsole_1_1_regex.html#aa62abfe42c5c4557a777dcb255f9d26f',1,'console::Regex::split()'],['../namespaceconsole_1_1re.html#aa1d589346655b81fe4591c85423d5b9f',1,'console::re::split()'],['../group__strpp.html#ga60b86273d02abf33f057e1e86325f455',1,'console::split()']]],
   ['start_18',['start',['../classconsole_1_1_regex_1_1_match.html#a03761c7aad6c7390f5d37ab0bd5e1b26',1,'console::Regex::Match']]],
-  ['stddev_19',['stddev',['../group__matools.html#gad6de46e49fce431f3f9e66cde68c0746',1,'console']]],
-  ['str_20',['str',['../classconsole_1_1_item.html#a801550a9eef4a38b4cf905544cac375b',1,'console::Item']]],
-  ['sub_21',['sub',['../classconsole_1_1_regex.html#accf500739eda0a6cd617b628dc900ff4',1,'console::Regex::sub()'],['../namespaceconsole_1_1re.html#a87080596675b594f6f5b7de7cba09647',1,'console::re::sub()']]],
-  ['subn_22',['subn',['../classconsole_1_1_regex.html#a440575f32eb82908026d88e8a0a969b9',1,'console::Regex']]],
-  ['sum_23',['sum',['../group__multiarray__stats.html#gac77dd17c6c6aabf513856c4e41f2aa51',1,'console']]],
-  ['swap_24',['swap',['../classconsole_1_1cursor__ptr.html#a5ff4d8ef5708cc493d3d1929c830cae7',1,'console::cursor_ptr::swap()'],['../classconsole_1_1cursor__ptr_3_01_t_0f_0e_4.html#a72edc813eabe03cac19a2aaa2ba396ed',1,'console::cursor_ptr&lt; T[]&gt;::swap()'],['../classconsole_1_1_maybe.html#a6f907629b22ed4fb9f1c35a2c6f1f289',1,'console::Maybe::swap()']]]
+  ['status_19',['status',['../classconsole_1_1_cmd_result.html#ae62bb44596288018a3b29e3c5a60f547',1,'console::CmdResult']]],
+  ['stddev_20',['stddev',['../group__matools.html#gad6de46e49fce431f3f9e66cde68c0746',1,'console']]],
+  ['str_21',['str',['../classconsole_1_1_item.html#a801550a9eef4a38b4cf905544cac375b',1,'console::Item']]],
+  ['sub_22',['sub',['../classconsole_1_1_regex.html#accf500739eda0a6cd617b628dc900ff4',1,'console::Regex::sub()'],['../namespaceconsole_1_1re.html#a87080596675b594f6f5b7de7cba09647',1,'console::re::sub()']]],
+  ['subn_23',['subn',['../classconsole_1_1_regex.html#a440575f32eb82908026d88e8a0a969b9',1,'console::Regex']]],
+  ['sum_24',['sum',['../group__multiarray__stats.html#gac77dd17c6c6aabf513856c4e41f2aa51',1,'console']]],
+  ['swap_25',['swap',['../classconsole_1_1cursor__ptr.html#a5ff4d8ef5708cc493d3d1929c830cae7',1,'console::cursor_ptr::swap()'],['../classconsole_1_1cursor__ptr_3_01_t_0f_0e_4.html#a72edc813eabe03cac19a2aaa2ba396ed',1,'console::cursor_ptr&lt; T[]&gt;::swap()'],['../classconsole_1_1_maybe.html#a6f907629b22ed4fb9f1c35a2c6f1f289',1,'console::Maybe::swap()']]],
+  ['syscmd_26',['syscmd',['../namespaceconsole.html#aad2c41385d8bd75abcee825fc7f30e07',1,'console']]]
 ];

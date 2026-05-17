@@ -3,6 +3,7 @@ var kb_8h =
     [ "console::Keyboard", "classconsole_1_1_keyboard.html", "classconsole_1_1_keyboard" ],
     [ "console::Key", "namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29", [
       [ "console::Key::None", "namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a6adf97f83acf6453d4a6a4b1070f3754", null ],
+      [ "console::Key::Unknown", "namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a88183b946cc5f0e8c96b2e66e1c74a7e", null ],
       [ "console::Key::A", "namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a7fc56270e7a70fa81a5935b72eacbe29", null ],
       [ "console::Key::B", "namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a9d5ed678fe57bcca610140957afab571", null ],
       [ "console::Key::C", "namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a0d61f8370cad1d412f80b84d143e1257", null ],
@@ -60,5 +61,6 @@ var kb_8h =
       [ "console::Key::F10", "namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ab213ce22ca6ad4eda8db82966b9b6e5a", null ],
       [ "console::Key::F11", "namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a643b0662422d1d0dffa3fca2e2bf28a8", null ],
       [ "console::Key::F12", "namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29ae902674982fc99aa343cdd94da7476c3", null ]
-    ] ]
+    ] ],
+    [ "console::operator<<", "namespaceconsole.html#ab52cbf6e3e95c829e2756a3447695f6d", null ]
 ];

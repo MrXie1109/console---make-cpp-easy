@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.8.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.9.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -122,6 +122,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a76f4e925b4abf523dd3e0c1d8c331749" id="r_a76f4e925b4abf523dd3e0c1d8c331749"><td class="memTemplParams" colspan="2">template&lt;class Iter&gt; </td></tr>
 <tr class="memitem:a76f4e925b4abf523dd3e0c1d8c331749 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a76f4e925b4abf523dd3e0c1d8c331749">nplay</a> (Iter begin, Iter end)</td></tr>
 <tr class="memdesc:a76f4e925b4abf523dd3e0c1d8c331749"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步步播放一个音符范围（非阻塞）。  <br /></td></tr>
+<tr class="memitem:ad3321bdb70ecd0bbd50cfdb1aaf8e9eb" id="r_ad3321bdb70ecd0bbd50cfdb1aaf8e9eb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad3321bdb70ecd0bbd50cfdb1aaf8e9eb">note_on</a> (<a class="el" href="structconsole_1_1_note.html">Note</a> note)</td></tr>
+<tr class="memdesc:ad3321bdb70ecd0bbd50cfdb1aaf8e9eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始播放某个音符。  <br /></td></tr>
+<tr class="memitem:a6c72c82c88bc272d93dc8605150703e1" id="r_a6c72c82c88bc272d93dc8605150703e1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6c72c82c88bc272d93dc8605150703e1">note_off</a> (<a class="el" href="structconsole_1_1_note.html">Note</a> note)</td></tr>
+<tr class="memdesc:a6c72c82c88bc272d93dc8605150703e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">结束某个音符的播放。  <br /></td></tr>
 <tr id="pub-methods-0" class="groupHeader"><td colspan="2"><div class="groupHeader">属性访问</div></td></tr>
 <tr><td colspan="2" class="ititle"><div class="groupText"><p>获取当前 BPM。 </p>
 </div></td></tr>
@@ -352,6 +356,72 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>获取默认音量。 </p>
+
+</div>
+</div>
+<a id="a6c72c82c88bc272d93dc8605150703e1" name="a6c72c82c88bc272d93dc8605150703e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c72c82c88bc272d93dc8605150703e1">&#9670;&#160;</a></span>note_off()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void console::MIDI::note_off </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structconsole_1_1_note.html">Note</a></td>          <td class="paramname"><span class="paramname"><em>note</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>结束某个音符的播放。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">note</td><td>要结束的音符，其 beats 将被忽略。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad3321bdb70ecd0bbd50cfdb1aaf8e9eb" name="ad3321bdb70ecd0bbd50cfdb1aaf8e9eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3321bdb70ecd0bbd50cfdb1aaf8e9eb">&#9670;&#160;</a></span>note_on()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void console::MIDI::note_on </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structconsole_1_1_note.html">Note</a></td>          <td class="paramname"><span class="paramname"><em>note</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>开始播放某个音符。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">note</td><td>要播放的音符，其 beats 将被忽略。 </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

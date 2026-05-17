@@ -48,6 +48,7 @@ var annotated_dup =
       [ "uniform_distribution_impl", "structconsole_1_1uniform__distribution__impl.html", null ],
       [ "PartitionResult", "structconsole_1_1_partition_result.html", "structconsole_1_1_partition_result" ],
       [ "f_string", "classconsole_1_1f__string.html", "classconsole_1_1f__string" ],
+      [ "CmdResult", "classconsole_1_1_cmd_result.html", "classconsole_1_1_cmd_result" ],
       [ "Time", "classconsole_1_1_time.html", "classconsole_1_1_time" ],
       [ "View", "classconsole_1_1_view.html", "classconsole_1_1_view" ],
       [ "View&lt; const Container &gt;", "classconsole_1_1_view_3_01const_01_container_01_4.html", "classconsole_1_1_view_3_01const_01_container_01_4" ],

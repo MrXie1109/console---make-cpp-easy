@@ -5,6 +5,7 @@ var hierarchy =
       [ "console::MultiArray< T, First, Rest... >", "classconsole_1_1_multi_array_3_01_t_00_01_first_00_01_rest_8_8_8_01_4.html", null ]
     ] ],
     [ "console::BasicRational&lt; T &gt;", "classconsole_1_1_basic_rational.html", null ],
+    [ "console::CmdResult", "classconsole_1_1_cmd_result.html", null ],
     [ "console::Comprehension&lt; T &gt;", "classconsole_1_1_comprehension.html", null ],
     [ "console::cursor_ptr&lt; T &gt;", "classconsole_1_1cursor__ptr.html", null ],
     [ "console::cursor_ptr&lt; T[]&gt;", "classconsole_1_1cursor__ptr_3_01_t_0f_0e_4.html", null ],

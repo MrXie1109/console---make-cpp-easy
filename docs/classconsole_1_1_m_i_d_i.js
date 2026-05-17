@@ -7,6 +7,8 @@ var classconsole_1_1_m_i_d_i =
     [ "get_bpm", "classconsole_1_1_m_i_d_i.html#a187f728583dde61726c6b49c67a01d76", null ],
     [ "get_instrument", "classconsole_1_1_m_i_d_i.html#a8c3909e371e85b030fd593e90be46420", null ],
     [ "get_volume", "classconsole_1_1_m_i_d_i.html#ab96ac5bc9b680b763a4f66daf2d5a6c5", null ],
+    [ "note_off", "classconsole_1_1_m_i_d_i.html#a6c72c82c88bc272d93dc8605150703e1", null ],
+    [ "note_on", "classconsole_1_1_m_i_d_i.html#ad3321bdb70ecd0bbd50cfdb1aaf8e9eb", null ],
     [ "nplay", "classconsole_1_1_m_i_d_i.html#a76f4e925b4abf523dd3e0c1d8c331749", null ],
     [ "nplay", "classconsole_1_1_m_i_d_i.html#a1d0732235c968bd7de330afaabdfb9ab", null ],
     [ "operator=", "classconsole_1_1_m_i_d_i.html#ac581b75be802e0230780ab342701e7b4", null ],

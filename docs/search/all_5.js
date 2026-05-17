@@ -37,7 +37,7 @@ var searchData=
   ['ensure_34',['ensure',['../classconsole_1_1_path.html#a31aa49a0c593427633a0d585301bd6fe',1,'console::Path']]],
   ['enter_35',['Enter',['../namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29af1851d5600eae616ee802a31ac74701b',1,'console']]],
   ['error_36',['ERROR',['../classconsole_1_1_logging.html#adbe10800d06e6c74c22849f7f210d5e8abb1ca97ec761fc37101737ba0aa2e7c5',1,'console::Logging::ERROR'],['../logging_8h.html#a540aae996af47330f7fb73552763680fabb1ca97ec761fc37101737ba0aa2e7c5',1,'ERROR:&#160;logging.h']]],
-  ['error_37',['error',['../classconsole_1_1_logging.html#a45cce11639e8308a30eefe772fa48c42',1,'console::Logging::error()'],['../logging_8h.html#ae4d0fb185a06dab2b1bed05021de591e',1,'error():&#160;logging.h']]],
+  ['error_37',['error',['../classconsole_1_1_logging.html#a45cce11639e8308a30eefe772fa48c42',1,'console::Logging::error()'],['../classconsole_1_1_cmd_result.html#af75dd2cefdfafde0672723950594d3a0',1,'console::CmdResult::error()'],['../logging_8h.html#ae4d0fb185a06dab2b1bed05021de591e',1,'error():&#160;logging.h']]],
   ['esc_38',['Esc',['../namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29a91f4253ca587ca8ac4e63b9ceb351f5d',1,'console']]],
   ['escape_39',['escape',['../namespaceconsole_1_1re.html#a169c8f4ac3ff604bb1b35b13fb4518a1',1,'console::re']]],
   ['euclidean_40',['euclidean',['../group__matools.html#ga962ff11f2c653772ca6649f91e6e1f5e',1,'console']]],

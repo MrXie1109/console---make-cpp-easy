@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['win32_5flean_5fand_5fmean_0',['WIN32_LEAN_AND_MEAN',['../melody_8h.html#ac7bef5d85e3dcd73eef56ad39ffc84a9',1,'melody.h']]]
+  ['pclose_0',['PCLOSE',['../syscmd_8h.html#a4c39c7c96d7f5d1f5cd1743122d476e3',1,'syscmd.h']]],
+  ['popen_1',['POPEN',['../syscmd_8h.html#ab6949e8178edeb4294d893f3ee4966d5',1,'syscmd.h']]]
 ];

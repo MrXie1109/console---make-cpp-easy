@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.8.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.9.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -416,15 +416,15 @@ $(function(){initNavTree('melody_8h_source.html','',''); });
 <div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>                <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>            <span class="keywordflow">if</span> (note.<a class="code hl_variable" href="structconsole_1_1_note.html#ac74728e00255ee98389347cdb0e55fa9">pitch</a> != -1)</div>
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>            {</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>                DWORD note_on = 0x90 | (note.<a class="code hl_variable" href="structconsole_1_1_note.html#ac74728e00255ee98389347cdb0e55fa9">pitch</a> &lt;&lt; 8) |</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>                DWORD <a class="code hl_function" href="classconsole_1_1_m_i_d_i.html#ad3321bdb70ecd0bbd50cfdb1aaf8e9eb">note_on</a> = 0x90 | (note.<a class="code hl_variable" href="structconsole_1_1_note.html#ac74728e00255ee98389347cdb0e55fa9">pitch</a> &lt;&lt; 8) |</div>
 <div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>                                ((note.<a class="code hl_variable" href="structconsole_1_1_note.html#a0df0710eb7ca548a96ec2dfb498187f9">volume</a> == -1</div>
 <div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>                                      ? volume</div>
 <div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>                                      : note.<a class="code hl_variable" href="structconsole_1_1_note.html#a0df0710eb7ca548a96ec2dfb498187f9">volume</a>)</div>
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>                                 &lt;&lt; 16);</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>                midiOutShortMsg(handle, note_on);</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>                midiOutShortMsg(handle, <a class="code hl_function" href="classconsole_1_1_m_i_d_i.html#ad3321bdb70ecd0bbd50cfdb1aaf8e9eb">note_on</a>);</div>
 <div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>                Sleep(60000 * note.<a class="code hl_variable" href="structconsole_1_1_note.html#adc856e58caa8b453ce4a8102ab6e00e4">beats</a> / bpm);</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>                DWORD note_off = 0x80 | (note.<a class="code hl_variable" href="structconsole_1_1_note.html#ac74728e00255ee98389347cdb0e55fa9">pitch</a> &lt;&lt; 8) | (64 &lt;&lt; 16);</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>                midiOutShortMsg(handle, note_off);</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>                DWORD <a class="code hl_function" href="classconsole_1_1_m_i_d_i.html#a6c72c82c88bc272d93dc8605150703e1">note_off</a> = 0x80 | (note.<a class="code hl_variable" href="structconsole_1_1_note.html#ac74728e00255ee98389347cdb0e55fa9">pitch</a> &lt;&lt; 8) | (64 &lt;&lt; 16);</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>                midiOutShortMsg(handle, <a class="code hl_function" href="classconsole_1_1_m_i_d_i.html#a6c72c82c88bc272d93dc8605150703e1">note_off</a>);</div>
 <div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>            }</div>
 <div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>            <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>                Sleep(60000 * note.<a class="code hl_variable" href="structconsole_1_1_note.html#adc856e58caa8b453ce4a8102ab6e00e4">beats</a> / bpm);</div>
@@ -458,9 +458,33 @@ $(function(){initNavTree('melody_8h_source.html','',''); });
 <div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>                .detach();</div>
 <div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>        }</div>
 </div>
-<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>    };</div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span></div>
+<div class="foldopen" id="foldopen00446" data-start="{" data-end="}">
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno"><a class="line" href="classconsole_1_1_m_i_d_i.html#ad3321bdb70ecd0bbd50cfdb1aaf8e9eb">  446</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classconsole_1_1_m_i_d_i.html#ad3321bdb70ecd0bbd50cfdb1aaf8e9eb">note_on</a>(<a class="code hl_struct" href="structconsole_1_1_note.html">Note</a> note)</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>        {</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>            <span class="keywordflow">if</span> (!handle)</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>            DWORD on = 0x90 | (note.<a class="code hl_variable" href="structconsole_1_1_note.html#ac74728e00255ee98389347cdb0e55fa9">pitch</a> &lt;&lt; 8) |</div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>                       ((note.<a class="code hl_variable" href="structconsole_1_1_note.html#a0df0710eb7ca548a96ec2dfb498187f9">volume</a> == -1</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>                             ? volume</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>                             : note.<a class="code hl_variable" href="structconsole_1_1_note.html#a0df0710eb7ca548a96ec2dfb498187f9">volume</a>)</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>                        &lt;&lt; 16);</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>            midiOutShortMsg(handle, on);</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>        }</div>
 </div>
-<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>}</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span></div>
+<div class="foldopen" id="foldopen00462" data-start="{" data-end="}">
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno"><a class="line" href="classconsole_1_1_m_i_d_i.html#a6c72c82c88bc272d93dc8605150703e1">  462</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classconsole_1_1_m_i_d_i.html#a6c72c82c88bc272d93dc8605150703e1">note_off</a>(<a class="code hl_struct" href="structconsole_1_1_note.html">Note</a> note)</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>        {</div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>            <span class="keywordflow">if</span> (!handle)</div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>            DWORD off = 0x80 | (note.<a class="code hl_variable" href="structconsole_1_1_note.html#ac74728e00255ee98389347cdb0e55fa9">pitch</a> &lt;&lt; 8) | (64 &lt;&lt; 16);</div>
+<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span>            midiOutShortMsg(handle, off);</div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>        }</div>
+</div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>    };</div>
+</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>}</div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_a187f728583dde61726c6b49c67a01d76"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#a187f728583dde61726c6b49c67a01d76">console::MIDI::get_bpm</a></div><div class="ttdeci">unsigned char get_bpm() const</div><div class="ttdef"><b>Definition</b> melody.h:339</div></div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_a1d0732235c968bd7de330afaabdfb9ab"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#a1d0732235c968bd7de330afaabdfb9ab">console::MIDI::nplay</a></div><div class="ttdeci">void nplay(Note note)</div><div class="ttdoc">异步播放一个音符（非阻塞）。</div><div class="ttdef"><b>Definition</b> melody.h:408</div></div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_a348100253fa07c2d70172c911af80155"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#a348100253fa07c2d70172c911af80155">console::MIDI::MIDI</a></div><div class="ttdeci">MIDI(MIDI &amp;&amp;midi)=delete</div><div class="ttdoc">禁止移动构造。</div></div>
@@ -468,11 +492,13 @@ $(function(){initNavTree('melody_8h_source.html','',''); });
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_a5246d97c3e9f0ca97b69fabc8d3baa66"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#a5246d97c3e9f0ca97b69fabc8d3baa66">console::MIDI::play</a></div><div class="ttdeci">void play(Note note)</div><div class="ttdoc">同步播放一个音符（阻塞）。</div><div class="ttdef"><b>Definition</b> melody.h:382</div></div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_a53b743162cb98c556d5d7f72de82d633"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#a53b743162cb98c556d5d7f72de82d633">console::MIDI::play</a></div><div class="ttdeci">void play(Iter begin, Iter end)</div><div class="ttdoc">同步播放一个音符范围（阻塞）。</div><div class="ttdef"><b>Definition</b> melody.h:422</div></div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_a657549998272eb1d8637bb4c96ad0d89"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#a657549998272eb1d8637bb4c96ad0d89">console::MIDI::MIDI</a></div><div class="ttdeci">MIDI(Instrument instrument=Instrument::AcousticGrandPiano, unsigned char bpm=120, unsigned char volume=100, unsigned deviceID=0)</div><div class="ttdoc">构造 MIDI 对象，打开默认 MIDI 设备并设置乐器、音量和 BPM。</div><div class="ttdef"><b>Definition</b> melody.h:298</div></div>
+<div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_a6c72c82c88bc272d93dc8605150703e1"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#a6c72c82c88bc272d93dc8605150703e1">console::MIDI::note_off</a></div><div class="ttdeci">void note_off(Note note)</div><div class="ttdoc">结束某个音符的播放。</div><div class="ttdef"><b>Definition</b> melody.h:462</div></div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_a76f4e925b4abf523dd3e0c1d8c331749"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#a76f4e925b4abf523dd3e0c1d8c331749">console::MIDI::nplay</a></div><div class="ttdeci">void nplay(Iter begin, Iter end)</div><div class="ttdoc">异步步播放一个音符范围（非阻塞）。</div><div class="ttdef"><b>Definition</b> melody.h:435</div></div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_a8c3909e371e85b030fd593e90be46420"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#a8c3909e371e85b030fd593e90be46420">console::MIDI::get_instrument</a></div><div class="ttdeci">Instrument get_instrument()</div><div class="ttdoc">获取当前乐器。</div><div class="ttdef"><b>Definition</b> melody.h:344</div></div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_ab96ac5bc9b680b763a4f66daf2d5a6c5"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#ab96ac5bc9b680b763a4f66daf2d5a6c5">console::MIDI::get_volume</a></div><div class="ttdeci">unsigned char get_volume() const</div><div class="ttdoc">获取默认音量。</div><div class="ttdef"><b>Definition</b> melody.h:360</div></div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_ac581b75be802e0230780ab342701e7b4"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#ac581b75be802e0230780ab342701e7b4">console::MIDI::operator=</a></div><div class="ttdeci">const MIDI &amp; operator=(const MIDI &amp;)=delete</div><div class="ttdoc">禁止拷贝赋值。</div></div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_ad0ed400e79f851ca5dbf0efca76b1009"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#ad0ed400e79f851ca5dbf0efca76b1009">console::MIDI::~MIDI</a></div><div class="ttdeci">~MIDI() noexcept</div><div class="ttdoc">析构函数，关闭 MIDI 设备。</div><div class="ttdef"><b>Definition</b> melody.h:330</div></div>
+<div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_ad3321bdb70ecd0bbd50cfdb1aaf8e9eb"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#ad3321bdb70ecd0bbd50cfdb1aaf8e9eb">console::MIDI::note_on</a></div><div class="ttdeci">void note_on(Note note)</div><div class="ttdoc">开始播放某个音符。</div><div class="ttdef"><b>Definition</b> melody.h:446</div></div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_ae6b3190a0ddb7696eb49cb6ce2705cff"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#ae6b3190a0ddb7696eb49cb6ce2705cff">console::MIDI::MIDI</a></div><div class="ttdeci">MIDI(const MIDI &amp;)=delete</div><div class="ttdoc">禁止拷贝构造。</div></div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_af50314ce98507c18372c99b70f054fa1"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#af50314ce98507c18372c99b70f054fa1">console::MIDI::set_instrument</a></div><div class="ttdeci">void set_instrument(Instrument new_instrument)</div><div class="ttdoc">切换乐器。</div><div class="ttdef"><b>Definition</b> melody.h:350</div></div>
 <div class="ttc" id="aclassconsole_1_1_m_i_d_i_html_af9484ea4c9a239c5ff9c5446337556d5"><div class="ttname"><a href="classconsole_1_1_m_i_d_i.html#af9484ea4c9a239c5ff9c5446337556d5">console::MIDI::set_volume</a></div><div class="ttdeci">void set_volume(unsigned char vol)</div><div class="ttdoc">设置默认音量。</div><div class="ttdef"><b>Definition</b> melody.h:365</div></div>
@@ -594,7 +620,7 @@ $(function(){initNavTree('melody_8h_source.html','',''); });
 <div class="ttc" id="anamespaceconsole_1_1pitches_html_afcdb51f46572dfa415c639e3456a047a"><div class="ttname"><a href="namespaceconsole_1_1pitches.html#afcdb51f46572dfa415c639e3456a047a">console::pitches::Ds7</a></div><div class="ttdeci">const int Ds7</div><div class="ttdef"><b>Definition</b> melody.h:245</div></div>
 <div class="ttc" id="anamespaceconsole_1_1pitches_html_afe42020014cf4ef7a3652192d28f9e18"><div class="ttname"><a href="namespaceconsole_1_1pitches.html#afe42020014cf4ef7a3652192d28f9e18">console::pitches::Fs1</a></div><div class="ttdeci">const int Fs1</div><div class="ttdef"><b>Definition</b> melody.h:239</div></div>
 <div class="ttc" id="anamespaceconsole_1_1pitches_html_affc4690f21248d84380e4d9bb7631eca"><div class="ttname"><a href="namespaceconsole_1_1pitches.html#affc4690f21248d84380e4d9bb7631eca">console::pitches::G2</a></div><div class="ttdeci">const int G2</div><div class="ttdef"><b>Definition</b> melody.h:226</div></div>
-<div class="ttc" id="anamespaceconsole_html"><div class="ttname"><a href="namespaceconsole.html">console</a></div><div class="ttdoc">本库所有组件所在的顶层命名空间。</div><div class="ttdef"><b>Definition</b> adapter.h:40</div></div>
+<div class="ttc" id="anamespaceconsole_html"><div class="ttname"><a href="namespaceconsole.html">console</a></div><div class="ttdoc">本库所有组件所在的顶层命名空间。</div><div class="ttdef"><b>Definition</b> adapter.h:42</div></div>
 <div class="ttc" id="anamespaceconsole_html_ac3066e557db972dbb8670effba117592"><div class="ttname"><a href="namespaceconsole.html#ac3066e557db972dbb8670effba117592">console::Instrument</a></div><div class="ttdeci">Instrument</div><div class="ttdoc">128 种 GM 标准乐器编号（0-127）。</div><div class="ttdef"><b>Definition</b> melody.h:85</div></div>
 <div class="ttc" id="anamespaceconsole_html_ac3066e557db972dbb8670effba117592a0106edef0888ff481bb419c25fb269ec"><div class="ttname"><a href="namespaceconsole.html#ac3066e557db972dbb8670effba117592a0106edef0888ff481bb419c25fb269ec">console::Instrument::OrchestralHarp</a></div><div class="ttdeci">@ OrchestralHarp</div><div class="ttdoc">竖琴</div><div class="ttdef"><b>Definition</b> melody.h:132</div></div>
 <div class="ttc" id="anamespaceconsole_html_ac3066e557db972dbb8670effba117592a038810d0fea91e013692cedfdf517478"><div class="ttname"><a href="namespaceconsole.html#ac3066e557db972dbb8670effba117592a038810d0fea91e013692cedfdf517478">console::Instrument::Violin</a></div><div class="ttdeci">@ Violin</div><div class="ttdoc">小提琴</div><div class="ttdef"><b>Definition</b> melody.h:126</div></div>

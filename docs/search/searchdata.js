@@ -9,8 +9,8 @@ var indexSectionsWithContent =
   6: "bcdeipruv",
   7: "ikl",
   8: "abcdefghijklmnopqrstuvwxyz",
-  9: "o",
-  10: "_mnw",
+  9: "os",
+  10: "_mnpw",
   11: "t字打数标类统视输运随"
 };
 

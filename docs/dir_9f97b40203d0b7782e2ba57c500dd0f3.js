@@ -29,6 +29,7 @@ var dir_9f97b40203d0b7782e2ba57c500dd0f3 =
     [ "sfinae.h", "sfinae_8h.html", "sfinae_8h" ],
     [ "std.h", "std_8h.html", null ],
     [ "strpp.h", "strpp_8h.html", "strpp_8h" ],
+    [ "syscmd.h", "syscmd_8h.html", "syscmd_8h" ],
     [ "time.h", "time_8h.html", "time_8h" ],
     [ "view.h", "view_8h.html", "view_8h" ]
 ];

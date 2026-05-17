@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.8.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.9.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -116,6 +116,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab2f502aef9e4203a213842c48da84574"><td class="mdescLeft">&#160;</td><td class="mdescRight">试图取得当前键击的按键。  <br /></td></tr>
 <tr class="memitem:a442c6ffddedddef1d9b52005884404f6" id="r_a442c6ffddedddef1d9b52005884404f6"><td class="memItemLeft"><a class="el" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29">Key</a>&#160;</td><td class="memItemRight"><a class="el" href="#a442c6ffddedddef1d9b52005884404f6">wait</a> ()</td></tr>
 <tr class="memdesc:a442c6ffddedddef1d9b52005884404f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待直到键击并取得当前按键。  <br /></td></tr>
+<tr class="memitem:ae2fc4cc7479bcdb3b377cb1659c537ed" id="r_ae2fc4cc7479bcdb3b377cb1659c537ed"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae2fc4cc7479bcdb3b377cb1659c537ed">ignore</a> (int n=-1)</td></tr>
+<tr class="memdesc:ae2fc4cc7479bcdb3b377cb1659c537ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">消耗留在缓冲区内的按键。  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>用于监视键盘键击情况的类。 </p>
@@ -256,6 +258,39 @@ Public Member Functions</h2></td></tr>
 
 <p>试图取得当前键击的按键。 </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="namespaceconsole.html#a506ee9cef0c6d79e2e87674233647f29" title="用于表示常用按键的枚举。">Key</a> 如果没有键击，返回 Key::None，否则返回对应按键。 </dd></dl>
+
+</div>
+</div>
+<a id="ae2fc4cc7479bcdb3b377cb1659c537ed" name="ae2fc4cc7479bcdb3b377cb1659c537ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2fc4cc7479bcdb3b377cb1659c537ed">&#9670;&#160;</a></span>ignore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void console::Keyboard::ignore </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>消耗留在缓冲区内的按键。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>消耗的数量，负数为所有，默认为 -1。 </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

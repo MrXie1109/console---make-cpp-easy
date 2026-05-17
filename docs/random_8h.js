@@ -18,7 +18,7 @@ var random_8h =
     [ "console::rt", "group__random.html#gab8f458749a552cd247b3e239d2ecaa69", null ],
     [ "console::runif", "group__random.html#ga81680bca4159ad954b25e0f6260f3e2f", null ],
     [ "console::rweibull", "group__random.html#gae37cf6bc23b7aa22a753df79a4a330c8", null ],
-    [ "console::sample", "group__random.html#ga779aaa804c4e95ffa31bd3b813977032", null ],
+    [ "console::sample", "group__random.html#gacb660498d8104da35f7f0b41e487ca0f", null ],
     [ "console::sample", "group__random.html#gac5d4baec5248d35418123f4cc0ef3b97", null ],
     [ "console::seed", "group__random.html#ga71ad035c75b9d2bfa5f02d45874ec65c", null ],
     [ "console::shuffle", "group__random.html#ga9bfc03e8332620166066cb4c84e82be2", null ],

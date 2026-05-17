@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Console Library<span id="projectnumber">&#160;4.8.0</span>
+   <div id="projectname">Console Library<span id="projectnumber">&#160;4.9.0</span>
    </div>
    <div id="projectbrief">A header-only library that makes C++ simple</div>
   </td>
@@ -92,6 +92,9 @@ $(function(){initNavTree('adapter_8h.html','',''); });
   <div class="headertitle"><div class="title">adapter.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>提供带有值返回 pop 操作的容器适配器包装类。  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;deque&gt;</code><br />
 <code>#include &lt;stack&gt;</code><br />
 <code>#include &lt;queue&gt;</code><br />
@@ -103,8 +106,11 @@ $(function(){initNavTree('adapter_8h.html','',''); });
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:console_3A_3AStack_3C_20T_2C_20Container_20_3E" id="r_console_3A_3AStack_3C_20T_2C_20Container_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_stack.html">console::Stack&lt; T, Container &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">栈容器适配器，扩展自 std::stack。  <a href="classconsole_1_1_stack.html#details">More...</a><br /></td></tr>
 <tr class="memitem:console_3A_3AQueue_3C_20T_2C_20Container_20_3E" id="r_console_3A_3AQueue_3C_20T_2C_20Container_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_queue.html">console::Queue&lt; T, Container &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">队列容器适配器，扩展自 std::queue。  <a href="classconsole_1_1_queue.html#details">More...</a><br /></td></tr>
 <tr class="memitem:console_3A_3APriorityQueue_3C_20T_2C_20Container_2C_20Compare_20_3E" id="r_console_3A_3APriorityQueue_3C_20T_2C_20Container_2C_20Compare_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classconsole_1_1_priority_queue.html">console::PriorityQueue&lt; T, Container, Compare &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">优先队列容器适配器，扩展自 std::priority_queue。  <a href="classconsole_1_1_priority_queue.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -112,7 +118,8 @@ Namespaces</h2></td></tr>
 <tr class="memdesc:namespaceconsole"><td class="mdescLeft">&#160;</td><td class="mdescRight">本库所有组件所在的顶层命名空间。 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>MrXie1109 </dd></dl>
+<div class="textblock"><p>提供带有值返回 pop 操作的容器适配器包装类。 </p>
+<p>该模块对 STL 容器适配器（stack、queue、priority_queue）进行扩展， 添加了返回被弹出元素值的 pop() 方法，避免先 top() 再 pop() 的两步操作。 所有适配器均保持与原 STL 容器适配器相同的接口和行为。 </p><dl class="section author"><dt>Author</dt><dd>MrXie1109 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>MIT License </dd></dl>
 </div></div><!-- contents -->
