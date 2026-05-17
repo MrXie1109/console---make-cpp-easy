@@ -77,6 +77,7 @@ namespace console
     enum class Key : int
     {
         None = 0,
+        Unknown = 1,
 
         A = 'A',
         B,
@@ -151,10 +152,11 @@ namespace console
     std::ostream &operator<<(std::ostream &os, Key k)
     {
         if ((k >= Key::A && k <= Key::Z) || (k >= Key::Num0 && k <= Key::Num9))
-        {
-            os << static_cast<char>(k);
-            return os;
-        }
+            return os << static_cast<char>(k);
+        if (k >= Key::F1 && k <= Key::F12)
+            return os << "<F"
+                      << static_cast<int>(k) - static_cast<int>(Key::F1) + 1
+                      << '>';
         switch (k)
         {
         case Key::Space:
@@ -184,15 +186,11 @@ namespace console
         case Key::Right:
             os << "<right>";
             break;
+        case Key::None:
+            os << "<none>";
+            break;
         default:
-            if (k >= Key::F1 && k <= Key::F12)
-            {
-                os << "<F"
-                   << static_cast<int>(k) - static_cast<int>(Key::F1) + 1
-                   << '>';
-            }
-            else
-                os << "<none>";
+            os << "<unknown>";
             break;
         }
         return os;
@@ -276,6 +274,16 @@ namespace console
             }
         }
 
+        /**
+         * @brief 消耗留在缓冲区内的按键。
+         * @param n 消耗的数量，负数为所有，默认为 -1。
+         */
+        void ignore(int n = -1)
+        {
+            for (int i = 0; i != n && get() != Key::None; i++)
+                ;
+        }
+
     private:
 #ifdef _WIN32
         HANDLE hStdin; ///< Windows: 标准输入设备句柄（STD_INPUT_HANDLE）
@@ -334,13 +342,13 @@ namespace console
         /**
          * @brief 将原始扫描码解析为 Key 枚举值。
          * @param raw 原始按键整数值（来自 readRaw 或 readRawBlock）。
-         * @return 对应的 Key 枚举值；若无法识别则返回 Key::None。
+         * @return 对应的 Key 枚举值；若无法识别则返回 Key::Unknown。
          * @details 处理以下情况：
          *          - 字母字符（自动将小写转为大写）
          *          - 数字字符
          *          - 空格、回车、Esc、退格、Tab
          *          - Windows 平台扩展键（方向键、F1-F12，其扫描码为 0xE0 或 0x00）
-         *          - 其他平台无法识别的键返回 None
+         *          - 其他平台无法识别的键返回 Unknown
          */
         Key parse(int raw)
         {
@@ -407,7 +415,7 @@ namespace console
                 }
             }
 #endif
-            return Key::None;
+            return Key::Unknown;
         }
 
         /**

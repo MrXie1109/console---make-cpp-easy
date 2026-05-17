@@ -438,5 +438,33 @@ namespace console
                         { play(begin, end); })
                 .detach();
         }
+
+        /**
+         * @brief 开始播放某个音符。
+         * @param note 要播放的音符，其 beats 将被忽略。
+         */
+        void note_on(Note note)
+        {
+            if (!handle)
+                return;
+            DWORD on = 0x90 | (note.pitch << 8) |
+                       ((note.volume == -1
+                             ? volume
+                             : note.volume)
+                        << 16);
+            midiOutShortMsg(handle, on);
+        }
+
+        /**
+         * @brief 结束某个音符的播放。
+         * @param note 要结束的音符，其 beats 将被忽略。
+         */
+        void note_off(Note note)
+        {
+            if (!handle)
+                return;
+            DWORD off = 0x80 | (note.pitch << 8) | (64 << 16);
+            midiOutShortMsg(handle, off);
+        }
     };
 }

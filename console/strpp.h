@@ -313,10 +313,12 @@ namespace console
         template <class T>
         f_string operator%(const T &t)
         {
-            auto result = partition(*this, "{}");
-            if (result.middle == "{}")
+            auto pos = this->find("{}");
+            if (pos != std::string::npos)
             {
-                return result.left + uni_to_str(t) + result.right;
+                auto bak = *this;
+                bak.replace(pos, 2, uni_to_str(t));
+                return bak;
             }
             throw bad_format("Bad Format");
         }

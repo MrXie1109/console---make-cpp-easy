@@ -439,7 +439,7 @@ namespace console
      */
     template <class C>
     std::vector<typename C::value_type>
-    sample(C &&c, size_t size, bool replace = false,
+    sample(const C &c, size_t size, bool replace = false,
            std::mt19937 &gen = default_gen())
     {
         using value_type = typename C::value_type;
@@ -469,7 +469,6 @@ namespace console
             for (size_t i = 0; i < size; ++i)
                 result.push_back(*std::next(it_begin, indices[i]));
         }
-
         return result;
     }
 
@@ -481,6 +480,8 @@ namespace console
      * @param replace 是否允许重复抽取（有放回），默认为 false。
      * @param gen 使用的随机数引擎，默认为 default_gen()。
      * @return std::vector<T> 抽取结果的向量。
+     * @throw container_error 如果容器为空，或 size 超过容器大小且 replace==false。
+     * @note 对非随机访问容器效果不佳，这并非设计缺陷。
      */
     template <class T>
     std::vector<T> sample(std::initializer_list<T> init,
