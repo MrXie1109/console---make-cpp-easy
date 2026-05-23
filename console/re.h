@@ -33,6 +33,7 @@ SOFTWARE.
 #include <regex>
 #include <string>
 #include <vector>
+#include "iter.h"
 
 namespace console
 {
@@ -227,28 +228,11 @@ namespace console
         };
 
         /**
-         * @class IteratorPair
-         * @brief 包装起始和结束迭代器，支持范围 for 循环。
-         */
-        class IteratorPair
-        {
-        private:
-            Iterator begin_;
-            Iterator end_;
-
-        public:
-            typedef Iterator iterator;
-            IteratorPair(iterator beg, iterator end) : begin_(beg), end_(end) {}
-            iterator begin() const { return begin_; }
-            iterator end() const { return end_; }
-        };
-
-        /**
          * @brief 返回一个可迭代对象，遍历所有匹配的 Match 对象。
          * @param text 要搜索的字符串。
-         * @return IteratorPair 可用于范围 for 循环。
+         * @return IteratorPair<std::sregex_iterator> 可用于范围 for 循环。
          */
-        IteratorPair finditer(const std::string &text) const
+        IteratorPair<std::sregex_iterator> finditer(const std::string &text) const
         {
             return {{std::sregex_iterator(text.begin(), text.end(), pattern)},
                     {std::sregex_iterator()}};
@@ -419,6 +403,18 @@ namespace console
                                                 const std::string &text)
         {
             return Regex(pattern).findall(text);
+        }
+
+        /**
+         * @brief 返回一个可迭代对象，遍历所有匹配的 Match 对象（函数式接口）。
+         * @param pattern 正则字符串。
+         * @param text 目标文本。
+         * @return console::IteratorPair<std::sregex_iterator> 可用于范围 for 循环。
+         */
+        inline IteratorPair<std::sregex_iterator>
+        finditer(const std::string &pattern, const std::string &text)
+        {
+            return Regex(pattern).finditer(text);
         }
 
         /**

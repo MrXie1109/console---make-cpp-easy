@@ -105,7 +105,7 @@ SOFTWARE.)";
      */
     inline std::string version()
     {
-        return "console version 4.9.0 (2026-05-17) -- \"ls -la /tmp\"";
+        return "console version 4.10.0 (2026-05-23) -- \"There's a range in your code~\"";
     }
 
     /**

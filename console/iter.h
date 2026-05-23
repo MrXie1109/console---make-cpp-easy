@@ -52,7 +52,12 @@ namespace console
          * @param end 超尾迭代器。
          */
         IteratorPair(Iter beg, Iter end) : std::pair<Iter, Iter>(beg, end) {}
-        typedef Iter iterator; ///< 迭代器类型别名。
+
+        typedef Iter iterator;                                              ///< 迭代器类型别名。
+        using value_type = typename std::iterator_traits<Iter>::value_type; ///< 值类型别名。
+        using reference = typename std::iterator_traits<Iter>::reference;   ///< 引用类型别名。
+        using pointer = typename std::iterator_traits<Iter>::pointer;       ///< 指针类型别名。
+
         /**
          * @brief 返回首迭代器。
          * @return iterator first
