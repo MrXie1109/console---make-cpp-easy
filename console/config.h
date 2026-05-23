@@ -290,6 +290,30 @@ namespace console
         }
 
         /**
+         * @brief 删除配置项或节。
+         * @param section_and_key 节和键，格式为 "节名.键名" 或仅 "节名"。
+         * @return bool 成功删除返回 true，未找到返回 false。
+         */
+        bool remove(const std::string &section_and_key)
+        {
+            auto pr = partition(section_and_key, ".");
+            if (pr.middle.empty())
+            {
+                auto section = pr.left;
+                return data_.erase(section) > 0;
+            }
+            else
+            {
+                auto section = pr.left;
+                auto key = pr.right;
+                auto sec_it = data_.find(section);
+                if (sec_it == data_.end())
+                    return false;
+                return sec_it->second.erase(key) > 0;
+            }
+        }
+
+        /**
          * @brief 获取原始数据结构的只读引用。
          * @return const std::map<std::string, std::map<std::string, std::string>>&
          *         内层 map 为 [节名] -> [键名] -> [值]
