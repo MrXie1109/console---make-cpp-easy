@@ -60,6 +60,7 @@ SOFTWARE.
 #include "kb.h" // windows.h
 #include "adapter.h"
 #include "syscmd.h"
+#include "config.h"
 
 // #include "win/melody.h"
 

@@ -50,7 +50,7 @@ namespace console
      * @brief 可选值容器，可包含一个值或为空。
      * @tparam T 存储的值类型。
      * @details 基于 std::unique_ptr 实现，支持拷贝、移动、流输入输出。
-     *          访问空 Maybe 会抛出 bad_maybe_access 异常。
+     *          访问空 Maybe 会抛出 type_error 异常。
      */
     template <class T>
     class Maybe
@@ -94,25 +94,25 @@ namespace console
         /**
          * @brief 获取内部值的引用（非常量）。
          * @return T& 值的引用。
-         * @throw bad_maybe_access 若 Maybe 为空。
+         * @throw type_error 若 Maybe 为空。
          */
         T &value()
         {
             if (ptr)
                 return *ptr;
-            throw bad_maybe_access("Nothing");
+            throw type_error("Nothing");
         }
 
         /**
          * @brief 获取内部值的引用（常量）。
          * @return const T& 值的常量引用。
-         * @throw bad_maybe_access 若 Maybe 为空。
+         * @throw type_error 若 Maybe 为空。
          */
         const T &value() const
         {
             if (ptr)
                 return *ptr;
-            throw bad_maybe_access("Nothing");
+            throw type_error("Nothing");
         }
 
         /**

@@ -36,6 +36,7 @@ SOFTWARE.
 #include <vector>
 #include <iterator>
 #include <type_traits>
+#include <cstdio>
 #include "csexc.h"
 #include "strpp.h"
 
@@ -88,7 +89,7 @@ namespace console
          * @return std::string 文件内容。
          * @throw file_error 若文件无法打开或读取过程中流状态出错。
          */
-        std::string read_text()
+        std::string read_text() const
         {
             std::ifstream fin(path);
             if (!fin.is_open())
@@ -106,7 +107,7 @@ namespace console
          * @return Bytes 无符号字节向量。
          * @throw file_error 若文件无法打开或读取过程中流状态出错。
          */
-        Bytes read_binary()
+        Bytes read_binary() const
         {
             std::ifstream fin(path, std::ios::binary);
             if (!fin.is_open())
@@ -124,7 +125,7 @@ namespace console
          * @return std::vector<std::string> 各行内容（不包含换行符）。
          * @throw file_error 若文件无法打开或读取过程中出错。
          */
-        std::vector<std::string> read_lines()
+        std::vector<std::string> read_lines() const
         {
             return split(read_text(), "\n");
         }
@@ -137,7 +138,7 @@ namespace console
          * @note 编译期检查 T 是否为 POD 类型，否则触发 static_assert。
          */
         template <class T>
-        T read_POD()
+        T read_POD() const
         {
             static_assert(std::is_trivially_copyable<T>::value,
                           "This Type is Not POD Type!");
@@ -159,7 +160,7 @@ namespace console
          * @warning 不检查 T 是否为 POD 类型，可能因类型不匹配导致未定义行为。
          */
         template <class T>
-        T unsafe_read_POD()
+        T unsafe_read_POD() const
         {
             std::ifstream fin(path, std::ios::binary);
             if (!fin.is_open())
@@ -176,7 +177,7 @@ namespace console
          * @param text 要写入的文本。
          * @throw file_error 若文件无法打开或写入过程中流状态出错。
          */
-        void write_text(const std::string &text)
+        void write_text(const std::string &text) const
         {
             std::ofstream fout(path);
             if (!fout.is_open())
@@ -191,7 +192,7 @@ namespace console
          * @param bts 要写入的字节向量。
          * @throw file_error 若文件无法打开或写入过程中流状态出错。
          */
-        void write_binary(const Bytes &bts)
+        void write_binary(const Bytes &bts) const
         {
             std::ofstream fout(path, std::ios::binary);
             if (!fout.is_open())
@@ -207,7 +208,7 @@ namespace console
          * @throw file_error 若文件无法打开或写入过程中出错。
          * @note 若 lines 为空，则不做任何操作（不创建文件）。
          */
-        void write_lines(const std::vector<std::string> &lines)
+        void write_lines(const std::vector<std::string> &lines) const
         {
             std::ofstream fout(path, std::ios::binary);
             if (lines.empty())
@@ -231,7 +232,7 @@ namespace console
          * @note 编译期检查 T 是否为 POD 类型。
          */
         template <class T>
-        void write_POD(const T &data)
+        void write_POD(const T &data) const
         {
             static_assert(std::is_trivially_copyable<T>::value,
                           "This Type is Not POD Type!");
@@ -251,7 +252,7 @@ namespace console
          * @warning 不检查 T 是否为 POD 类型，直接以二进制写入内存表示，可能导致不可移植。
          */
         template <class T>
-        void unsafe_write_POD(const T &data)
+        void unsafe_write_POD(const T &data) const
         {
             std::ofstream fout(path, std::ios::binary);
             if (!fout.is_open())
@@ -265,7 +266,7 @@ namespace console
          * @brief 检查文件是否存在。
          * @return bool 若文件存在且可打开则返回 true，否则 false。
          */
-        bool exists()
+        bool exists() const
         {
             return std::ifstream{path}.is_open();
         }
@@ -274,7 +275,7 @@ namespace console
          * @brief 创建空文件（若已存在则更新访问和修改时间）。
          * @details 相当于 Unix 的 touch 命令，若文件不存在则创建，若存在则仅更新时间戳。
          */
-        void touch()
+        void touch() const
         {
             std::ofstream{path};
         }
@@ -283,9 +284,40 @@ namespace console
          * @brief 确保文件存在，若不存在则创建空文件。
          * @details 使用追加模式打开文件，不会清空已有内容。
          */
-        void ensure()
+        void ensure() const
         {
             std::ofstream{path, std::ios::app};
+        }
+
+        /**
+         * @brief 删除文件。
+         * @details 使用 std::remove 删除文件，若删除失败（如文件不存在）
+         */
+        void remove() const
+        {
+            if (std::remove(path.c_str()) != 0)
+                throw file_error("Cannot Remove File \"" + path + '"');
+        }
+
+        /**
+         * @brief 获取路径字符串。
+         * @return const std::string& 路径字符串。
+         */
+        const std::string &str() const
+        {
+            return path;
+        }
+
+        /**
+         * @brief 获取文件流对象。
+         * @return std::fstream 文件流对象。
+         * @note 文件流关闭前其它操作可能会导致流状态异常，
+         *       使用前请确保正确管理流的生命周期和状态。
+         */
+        std::fstream stream(std::ios_base::openmode mode =
+                                std::ios_base::in | std::ios_base::out) const
+        {
+            return std::fstream(path, mode);
         }
     };
 }

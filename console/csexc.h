@@ -97,18 +97,19 @@ namespace console
     };
 
     /**
-     * @class bad_get
-     * @brief 表示从 Item 或 Box 中获取类型不匹配或空值时发生的错误。
-     * @see Item, Box
+     * @class type_error
+     * @brief 表示类型错误，例如访问 Maybe 中不存在的值或 Box 中类型不匹配。
+     * @see console::Maybe, console::Box
+     * @note `空值` 也被视为一种类型错误，因为它表示没有类型可访问。
      */
-    class bad_get : public console_error
+    class type_error : public console_error
     {
     public:
         /**
-         * @brief 构造 bad_get。
+         * @brief 构造 type_error。
          * @param msg 错误描述信息。
          */
-        bad_get(const std::string &msg)
+        type_error(const std::string &msg)
             : console_error(msg) {}
     };
 
@@ -154,22 +155,6 @@ namespace console
          * @param msg 错误描述信息。
          */
         index_error(const std::string &msg)
-            : console_error(msg) {}
-    };
-
-    /**
-     * @class bad_maybe_access
-     * @brief 表示对空的 Maybe 对象进行取值操作时抛出的异常。
-     * @see Maybe
-     */
-    class bad_maybe_access : public console_error
-    {
-    public:
-        /**
-         * @brief 构造 bad_maybe_access。
-         * @param msg 错误描述信息。
-         */
-        bad_maybe_access(const std::string &msg)
             : console_error(msg) {}
     };
 

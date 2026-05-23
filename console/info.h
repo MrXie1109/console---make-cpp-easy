@@ -105,7 +105,7 @@ SOFTWARE.)";
      */
     inline std::string version()
     {
-        return "console version 4.10.0 (2026-05-23) -- \"There's a range in your code~\"";
+        return "console version 4.11.0 (2026-05-23) -- \"[ini] is all you need.\"";
     }
 
     /**
