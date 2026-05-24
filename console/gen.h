@@ -209,7 +209,7 @@ namespace console
          * @param container 容器引用。
          */
         template <class Container>
-        Views(Container &&container)
+        Views(const Container &container)
             : curr(std::begin(container)), end(std::end(container)) {}
 
         /**
@@ -488,7 +488,7 @@ namespace console
          * @brief 获取当前值。
          * @return 当前满足谓词的值。
          */
-        auto current() const { return gen.current(); }
+        auto current() const -> decltype(gen.current()) { return gen.current(); }
 
         /**
          * @brief 向前移动一步。
@@ -530,7 +530,7 @@ namespace console
          * @brief 获取当前值。
          * @return 当前值。
          */
-        auto current() const { return gen.current(); }
+        auto current() const -> decltype(gen.current()) { return gen.current(); }
 
         /**
          * @brief 向前移动一步。
@@ -589,7 +589,7 @@ namespace console
          * @brief 获取当前值。
          * @return 当前值。
          */
-        auto current() const { return gen.current(); }
+        auto current() const -> decltype(gen.current()) { return gen.current(); }
 
         /**
          * @brief 向前移动一步。
@@ -626,7 +626,7 @@ namespace console
          * @brief 获取当前值。
          * @return 包含索引和值的键值对。
          */
-        auto current() const { return std::make_pair(index, gen.current()); }
+        auto current() const -> decltype(std::make_pair(index, gen.current())) { return std::make_pair(index, gen.current()); }
 
         /**
          * @brief 向前移动一步。
@@ -665,7 +665,7 @@ namespace console
          * @brief 获取当前值。
          * @return 调用生成函数返回的值。
          */
-        auto current() const { return func(); }
+        auto current() const -> decltype(func()) { return func(); }
 
         /**
          * @brief 向前移动一步（无操作）。
@@ -742,7 +742,8 @@ namespace console
          * @return Views<typename Container::iterator> 视图生成器。
          */
         template <class Container>
-        Views<typename Container::iterator> views(Container &&container)
+        Views<typename Container::iterator>
+        views(Container &container)
         {
             return {std::begin(container), std::end(container)};
         }
