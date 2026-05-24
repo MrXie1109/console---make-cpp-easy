@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['magenta_0',['Magenta',['../namespaceconsole_1_1color.html#a5232da7036369752ecbcf876373b30af',1,'console::color']]],
-  ['meta_1',['meta',['../namespaceconsole.html#a961f78601d0d038fd5c3ffba6bfd6e37',1,'console']]],
-  ['middle_2',['middle',['../structconsole_1_1_partition_result.html#a36494fa9d7d286cd77f3434d18c96585',1,'console::PartitionResult']]]
+  ['left_0',['left',['../structconsole_1_1_partition_result.html#a635f3a1a6141d044f5191a66908a2a82',1,'console::PartitionResult']]],
+  ['logger_1',['logger',['../classconsole_1_1_logging.html#a96c8397fe297bb09f3c447ceeede2d0e',1,'console::Logging']]]
 ];

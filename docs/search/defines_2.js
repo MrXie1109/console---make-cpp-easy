@@ -19,7 +19,7 @@ var searchData=
   ['noprofiler_16',['NOPROFILER',['../melody_8h.html#af883320ccbc88fe5ff2d8733ec0a034f',1,'melody.h']]],
   ['norasterops_17',['NORASTEROPS',['../melody_8h.html#a0293d1b2742d9c9ef401d75a55b81859',1,'melody.h']]],
   ['noscroll_18',['NOSCROLL',['../melody_8h.html#a06f62f70cab65b4c19972202f784e12d',1,'melody.h']]],
-  ['noservice_19',['NOSERVICE',['../melody_8h.html#a14ac98af6281e748377693d824e41ca9',1,'NOSERVICE:&#160;melody.h'],['../melody_8h.html#a1264c308a155eeee8731bd3c0fa453a8',1,'NOSERVICE:&#160;melody.h']]],
+  ['noservice_19',['noservice',['../melody_8h.html#a14ac98af6281e748377693d824e41ca9',1,'NOSERVICE:&#160;melody.h'],['../melody_8h.html#a14ac98af6281e748377693d824e41ca9',1,'NOSERVICE:&#160;melody.h']]],
   ['noshowwindow_20',['NOSHOWWINDOW',['../melody_8h.html#ab2dcc39e73a373330467f5f503c779d3',1,'melody.h']]],
   ['nosound_21',['NOSOUND',['../melody_8h.html#af40cddcc88a6ebeed4f75d4bbbed195e',1,'melody.h']]],
   ['nosyscommands_22',['NOSYSCOMMANDS',['../melody_8h.html#a271ce221dc9c5c8887d443008b3d718c',1,'melody.h']]],
