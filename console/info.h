@@ -105,7 +105,7 @@ SOFTWARE.)";
      */
     inline std::string version()
     {
-        return "console version 4.12.0 (2026-05-24) -- \"How Secure is Your Password?\"";
+        return "console version 4.12.1 (2026-05-24) -- \"vals_to_str <-> str_to_vals\"";
     }
 
     /**

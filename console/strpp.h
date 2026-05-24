@@ -278,12 +278,26 @@ namespace console
      * @return std::string 所有参数按顺序拼接的结果。
      */
     template <class... Args>
-    std::string uni_to_str(Args &&...args)
+    std::string vals_to_str(Args &&...args)
     {
         std::ostringstream oss;
         int _[] = {0, (oss << std::forward<Args>(args), 0)...};
         (void)_;
         return oss.str();
+    }
+
+    /**
+     * @brief 将字符串中的值提取到多个参数中，参数类型由调用者指定。
+     * @tparam Args 参数类型包。
+     * @param str 包含要提取值的字符串，值之间应以空格分隔。
+     * @param args 要提取值的参数列表，按顺序对应字符串中的值。
+     */
+    template <class... Args>
+    void str_to_vals(std::string str, Args &...args)
+    {
+        std::istringstream iss(str);
+        int _[] = {0, (iss >> args, 0)...};
+        (void)_;
     }
 
     /**
