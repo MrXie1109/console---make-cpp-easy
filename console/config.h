@@ -76,26 +76,7 @@ namespace console
          */
         void load(const Path &filename)
         {
-            auto lines = filename.read_lines();
-            std::string current_section;
-            for (const auto &line : lines)
-            {
-                std::string trimmed_line = trim(line);
-                if (trimmed_line.empty() || trimmed_line[0] == ';' || trimmed_line[0] == '#')
-                    continue;
-                if (trimmed_line.front() == '[' && trimmed_line.back() == ']')
-                    current_section = trim(trimmed_line.substr(1, trimmed_line.size() - 2));
-                else
-                {
-                    auto pos = trimmed_line.find('=');
-                    if (pos != std::string::npos)
-                    {
-                        std::string key = trim(trimmed_line.substr(0, pos));
-                        std::string value = trim(trimmed_line.substr(pos + 1));
-                        data_[current_section][key] = value;
-                    }
-                }
-            }
+            filename.stream() >> *this;
         }
 
         /**
@@ -143,6 +124,39 @@ namespace console
         }
 
         /**
+         * @brief 配置对象的输入流运算符，按 INI 格式输入配置内容。
+         * @param is 输入流。
+         * @param config 配置对象。
+         * @return std::istream& 输入流引用。
+         */
+        friend std::istream &operator>>(std::istream &is, INIConfig &config)
+        {
+            std::string line;
+            std::string current_section;
+            while (std::getline(is, line))
+            {
+                std::string trimmed_line = trim(line);
+                if (trimmed_line.empty() ||
+                    trimmed_line[0] == ';' || trimmed_line[0] == '#')
+                    continue;
+                if (trimmed_line.front() == '[' && trimmed_line.back() == ']')
+                    current_section = trim(
+                        trimmed_line.substr(1, trimmed_line.size() - 2));
+                else
+                {
+                    auto pos = trimmed_line.find('=');
+                    if (pos != std::string::npos)
+                    {
+                        std::string key = trim(trimmed_line.substr(0, pos));
+                        std::string value = trim(trimmed_line.substr(pos + 1));
+                        config.data_[current_section][key] = value;
+                    }
+                }
+            }
+            return is;
+        }
+
+        /**
          * @brief 配置项代理类，支持隐式类型转换。
          * @details 用于封装配置值，支持自动转换为 string 或算术类型。
          */
@@ -173,12 +187,10 @@ namespace console
                 std::string lower = str_;
                 for (auto &c : lower)
                     c = std::tolower(c);
-
                 if (lower == "true" || lower == "1" || lower == "yes" || lower == "on")
                     return true;
                 if (lower == "false" || lower == "0" || lower == "no" || lower == "off")
                     return false;
-
                 throw type_error("Failed to Convert \"" + str_ + "\" to bool");
             }
 

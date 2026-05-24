@@ -61,6 +61,7 @@ SOFTWARE.
 #include "adapter.h"
 #include "syscmd.h"
 #include "config.h"
+#include "crypto.h"
 
 // #include "win/melody.h"
 
@@ -70,5 +71,5 @@ SOFTWARE.
  */
 namespace console
 {
-    static constexpr char meta[] = "CONSOLE-LIB-2026-05-23";
+    static constexpr char meta[] = "CONSOLE-LIB-2026-05-24";
 }
