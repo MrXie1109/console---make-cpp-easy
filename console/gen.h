@@ -36,7 +36,6 @@ SOFTWARE.
 #include <cstdlib>
 #include <cmath>
 #include <type_traits>
-#include <vector>
 #include "csexc.h"
 
 namespace console
@@ -1849,5 +1848,26 @@ namespace console
          */
         template <class Class, typename Mem>
         Member<Class, Mem> member(Mem Class::*p) { return {p}; }
+
+        /**
+         * @brief 逻辑与运算符，等价于 and_(p, q)。
+         * @note 小范围内的重载，依赖 ADL，作用域可控。
+         */
+        template <class P, class Q>
+        And<P, Q> operator&&(P p, Q q) { return {p, q}; }
+
+        /**
+         * @brief 逻辑或运算符，等价于 or_(p, q)。
+         * @note 小范围内的重载，依赖 ADL，作用域可控。
+         */
+        template <class P, class Q>
+        Or<P, Q> operator||(P p, Q q) { return {p, q}; }
+
+        /**
+         * @brief 逻辑非运算符，等价于 not_(p)。
+         * @note 小范围内的重载，依赖 ADL，作用域可控。
+         */
+        template <class P>
+        Not<P> operator!(P p) { return {p}; }
     }
 }
