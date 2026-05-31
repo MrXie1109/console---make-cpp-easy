@@ -105,7 +105,7 @@ SOFTWARE.)";
      */
     inline std::string version()
     {
-        return "console version 5.1.3 (2026-05-31) -- \"I Hate Monday!\"";
+        return "console version 5.1.4 (2026-05-31) -- \"O.W.N.E.R.\"";
     }
 
     /**

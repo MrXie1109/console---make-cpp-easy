@@ -195,7 +195,7 @@ namespace console
         class Views : public Generator<Views<Iter>, typename std::iterator_traits<Iter>::value_type>
         {
             Iter curr;
-            Iter end;
+            Iter end_;
 
         public:
             using value_type = typename std::iterator_traits<Iter>::value_type;
@@ -206,7 +206,7 @@ namespace console
              * @param end 结束迭代器。
              */
             Views(Iter begin, Iter end)
-                : curr(begin), end(end) {}
+                : curr(begin), end_(end) {}
 
             /**
              * @brief 构造函数，使用容器引用初始化。
@@ -215,20 +215,13 @@ namespace console
              */
             template <class Container>
             Views(const Container &container)
-                : curr(std::begin(container)), end(std::end(container)) {}
-
-            /**
-             * @brief 构造函数，使用初始化列表。
-             * @param list 初始化列表。
-             */
-            Views(std::initializer_list<value_type> list)
-                : curr(list.begin()), end(list.end()) {}
+                : curr(std::begin(container)), end_(std::end(container)) {}
 
             /**
              * @brief 检查生成器是否已完成。
              * @return 如果已到达结束迭代器则返回true。
              */
-            bool done() { return curr == end; }
+            bool done() { return curr == end_; }
 
             /**
              * @brief 获取当前值。
@@ -241,11 +234,43 @@ namespace console
              */
             void advance()
             {
-                if (curr != end)
+                if (curr != end_)
                     ++curr;
             }
         };
 
+        /**
+         * @brief 用书数据的序列，从初始化列表构造。
+         * @tparam T 元素类型。
+         */
+        template <class T>
+        class List : public Generator<List<T>, T>
+        {
+            std::vector<T> data;
+            size_t idx = 0;
+
+        public:
+            /**
+             * @brief 构造函数，使用初始化列表初始化。
+             * @param list 初始化列表。
+             */
+            List(std::initializer_list<T> list) : data(list) {}
+
+            /**
+             * @brief 检查生成器是否已完成。
+             */
+            bool done() { return idx >= data.size(); }
+
+            /**
+             * @brief 获取当前值。
+             */
+            T current() { return data[idx]; }
+
+            /**
+             * @brief 向前移动一步。
+             */
+            void advance() { idx++; }
+        };
         /**
          * @brief 范围生成器，生成从start到end的等差数列。
          * @tparam T 数值类型。
@@ -760,16 +785,15 @@ namespace console
         }
 
         /**
-         * @brief 从初始化列表创建视图生成器。
-         * @tparam T 初始化列表元素类型。
+         * @brief 从初始化列表创建列表生成器。
+         * @tparam T 元素类型。
          * @param list 初始化列表。
-         * @return Views<typename std::initializer_list<T>::iterator> 视图生成器。
+         * @return List<T> 列表生成器。
          */
         template <class T>
-        Views<typename std::initializer_list<T>::iterator>
-        views(std::initializer_list<T> list)
+        List<T> list(std::initializer_list<T> list)
         {
-            return {list.begin(), list.end()};
+            return List<T>(list);
         }
 
         /**
@@ -829,7 +853,7 @@ namespace console
          * @param step 步长，默认为1。
          * @return Counter 有限计数器。
          */
-        inline Counter counter(int start, int times, int step = 1)
+        inline Counter counter(int start, int times, int step)
         {
             return Counter(start, times, step);
         }
