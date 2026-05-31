@@ -121,8 +121,8 @@ namespace console
      * @warning 函数阻塞直到命令执行完毕。
      */
     CmdResult syscmd(const std::string &exe,
-                     const std::vector<std::string> &args,
-                     const std::map<std::string, std::string> &kwargs)
+                     const std::vector<std::string> &args = {},
+                     const std::map<std::string, std::string> &kwargs = {})
     {
         std::string cmd = exe;
         for (const std::string &arg : args)

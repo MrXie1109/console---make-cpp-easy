@@ -166,19 +166,19 @@ namespace console
             }
 
             /// @brief 比较迭代器是否相等（通过当前进度索引）。
-            bool operator==(const iterator &other) const
+            bool operator==(const iterator &other)
             {
                 return current_ == other.current_;
             }
 
             /// @brief 比较迭代器是否不等。
-            bool operator!=(const iterator &other) const
+            bool operator!=(const iterator &other)
             {
                 return current_ != other.current_;
             }
 
             /// @brief 解引用：返回底层迭代器所指向的元素。
-            decltype(*it_) operator*() const
+            decltype(*it_) operator*()
             {
                 return *it_;
             }

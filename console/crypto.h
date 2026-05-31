@@ -38,6 +38,8 @@ SOFTWARE.
 #include <algorithm>
 #include <stdexcept>
 #include <cstdint>
+#include <random>
+#include <chrono>
 
 namespace console
 {
@@ -759,6 +761,26 @@ namespace console
                 padded.resize(16, 0);
                 return padded;
             }
+
+            /**
+             * @brief 生成随机字节序列。
+             * @return std::string 字节序列。
+             * @note 尽可能确保了序列的随机。
+             */
+            std::string random_bytes()
+            {
+                static std::random_device rd;
+                static std::mt19937 gen(std::chrono::steady_clock::now()
+                                            .time_since_epoch()
+                                            .count() +
+                                        rd());
+                static std::uniform_int_distribution<> dis(0, 255);
+                std::string bytes;
+                bytes.reserve(16);
+                for (int i = 0; i < 16; i++)
+                    bytes.push_back(static_cast<char>(dis(gen)));
+                return bytes;
+            }
         }
 
         /**
@@ -776,7 +798,7 @@ namespace console
             aes_impl::key_expansion(reinterpret_cast<const uint8_t *>(
                                         padded_key.c_str()),
                                     round_keys);
-            std::string iv = sha256(key).substr(0, 16);
+            std::string iv(aes_impl::random_bytes());
             std::string result;
             result.reserve(plaintext.size() + 16);
             result = iv;
@@ -786,7 +808,6 @@ namespace console
             {
                 uint8_t keystream[16];
                 aes_impl::aes_encrypt_block(counter, keystream, round_keys);
-
                 for (int j = 0; j < 16 && i + j < plaintext.size(); j++)
                     result.push_back(plaintext[i + j] ^ keystream[j]);
                 for (int j = 15; j >= 0; j--)
@@ -802,15 +823,14 @@ namespace console
          * @brief 使用AES-128-CTR模式解密密文。
          * @param ciphertext Base64编码的密文字符串，包含前16字节的初始化向量。
          * @param key 解密密钥，必须与加密时使用的密钥相同。
-         * @return std::string 解密后的明文字符串。
-         * @throws std::runtime_error 当密文长度小于16字节时抛出异常。
+         * @return std::string 解密后的明文字符串，输入错误时返回 "Invalid ciphertext"。
          * @note 密文格式必须与aes_encrypt函数生成的格式一致。
          */
         std::string aes_decrypt(const std::string &ciphertext, const std::string &key)
         {
             std::string decoded = base64_decode(ciphertext);
             if (decoded.size() < 16)
-                throw std::runtime_error("Invalid ciphertext");
+                return "Invalid ciphertext";
             std::string padded_key = aes_impl::pad_key(key);
             uint8_t round_keys[44 * 4];
             aes_impl::key_expansion(reinterpret_cast<const uint8_t *>(
