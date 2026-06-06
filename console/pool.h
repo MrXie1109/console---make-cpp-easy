@@ -161,9 +161,9 @@ namespace console
          *          等待任务完成并获取返回值。
          */
         template <class F>
-        auto submit(F &&f) -> std::future<result_type<F()>>
+        auto submit(F &&f) -> std::future<result_type<F>>
         {
-            using return_type = result_type<F()>;
+            using return_type = result_type<F>;
             std::packaged_task<return_type()> task(std::forward<F>(f));
             std::future<return_type> result = task.get_future();
             {
@@ -188,9 +188,9 @@ namespace console
          *          返回的 future 对象可用于等待任务完成并获取返回值。
          */
         template <class F, class... Args>
-        auto submit(F &&f, Args &&...args) -> std::future<result_type<F(Args...)>>
+        auto submit(F &&f, Args &&...args) -> std::future<result_type_args<F, Args...>>
         {
-            using return_type = result_type<F(Args...)>;
+            using return_type = result_type_args<F, Args...>;
             auto bound_task = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
             std::packaged_task<return_type()> task(bound_task);
             std::future<return_type> result = task.get_future();
