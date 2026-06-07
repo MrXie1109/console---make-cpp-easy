@@ -137,60 +137,28 @@ namespace console
 
         /**
          * @brief 析构函数，关闭线程池并等待所有线程结束。
-         * @details 设置关闭标志，通知所有工作线程，然后等待每个线程执行完毕。
-         *          注意：析构时不会等待任务队列中的任务完成，如需等待请先调用 finish()。
+         * @details 调用 close() 方法设置关闭标志，通知所有工作线程，然后等待每个线程执行完毕。
          */
         ~ThreadPoolExecutor()
         {
-            shutdown.store(true, std::memory_order_release);
-            cv.notify_all();
-            for (auto &worker : workers)
-            {
-                if (worker.joinable())
-                    worker.join();
-            }
+            close();
         }
 
         /**
-         * @brief 提交一个无参数的可调用对象到线程池执行。
-         * @tparam F 可调用对象的类型。
-         * @param f 要执行的可调用对象（函数、lambda 等）。
-         * @return std::future<result_type<F()>> 与任务关联的 future 对象，用于获取返回值。
-         * @throw ThreadPoolError 如果线程池正在关闭，则抛出异常。
-         * @details 将任务添加到任务队列，由工作线程异步执行。返回的 future 对象可用于
-         *          等待任务完成并获取返回值。
-         */
-        template <class F>
-        auto submit(F &&f) -> std::future<result_type<F>>
-        {
-            using return_type = result_type<F>;
-            std::packaged_task<return_type()> task(std::forward<F>(f));
-            std::future<return_type> result = task.get_future();
-            {
-                std::lock_guard<std::mutex> lock(mutex);
-                if (shutdown.load(std::memory_order_acquire))
-                    throw ThreadPoolError("ThreadPoolExecutor is shutting down");
-                tasks.emplace(std::unique_ptr<TaskBase>(new Task<return_type>(std::move(task))));
-            }
-            cv.notify_one();
-            return result;
-        }
-
-        /**
-         * @brief 提交一个带参数的可调用对象到线程池执行。
+         * @brief 提交一个可调用对象到线程池执行。
          * @tparam F 可调用对象的类型。
          * @tparam Args 参数包的类型。
          * @param f 要执行的可调用对象（函数、lambda 等）。
          * @param args 传递给可调用对象的参数。
-         * @return std::future<result_type<F(Args...)>> 与任务关联的 future 对象，用于获取返回值。
+         * @return  与任务关联的 future 对象，用于获取返回值。
          * @throw ThreadPoolError 如果线程池正在关闭，则抛出异常。
          * @details 将参数绑定到可调用对象后添加到任务队列，由工作线程异步执行。
          *          返回的 future 对象可用于等待任务完成并获取返回值。
          */
         template <class F, class... Args>
-        auto submit(F &&f, Args &&...args) -> std::future<result_type_args<F, Args...>>
+        auto submit(F &&f, Args &&...args) -> std::future<decltype(f(args...))>
         {
-            using return_type = result_type_args<F, Args...>;
+            using return_type = decltype(f(args...));
             auto bound_task = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
             std::packaged_task<return_type()> task(bound_task);
             std::future<return_type> result = task.get_future();
@@ -244,7 +212,7 @@ namespace console
          * @return size_t 等待执行的任务数量（不包括正在执行的任务）。
          * @details 返回尚未被工作线程取走的任务数量。注意：正在执行的任务不计入队列大小。
          */
-        size_t queue_size() const
+        size_t size() const
         {
             std::lock_guard<std::mutex> lock(mutex);
             return tasks.size();
@@ -255,7 +223,7 @@ namespace console
          * @return size_t 正在执行的任务数量。
          * @details 返回已经被工作线程取走但尚未执行完成的任务数量。
          */
-        size_t active_task_count() const
+        size_t count() const
         {
             return active_tasks.load(std::memory_order_acquire);
         }
@@ -263,10 +231,9 @@ namespace console
         /**
          * @brief 优雅关闭线程池，等待所有任务完成。
          * @details 设置关闭标志，等待所有已提交的任务执行完毕，然后等待所有工作线程退出。
-         *          与析构函数不同，该方法会等待任务队列中的所有任务完成后再关闭线程池。
-         *          调用后线程池将无法再提交新任务。
+         *          该方法会等待任务队列中的所有任务完成后再关闭线程池，调用后线程池将无法再提交新任务。
          */
-        void finish()
+        void close()
         {
             shutdown.store(true, std::memory_order_release);
             cv.notify_all();
