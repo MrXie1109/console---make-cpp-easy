@@ -71,7 +71,7 @@ SOFTWARE.
 #pragma message("Define 'CONSOLE_IGNORE_ADVICE' for ignore it")
 #endif
 #else
-#error "Unsupported platform"
+#error "Unsupported platform - this library is for Windows only"
 #endif
 
 namespace console

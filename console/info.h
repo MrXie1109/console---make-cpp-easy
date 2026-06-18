@@ -105,7 +105,7 @@ SOFTWARE.)";
      */
     inline std::string version()
     {
-        return "console version 5.3.2 (2026-06-07) -- \"Six Seven!\"";
+        return "console version 5.4.0 (2026-06-18) -- \"A Gift for Linux.\"";
     }
 
     /**

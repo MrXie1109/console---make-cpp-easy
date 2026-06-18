@@ -66,7 +66,11 @@ SOFTWARE.
 #include "put.h"
 #include "pool.h"
 
-// #include "win/melody.h"
+// #include "win/melody.h" //需要链接，所以不自动包含
+
+#ifdef __linux__
+#include "linux/pcocess.h"
+#endif
 
 /**
  * @namespace console
@@ -74,5 +78,5 @@ SOFTWARE.
  */
 namespace console
 {
-    static constexpr char meta[] = "CONSOLE-LIB-2026-06-07-MRXIE1109";
+    static constexpr char meta[] = "CONSOLE-LIB-2026-06-18-MRXIE1109";
 }

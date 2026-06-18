@@ -55,18 +55,6 @@ namespace console
      */
     class ThreadPoolExecutor
     {
-#if __cplusplus < 201703L
-        template <class F>
-        using result_type = typename std::result_of<F>::type;
-        template <class F, class... Args>
-        using result_type_args = typename std::result_of<F(Args...)>::type;
-#else
-        template <class F>
-        using result_type = typename std::invoke_result<F>::type;
-        template <class F, class... Args>
-        using result_type_args = typename std::invoke_result<F, Args...>::type;
-#endif
-
         /**
          * @struct TaskBase
          * @brief 任务基类，提供多态接口。
@@ -106,9 +94,11 @@ namespace console
          * @details 创建 num_threads 个工作线程，每个线程不断从任务队列中取出任务并执行，
          *          当线程池关闭且任务队列为空时，线程会退出。
          */
-        ThreadPoolExecutor(size_t num_threads)
+        ThreadPoolExecutor(size_t num_threads = std::thread::hardware_concurrency())
             : shutdown(false), active_tasks(0)
         {
+            if (num_threads == 0)
+                num_threads = 2;
             for (size_t i = 0; i < num_threads; ++i)
             {
                 workers.emplace_back([this]
@@ -178,16 +168,16 @@ namespace console
          * @tparam Container 容器类型，必须包含 value_type 成员类型。
          * @param func 要应用于每个元素的函数。
          * @param items 包含输入元素的容器。
-         * @return std::vector<std::future<result_type_args<F, typename Container::value_type>>>
+         * @return std::vector<std::future<decltype(func(std::declval<typename Container::value_type>()))>>
          *         包含所有任务 future 对象的 vector，顺序与输入容器一致。
          * @details 对容器中的每个元素调用 submit(func, item)，将所有返回的 future 对象
          *          收集到 vector 中返回。可用于并行处理集合中的元素。
          */
         template <class F, class Container>
         auto map(F &&func, const Container &items)
-            -> std::vector<std::future<result_type_args<F, typename Container::value_type>>>
+            -> std::vector<std::future<decltype(func(std::declval<typename Container::value_type>()))>>
         {
-            using return_type = result_type_args<F, typename Container::value_type>;
+            using return_type = decltype(func(std::declval<typename Container::value_type>()));
             std::vector<std::future<return_type>> futures;
             futures.reserve(items.size());
             for (const auto &item : items)
@@ -241,6 +231,24 @@ namespace console
             for (auto &worker : workers)
                 if (worker.joinable())
                     worker.join();
+        }
+
+        /**
+         * @brief 粗暴地关闭线程池，用于需要立刻结束一切。
+         * @details 设置关闭标志，不等待已提交的任务，然后分离所有工作线程并退出。
+         *          最好不要直接调用，除非必须，调用后线程池将无法再提交新任务。
+         */
+        void abort()
+        {
+            shutdown.store(true, std::memory_order_release);
+            {
+                std::lock_guard<std::mutex> lock(mutex);
+                std::queue<std::unique_ptr<TaskBase>>().swap(tasks);
+            }
+            cv.notify_all();
+            for (auto &worker : workers)
+                if (worker.joinable())
+                    worker.detach();
         }
 
         /// @brief 禁止拷贝构造。
