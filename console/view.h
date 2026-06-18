@@ -208,7 +208,7 @@ namespace console
      * @param sv 字符串视图。
      * @return std::ostream& 流引用。
      */
-    std::ostream &operator<<(std::ostream &os, const View<std::string> &sv)
+    inline std::ostream &operator<<(std::ostream &os, const View<std::string> &sv)
     {
         for (auto it = sv.begin(); it != sv.end(); ++it)
         {

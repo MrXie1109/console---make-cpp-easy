@@ -1,5 +1,5 @@
 /**
- * @file process.h
+ * @file linux/process.h
  * @brief Linux 平台进程管理库，支持进程创建、控制、等待和信息查询。
  * @details 封装 fork/waitpid/kill 等系统调用，提供 OOP 风格的进程管理接口。
  * @warning 仅支持 Linux 平台。
@@ -32,6 +32,10 @@ SOFTWARE.
 
 #pragma once
 
+#ifndef __linux__
+#error "Unsupported platform - this library is for Linux only"
+#endif
+
 #include <unistd.h>
 #include <sys/wait.h>
 #include <signal.h>
@@ -39,10 +43,6 @@ SOFTWARE.
 #include <cstdio>
 #include <cstdlib>
 #include <fcntl.h>
-
-#ifndef __linux__
-#error "Unsupported platform - this library is for Linux only"
-#endif
 
 namespace console
 {
@@ -139,7 +139,10 @@ namespace console
         static int sys_kill(pid_t pid, int sig) { return ::kill(pid, sig); }
 
     public:
-        static const Process Invalid; ///< 无效进程对象常量
+        /**
+         * @brief 无效进程对象常量。
+         */
+        static Process invalid() { return Process(-1); }
 
         /**
          * @brief 默认构造函数，创建无效进程对象。
@@ -215,7 +218,7 @@ namespace console
          * @brief 创建子进程执行指定函数。
          * @param fn 子进程执行的函数指针。
          * @param arg 传递给函数的参数。
-         * @return 父进程返回子进程对象，失败返回 Invalid。
+         * @return 父进程返回子进程对象，失败返回 invaild()。
          */
         static Process spawn(int (*fn)(void *), void *arg)
         {
@@ -234,7 +237,7 @@ namespace console
          * @brief 发射后不管模式创建子进程。
          * @param fn 子进程执行的函数指针。
          * @param arg 传递给函数的参数。
-         * @return 父进程返回子进程对象，失败返回 Invalid。
+         * @return 父进程返回子进程对象，失败返回 invaild()。
          * @note 与 spawn 功能相同，命名区分使用场景。
          */
         static Process spawn_detach(int (*fn)(void *), void *arg)
@@ -463,6 +466,4 @@ namespace console
             return true;
         }
     };
-
-    const Process Process::Invalid = Process(-1);
 }

@@ -54,7 +54,7 @@ namespace console
      * @param str 要处理的字符串（按值传递，内部修改副本）。
      * @return std::string 处理后的新字符串。
      */
-    std::string ltrim(std::string str)
+    inline std::string ltrim(std::string str)
     {
         auto it = std::find_if(str.begin(), str.end(),
                                [](unsigned char uc) -> bool
@@ -68,7 +68,7 @@ namespace console
      * @param str 要处理的字符串。
      * @return std::string 处理后的新字符串。
      */
-    std::string rtrim(std::string str)
+    inline std::string rtrim(std::string str)
     {
         auto it = std::find_if(str.rbegin(), str.rend(),
                                [](unsigned char uc) -> bool
@@ -82,7 +82,7 @@ namespace console
      * @param str 要处理的字符串。
      * @return std::string 处理后的新字符串。
      */
-    std::string trim(std::string str)
+    inline std::string trim(std::string str)
     {
         return ltrim(rtrim(str));
     }
@@ -93,7 +93,7 @@ namespace console
      * @param chars 要删除的字符集（只要字符出现在此集合中就被删除）。
      * @return std::string 处理后的新字符串。
      */
-    std::string ltrim(std::string str, const std::string &chars)
+    inline std::string ltrim(std::string str, const std::string &chars)
     {
         auto it = std::find_if(str.begin(), str.end(),
                                [&chars](unsigned char ch)
@@ -110,7 +110,7 @@ namespace console
      * @param chars 要删除的字符集。
      * @return std::string 处理后的新字符串。
      */
-    std::string rtrim(std::string str, const std::string &chars)
+    inline std::string rtrim(std::string str, const std::string &chars)
     {
         auto it = std::find_if(str.rbegin(), str.rend(),
                                [&chars](unsigned char ch)
@@ -127,7 +127,7 @@ namespace console
      * @param chars 要删除的字符集。
      * @return std::string 处理后的新字符串。
      */
-    std::string trim(std::string str, const std::string &chars)
+    inline std::string trim(std::string str, const std::string &chars)
     {
         return ltrim(rtrim(str, chars), chars);
     }
@@ -137,7 +137,7 @@ namespace console
      * @param str 要转换的字符串。
      * @return std::string 大写形式。
      */
-    std::string upper(std::string str)
+    inline std::string upper(std::string str)
     {
         for (char &ch : str)
         {
@@ -152,7 +152,7 @@ namespace console
      * @param str 要转换的字符串。
      * @return std::string 小写形式。
      */
-    std::string lower(std::string str)
+    inline std::string lower(std::string str)
     {
         for (char &ch : str)
         {
@@ -167,7 +167,7 @@ namespace console
      * @param str 要转换的字符串。
      * @return std::string 标题格式的字符串。
      */
-    std::string title(std::string str)
+    inline std::string title(std::string str)
     {
         if (str.empty())
             return "";
@@ -215,7 +215,7 @@ namespace console
      * @return PartitionResult 分区结果。
      * @note 若未找到分隔符，则 left 为原字符串，middle 和 right 为空。
      */
-    PartitionResult partition(
+    inline PartitionResult partition(
         const std::string &text, const std::string &sep)
     {
         size_t pos = text.find(sep);
@@ -234,17 +234,19 @@ namespace console
      * @return std::vector<std::string> 分割后的子串列表。
      * @note 连续的分隔符会产生空字符串子串。
      */
-    std::vector<std::string> split(
+    inline std::vector<std::string> split(
         std::string text, const std::string &sep = " ")
     {
         std::vector<std::string> vec;
-        PartitionResult pr;
-        while ((pr = partition(text, sep)).middle != "")
+        size_t start = 0;
+        size_t end;
+        size_t sep_len = sep.length();
+        while ((end = text.find(sep, start)) != std::string::npos)
         {
-            vec.push_back(pr.left);
-            text = pr.right;
+            vec.emplace_back(text, start, end - start);
+            start = end + sep_len;
         }
-        vec.push_back(pr.left);
+        vec.emplace_back(text, start);
         return vec;
     }
 
@@ -256,7 +258,7 @@ namespace console
      * @return std::string 连接后的字符串。
      */
     template <class T>
-    std::string join(
+    inline std::string join(
         const std::vector<T> &vec, const std::string &sep = "")
     {
         if (vec.empty())
@@ -265,9 +267,7 @@ namespace console
         auto it = vec.begin();
         ss << *it;
         while (++it != vec.end())
-        {
             ss << sep << *it;
-        }
         return ss.str();
     }
 
@@ -278,7 +278,7 @@ namespace console
      * @return std::string 所有参数按顺序拼接的结果。
      */
     template <class... Args>
-    std::string vals_to_str(Args &&...args)
+    std::string to_string(Args &&...args)
     {
         std::ostringstream oss;
         int _[] = {0, (oss << std::forward<Args>(args), 0)...};
@@ -293,7 +293,7 @@ namespace console
      * @param args 要提取值的参数列表，按顺序对应字符串中的值。
      */
     template <class... Args>
-    void str_to_vals(std::string str, Args &...args)
+    void from_string(std::string str, Args &...args)
     {
         std::istringstream iss(str);
         int _[] = {0, (iss >> args, 0)...};

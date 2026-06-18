@@ -53,7 +53,7 @@ namespace console
      * @param ti std::type_info 对象。
      * @return std::string 人类可读的类型名。
      */
-    std::string tiname(const std::type_info &ti)
+    inline std::string tiname(const std::type_info &ti)
     {
 #ifdef _MSC_VER
         return ti.name();

@@ -69,7 +69,7 @@ SOFTWARE.
 // #include "win/melody.h" //需要链接，所以不自动包含
 
 #ifdef __linux__
-#include "linux/pcocess.h"
+#include "linux/process.h"
 #endif
 
 /**

@@ -252,7 +252,7 @@ namespace console
      * @return IteratorPair<RangeIterator<T>> 可迭代对象。
      */
     template <class T>
-    IteratorPair<RangeIterator<T>> range(const T &end)
+    inline IteratorPair<RangeIterator<T>> range(const T &end)
     {
         return {{T{}, end, T{1}}, {T{}, end, T{1}}};
     }
@@ -265,7 +265,7 @@ namespace console
      * @return IteratorPair<RangeIterator<T>> 可迭代对象。
      */
     template <class T>
-    IteratorPair<RangeIterator<T>> range(const T &start, const T &end)
+    inline IteratorPair<RangeIterator<T>> range(const T &start, const T &end)
     {
         return {{start, end, T{1}}, {start, end, T{1}}};
     }
@@ -279,7 +279,8 @@ namespace console
      * @return IteratorPair<RangeIterator<T>> 可迭代对象。
      */
     template <class T>
-    IteratorPair<RangeIterator<T>> range(const T &start, const T &end, const T &step)
+    inline IteratorPair<RangeIterator<T>>
+    range(const T &start, const T &end, const T &step)
     {
         return {{start, end, step}, {start, end, step}};
     }

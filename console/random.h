@@ -104,7 +104,7 @@ namespace console
      * @param gen 使用的随机数引擎，默认为 default_gen()。
      * @return bool 服从伯努利分布的随机布尔值。
      */
-    bool randbool(double p = 0.5, std::mt19937 &gen = default_gen())
+    inline bool randbool(double p = 0.5, std::mt19937 &gen = default_gen())
     {
         return std::bernoulli_distribution(p)(gen);
     }

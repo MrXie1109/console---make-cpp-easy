@@ -49,7 +49,7 @@ namespace console
          * @param ns 纳秒数。
          * @return Time 表示指定纳秒数的 Time 对象。
          */
-        Time operator""_ns(unsigned long long ns)
+        inline Time operator""_ns(unsigned long long ns)
         {
             return Time(ns);
         }
@@ -59,35 +59,35 @@ namespace console
          * @param us 微秒数。
          * @return Time 表示指定微秒数的 Time 对象（转换为纳秒）。
          */
-        Time operator""_us(unsigned long long us) { return Time(us * 1e3); }
+        inline Time operator""_us(unsigned long long us) { return Time(us * 1e3); }
 
         /**
          * @brief 毫秒字面量（整数）。
          * @param ms 毫秒数。
          * @return Time 表示指定毫秒数的 Time 对象（转换为纳秒）。
          */
-        Time operator""_ms(unsigned long long ms) { return Time(ms * 1e6); }
+        inline Time operator""_ms(unsigned long long ms) { return Time(ms * 1e6); }
 
         /**
          * @brief 秒字面量（整数）。
          * @param s 秒数。
          * @return Time 表示指定秒数的 Time 对象（转换为纳秒）。
          */
-        Time operator""_s(unsigned long long s) { return Time(s * 1e9); }
+        inline Time operator""_s(unsigned long long s) { return Time(s * 1e9); }
 
         /**
          * @brief 分钟字面量（整数）。
          * @param min 分钟数。
          * @return Time 表示指定分钟数的 Time 对象（转换为纳秒）。
          */
-        Time operator""_min(unsigned long long min) { return Time(min * 6e10); }
+        inline Time operator""_min(unsigned long long min) { return Time(min * 6e10); }
 
         /**
          * @brief 小时字面量（整数）。
          * @param hr 小时数。
          * @return Time 表示指定小时数的 Time 对象（转换为纳秒）。
          */
-        Time operator""_hr(unsigned long long hr) { return Time(hr * 3.6e12); }
+        inline Time operator""_hr(unsigned long long hr) { return Time(hr * 3.6e12); }
 
         // ---------------------------- 时间字面量（浮点数版本）----------------------------
         /**
@@ -95,42 +95,42 @@ namespace console
          * @param ns 纳秒数（可为小数）。
          * @return Time 表示指定纳秒数的 Time 对象。
          */
-        Time operator""_ns(long double ns) { return Time(ns); }
+        inline Time operator""_ns(long double ns) { return Time(ns); }
 
         /**
          * @brief 微秒字面量（浮点数）。
          * @param us 微秒数。
          * @return Time 表示指定微秒数的 Time 对象。
          */
-        Time operator""_us(long double us) { return Time(us * 1e3); }
+        inline Time operator""_us(long double us) { return Time(us * 1e3); }
 
         /**
          * @brief 毫秒字面量（浮点数）。
          * @param ms 毫秒数。
          * @return Time 表示指定毫秒数的 Time 对象。
          */
-        Time operator""_ms(long double ms) { return Time(ms * 1e6); }
+        inline Time operator""_ms(long double ms) { return Time(ms * 1e6); }
 
         /**
          * @brief 秒字面量（浮点数）。
          * @param s 秒数。
          * @return Time 表示指定秒数的 Time 对象。
          */
-        Time operator""_s(long double s) { return Time(s * 1e9); }
+        inline Time operator""_s(long double s) { return Time(s * 1e9); }
 
         /**
          * @brief 分钟字面量（浮点数）。
          * @param min 分钟数。
          * @return Time 表示指定分钟数的 Time 对象。
          */
-        Time operator""_min(long double min) { return Time(min * 6e10); }
+        inline Time operator""_min(long double min) { return Time(min * 6e10); }
 
         /**
          * @brief 小时字面量（浮点数）。
          * @param hr 小时数。
          * @return Time 表示指定小时数的 Time 对象。
          */
-        Time operator""_hr(long double hr) { return Time(hr * 3.6e12); }
+        inline Time operator""_hr(long double hr) { return Time(hr * 3.6e12); }
 
         // ---------------------------- 格式化字符串字面量 ----------------------------
         /**
@@ -140,6 +140,6 @@ namespace console
          * @return f_string 可进行格式化绑定的对象。
          * @details 用法：`"Hello, {}"_f.format("world");` 或 `"Value: {}"_f % 42;`
          */
-        f_string operator""_f(const char *str, size_t) { return str; }
+        inline f_string operator""_f(const char *str, size_t) { return str; }
     }
 }

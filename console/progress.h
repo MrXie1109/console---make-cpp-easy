@@ -293,7 +293,7 @@ namespace console
      * @endcode
      */
     template <class Cont>
-    auto progress(Cont &&cont, const ProgressConfig &pc = {})
+    inline auto progress(Cont &&cont, const ProgressConfig &pc = {})
         -> Progress<decltype(std::begin(cont))>
     {
         return {std::forward<Cont>(cont), pc};

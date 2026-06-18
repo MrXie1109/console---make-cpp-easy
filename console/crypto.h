@@ -57,7 +57,7 @@ namespace console
             /**
              * @brief SHA256算法使用的常量K数组。
              */
-            const uint32_t K[64] = {
+            static constexpr uint32_t K[64] = {
                 0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
                 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
                 0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
@@ -147,7 +147,7 @@ namespace console
              * @param state 当前哈希状态，长度为8的数组。
              * @param data 要处理的数据块，长度必须为64字节。
              */
-            void transform(uint32_t *state, const uint8_t *data)
+            inline void transform(uint32_t *state, const uint8_t *data)
             {
                 uint32_t W[64];
                 uint32_t A, B, C, D, E, F, G, H, T1, T2;
@@ -193,7 +193,7 @@ namespace console
          * @param input 要计算哈希的输入字符串。
          * @return std::string 64位十六进制字符串格式的SHA256哈希值。
          */
-        std::string sha256(const std::string &input)
+        inline std::string sha256(const std::string &input)
         {
             using namespace sha256_impl;
             uint32_t state[8] = {
@@ -221,7 +221,7 @@ namespace console
          * @throws std::runtime_error 当文件无法打开时抛出异常。
          * @warning 对于大文件，该函数会逐块读取，内存占用较小，但处理时间较长。
          */
-        std::string file_sha256(const std::string &filename)
+        inline std::string file_sha256(const std::string &filename)
         {
             std::ifstream file(filename, std::ios::binary);
             if (!file.is_open())
@@ -262,7 +262,7 @@ namespace console
             /**
              * @brief MD5算法中每轮循环使用的左移位数数组。
              */
-            const uint32_t S[64] = {
+            static constexpr uint32_t S[64] = {
                 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
                 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
                 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
@@ -271,7 +271,7 @@ namespace console
             /**
              * @brief MD5算法中使用的常量K数组。
              */
-            const uint32_t K[64] = {
+            static constexpr uint32_t K[64] = {
                 0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee, 0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
                 0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be, 0x6b901122, 0xfd987193, 0xa679438e, 0x49b40821,
                 0xf61e2562, 0xc040b340, 0x265e5a51, 0xe9b6c7aa, 0xd62f105d, 0x02441453, 0xd8a1e681, 0xe7d3fbc8,
@@ -333,7 +333,7 @@ namespace console
              * @param state 当前哈希状态，长度为4的数组。
              * @param block 要处理的数据块，长度必须为64字节。
              */
-            void transform(uint32_t *state, const uint8_t *block)
+            inline void transform(uint32_t *state, const uint8_t *block)
             {
                 uint32_t a = state[0], b = state[1], c = state[2], d = state[3];
                 uint32_t M[16];
@@ -384,7 +384,7 @@ namespace console
          * @return std::string 32位十六进制字符串格式的MD5哈希值。
          * @warning MD5算法已被证明存在碰撞漏洞，不建议用于安全敏感场景，请考虑使用SHA256替代。
          */
-        std::string md5(const std::string &input)
+        inline std::string md5(const std::string &input)
         {
             using namespace md5_impl;
             uint32_t state[4] = {0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476};
@@ -411,7 +411,7 @@ namespace console
          * @return std::string Base64编码后的字符串。
          * @note 编码结果末尾会自动添加填充字符'='以确保长度为4的倍数。
          */
-        std::string base64_encode(const std::string &input)
+        inline std::string base64_encode(const std::string &input)
         {
             const char *base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
             std::string result;
@@ -444,7 +444,7 @@ namespace console
          * @return std::string 解码后的原始字符串。
          * @note 解码时遇到'='字符会停止处理，非Base64字符会被忽略。
          */
-        std::string base64_decode(const std::string &input)
+        inline std::string base64_decode(const std::string &input)
         {
             static const std::string base64_chars =
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
@@ -480,7 +480,7 @@ namespace console
             /**
              * @brief AES算法的S盒，用于字节替换。
              */
-            const uint8_t Sbox[256] = {
+            static constexpr uint8_t Sbox[256] = {
                 0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
                 0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0,
                 0xb7, 0xfd, 0x93, 0x26, 0x36, 0x3f, 0xf7, 0xcc, 0x34, 0xa5, 0xe5, 0xf1, 0x71, 0xd8, 0x31, 0x15,
@@ -501,7 +501,7 @@ namespace console
             /**
              * @brief AES算法的逆S盒，用于解密时的字节替换。
              */
-            const uint8_t InvSbox[256] = {
+            static constexpr uint8_t InvSbox[256] = {
                 0x52, 0x09, 0x6a, 0xd5, 0x30, 0x36, 0xa5, 0x38, 0xbf, 0x40, 0xa3, 0x9e, 0x81, 0xf3, 0xd7, 0xfb,
                 0x7c, 0xe3, 0x39, 0x82, 0x9b, 0x2f, 0xff, 0x87, 0x34, 0x8e, 0x43, 0x44, 0xc4, 0xde, 0xe9, 0xcb,
                 0x54, 0x7b, 0x94, 0x32, 0xa6, 0xc2, 0x23, 0x3d, 0xee, 0x4c, 0x95, 0x0b, 0x42, 0xfa, 0xc3, 0x4e,
@@ -523,7 +523,7 @@ namespace console
              * @brief 字节替换操作，使用S盒替换状态矩阵中的每个字节。
              * @param state 16字节的状态矩阵。
              */
-            void sub_bytes(uint8_t *state)
+            inline void sub_bytes(uint8_t *state)
             {
                 for (int i = 0; i < 16; i++)
                     state[i] = Sbox[state[i]];
@@ -533,7 +533,7 @@ namespace console
              * @brief 逆字节替换操作，使用逆S盒替换状态矩阵中的每个字节。
              * @param state 16字节的状态矩阵。
              */
-            void inv_sub_bytes(uint8_t *state)
+            inline void inv_sub_bytes(uint8_t *state)
             {
                 for (int i = 0; i < 16; i++)
                     state[i] = InvSbox[state[i]];
@@ -543,7 +543,7 @@ namespace console
              * @brief 行移位操作，将状态矩阵的各行循环左移不同偏移量。
              * @param state 16字节的状态矩阵。
              */
-            void shift_rows(uint8_t *state)
+            inline void shift_rows(uint8_t *state)
             {
                 uint8_t tmp;
                 tmp = state[1];
@@ -568,7 +568,7 @@ namespace console
              * @brief 逆行移位操作，将状态矩阵的各行循环右移不同偏移量。
              * @param state 16字节的状态矩阵。
              */
-            void inv_shift_rows(uint8_t *state)
+            inline void inv_shift_rows(uint8_t *state)
             {
                 uint8_t tmp;
                 tmp = state[13];
@@ -595,7 +595,7 @@ namespace console
              * @param b 乘数。
              * @return uint8_t 乘积结果。
              */
-            uint8_t gmul(uint8_t a, uint8_t b)
+            inline uint8_t gmul(uint8_t a, uint8_t b)
             {
                 uint8_t p = 0;
                 for (int i = 0; i < 8; i++)
@@ -615,7 +615,7 @@ namespace console
              * @brief 列混合操作，对状态矩阵的每一列进行线性变换。
              * @param state 16字节的状态矩阵。
              */
-            void mix_columns(uint8_t *state)
+            inline void mix_columns(uint8_t *state)
             {
                 uint8_t temp[4];
                 for (int i = 0; i < 4; i++)
@@ -637,7 +637,7 @@ namespace console
              * @brief 逆列混合操作，对状态矩阵的每一列进行逆线性变换。
              * @param state 16字节的状态矩阵。
              */
-            void inv_mix_columns(uint8_t *state)
+            inline void inv_mix_columns(uint8_t *state)
             {
                 uint8_t temp[4];
                 for (int i = 0; i < 4; i++)
@@ -660,7 +660,7 @@ namespace console
              * @param state 16字节的状态矩阵。
              * @param key 16字节的轮密钥。
              */
-            void add_round_key(uint8_t *state, const uint8_t *key)
+            inline void add_round_key(uint8_t *state, const uint8_t *key)
             {
                 for (int i = 0; i < 16; i++)
                     state[i] ^= key[i];
@@ -671,7 +671,7 @@ namespace console
              * @param key 原始密钥，长度为16字节。
              * @param round_keys 输出缓冲区，用于存储扩展后的轮密钥，需要至少176字节。
              */
-            void key_expansion(const uint8_t *key, uint8_t *round_keys)
+            inline void key_expansion(const uint8_t *key, uint8_t *round_keys)
             {
                 uint8_t temp[4];
                 uint8_t rcon[4];
@@ -707,7 +707,7 @@ namespace console
              * @param output 输出的16字节密文块。
              * @param round_keys 扩展后的轮密钥。
              */
-            void aes_encrypt_block(const uint8_t *input, uint8_t *output, const uint8_t *round_keys)
+            inline void aes_encrypt_block(const uint8_t *input, uint8_t *output, const uint8_t *round_keys)
             {
                 uint8_t state[16];
                 std::memcpy(state, input, 16);
@@ -731,7 +731,7 @@ namespace console
              * @param output 输出的16字节明文块。
              * @param round_keys 扩展后的轮密钥。
              */
-            void aes_decrypt_block(const uint8_t *input, uint8_t *output, const uint8_t *round_keys)
+            inline void aes_decrypt_block(const uint8_t *input, uint8_t *output, const uint8_t *round_keys)
             {
                 uint8_t state[16];
                 std::memcpy(state, input, 16);
@@ -755,7 +755,7 @@ namespace console
              * @return std::string 填充后的16字节密钥，不足部分补零。
              * @warning 如果密钥长度超过16字节，多余部分将被截断。
              */
-            std::string pad_key(const std::string &key)
+            inline std::string pad_key(const std::string &key)
             {
                 std::string padded = key;
                 padded.resize(16, 0);
@@ -767,7 +767,7 @@ namespace console
              * @return std::string 字节序列。
              * @note 尽可能确保了序列的随机。
              */
-            std::string random_bytes()
+            inline std::string random_bytes()
             {
                 static std::random_device rd;
                 static std::mt19937 gen(std::chrono::steady_clock::now()
@@ -791,7 +791,7 @@ namespace console
          * @return std::string Base64编码后的密文，包含前16字节的初始化向量和加密数据。
          * @note 返回的密文格式为：初始化向量（16字节）+ 密文数据，整体经过Base64编码。
          */
-        std::string aes_encrypt(const std::string &plaintext, const std::string &key)
+        inline std::string aes_encrypt(const std::string &plaintext, const std::string &key)
         {
             std::string padded_key = aes_impl::pad_key(key);
             uint8_t round_keys[44 * 4];
@@ -826,7 +826,7 @@ namespace console
          * @return std::string 解密后的明文字符串，输入错误时返回 "Invalid ciphertext"。
          * @note 密文格式必须与aes_encrypt函数生成的格式一致。
          */
-        std::string aes_decrypt(const std::string &ciphertext, const std::string &key)
+        inline std::string aes_decrypt(const std::string &ciphertext, const std::string &key)
         {
             std::string decoded = base64_decode(ciphertext);
             if (decoded.size() < 16)

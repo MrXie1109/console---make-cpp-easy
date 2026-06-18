@@ -582,7 +582,7 @@ namespace console
          * @tparam Gen 源生成器类型。
          */
         template <class Gen>
-        class Skip : public Generator<Skip<Gen>,
+        class Drop : public Generator<Drop<Gen>,
                                       typename Gen::iterator::value_type>
         {
             Gen gen;
@@ -607,7 +607,7 @@ namespace console
              * @param g 源生成器。
              * @param n 要跳过的元素个数。
              */
-            Skip(Gen g, int n) : gen(g), count(n) {}
+            Drop(Gen g, int n) : gen(g), count(n) {}
 
             /**
              * @brief 检查生成器是否已完成。
@@ -950,28 +950,28 @@ namespace console
         /**
          * @brief 跳过前n个元素适配器（用于管道操作符）。
          */
-        class skip_t
+        class drop_t
         {
             int count;
 
         public:
-            explicit skip_t(int n) : count(n) {}
+            explicit drop_t(int n) : count(n) {}
 
             template <class Gen>
-            friend Skip<Gen> operator|(Gen g, skip_t s)
+            friend Drop<Gen> operator|(Gen g, drop_t s)
             {
-                return Skip<Gen>(g, s.count);
+                return Drop<Gen>(g, s.count);
             }
         };
 
         /**
          * @brief 创建跳过前n个元素适配器。
          * @param n 要跳过的元素个数。
-         * @return skip_t 跳过元素适配器。
+         * @return drop_t 跳过元素适配器。
          */
-        inline skip_t skip(int n)
+        inline drop_t drop(int n)
         {
-            return skip_t(n);
+            return drop_t(n);
         }
 
         /**
@@ -980,7 +980,7 @@ namespace console
         class enumerate_t
         {
         public:
-            explicit enumerate_t() {}
+            explicit enumerate_t() = default;
 
             template <class Gen>
             friend Enumerate<Gen> operator|(Gen g, enumerate_t)
@@ -993,7 +993,9 @@ namespace console
             {
                 return Enumerate<Gen>(g);
             }
-        } enumerate;
+        };
+
+        static constexpr enumerate_t enumerate;
 
         /**
          * @brief 创建生成器适配器。
@@ -1216,7 +1218,9 @@ namespace console
             {
                 return ++x;
             }
-        } inc;
+        };
+
+        static constexpr inc_t inc;
 
         /**
          * @brief 自减变换器。
@@ -1233,7 +1237,9 @@ namespace console
             {
                 return --x;
             }
-        } dec;
+        };
+
+        static constexpr dec_t dec;
 
         /**
          * @brief 取负变换器。
@@ -1250,7 +1256,9 @@ namespace console
             {
                 return -x;
             }
-        } negate;
+        };
+
+        static constexpr negate_t negate;
 
         /**
          * @brief 平方变换器。
@@ -1267,7 +1275,9 @@ namespace console
             {
                 return x * x;
             }
-        } square;
+        };
+
+        static constexpr square_t square;
 
         /**
          * @brief 立方变换器。
@@ -1284,7 +1294,9 @@ namespace console
             {
                 return x * x * x;
             }
-        } cube;
+        };
+
+        static constexpr cube_t cube;
 
         /**
          * @brief 平方根变换器。
@@ -1301,7 +1313,9 @@ namespace console
             {
                 return std::sqrt(x);
             }
-        } sqrt;
+        };
+
+        static constexpr sqrt_t sqrt;
 
         /**
          * @brief 倒数变换器。
@@ -1318,7 +1332,9 @@ namespace console
             {
                 return 1 / x;
             }
-        } reciprocal;
+        };
+
+        static constexpr reciprocal_t reciprocal;
 
         /**
          * @brief 绝对值变换器。
@@ -1335,7 +1351,9 @@ namespace console
             {
                 return std::abs(x);
             }
-        } abs;
+        };
+
+        static constexpr abs_t abs;
 
         /**
          * @brief 转为字符串变换器。
@@ -1352,7 +1370,9 @@ namespace console
             {
                 return std::to_string(x);
             }
-        } to_string;
+        };
+
+        static constexpr to_string_t to_string;
 
         /**
          * @brief 大于谓词。
@@ -1495,7 +1515,9 @@ namespace console
             {
                 return x % 2 == 0;
             }
-        } even;
+        };
+
+        static constexpr even_t even;
 
         /**
          * @brief 奇数谓词。
@@ -1512,7 +1534,9 @@ namespace console
             {
                 return x % 2 != 0;
             }
-        } odd;
+        };
+
+        static constexpr odd_t odd;
 
         /**
          * @brief 正数谓词。
@@ -1529,7 +1553,9 @@ namespace console
             {
                 return x > 0;
             }
-        } positive;
+        };
+
+        static constexpr positive_t positive;
 
         /**
          * @brief 负数谓词。
@@ -1546,7 +1572,9 @@ namespace console
             {
                 return x < 0;
             }
-        } negative;
+        };
+
+        static constexpr negative_t negative;
 
         /**
          * @brief 零谓词。
@@ -1563,7 +1591,9 @@ namespace console
             {
                 return x == 0;
             }
-        } zero;
+        };
+
+        static constexpr zero_t zero;
 
         /**
          * @brief 素数谓词。
@@ -1585,7 +1615,9 @@ namespace console
                         return false;
                 return true;
             }
-        } prime;
+        };
+
+        static constexpr prime_t prime;
 
         /**
          * @brief 逻辑与组合器。
@@ -1691,7 +1723,9 @@ namespace console
             {
                 return p.first;
             }
-        } first;
+        };
+
+        static constexpr first_t first;
 
         /**
          * @brief 取 pair 的 second 变换器。
@@ -1708,7 +1742,9 @@ namespace console
             {
                 return p.second;
             }
-        } second;
+        };
+
+        static constexpr second_t second;
 
         /**
          * @brief 相邻去重过滤器。
@@ -1755,7 +1791,9 @@ namespace console
             {
                 return x;
             }
-        } identity;
+        };
+
+        static constexpr identity_t identity;
 
         /**
          * @brief 转型变化器。

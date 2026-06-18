@@ -149,7 +149,7 @@ namespace console
      * @param k 要打印的 Key。
      * @return os 输出流的引用。
      */
-    std::ostream &operator<<(std::ostream &os, Key k)
+    inline std::ostream &operator<<(std::ostream &os, Key k)
     {
         if ((k >= Key::A && k <= Key::Z) || (k >= Key::Num0 && k <= Key::Num9))
             return os << static_cast<char>(k);

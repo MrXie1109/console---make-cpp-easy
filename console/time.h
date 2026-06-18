@@ -182,7 +182,7 @@ namespace console
      * @brief 获取当前时间点（自纪元以来的纳秒数）。
      * @return Time 当前时间点。
      */
-    Time now()
+    inline Time now()
     {
         return Time((long double)(std::chrono::
                                       duration_cast<std::chrono::nanoseconds>(
@@ -201,7 +201,7 @@ namespace console
      * @return Time 函数执行所花费的时间。
      */
     template <class F, class... Args>
-    Time timer(F &&f, Args &&...args)
+    inline Time timer(F &&f, Args &&...args)
     {
         Time start = now();
         f(args...);
@@ -212,7 +212,7 @@ namespace console
      * @brief 休眠指定时间。
      * @param tr 要休眠的时长。
      */
-    void sleep(const Time &tr)
+    inline void sleep(const Time &tr)
     {
         std::this_thread::sleep_for(std::chrono::duration<long double>(tr.s()));
     }
@@ -223,7 +223,7 @@ namespace console
      * @return std::string 格式化后的日期时间字符串。
      * @details 格式化语法与 std::put_time 相同。
      */
-    std::string datetime(const std::string &fmt = "%Y-%m-%d %H:%M:%S")
+    inline std::string datetime(const std::string &fmt = "%Y-%m-%d %H:%M:%S")
     {
         std::stringstream ss;
         auto now = std::chrono::system_clock::now();
@@ -243,7 +243,7 @@ namespace console
      * @param target 目标帧率。
      * @return double 实际帧率。
      */
-    double fps(double target)
+    inline double fps(double target)
     {
         using namespace std::chrono;
         thread_local auto last = steady_clock::now();

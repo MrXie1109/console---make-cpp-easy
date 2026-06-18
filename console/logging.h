@@ -201,7 +201,7 @@ namespace console
         template <class... Args>
         void fatal(const Args &...args)
         {
-            std::string error_info(uni_to_str(args...));
+            std::string error_info(to_string(args...));
             if (settings[4])
             {
                 if (colorful)
@@ -213,5 +213,16 @@ namespace console
             }
             throw FatalLogging("Fatal Error: " + error_info);
         }
-    } logger(std::clog, true, Logging::Level::INFO); ///< 全局默认 logger 实例，启用颜色，级别 INFO。
+    };
+
+    /**
+     * @brief 内部单例。
+     */
+    inline Logging &get_logger()
+    {
+        static Logging instance(std::clog, true, Logging::Level::INFO);
+        return instance;
+    }
+
+    static Logging &logger = get_logger(); ///< 全局默认 logger 实例，启用颜色，级别 INFO。
 }

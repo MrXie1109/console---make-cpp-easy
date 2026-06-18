@@ -192,7 +192,7 @@ namespace console
      * @return Comprehension<typename Cont::value_type> 新构造的 Comprehension。
      */
     template <class Cont>
-    auto compre(const Cont &cont)
+    inline auto compre(const Cont &cont)
         -> Comprehension<typename Cont::value_type>
     {
         return Comprehension<typename Cont::value_type>(cont);
@@ -205,7 +205,7 @@ namespace console
      * @return Comprehension<typename Cont::value_type> 新构造的 Comprehension。
      */
     template <class Cont>
-    auto compre(Cont &&cont)
+    inline auto compre(Cont &&cont)
         -> Comprehension<typename Cont::value_type>
     {
         return Comprehension<typename Cont::value_type>(std::move(cont));
@@ -220,7 +220,7 @@ namespace console
      * @return Comprehension<typename Cont::value_type> 新构造的 Comprehension。
      */
     template <class Cont>
-    auto compre(const Cont &cont, size_t start_pos, size_t end_pos)
+    inline auto compre(const Cont &cont, size_t start_pos, size_t end_pos)
         -> Comprehension<typename Cont::value_type>
     {
         return Comprehension<typename Cont::value_type>(
@@ -236,7 +236,7 @@ namespace console
      * @return Comprehension<typename Cont::value_type> 新构造的 Comprehension。
      */
     template <class Cont>
-    auto compre(Cont &&cont, size_t start_pos, size_t end_pos)
+    inline auto compre(Cont &&cont, size_t start_pos, size_t end_pos)
         -> Comprehension<typename Cont::value_type>
     {
         return Comprehension<typename Cont::value_type>(
@@ -251,7 +251,7 @@ namespace console
      * @return Comprehension<decltype(*beg)> 新构造的 Comprehension。
      */
     template <class Iter>
-    auto compre(Iter beg, Iter end) -> Comprehension<decltype(*beg)>
+    inline auto compre(Iter beg, Iter end) -> Comprehension<decltype(*beg)>
     {
         return Comprehension<decltype(*beg)>(beg, end);
     }
@@ -263,7 +263,7 @@ namespace console
      * @return Comprehension<T> 新构造的 Comprehension。
      */
     template <class T>
-    Comprehension<T> compre(std::initializer_list<T> init)
+    inline Comprehension<T> compre(std::initializer_list<T> init)
     {
         return Comprehension<T>(init);
     }

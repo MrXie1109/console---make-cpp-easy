@@ -32,6 +32,16 @@ SOFTWARE.
 */
 
 #pragma once
+
+#ifdef _WIN32
+#ifndef CONSOLE_IGNORE_ADVICE
+#pragma message("Remember to link against winmm library (e.g., -lwinmm or winmm.lib)")
+#pragma message("Define 'CONSOLE_IGNORE_ADVICE' for ignore it")
+#endif
+#else
+#error "Unsupported platform - this library is for Windows only"
+#endif
+
 #define WIN32_LEAN_AND_MEAN // 可以排除大量不需要的 Windows 组件
 #define NOMINMAX 1          // 避免 min/max 宏污染
 #define NOSERVICE           // 不需要 Windows 服务
@@ -64,15 +74,6 @@ SOFTWARE.
 #include <windows.h>
 #include <mmsystem.h>
 #include <thread>
-
-#ifdef _WIN32
-#ifndef CONSOLE_IGNORE_ADVICE
-#pragma message("Remember to link against winmm library (e.g., -lwinmm or winmm.lib)")
-#pragma message("Define 'CONSOLE_IGNORE_ADVICE' for ignore it")
-#endif
-#else
-#error "Unsupported platform - this library is for Windows only"
-#endif
 
 namespace console
 {
