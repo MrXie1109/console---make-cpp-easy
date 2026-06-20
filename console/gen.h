@@ -110,13 +110,13 @@ namespace console
              * @brief 相等比较操作符。
              * @return 如果生成器已完成则返回true，否则返回false。
              */
-            bool operator==(const iterator &) const { return d.done(); }
+            bool operator==(const iterator &) { return d.done(); }
 
             /**
              * @brief 不等比较操作符。
              * @return 如果生成器未完成则返回true，否则返回false。
              */
-            bool operator!=(const iterator &) const { return !d.done(); }
+            bool operator!=(const iterator &) { return !d.done(); }
 
             /**
              * @brief 获取当前值并移动到下一个位置。
@@ -479,7 +479,7 @@ namespace console
          * @tparam Gen 源生成器类型。
          * @tparam Pred 谓词函数类型。
          */
-        template <class Gen, typename Pred>
+        template <class Gen, class Pred>
         class Filter : public Generator<Filter<Gen, Pred>,
                                         typename Gen::iterator::value_type>
         {
@@ -587,18 +587,16 @@ namespace console
         {
             Gen gen;
             int count;
-            bool skipped = false;
+            bool droped = false;
 
             /**
              * @brief 执行跳过操作。
              */
-            void do_skip()
+            void do_drop()
             {
                 for (int i = 0; i < count && !gen.done(); i++)
-                {
                     gen.advance();
-                }
-                skipped = true;
+                droped = true;
             }
 
         public:
@@ -615,8 +613,8 @@ namespace console
              */
             bool done()
             {
-                if (!skipped)
-                    do_skip();
+                if (!droped)
+                    do_drop();
                 return gen.done();
             }
 
@@ -759,6 +757,91 @@ namespace console
         };
 
         /**
+         * @brief 取得前若干个元素直到谓词不成立。
+         * @tparam Gen 源生成器类型。
+         * @tparam Pred 谓词类型。
+         */
+        template <class Gen, class Pred>
+        class TakeWhile : public Generator<TakeWhile<Gen, Pred>,
+                                           typename Gen::value_type>
+        {
+            Gen gen;
+            Pred pred;
+
+        public:
+            /**
+             * @brief 构造函数。
+             * @param g 生成器。
+             * @param p 谓词。
+             */
+            TakeWhile(Gen g, Pred p) : gen(g), pred(p) {}
+
+            /**
+             * @brief 检查生成器是否已完成。
+             * @return 如果源生成器已完成或不满足谓词则返回true。
+             */
+            bool done() { return gen.done() || !pred(gen.current()); }
+
+            /**
+             * @brief 获取当前值。
+             */
+            auto current() -> decltype(gen.current()) { return gen.current(); }
+
+            /**
+             * @brief 向前移动一步。
+             */
+            void advance() { gen.advance(); }
+        };
+
+        /**
+         * @brief 跳过前若干个元素直到谓词不成立。
+         * @tparam Gen 源生成器类型。
+         * @tparam Pred 谓词类型。
+         */
+        template <class Gen, class Pred>
+        class DropWhile : public Generator<DropWhile<Gen, Pred>,
+                                           typename Gen::value_type>
+        {
+            Gen gen;
+            Pred pred;
+            bool droped = false;
+
+            /**
+             * @brief 执行跳过操作。
+             */
+            void do_drop()
+            {
+                while (!gen.done() && pred(gen.current()))
+                    gen.advance();
+                droped = true;
+            }
+
+        public:
+            DropWhile(Gen g, Pred p) : gen(g), pred(p) {}
+
+            /**
+             * @brief 检查生成器是否已完成。
+             * @return 如果源生成器已完成则返回true。
+             */
+            bool done()
+            {
+                if (!droped)
+                    do_drop();
+                return gen.done();
+            }
+
+            /**
+             * @brief 获取当前值。
+             */
+            auto current() -> decltype(gen.current()) { return gen.current(); }
+
+            /**
+             * @brief 向前移动一步。
+             */
+            void advance() { gen.advance(); }
+        };
+
+        /**
          * @brief 从迭代器范围创建视图生成器。
          * @tparam Iter 迭代器类型。
          * @param begin 起始迭代器。
@@ -766,7 +849,8 @@ namespace console
          * @return Views<Iter> 视图生成器。
          */
         template <class Iter>
-        Views<Iter> views(Iter begin, Iter end)
+        Views<Iter>
+        views(Iter begin, Iter end)
         {
             return Views<Iter>(begin, end);
         }
@@ -1026,6 +1110,64 @@ namespace console
                        typename std::decay<Gen2>::type>(
                 std::forward<Gen1>(g1),
                 std::forward<Gen2>(g2));
+        }
+
+        /**
+         * @brief 取前若干个元素适配器（用于管道操作符）。
+         */
+        template <class Pred>
+        class takewhile_t
+        {
+            Pred pred;
+
+        public:
+            explicit takewhile_t(Pred p) : pred(p) {}
+
+            template <class Gen>
+            friend TakeWhile<Gen, Pred> operator|(Gen g, takewhile_t tw)
+            {
+                return TakeWhile<Gen, Pred>(g, tw.pred);
+            }
+        };
+
+        /**
+         * @brief 创建取前若干个元素适配器。
+         * @param p 谓词。
+         * @return takewhile_t 取元素适配器。
+         */
+        template <class Pred>
+        inline takewhile_t<Pred> takewhile(Pred pred)
+        {
+            return takewhile_t<Pred>(pred);
+        }
+
+        /**
+         * @brief 跳过前若干个元素适配器（用于管道操作符）。
+         */
+        template <class Pred>
+        class dropwhile_t
+        {
+            Pred pred;
+
+        public:
+            explicit dropwhile_t(Pred p) : pred(p) {}
+
+            template <class Gen>
+            friend DropWhile<Gen, Pred> operator|(Gen g, dropwhile_t dw)
+            {
+                return DropWhile<Gen, Pred>(g, dw.pred);
+            }
+        };
+
+        /**
+         * @brief 创建跳过前若干个元素适配器。
+         * @param p 谓词。
+         * @return dropwhile_t 取元素适配器。
+         */
+        template <class Pred>
+        inline dropwhile_t<Pred> dropwhile(Pred pred)
+        {
+            return dropwhile_t<Pred>(pred);
         }
 
         /**
