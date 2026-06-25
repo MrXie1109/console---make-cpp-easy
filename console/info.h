@@ -105,7 +105,7 @@ SOFTWARE.)";
      */
     inline std::string version()
     {
-        return "console version 5.6.2 (2026-06-20) -- \"crypto.h is noexcept.\"";
+        return "console version 5.6.3 (2026-06-25) -- \"Useless Things are Unnecessary.\"";
     }
 
     /**

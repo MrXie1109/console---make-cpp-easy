@@ -219,7 +219,6 @@ namespace console
          */
         Item get(const std::string &section_and_key) const
         {
-            auto pos = section_and_key.find('.');
             auto pr = partition(section_and_key, ".");
             if (pr.middle.empty())
                 throw IndexError("Invalid Section and Key Format: \"" + section_and_key + '"');
@@ -268,7 +267,6 @@ namespace console
          */
         void set(const std::string &section_and_key, const std::string &value)
         {
-            auto pos = section_and_key.find('.');
             auto pr = partition(section_and_key, ".");
             if (pr.middle.empty())
                 throw IndexError("Invalid Section and Key Format: \"" + section_and_key + '"');
