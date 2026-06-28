@@ -1,7 +1,8 @@
 /**
  * @file strpp.h
  * @brief 提供字符串处理工具函数和格式化类。
- * @details 包含去除空白字符、大小写转换、分割与连接、分区、可变参数转字符串、格式化字符串（f_string）等功能。
+ * @details
+ * 包含去除空白字符、大小写转换、分割与连接、分区、可变参数转字符串、格式化字符串（f_string）等功能。
  * @author MrXie1109
  * @date 2026
  * @copyright MIT License
@@ -30,19 +31,19 @@ SOFTWARE.
 */
 
 #pragma once
-#include <string>
-#include <vector>
 #include <algorithm>
 #include <cctype>
-#include <sstream>
-#include <initializer_list>
-#include <utility>
 #include <cstdint>
-#include "output.h"
-#include "csexc.h"
+#include <initializer_list>
+#include <sstream>
+#include <string>
+#include <utility>
+#include <vector>
 
-namespace console
-{
+#include "csexc.h"
+#include "output.h"
+
+namespace console {
     /**
      * @defgroup strpp 字符串处理
      * @brief 字符串修剪、转换、分割、连接、格式化等工具。
@@ -54,11 +55,10 @@ namespace console
      * @param str 要处理的字符串（按值传递，内部修改副本）。
      * @return std::string 处理后的新字符串。
      */
-    inline std::string ltrim(std::string str)
-    {
-        auto it = std::find_if(str.begin(), str.end(),
-                               [](unsigned char uc) -> bool
-                               { return !isspace(uc); });
+    inline std::string ltrim(std::string str) {
+        auto it =
+            std::find_if(str.begin(), str.end(),
+                         [](unsigned char uc) -> bool { return !isspace(uc); });
         str.erase(str.begin(), it);
         return str;
     }
@@ -68,11 +68,10 @@ namespace console
      * @param str 要处理的字符串。
      * @return std::string 处理后的新字符串。
      */
-    inline std::string rtrim(std::string str)
-    {
-        auto it = std::find_if(str.rbegin(), str.rend(),
-                               [](unsigned char uc) -> bool
-                               { return !isspace(uc); });
+    inline std::string rtrim(std::string str) {
+        auto it =
+            std::find_if(str.rbegin(), str.rend(),
+                         [](unsigned char uc) -> bool { return !isspace(uc); });
         str.erase(it.base(), str.end());
         return str;
     }
@@ -82,8 +81,7 @@ namespace console
      * @param str 要处理的字符串。
      * @return std::string 处理后的新字符串。
      */
-    inline std::string trim(std::string str)
-    {
+    inline std::string trim(std::string str) {
         return ltrim(rtrim(str));
     }
 
@@ -93,13 +91,11 @@ namespace console
      * @param chars 要删除的字符集（只要字符出现在此集合中就被删除）。
      * @return std::string 处理后的新字符串。
      */
-    inline std::string ltrim(std::string str, const std::string &chars)
-    {
-        auto it = std::find_if(str.begin(), str.end(),
-                               [&chars](unsigned char ch)
-                               {
-                                   return chars.find(ch) == std::string::npos;
-                               });
+    inline std::string ltrim(std::string str, const std::string &chars) {
+        auto it =
+            std::find_if(str.begin(), str.end(), [&chars](unsigned char ch) {
+                return chars.find(ch) == std::string::npos;
+            });
         str.erase(str.begin(), it);
         return str;
     }
@@ -110,13 +106,11 @@ namespace console
      * @param chars 要删除的字符集。
      * @return std::string 处理后的新字符串。
      */
-    inline std::string rtrim(std::string str, const std::string &chars)
-    {
-        auto it = std::find_if(str.rbegin(), str.rend(),
-                               [&chars](unsigned char ch)
-                               {
-                                   return chars.find(ch) == std::string::npos;
-                               });
+    inline std::string rtrim(std::string str, const std::string &chars) {
+        auto it =
+            std::find_if(str.rbegin(), str.rend(), [&chars](unsigned char ch) {
+                return chars.find(ch) == std::string::npos;
+            });
         str.erase(it.base(), str.end());
         return str;
     }
@@ -127,8 +121,7 @@ namespace console
      * @param chars 要删除的字符集。
      * @return std::string 处理后的新字符串。
      */
-    inline std::string trim(std::string str, const std::string &chars)
-    {
+    inline std::string trim(std::string str, const std::string &chars) {
         return ltrim(rtrim(str, chars), chars);
     }
 
@@ -137,12 +130,9 @@ namespace console
      * @param str 要转换的字符串。
      * @return std::string 大写形式。
      */
-    inline std::string upper(std::string str)
-    {
-        for (char &ch : str)
-        {
-            if (ch >= 'a' && ch <= 'z')
-                ch += 'A' - 'a';
+    inline std::string upper(std::string str) {
+        for (char &ch : str) {
+            if (ch >= 'a' && ch <= 'z') ch += 'A' - 'a';
         }
         return str;
     }
@@ -152,12 +142,9 @@ namespace console
      * @param str 要转换的字符串。
      * @return std::string 小写形式。
      */
-    inline std::string lower(std::string str)
-    {
-        for (char &ch : str)
-        {
-            if (ch >= 'A' && ch <= 'Z')
-                ch -= 'A' - 'a';
+    inline std::string lower(std::string str) {
+        for (char &ch : str) {
+            if (ch >= 'A' && ch <= 'Z') ch -= 'A' - 'a';
         }
         return str;
     }
@@ -167,16 +154,12 @@ namespace console
      * @param str 要转换的字符串。
      * @return std::string 标题格式的字符串。
      */
-    inline std::string title(std::string str)
-    {
-        if (str.empty())
-            return "";
-        if (str[0] >= 'a' && str[0] <= 'z')
-            str[0] += 'A' - 'a';
-        for (size_t i = 1; i < str.size(); ++i)
-        {
-            if (isspace((unsigned char)str[i - 1]) &&
-                str[i] >= 'a' && str[i] <= 'z')
+    inline std::string title(std::string str) {
+        if (str.empty()) return "";
+        if (str[0] >= 'a' && str[0] <= 'z') str[0] += 'A' - 'a';
+        for (size_t i = 1; i < str.size(); ++i) {
+            if (isspace((unsigned char)str[i - 1]) && str[i] >= 'a' &&
+                str[i] <= 'z')
                 str[i] += 'A' - 'a';
             else if (str[i] >= 'A' && str[i] <= 'Z')
                 str[i] -= 'A' - 'a';
@@ -188,8 +171,7 @@ namespace console
      * @struct PartitionResult
      * @brief 字符串分区结果，包含左部分、分隔符、右部分。
      */
-    struct PartitionResult
-    {
+    struct PartitionResult {
         std::string left;   ///< 分隔符前的子串
         std::string middle; ///< 分隔符本身
         std::string right;  ///< 分隔符后的子串
@@ -200,31 +182,27 @@ namespace console
          * @param pr 分区结果对象。
          * @return std::ostream& 流引用。
          */
-        friend std::ostream &operator<<(
-            std::ostream &os, const PartitionResult &pr)
-        {
-            return os << "(\"" << pr.left << "\", \"" << pr.middle
-                      << "\", \"" << pr.right << "\")";
+        friend std::ostream &operator<<(std::ostream          &os,
+                                        const PartitionResult &pr) {
+            return os << "(\"" << pr.left << "\", \"" << pr.middle << "\", \""
+                      << pr.right << "\")";
         }
     };
 
     /**
-     * @brief 在字符串中查找第一个分隔符，并返回分隔符之前、分隔符本身、分隔符之后的三部分。
+     * @brief
+     * 在字符串中查找第一个分隔符，并返回分隔符之前、分隔符本身、分隔符之后的三部分。
      * @param text 原始字符串。
      * @param sep 分隔符。
      * @return PartitionResult 分区结果。
      * @note 若未找到分隔符，则 left 为原字符串，middle 和 right 为空。
      */
-    inline PartitionResult partition(
-        const std::string &text, const std::string &sep)
-    {
+    inline PartitionResult partition(const std::string &text,
+                                     const std::string &sep) {
         size_t pos = text.find(sep);
-        if (pos == std::string::npos)
-            return PartitionResult{text, "", ""};
-        return PartitionResult{
-            text.substr(0, pos),
-            sep,
-            text.substr(pos + sep.size())};
+        if (pos == std::string::npos) return PartitionResult{text, "", ""};
+        return PartitionResult{text.substr(0, pos), sep,
+                               text.substr(pos + sep.size())};
     }
 
     /**
@@ -234,15 +212,13 @@ namespace console
      * @return std::vector<std::string> 分割后的子串列表。
      * @note 连续的分隔符会产生空字符串子串。
      */
-    inline std::vector<std::string> split(
-        std::string text, const std::string &sep = " ")
-    {
+    inline std::vector<std::string> split(std::string        text,
+                                          const std::string &sep = " ") {
         std::vector<std::string> vec;
-        size_t start = 0;
-        size_t end;
-        size_t sep_len = sep.length();
-        while ((end = text.find(sep, start)) != std::string::npos)
-        {
+        size_t                   start = 0;
+        size_t                   end;
+        size_t                   sep_len = sep.length();
+        while ((end = text.find(sep, start)) != std::string::npos) {
             vec.emplace_back(text, start, end - start);
             start = end + sep_len;
         }
@@ -258,16 +234,13 @@ namespace console
      * @return std::string 连接后的字符串。
      */
     template <class T>
-    inline std::string join(
-        const std::vector<T> &vec, const std::string &sep = "")
-    {
-        if (vec.empty())
-            return "";
+    inline std::string join(const std::vector<T> &vec,
+                            const std::string    &sep = "") {
+        if (vec.empty()) return "";
         std::stringstream ss;
-        auto it = vec.begin();
+        auto              it = vec.begin();
         ss << *it;
-        while (++it != vec.end())
-            ss << sep << *it;
+        while (++it != vec.end()) ss << sep << *it;
         return ss.str();
     }
 
@@ -277,11 +250,9 @@ namespace console
      * @param args 要转换的参数。
      * @return std::string 所有参数按顺序拼接的结果。
      */
-    template <class... Args>
-    std::string to_string(Args &&...args)
-    {
+    template <class... Args> std::string to_string(Args &&...args) {
         std::ostringstream oss;
-        int _[] = {0, (oss << std::forward<Args>(args), 0)...};
+        int                _[] = {0, (oss << std::forward<Args>(args), 0)...};
         (void)_;
         return oss.str();
     }
@@ -292,19 +263,17 @@ namespace console
      * @param str 包含要提取值的字符串，值之间应以空格分隔。
      * @param args 要提取值的参数列表，按顺序对应字符串中的值。
      */
-    template <class... Args>
-    void from_string(std::string str, Args &...args)
-    {
+    template <class... Args> void from_string(std::string str, Args &...args) {
         std::istringstream iss(str);
-        int _[] = {0, (iss >> args, 0)...};
+        int                _[] = {0, (iss >> args, 0)...};
         (void)_;
     }
 
     /**
      * @class f_string
      * @brief 格式化字符串类，支持使用 `%` 运算符进行占位符 `{}` 替换。
-     * @details 继承自 std::string，通过 `operator%` 将第一个 `{}` 替换为参数的字符串表示。
-     *          若字符串中不包含 `{}` 则抛出 bad_format 异常。
+     * @details 继承自 std::string，通过 `operator%` 将第一个 `{}`
+     * 替换为参数的字符串表示。 若字符串中不包含 `{}` 则抛出 bad_format 异常。
      *
      * 使用示例：
      * @code
@@ -312,8 +281,7 @@ namespace console
      * std::string result = fmt % "world";  // "Hello, world!"
      * @endcode
      */
-    class f_string : public std::string
-    {
+    class f_string : public std::string {
     public:
         using std::string::string;
 
@@ -324,12 +292,9 @@ namespace console
          * @return f_string 替换后的新 f_string 对象。
          * @throw bad_format 若当前字符串中不包含 `{}`。
          */
-        template <class T>
-        f_string operator%(const T &t)
-        {
+        template <class T> f_string operator%(const T &t) {
             auto pos = this->find("{}");
-            if (pos != std::string::npos)
-            {
+            if (pos != std::string::npos) {
                 auto bak = *this;
                 bak.replace(pos, 2, uni_to_str(t));
                 return bak;

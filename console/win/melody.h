@@ -35,7 +35,8 @@ SOFTWARE.
 
 #ifdef _WIN32
 #ifndef CONSOLE_IGNORE_ADVICE
-#pragma message("Remember to link against winmm library (e.g., -lwinmm or winmm.lib)")
+#pragma message(                                                               \
+    "Remember to link against winmm library (e.g., -lwinmm or winmm.lib)")
 #pragma message("Define 'CONSOLE_IGNORE_ADVICE' for ignore it")
 #endif
 #else
@@ -71,155 +72,153 @@ SOFTWARE.
 #define NOWINOFFSETS        // 不需要窗口偏移量
 #define NOPROFILER          // 不需要性能分析器
 #define NODEFERWINDOWPOS    // 不需要 DeferWindowPos
-#include <windows.h>
 #include <mmsystem.h>
 #include <thread>
+#include <windows.h>
 
-namespace console
-{
+namespace console {
     /**
      * @enum Instrument
      * @brief 128 种 GM 标准乐器编号（0-127）。
      * @details 枚举值与 MIDI 程序变更号对应，默认乐器为 AcousticGrandPiano。
      */
-    enum class Instrument : unsigned char
-    {
-        AcousticGrandPiano = 0,   ///< 大钢琴 (默认)
-        BrightAcousticPiano = 1,  ///< 明亮的钢琴
-        ElectricGrandPiano = 2,   ///< 电子大钢琴
-        HonkyTonkPiano = 3,       ///< 酒吧钢琴
-        ElectricPiano1 = 4,       ///< 电钢琴 1
-        ElectricPiano2 = 5,       ///< 电钢琴 2
-        Harpsichord = 6,          ///< 大键琴
-        Clavinet = 7,             ///< 击弦古钢琴
-        Celesta = 8,              ///< 钢片琴
-        Glockenspiel = 9,         ///< 钟琴
-        MusicBox = 10,            ///< 八音盒
-        Vibraphone = 11,          ///< 颤音琴
-        Marimba = 12,             ///< 马林巴
-        Xylophone = 13,           ///< 木琴
-        TubularBells = 14,        ///< 管钟
-        Dulcimer = 15,            ///< 扬琴
-        DrawbarOrgan = 16,        ///< 拉杆风琴
-        PercussiveOrgan = 17,     ///< 打击型风琴
-        RockOrgan = 18,           ///< 摇滚风琴
-        ChurchOrgan = 19,         ///< 教堂风琴
-        ReedOrgan = 20,           ///< 簧风琴
-        Accordion = 21,           ///< 手风琴
-        Harmonica = 22,           ///< 口琴
-        TangoAccordion = 23,      ///< 探戈手风琴
-        AcousticGuitarNylon = 24, ///< 尼龙弦吉他
-        AcousticGuitarSteel = 25, ///< 钢弦吉他
-        ElectricGuitarJazz = 26,  ///< 爵士吉他
-        ElectricGuitarClean = 27, ///< 清音电吉他
-        ElectricGuitarMuted = 28, ///< 闷音吉他
-        OverdrivenGuitar = 29,    ///< 过载吉他
-        DistortionGuitar = 30,    ///< 失真吉他
-        GuitarHarmonics = 31,     ///< 吉他泛音
-        AcousticBass = 32,        ///< 原声贝司
-        ElectricBassFinger = 33,  ///< 指拨电贝司
-        ElectricBassPick = 34,    ///< 拨片电贝司
-        FretlessBass = 35,        ///< 无品贝司
-        SlapBass1 = 36,           ///< 击弦贝司 1
-        SlapBass2 = 37,           ///< 击弦贝司 2
-        SynthBass1 = 38,          ///< 合成贝司 1
-        SynthBass2 = 39,          ///< 合成贝司 2
-        Violin = 40,              ///< 小提琴
-        Viola = 41,               ///< 中提琴
-        Cello = 42,               ///< 大提琴
-        Contrabass = 43,          ///< 低音提琴
-        TremoloStrings = 44,      ///< 弦乐颤音
-        PizzicatoStrings = 45,    ///< 弦乐拨奏
-        OrchestralHarp = 46,      ///< 竖琴
-        Timpani = 47,             ///< 定音鼓
-        StringEnsemble1 = 48,     ///< 弦乐合奏 1
-        StringEnsemble2 = 49,     ///< 弦乐合奏 2
-        SynthStrings1 = 50,       ///< 合成弦乐 1
-        SynthStrings2 = 51,       ///< 合成弦乐 2
-        ChoirAahs = 52,           ///< 合唱 "啊"
-        VoiceOohs = 53,           ///< 人声 "哦"
-        SynthVoice = 54,          ///< 合成人声
-        OrchestraHit = 55,        ///< 乐队打击乐
-        Trumpet = 56,             ///< 小号
-        Trombone = 57,            ///< 长号
-        Tuba = 58,                ///< 大号
-        MutedTrumpet = 59,        ///< 弱音小号
-        FrenchHorn = 60,          ///< 圆号
-        BrassSection = 61,        ///< 铜管组
-        SynthBrass1 = 62,         ///< 合成铜管 1
-        SynthBrass2 = 63,         ///< 合成铜管 2
-        SopranoSax = 64,          ///< 高音萨克斯
-        AltoSax = 65,             ///< 中音萨克斯
-        TenorSax = 66,            ///< 次中音萨克斯
-        BaritoneSax = 67,         ///< 上低音萨克斯
-        Oboe = 68,                ///< 双簧管
-        EnglishHorn = 69,         ///< 英国管
-        Bassoon = 70,             ///< 巴松管
-        Clarinet = 71,            ///< 单簧管
-        Piccolo = 72,             ///< 短笛
-        Flute = 73,               ///< 长笛
-        Recorder = 74,            ///< 竖笛
-        PanFlute = 75,            ///< 排箫
-        BlownBottle = 76,         ///< 吹瓶口
-        Shakuhachi = 77,          ///< 尺八
-        Whistle = 78,             ///< 口哨
-        Ocarina = 79,             ///< 奥卡雷纳
-        Lead1Square = 80,         ///< 方波领奏
-        Lead2Sawtooth = 81,       ///< 锯齿波领奏
-        Lead3Calliope = 82,       ///< 汽笛风琴
-        Lead4Chiff = 83,          ///< 气声领奏
-        Lead5Charang = 84,        ///< 炭精吉他
-        Lead6Voice = 85,          ///< 人声领奏
-        Lead7Fifths = 86,         ///< 五度领奏
-        Lead8BassLead = 87,       ///< 贝司领奏
-        Pad1NewAge = 88,          ///< 新世纪背景
-        Pad2Warm = 89,            ///< 温暖背景
-        Pad3Polysynth = 90,       ///< 复音合成背景
-        Pad4Choir = 91,           ///< 合唱背景
-        Pad5Bowed = 92,           ///< 弓弦背景
-        Pad6Metallic = 93,        ///< 金属背景
-        Pad7Halo = 94,            ///< 光环背景
-        Pad8Sweep = 95,           ///< 扫弦背景
-        Fx1Rain = 96,             ///< 雨声
-        Fx2Soundtrack = 97,       ///< 电影配乐
-        Fx3Crystal = 98,          ///< 水晶
-        Fx4Atmosphere = 99,       ///< 大气
-        Fx5Brightness = 100,      ///< 明亮
-        Fx6Goblins = 101,         ///< 小妖
-        Fx7Echoes = 102,          ///< 回声
-        Fx8SciFi = 103,           ///< 科幻
-        Sitar = 104,              ///< 西塔琴
-        Banjo = 105,              ///< 班卓琴
-        Shamisen = 106,           ///< 三味线
-        Koto = 107,               ///< 古筝
-        Kalimba = 108,            ///< 卡林巴
-        Bagpipe = 109,            ///< 风笛
-        Fiddle = 110,             ///< 民间提琴
-        Shanai = 111,             ///< 唢呐
-        TinkleBell = 112,         ///< 铃铛
-        Agogo = 113,              ///< 阿果果铃
-        SteelDrums = 114,         ///< 钢鼓
-        Woodblock = 115,          ///< 木鱼
-        TaikoDrum = 116,          ///< 太鼓
-        MelodicTom = 117,         ///< 旋律通鼓
-        SynthDrum = 118,          ///< 合成鼓
-        ReverseCymbal = 119,      ///< 反奏钹
-        GuitarFretNoise = 120,    ///< 吉他擦弦声
-        BreathNoise = 121,        ///< 呼吸声
-        Seashore = 122,           ///< 海浪
-        BirdTweet = 123,          ///< 鸟鸣
-        TelephoneRing = 124,      ///< 电话铃
-        Helicopter = 125,         ///< 直升机
-        Applause = 126,           ///< 掌声
-        Gunshot = 127             ///< 枪声
+    enum class Instrument : unsigned char {
+        AcousticGrandPiano  = 0,   ///< 大钢琴 (默认)
+        BrightAcousticPiano = 1,   ///< 明亮的钢琴
+        ElectricGrandPiano  = 2,   ///< 电子大钢琴
+        HonkyTonkPiano      = 3,   ///< 酒吧钢琴
+        ElectricPiano1      = 4,   ///< 电钢琴 1
+        ElectricPiano2      = 5,   ///< 电钢琴 2
+        Harpsichord         = 6,   ///< 大键琴
+        Clavinet            = 7,   ///< 击弦古钢琴
+        Celesta             = 8,   ///< 钢片琴
+        Glockenspiel        = 9,   ///< 钟琴
+        MusicBox            = 10,  ///< 八音盒
+        Vibraphone          = 11,  ///< 颤音琴
+        Marimba             = 12,  ///< 马林巴
+        Xylophone           = 13,  ///< 木琴
+        TubularBells        = 14,  ///< 管钟
+        Dulcimer            = 15,  ///< 扬琴
+        DrawbarOrgan        = 16,  ///< 拉杆风琴
+        PercussiveOrgan     = 17,  ///< 打击型风琴
+        RockOrgan           = 18,  ///< 摇滚风琴
+        ChurchOrgan         = 19,  ///< 教堂风琴
+        ReedOrgan           = 20,  ///< 簧风琴
+        Accordion           = 21,  ///< 手风琴
+        Harmonica           = 22,  ///< 口琴
+        TangoAccordion      = 23,  ///< 探戈手风琴
+        AcousticGuitarNylon = 24,  ///< 尼龙弦吉他
+        AcousticGuitarSteel = 25,  ///< 钢弦吉他
+        ElectricGuitarJazz  = 26,  ///< 爵士吉他
+        ElectricGuitarClean = 27,  ///< 清音电吉他
+        ElectricGuitarMuted = 28,  ///< 闷音吉他
+        OverdrivenGuitar    = 29,  ///< 过载吉他
+        DistortionGuitar    = 30,  ///< 失真吉他
+        GuitarHarmonics     = 31,  ///< 吉他泛音
+        AcousticBass        = 32,  ///< 原声贝司
+        ElectricBassFinger  = 33,  ///< 指拨电贝司
+        ElectricBassPick    = 34,  ///< 拨片电贝司
+        FretlessBass        = 35,  ///< 无品贝司
+        SlapBass1           = 36,  ///< 击弦贝司 1
+        SlapBass2           = 37,  ///< 击弦贝司 2
+        SynthBass1          = 38,  ///< 合成贝司 1
+        SynthBass2          = 39,  ///< 合成贝司 2
+        Violin              = 40,  ///< 小提琴
+        Viola               = 41,  ///< 中提琴
+        Cello               = 42,  ///< 大提琴
+        Contrabass          = 43,  ///< 低音提琴
+        TremoloStrings      = 44,  ///< 弦乐颤音
+        PizzicatoStrings    = 45,  ///< 弦乐拨奏
+        OrchestralHarp      = 46,  ///< 竖琴
+        Timpani             = 47,  ///< 定音鼓
+        StringEnsemble1     = 48,  ///< 弦乐合奏 1
+        StringEnsemble2     = 49,  ///< 弦乐合奏 2
+        SynthStrings1       = 50,  ///< 合成弦乐 1
+        SynthStrings2       = 51,  ///< 合成弦乐 2
+        ChoirAahs           = 52,  ///< 合唱 "啊"
+        VoiceOohs           = 53,  ///< 人声 "哦"
+        SynthVoice          = 54,  ///< 合成人声
+        OrchestraHit        = 55,  ///< 乐队打击乐
+        Trumpet             = 56,  ///< 小号
+        Trombone            = 57,  ///< 长号
+        Tuba                = 58,  ///< 大号
+        MutedTrumpet        = 59,  ///< 弱音小号
+        FrenchHorn          = 60,  ///< 圆号
+        BrassSection        = 61,  ///< 铜管组
+        SynthBrass1         = 62,  ///< 合成铜管 1
+        SynthBrass2         = 63,  ///< 合成铜管 2
+        SopranoSax          = 64,  ///< 高音萨克斯
+        AltoSax             = 65,  ///< 中音萨克斯
+        TenorSax            = 66,  ///< 次中音萨克斯
+        BaritoneSax         = 67,  ///< 上低音萨克斯
+        Oboe                = 68,  ///< 双簧管
+        EnglishHorn         = 69,  ///< 英国管
+        Bassoon             = 70,  ///< 巴松管
+        Clarinet            = 71,  ///< 单簧管
+        Piccolo             = 72,  ///< 短笛
+        Flute               = 73,  ///< 长笛
+        Recorder            = 74,  ///< 竖笛
+        PanFlute            = 75,  ///< 排箫
+        BlownBottle         = 76,  ///< 吹瓶口
+        Shakuhachi          = 77,  ///< 尺八
+        Whistle             = 78,  ///< 口哨
+        Ocarina             = 79,  ///< 奥卡雷纳
+        Lead1Square         = 80,  ///< 方波领奏
+        Lead2Sawtooth       = 81,  ///< 锯齿波领奏
+        Lead3Calliope       = 82,  ///< 汽笛风琴
+        Lead4Chiff          = 83,  ///< 气声领奏
+        Lead5Charang        = 84,  ///< 炭精吉他
+        Lead6Voice          = 85,  ///< 人声领奏
+        Lead7Fifths         = 86,  ///< 五度领奏
+        Lead8BassLead       = 87,  ///< 贝司领奏
+        Pad1NewAge          = 88,  ///< 新世纪背景
+        Pad2Warm            = 89,  ///< 温暖背景
+        Pad3Polysynth       = 90,  ///< 复音合成背景
+        Pad4Choir           = 91,  ///< 合唱背景
+        Pad5Bowed           = 92,  ///< 弓弦背景
+        Pad6Metallic        = 93,  ///< 金属背景
+        Pad7Halo            = 94,  ///< 光环背景
+        Pad8Sweep           = 95,  ///< 扫弦背景
+        Fx1Rain             = 96,  ///< 雨声
+        Fx2Soundtrack       = 97,  ///< 电影配乐
+        Fx3Crystal          = 98,  ///< 水晶
+        Fx4Atmosphere       = 99,  ///< 大气
+        Fx5Brightness       = 100, ///< 明亮
+        Fx6Goblins          = 101, ///< 小妖
+        Fx7Echoes           = 102, ///< 回声
+        Fx8SciFi            = 103, ///< 科幻
+        Sitar               = 104, ///< 西塔琴
+        Banjo               = 105, ///< 班卓琴
+        Shamisen            = 106, ///< 三味线
+        Koto                = 107, ///< 古筝
+        Kalimba             = 108, ///< 卡林巴
+        Bagpipe             = 109, ///< 风笛
+        Fiddle              = 110, ///< 民间提琴
+        Shanai              = 111, ///< 唢呐
+        TinkleBell          = 112, ///< 铃铛
+        Agogo               = 113, ///< 阿果果铃
+        SteelDrums          = 114, ///< 钢鼓
+        Woodblock           = 115, ///< 木鱼
+        TaikoDrum           = 116, ///< 太鼓
+        MelodicTom          = 117, ///< 旋律通鼓
+        SynthDrum           = 118, ///< 合成鼓
+        ReverseCymbal       = 119, ///< 反奏钹
+        GuitarFretNoise     = 120, ///< 吉他擦弦声
+        BreathNoise         = 121, ///< 呼吸声
+        Seashore            = 122, ///< 海浪
+        BirdTweet           = 123, ///< 鸟鸣
+        TelephoneRing       = 124, ///< 电话铃
+        Helicopter          = 125, ///< 直升机
+        Applause            = 126, ///< 掌声
+        Gunshot             = 127  ///< 枪声
     };
 
     /**
      * @namespace pitches
-     * @brief 标准 MIDI 音高常量，包含中央 C4=60 的所有半音音高，以及休止符 REST。
+     * @brief 标准 MIDI 音高常量，包含中央 C4=60 的所有半音音高，以及休止符
+     * REST。
      */
-    namespace pitches
-    {
+    namespace pitches {
         /// @name 自然音（C D E F G A B）
         /// @{
         const int C0 = 12, D0 = 14, E0 = 16, F0 = 17, G0 = 19, A0 = 21, B0 = 23;
@@ -229,8 +228,10 @@ namespace console
         const int C4 = 60, D4 = 62, E4 = 64, F4 = 65, G4 = 67, A4 = 69, B4 = 71;
         const int C5 = 72, D5 = 74, E5 = 76, F5 = 77, G5 = 79, A5 = 81, B5 = 83;
         const int C6 = 84, D6 = 86, E6 = 88, F6 = 89, G6 = 91, A6 = 93, B6 = 95;
-        const int C7 = 96, D7 = 98, E7 = 100, F7 = 101, G7 = 103, A7 = 105, B7 = 107;
-        const int C8 = 108, D8 = 110, E8 = 112, F8 = 113, G8 = 115, A8 = 117, B8 = 119;
+        const int C7 = 96, D7 = 98, E7 = 100, F7 = 101, G7 = 103, A7 = 105,
+                  B7 = 107;
+        const int C8 = 108, D8 = 110, E8 = 112, F8 = 113, G8 = 115, A8 = 117,
+                  B8 = 119;
         const int C9 = 120, D9 = 122, E9 = 124, F9 = 125, G9 = 127;
         /// @}
 
@@ -256,10 +257,10 @@ namespace console
      * @struct Note
      * @brief 表示一个音符，包含音高、时值和力度。
      */
-    struct Note
-    {
-        signed char pitch;  ///< MIDI 音高编号（0-127），或 pitches::REST 表示休止符
-        double beats;       ///< 音符时值（以四分音符为单位，1 表示一拍）
+    struct Note {
+        signed char
+            pitch; ///< MIDI 音高编号（0-127），或 pitches::REST 表示休止符
+        double beats; ///< 音符时值（以四分音符为单位，1 表示一拍）
         signed char volume; ///< 力度（0-127），-1 表示使用 MIDI 对象的默认音量
 
         /**
@@ -268,24 +269,26 @@ namespace console
          * @param b 时值，默认为 1（一拍）。
          * @param v 力度，默认为 -1（使用默认音量）。
          */
-        Note(signed char p = 60, double b = 1, signed char v = -1)
-            : pitch(p), beats(b), volume(v) {}
+        Note(signed char p = 60, double b = 1, signed char v = -1) :
+            pitch(p), beats(b), volume(v) {}
     };
 
     /**
      * @class MIDI
-     * @brief MIDI 输出设备控制器，支持乐器切换、音量调节、同步/异步播放音符序列。
-     * @details 封装 Windows MIDI 输出函数，支持设置乐器（GM 标准）、节拍（BPM）、音量。
+     * @brief MIDI
+     * 输出设备控制器，支持乐器切换、音量调节、同步/异步播放音符序列。
+     * @details 封装 Windows MIDI 输出函数，支持设置乐器（GM
+     * 标准）、节拍（BPM）、音量。
      *          播放音符时会阻塞当前线程（同步）或启动新线程（异步）。
      * @note 该类不可拷贝、不可移动。析构时自动关闭 MIDI 设备。
-     * @warning 异步播放（nplay）会分离线程，确保音符在 MIDI 对象销毁前播放完毕，否则可能被中断。
+     * @warning 异步播放（nplay）会分离线程，确保音符在 MIDI
+     * 对象销毁前播放完毕，否则可能被中断。
      */
-    class MIDI
-    {
-        HMIDIOUT handle;       ///< MIDI 输出设备句柄
-        unsigned char bpm;     ///< 每分钟节拍数（beats per minute）
-        unsigned char volume;  ///< 默认音量（0-127）
-        Instrument instrument; ///< 当前乐器
+    class MIDI {
+        HMIDIOUT      handle;     ///< MIDI 输出设备句柄
+        unsigned char bpm;        ///< 每分钟节拍数（beats per minute）
+        unsigned char volume;     ///< 默认音量（0-127）
+        Instrument    instrument; ///< 当前乐器
 
     public:
         /**
@@ -296,22 +299,20 @@ namespace console
          * @param deviceID MIDI 设备 ID，默认为 0（系统默认设备）。
          * @note 若设备打开失败，handle 将为 nullptr，后续播放操作无效。
          */
-        MIDI(Instrument instrument = Instrument::AcousticGrandPiano,
-             unsigned char bpm = 120,
-             unsigned char volume = 100,
-             unsigned deviceID = 0)
-            : bpm(bpm), volume(volume), instrument(instrument)
-        {
+        MIDI(Instrument    instrument = Instrument::AcousticGrandPiano,
+             unsigned char bpm = 120, unsigned char volume = 100,
+             unsigned deviceID = 0) :
+            bpm(bpm), volume(volume), instrument(instrument) {
             HMIDIOUT h = nullptr;
-            if (midiOutOpen(&h, deviceID, 0, 0, CALLBACK_NULL) == MMSYSERR_NOERROR)
-            {
+            if (midiOutOpen(&h, deviceID, 0, 0, CALLBACK_NULL) ==
+                MMSYSERR_NOERROR) {
                 handle = h;
-                DWORD program_change = 0xC0 | ((unsigned char)(instrument) << 8);
+                DWORD program_change =
+                    0xC0 | ((unsigned char)(instrument) << 8);
                 midiOutShortMsg(handle, program_change);
                 DWORD volume_change = 0xB0 | (0x07 << 8) | (volume << 16);
                 midiOutShortMsg(handle, volume_change);
-            }
-            else
+            } else
                 handle = nullptr;
         }
 
@@ -328,10 +329,8 @@ namespace console
          * @brief 析构函数，关闭 MIDI 设备。
          * @note 若仍有异步播放中的音符，可能被截断。
          */
-        ~MIDI() noexcept
-        {
-            if (handle)
-                midiOutClose(handle);
+        ~MIDI() noexcept {
+            if (handle) midiOutClose(handle);
         }
 
         /// @name 属性访问
@@ -348,12 +347,11 @@ namespace console
          * @param new_instrument 新乐器。
          * @note 若 MIDI 设备未打开则无效。
          */
-        void set_instrument(Instrument new_instrument)
-        {
+        void set_instrument(Instrument new_instrument) {
             instrument = new_instrument;
-            if (!handle)
-                return;
-            DWORD program_change = 0xC0 | ((unsigned char)(new_instrument) << 8);
+            if (!handle) return;
+            DWORD program_change =
+                0xC0 | ((unsigned char)(new_instrument) << 8);
             midiOutShortMsg(handle, program_change);
         }
 
@@ -363,11 +361,9 @@ namespace console
          * @brief 设置默认音量。
          * @param vol 新音量（0-127）。
          */
-        void set_volume(unsigned char vol)
-        {
+        void set_volume(unsigned char vol) {
             volume = vol;
-            if (!handle)
-                return;
+            if (!handle) return;
             DWORD volume_change = 0xB0 | (0x07 << 8) | (vol << 16);
             midiOutShortMsg(handle, volume_change);
         }
@@ -380,23 +376,17 @@ namespace console
          *          若音符力度为 -1，则使用 MIDI 对象的默认音量。
          * @note 若 MIDI 设备未打开，函数直接返回。
          */
-        void play(Note note)
-        {
-            if (!handle)
-                return;
-            if (note.pitch != -1)
-            {
-                DWORD note_on = 0x90 | (note.pitch << 8) |
-                                ((note.volume == -1
-                                      ? volume
-                                      : note.volume)
-                                 << 16);
+        void play(Note note) {
+            if (!handle) return;
+            if (note.pitch != -1) {
+                DWORD note_on =
+                    0x90 | (note.pitch << 8) |
+                    ((note.volume == -1 ? volume : note.volume) << 16);
                 midiOutShortMsg(handle, note_on);
                 Sleep(60000 * note.beats / bpm);
                 DWORD note_off = 0x80 | (note.pitch << 8) | (64 << 16);
                 midiOutShortMsg(handle, note_off);
-            }
-            else
+            } else
                 Sleep(60000 * note.beats / bpm);
         }
 
@@ -404,13 +394,11 @@ namespace console
          * @brief 异步播放一个音符（非阻塞）。
          * @param note 要播放的音符。
          * @details 该函数启动一个新线程执行 play(note) 并立即返回。
-         * @warning 线程被分离（detach），无法等待其完成。若 MIDI 对象在播放完成前被销毁，可能截断声音。
+         * @warning 线程被分离（detach），无法等待其完成。若 MIDI
+         * 对象在播放完成前被销毁，可能截断声音。
          */
-        void nplay(Note note)
-        {
-            std::thread([this, note]()
-                        { play(note); })
-                .detach();
+        void nplay(Note note) {
+            std::thread([this, note]() { play(note); }).detach();
         }
 
         /**
@@ -419,11 +407,8 @@ namespace console
          * @param begin 首迭代器
          * @param end 超尾迭代器
          */
-        template <class Iter>
-        void play(Iter begin, Iter end)
-        {
-            for (; begin != end; ++begin)
-                play(*begin);
+        template <class Iter> void play(Iter begin, Iter end) {
+            for (; begin != end; ++begin) play(*begin);
         }
 
         /**
@@ -432,27 +417,18 @@ namespace console
          * @param begin 首迭代器
          * @param end 超尾迭代器
          */
-        template <class Iter>
-        void nplay(Iter begin, Iter end)
-        {
-            std::thread([=]()
-                        { play(begin, end); })
-                .detach();
+        template <class Iter> void nplay(Iter begin, Iter end) {
+            std::thread([=]() { play(begin, end); }).detach();
         }
 
         /**
          * @brief 开始播放某个音符。
          * @param note 要播放的音符，其 beats 将被忽略。
          */
-        void note_on(Note note)
-        {
-            if (!handle)
-                return;
+        void note_on(Note note) {
+            if (!handle) return;
             DWORD on = 0x90 | (note.pitch << 8) |
-                       ((note.volume == -1
-                             ? volume
-                             : note.volume)
-                        << 16);
+                       ((note.volume == -1 ? volume : note.volume) << 16);
             midiOutShortMsg(handle, on);
         }
 
@@ -460,10 +436,8 @@ namespace console
          * @brief 结束某个音符的播放。
          * @param note 要结束的音符，其 beats 将被忽略。
          */
-        void note_off(Note note)
-        {
-            if (!handle)
-                return;
+        void note_off(Note note) {
+            if (!handle) return;
             DWORD off = 0x80 | (note.pitch << 8) | (64 << 16);
             midiOutShortMsg(handle, off);
         }

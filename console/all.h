@@ -30,42 +30,42 @@ SOFTWARE.
 */
 
 #pragma once
-#include "std.h"
-#include "output.h"
-#include "input.h"
-#include "time.h"
-#include "random.h"
-#include "strpp.h"
-#include "colorful.h"
-#include "logging.h"
-#include "progress.h"
-#include "csexc.h"
-#include "file.h"
-#include "box.h"
-#include "multiarray.h"
-#include "cursor_ptr.h"
-#include "literals.h"
-#include "view.h"
-#include "compre.h"
-#include "sfinae.h"
-#include "re.h"
-#include "info.h"
-#include "repr.h"
-#include "outfwd.h"
-#include "maybe.h"
-#include "matools.h"
-#include "iter.h"
-#include "rational.h"
-#include "screen.h"
-#include "kb.h" // windows.h on Windows
 #include "adapter.h"
-#include "syscmd.h"
+#include "box.h"
+#include "colorful.h"
+#include "compre.h"
 #include "config.h"
 #include "crypto.h"
+#include "csexc.h"
+#include "cursor_ptr.h"
+#include "file.h"
 #include "gen.h"
-#include "put.h"
+#include "info.h"
+#include "input.h"
+#include "iter.h"
+#include "kb.h" // windows.h on Windows
+#include "literals.h"
+#include "logging.h"
+#include "matools.h"
+#include "maybe.h"
+#include "multiarray.h"
+#include "outfwd.h"
+#include "output.h"
 #include "pool.h"
+#include "progress.h"
+#include "put.h"
+#include "random.h"
+#include "rational.h"
+#include "re.h"
+#include "repr.h"
+#include "screen.h"
+#include "sfinae.h"
+#include "std.h"
+#include "strpp.h"
+#include "syscmd.h"
 #include "term.h" // windows.h on Windows
+#include "time.h"
+#include "view.h"
 
 // #include "win/melody.h" // 需要链接，所以不自动包含
 
@@ -77,7 +77,6 @@ SOFTWARE.
  * @namespace console
  * @brief 本库所有组件所在的顶层命名空间。
  */
-namespace console
-{
+namespace console {
     static constexpr char meta[] = "CONSOLE-LIB-2026-06-28-MRXIE1109";
 }

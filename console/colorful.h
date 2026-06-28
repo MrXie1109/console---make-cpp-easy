@@ -31,15 +31,13 @@ SOFTWARE.
 #pragma once
 #include <iostream>
 
-namespace console
-{
+namespace console {
     /**
      * @namespace console::color
      * @brief 包含控制台颜色、背景色和文本样式的 ANSI 转义序列常量。
      * @details 使用方式：`std::cout << color::Red << "Hello" << color::Reset;`
      */
-    namespace color
-    {
+    namespace color {
         // ------------------------------ 前景色 ------------------------------
         /// @brief 黑色前景
         static constexpr char Black[] = "\033[30m";
@@ -110,7 +108,8 @@ namespace console
         /// @brief 亮白色背景
         static constexpr char BgBrightWhite[] = "\033[107m";
 
-        // ------------------------------ 文本样式 ------------------------------
+        // ------------------------------ 文本样式
+        // ------------------------------
         /// @brief 粗体
         static constexpr char Bold[] = "\033[1m";
         /// @brief 暗淡（降低亮度）
@@ -135,8 +134,8 @@ namespace console
      * @param os 输出流，默认 std::cout。
      * @note cc = change color
      */
-    inline void cc(const char *clr = color::Reset, std::ostream &os = std::cout)
-    {
+    inline void cc(const char   *clr = color::Reset,
+                   std::ostream &os  = std::cout) {
         os << clr;
     }
 
@@ -144,8 +143,7 @@ namespace console
      * @class ColorGuard
      * @brief RAII颜色守卫，构造时设置颜色，析构时自动恢复。
      */
-    class ColorGuard
-    {
+    class ColorGuard {
         std::ostream &os_; ///< 输出流引用
 
     public:
@@ -154,22 +152,18 @@ namespace console
          * @param color ANSI颜色序列（如 color::Red）
          * @param os 输出流，默认为 std::cout
          */
-        explicit ColorGuard(const char *color, std::ostream &os = std::cout)
-            : os_(os)
-        {
+        explicit ColorGuard(const char *color, std::ostream &os = std::cout) :
+            os_(os) {
             os << color;
         }
 
         /**
          * @brief 析构函数，自动恢复默认颜色。
          */
-        ~ColorGuard()
-        {
-            os_ << color::Reset;
-        }
+        ~ColorGuard() { os_ << color::Reset; }
 
         // 禁止拷贝
-        ColorGuard(const ColorGuard &) = delete;
+        ColorGuard(const ColorGuard &)            = delete;
         ColorGuard &operator=(const ColorGuard &) = delete;
     };
 }

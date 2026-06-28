@@ -2,7 +2,8 @@
  * @file logging.h
  * @brief 提供带颜色和级别的日志记录功能。
  * @details 包含 Logging 类，支持 DEBUG、INFO、WARN、ERROR、FATAL 五个级别，
- *          可控制输出级别、颜色开关，并自动附加时间戳。全局默认 logger 实例可直接使用。
+ *          可控制输出级别、颜色开关，并自动附加时间戳。全局默认 logger
+ * 实例可直接使用。
  * @author MrXie1109
  * @date 2026
  * @copyright MIT License
@@ -33,23 +34,23 @@ SOFTWARE.
 #pragma once
 #include <cstdint>
 #include <sstream>
-#include "output.h"
+
 #include "colorful.h"
-#include "time.h"
-#include "strpp.h"
 #include "csexc.h"
 #include "literals.h"
+#include "output.h"
+#include "strpp.h"
+#include "time.h"
 
-namespace console
-{
+namespace console {
     /**
      * @class Logging
      * @brief 日志记录器，支持多级别、颜色输出和自动时间戳。
-     * @details 使用 Output 类进行格式化输出，可设置最低日志级别或单独控制每个级别的开关。
-     *          FATAL 级别会抛出 FatalLogging 异常。
+     * @details 使用 Output
+     * 类进行格式化输出，可设置最低日志级别或单独控制每个级别的开关。 FATAL
+     * 级别会抛出 FatalLogging 异常。
      */
-    class Logging
-    {
+    class Logging {
     public:
         /**
          * @enum Level
@@ -60,18 +61,11 @@ namespace console
          * @var ERROR 错误
          * @var FATAL 致命错误（会抛出异常）
          */
-        enum class Level : int8_t
-        {
-            DEBUG,
-            INFO,
-            WARN,
-            ERROR,
-            FATAL
-        };
+        enum class Level : int8_t { DEBUG, INFO, WARN, ERROR, FATAL };
 
     private:
-        Output output;    ///< 输出器
-        bool colorful;    ///< 是否启用颜色
+        Output output;   ///< 输出器
+        bool   colorful; ///< 是否启用颜色
         bool settings[5]; ///< 每个级别的开关，索引对应 Level 枚举值
 
     public:
@@ -79,13 +73,10 @@ namespace console
          * @brief 设置最低日志级别（低于该级别的日志将被忽略）。
          * @param minLevel 最低级别（包含）。
          */
-        void set(Level minLevel)
-        {
+        void set(Level minLevel) {
             int8_t n = int8_t(minLevel);
-            for (int i = 0; i < n; i++)
-                settings[i] = false;
-            for (int i = n; i < 5; i++)
-                settings[i] = true;
+            for (int i = 0; i < n; i++) settings[i] = false;
+            for (int i = n; i < 5; i++) settings[i] = true;
         }
 
         /**
@@ -96,8 +87,7 @@ namespace console
          * @param d ERROR 开关
          * @param e FATAL 开关
          */
-        void set(bool a, bool b, bool c, bool d, bool e)
-        {
+        void set(bool a, bool b, bool c, bool d, bool e) {
             settings[0] = a;
             settings[1] = b;
             settings[2] = c;
@@ -111,24 +101,21 @@ namespace console
          * @param cf 是否启用颜色，默认 false。
          * @param lvl 最低日志级别，默认 INFO。
          */
-        Logging(std::ostream &os = std::clog,
-                bool cf = false, Level lvl = Level::INFO)
-            : output(os, "", "\n", true),
-              colorful(cf) { set(lvl); }
+        Logging(std::ostream &os = std::clog, bool cf = false,
+                Level lvl = Level::INFO) :
+            output(os, "", "\n", true), colorful(cf) {
+            set(lvl);
+        }
 
         /**
          * @brief 输出 DEBUG 级别日志。
          * @tparam Args 可变参数类型。
          * @param args 要输出的内容（可多个，自动转换为字符串）。
          */
-        template <class... Args>
-        void debug(const Args &...args)
-        {
-            if (settings[0])
-            {
+        template <class... Args> void debug(const Args &...args) {
+            if (settings[0]) {
                 if (colorful)
-                    output(color::BrightBlack,
-                           '[', datetime(), "] [DEBUG] - ",
+                    output(color::BrightBlack, '[', datetime(), "] [DEBUG] - ",
                            args..., color::Reset);
                 else
                     output('[', datetime(), "] [DEBUG] - ", args...);
@@ -140,14 +127,10 @@ namespace console
          * @tparam Args 可变参数类型。
          * @param args 要输出的内容。
          */
-        template <class... Args>
-        void info(const Args &...args)
-        {
-            if (settings[1])
-            {
+        template <class... Args> void info(const Args &...args) {
+            if (settings[1]) {
                 if (colorful)
-                    output(color::BrightCyan,
-                           '[', datetime(), "] [.INFO] - ",
+                    output(color::BrightCyan, '[', datetime(), "] [.INFO] - ",
                            args..., color::Reset);
                 else
                     output('[', datetime(), "] [.INFO] - ", args...);
@@ -159,14 +142,10 @@ namespace console
          * @tparam Args 可变参数类型。
          * @param args 要输出的内容。
          */
-        template <class... Args>
-        void warn(const Args &...args)
-        {
-            if (settings[2])
-            {
+        template <class... Args> void warn(const Args &...args) {
+            if (settings[2]) {
                 if (colorful)
-                    output(color::BrightYellow,
-                           '[', datetime(), "] [.WARN] - ",
+                    output(color::BrightYellow, '[', datetime(), "] [.WARN] - ",
                            args..., color::Reset);
                 else
                     output('[', datetime(), "] [.WARN] - ", args...);
@@ -178,14 +157,10 @@ namespace console
          * @tparam Args 可变参数类型。
          * @param args 要输出的内容。
          */
-        template <class... Args>
-        void error(const Args &...args)
-        {
-            if (settings[3])
-            {
+        template <class... Args> void error(const Args &...args) {
+            if (settings[3]) {
                 if (colorful)
-                    output(color::BrightRed,
-                           '[', datetime(), "] [ERROR] - ",
+                    output(color::BrightRed, '[', datetime(), "] [ERROR] - ",
                            args..., color::Reset);
                 else
                     output('[', datetime(), "] [ERROR] - ", args...);
@@ -198,16 +173,12 @@ namespace console
          * @param args 要输出的内容。
          * @throw FatalLogging 异常，异常消息包含日志内容。
          */
-        template <class... Args>
-        void fatal(const Args &...args)
-        {
+        template <class... Args> void fatal(const Args &...args) {
             std::string error_info(to_string(args...));
-            if (settings[4])
-            {
+            if (settings[4]) {
                 if (colorful)
-                    output(color::BrightMagenta,
-                           '[', datetime(), "] [FATAL] - ",
-                           error_info, color::Reset);
+                    output(color::BrightMagenta, '[', datetime(),
+                           "] [FATAL] - ", error_info, color::Reset);
                 else
                     output('[', datetime(), "] [FATAL] - ", error_info);
             }
@@ -218,11 +189,11 @@ namespace console
     /**
      * @brief 内部单例。
      */
-    inline Logging &get_logger()
-    {
+    inline Logging &get_logger() {
         static Logging instance(std::clog, true, Logging::Level::INFO);
         return instance;
     }
 
-    static Logging &logger = get_logger(); ///< 全局默认 logger 实例，启用颜色，级别 INFO。
+    static Logging &logger =
+        get_logger(); ///< 全局默认 logger 实例，启用颜色，级别 INFO。
 }

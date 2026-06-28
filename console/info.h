@@ -31,14 +31,12 @@ SOFTWARE.
 #pragma once
 #include <string>
 
-namespace console
-{
+namespace console {
     /**
      * @brief 返回 MIT 许可证全文。
      * @return std::string 许可证文本。
      */
-    inline std::string license()
-    {
+    inline std::string license() {
         return R"(Copyright (c) 2026 MrXie1109
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -65,8 +63,7 @@ SOFTWARE.)";
      * @details 根据预定义宏识别 Windows、Linux、macOS 或 Unknown。
      * @return std::string 平台名称。
      */
-    inline std::string platform()
-    {
+    inline std::string platform() {
 #ifdef _WIN32
         return "Windows";
 #elif defined(__linux__)
@@ -83,12 +80,9 @@ SOFTWARE.)";
      * @details 支持 GCC（版本号）、MSVC（版本号）、Clang（仅名称）以及其他。
      * @return std::string 编译器信息。
      */
-    inline std::string compiler()
-    {
+    inline std::string compiler() {
 #ifdef __GNUC__
-        return "GCC " +
-               std::to_string(__GNUC__) +
-               "." +
+        return "GCC " + std::to_string(__GNUC__) + "." +
                std::to_string(__GNUC_MINOR__);
 #elif defined(_MSC_VER)
         return "MSVC " + std::to_string(_MSC_VER);
@@ -101,19 +95,18 @@ SOFTWARE.)";
 
     /**
      * @brief 返回库的版本字符串。
-     * @return std::string 格式为 console version Major.Minor.Patch (YYYY-MM-DD) -- "Commit Message"。
+     * @return std::string 格式为 console version Major.Minor.Patch (YYYY-MM-DD)
+     * -- "Commit Message"。
      */
-    inline std::string version()
-    {
-        return "console version 5.7.0 (2026-06-25) -- \"Believe it.\"";
+    inline std::string version() {
+        return "console version 5.7.1 (2026-06-28) -- \"New Format.\"";
     }
 
     /**
      * @brief 返回库的作者。
      * @return std::string "MrXie1109"。
      */
-    inline std::string author()
-    {
+    inline std::string author() {
         return "MrXie1109";
     }
 }

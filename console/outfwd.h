@@ -1,8 +1,8 @@
 /**
  * @file outfwd.h
  * @brief 为 STL 容器提供输出流运算符的前向声明。
- * @details 该头文件声明了 console 命名空间中针对各种 STL 容器的 operator<< 重载，
- *          用于支持将这些容器直接输出到 std::ostream。实际定义在 output.h 中。
+ * @details 该头文件声明了 console 命名空间中针对各种 STL 容器的 operator<<
+ * 重载， 用于支持将这些容器直接输出到 std::ostream。实际定义在 output.h 中。
  * @author MrXie1109
  * @date 2026
  * @copyright MIT License
@@ -31,21 +31,20 @@ SOFTWARE.
 */
 
 #pragma once
-#include <iostream>
-#include <vector>
-#include <deque>
-#include <list>
-#include <forward_list>
 #include <array>
-#include <set>
+#include <deque>
+#include <forward_list>
+#include <iostream>
+#include <list>
 #include <map>
-#include <unordered_set>
+#include <set>
 #include <unordered_map>
-#include <valarray>
+#include <unordered_set>
 #include <utility>
+#include <valarray>
+#include <vector>
 
-namespace console
-{
+namespace console {
     /**
      * @defgroup output_forward_decl 输出流运算符前向声明
      * @brief 为各种 STL 容器声明的 operator<< 重载。
@@ -98,11 +97,13 @@ namespace console
 
     /// @brief std::unordered_multiset 输出声明。
     template <class T>
-    std::ostream &operator<<(std::ostream &, const std::unordered_multiset<T> &);
+    std::ostream &operator<<(std::ostream &,
+                             const std::unordered_multiset<T> &);
 
     /// @brief std::unordered_multimap 输出声明。
     template <class K, class V>
-    std::ostream &operator<<(std::ostream &, const std::unordered_multimap<K, V> &);
+    std::ostream &operator<<(std::ostream &,
+                             const std::unordered_multimap<K, V> &);
 
     /// @brief std::pair 输出声明。
     template <class T, class U>

@@ -1,7 +1,8 @@
 /**
  * @file syscmd.h
  * @brief 跨平台系统命令执行模块。
- * @details 封装 popen/_popen 函数，支持命令行参数和关键字参数，自动合并 stderr 到 stdout。
+ * @details 封装 popen/_popen 函数，支持命令行参数和关键字参数，自动合并 stderr
+ * 到 stdout。
  * @author MrXie1109
  * @date 2026
  * @copyright MIT License
@@ -30,12 +31,12 @@ SOFTWARE.
 */
 
 #pragma once
+#include <array>
 #include <cstdlib>
+#include <map>
+#include <memory>
 #include <string>
 #include <vector>
-#include <map>
-#include <array>
-#include <memory>
 
 #ifdef _WIN32
 #define POPEN _popen
@@ -45,16 +46,14 @@ SOFTWARE.
 #define PCLOSE pclose
 #endif
 
-namespace console
-{
+namespace console {
     /**
      * @class CmdResult
      * @brief 命令执行结果封装类。
      * @details 存储命令执行状态码和标准输出内容，对象只能通过 syscmd 函数创建。
      */
-    class CmdResult
-    {
-        int status_;                       ///< 命令退出状态码（0 成功，-1 管道打开失败）
+    class CmdResult {
+        int status_; ///< 命令退出状态码（0 成功，-1 管道打开失败）
         std::unique_ptr<std::string> ptr_; ///< 命令输出内容（含 stderr）
 
         /**
@@ -100,7 +99,8 @@ namespace console
         /**
          * @brief 获取命令的标准输出内容。
          * @return const std::string& 输出内容（含 stderr）
-         * @warning 请先使用 ok() 或 fail() || error() 检查合法性，否则行为未定义
+         * @warning 请先使用 ok() 或 fail() || error()
+         * 检查合法性，否则行为未定义
          */
         const std::string &output() const { return *ptr_; }
     };
@@ -120,32 +120,29 @@ namespace console
      * @endcode
      * @warning 函数阻塞直到命令执行完毕。
      */
-    inline CmdResult syscmd(const std::string &exe,
-                            const std::vector<std::string> &args = {},
-                            const std::map<std::string, std::string> &kwargs = {})
-    {
+    inline CmdResult
+    syscmd(const std::string &exe, const std::vector<std::string> &args = {},
+           const std::map<std::string, std::string> &kwargs = {}) {
         std::string cmd = exe;
-        for (const std::string &arg : args)
-            cmd += " " + arg;
+        for (const std::string &arg : args) cmd += " " + arg;
         for (const auto &kwarg : kwargs)
             cmd += " " + kwarg.first + " " + kwarg.second;
         cmd += " 2>&1";
         FILE *pipe = POPEN(cmd.c_str(), "r");
-        if (!pipe)
-        {
+        if (!pipe) {
             CmdResult cr;
             cr.status_ = -1;
-            cr.ptr_ = nullptr;
+            cr.ptr_    = nullptr;
             return cr;
         }
-        std::array<char, 256> buffer;
+        std::array<char, 256>        buffer;
         std::unique_ptr<std::string> output(new std::string);
         while (fgets(buffer.data(), buffer.size(), pipe) != nullptr)
             *output += buffer.data();
-        int status = PCLOSE(pipe);
+        int       status = PCLOSE(pipe);
         CmdResult cr;
         cr.status_ = status;
-        cr.ptr_ = std::move(output);
+        cr.ptr_    = std::move(output);
         return cr;
     }
 }

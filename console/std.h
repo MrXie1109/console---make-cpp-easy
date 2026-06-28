@@ -1,8 +1,9 @@
 /**
  * @file std.h
  * @brief 聚合包含所有 C++ 标准库头文件（根据语言标准版本条件包含）。
- * @details 该头文件旨在提供一站式标准库包含，方便快速开发。根据 __cplusplus 宏，
- *          自动包含对应 C++ 版本的标准库头文件，包括 C++11、C++14、C++17、C++20、C++23 等。
+ * @details 该头文件旨在提供一站式标准库包含，方便快速开发。根据 __cplusplus
+ * 宏， 自动包含对应 C++ 版本的标准库头文件，包括
+ * C++11、C++14、C++17、C++20、C++23 等。
  * @author MrXie1109
  * @date 2026
  * @copyright MIT License
@@ -65,16 +66,16 @@ SOFTWARE.
 #include <ratio>
 #include <scoped_allocator>
 #include <tuple>
-#include <typeindex>
 #include <type_traits>
+#include <typeindex>
 #endif
 #if __cplusplus >= 201402L
 #endif
 #if __cplusplus >= 201703L
 #include <any>
 #include <optional>
-#include <variant>
 #include <string_view>
+#include <variant>
 #endif
 #if __cplusplus >= 202002L
 #include <bit>
@@ -82,8 +83,8 @@ SOFTWARE.
 #include <concepts>
 #include <numbers>
 #include <ranges>
-#include <span>
 #include <source_location>
+#include <span>
 #include <version>
 #if __cpp_impl_coroutine
 #include <coroutine>
@@ -172,8 +173,8 @@ SOFTWARE.
 #include <system_error>
 #include <thread>
 #include <tuple>
-#include <typeindex>
 #include <type_traits>
+#include <typeindex>
 #include <unordered_map>
 #include <unordered_set>
 #endif
@@ -184,8 +185,8 @@ SOFTWARE.
 #include <any>
 #include <charconv>
 #include <filesystem>
-#include <optional>
 #include <memory_resource>
+#include <optional>
 #include <variant>
 #endif
 #if __cplusplus >= 202002L
@@ -197,10 +198,10 @@ SOFTWARE.
 #include <latch>
 #include <numbers>
 #include <ranges>
-#include <span>
-#include <stop_token>
 #include <semaphore>
 #include <source_location>
+#include <span>
+#include <stop_token>
 #include <syncstream>
 #include <version>
 #endif
@@ -216,12 +217,10 @@ SOFTWARE.
 #include <stdfloat>
 #endif
 #if __cplusplus > 202302L
-#include <text_encoding>
 #include <stdbit.h>
 #include <stdckdint.h>
+#include <text_encoding>
 #endif
 #endif
 
-namespace console
-{
-}
+namespace console {}

@@ -1,7 +1,8 @@
 /**
  * @file matools.h
  * @brief 提供 MultiArray 多维数组的数学工具函数。
- * @details 包含统计（均值、方差、标准差）、线性代数（点积、范数、余弦、矩阵乘法、转置、迹、叉积）、
+ * @details
+ * 包含统计（均值、方差、标准差）、线性代数（点积、范数、余弦、矩阵乘法、转置、迹、叉积）、
  *          元素级运算（clamp、abs、三角函数、指数对数、幂、取整）、随机初始化、卷积等。
  * @author MrXie1109
  * @date 2026
@@ -32,9 +33,10 @@ SOFTWARE.
 
 #pragma once
 #define _USE_MATH_DEFINES
+#include <cmath>
 #include <iostream>
 #include <numeric>
-#include <cmath>
+
 #include "multiarray.h"
 #include "random.h"
 
@@ -42,8 +44,7 @@ SOFTWARE.
 #define M_PI 3.14159265358979323846
 #endif
 
-namespace console
-{
+namespace console {
     /**
      * @defgroup matools 数学工具
      * @brief MultiArray 的数学运算函数集合。
@@ -59,8 +60,7 @@ namespace console
      * @return double 平均值。
      */
     template <class T, size_t... Dims>
-    double mean(const MultiArray<T, Dims...> &arr)
-    {
+    double mean(const MultiArray<T, Dims...> &arr) {
         return double(sum(arr)) / arr.fsize();
     }
 
@@ -69,18 +69,18 @@ namespace console
      * @tparam T 元素类型。
      * @tparam Dims 维度包。
      * @param arr 输入数组。
-     * @param sample 若为 true（默认），计算样本方差（除以 n-1）；若为 false，计算总体方差（除以 n）。
+     * @param sample 若为 true（默认），计算样本方差（除以 n-1）；若为
+     * false，计算总体方差（除以 n）。
      * @return double 方差。
      */
     template <class T, size_t... Dims>
-    double variance(const MultiArray<T, Dims...> &arr, bool sample = true)
-    {
-        double m = mean(arr);
+    double variance(const MultiArray<T, Dims...> &arr, bool sample = true) {
+        double m      = mean(arr);
         double sq_sum = 0;
-        arr.for_each([&](const T &x)
-                     {
+        arr.for_each([&](const T &x) {
             double d = double(x) - m;
-            sq_sum += d * d; });
+            sq_sum += d * d;
+        });
         return sq_sum / (arr.fsize() - (sample ? 1 : 0));
     }
 
@@ -89,16 +89,17 @@ namespace console
      * @tparam T 元素类型。
      * @tparam Dims 维度包。
      * @param arr 输入数组。
-     * @param sample 若为 true，计算样本标准差（除以 n-1 的方差开根）；否则总体标准差。
+     * @param sample 若为 true，计算样本标准差（除以 n-1
+     * 的方差开根）；否则总体标准差。
      * @return double 标准差。
      */
     template <class T, size_t... Dims>
-    double stddev(const MultiArray<T, Dims...> &arr, bool sample = true)
-    {
+    double stddev(const MultiArray<T, Dims...> &arr, bool sample = true) {
         return std::sqrt(variance(arr, sample));
     }
 
-    // ---------------------------- 向量运算（一维） ----------------------------
+    // ---------------------------- 向量运算（一维）
+    // ----------------------------
     /**
      * @brief 计算两个一维向量的点积。
      * @tparam T 元素类型。
@@ -108,8 +109,7 @@ namespace console
      * @return T 点积结果。
      */
     template <class T, size_t N>
-    T dot(const MultiArray<T, N> &a, const MultiArray<T, N> &b)
-    {
+    T dot(const MultiArray<T, N> &a, const MultiArray<T, N> &b) {
         return std::inner_product(a.fbegin(), a.fend(), b.fbegin(), T{});
     }
 
@@ -120,9 +120,7 @@ namespace console
      * @param a 输入向量。
      * @return double 范数值。
      */
-    template <class T, size_t N>
-    double norm(const MultiArray<T, N> &a)
-    {
+    template <class T, size_t N> double norm(const MultiArray<T, N> &a) {
         return std::sqrt(double(dot(a, a)));
     }
 
@@ -135,8 +133,7 @@ namespace console
      * @return double 余弦值（范围 [-1, 1]）。
      */
     template <class T, size_t N>
-    double cosine(const MultiArray<T, N> &a, const MultiArray<T, N> &b)
-    {
+    double cosine(const MultiArray<T, N> &a, const MultiArray<T, N> &b) {
         return dot(a, b) / (norm(a) * norm(b));
     }
 
@@ -148,16 +145,13 @@ namespace console
      * @return MultiArray<T, N> 归一化后的向量（若原范数为 0，返回原向量）。
      */
     template <class T, size_t N>
-    MultiArray<T, N> normalize(const MultiArray<T, N> &a)
-    {
+    MultiArray<T, N> normalize(const MultiArray<T, N> &a) {
         double len = norm(a);
-        if (len == 0)
-            return a;
+        if (len == 0) return a;
         MultiArray<T, N> result;
-        auto ai = a.fbegin();
-        auto ri = result.fbegin();
-        while (ri != result.fend())
-            *ri++ = *ai++ / len;
+        auto             ai = a.fbegin();
+        auto             ri = result.fbegin();
+        while (ri != result.fend()) *ri++ = *ai++ / len;
         return result;
     }
 
@@ -170,13 +164,11 @@ namespace console
      * @return double 欧氏距离。
      */
     template <class T, size_t N>
-    double euclidean(const MultiArray<T, N> &a, const MultiArray<T, N> &b)
-    {
+    double euclidean(const MultiArray<T, N> &a, const MultiArray<T, N> &b) {
         double sum = 0;
-        auto ai = a.fbegin();
-        auto bi = b.fbegin();
-        while (ai != a.fend())
-        {
+        auto   ai  = a.fbegin();
+        auto   bi  = b.fbegin();
+        while (ai != a.fend()) {
             double d = *ai++ - *bi++;
             sum += d * d;
         }
@@ -192,17 +184,16 @@ namespace console
      * @return double 曼哈顿距离。
      */
     template <class T, size_t N>
-    double manhattan(const MultiArray<T, N> &a, const MultiArray<T, N> &b)
-    {
+    double manhattan(const MultiArray<T, N> &a, const MultiArray<T, N> &b) {
         double sum = 0;
-        auto ai = a.fbegin();
-        auto bi = b.fbegin();
-        while (ai != a.fend())
-            sum += std::abs(*ai++ - *bi++);
+        auto   ai  = a.fbegin();
+        auto   bi  = b.fbegin();
+        while (ai != a.fend()) sum += std::abs(*ai++ - *bi++);
         return sum;
     }
 
-    // ---------------------------- 矩阵运算（二维） ----------------------------
+    // ---------------------------- 矩阵运算（二维）
+    // ----------------------------
     /**
      * @brief 矩阵乘法（二维）。
      * @tparam T 元素类型。
@@ -215,13 +206,11 @@ namespace console
      */
     template <class T, size_t M, size_t N, size_t K>
     MultiArray<T, M, K> matmul(const MultiArray<T, M, N> &A,
-                               const MultiArray<T, N, K> &B)
-    {
+                               const MultiArray<T, N, K> &B) {
         MultiArray<T, M, K> C{};
         for (size_t i = 0; i < M; ++i)
             for (size_t j = 0; j < N; ++j)
-                for (size_t k = 0; k < K; ++k)
-                    C[i][k] += A[i][j] * B[j][k];
+                for (size_t k = 0; k < K; ++k) C[i][k] += A[i][j] * B[j][k];
         return C;
     }
 
@@ -234,12 +223,10 @@ namespace console
      * @return MultiArray<T, N, M> 转置矩阵，尺寸 N×M。
      */
     template <class T, size_t M, size_t N>
-    MultiArray<T, N, M> transpose(const MultiArray<T, M, N> &A)
-    {
+    MultiArray<T, N, M> transpose(const MultiArray<T, M, N> &A) {
         MultiArray<T, N, M> B;
         for (size_t i = 0; i < M; i++)
-            for (size_t j = 0; j < N; j++)
-                B[j][i] = A[i][j];
+            for (size_t j = 0; j < N; j++) B[j][i] = A[i][j];
         return B;
     }
 
@@ -249,12 +236,9 @@ namespace console
      * @tparam N 矩阵阶数。
      * @return MultiArray<T, N, N> 单位矩阵。
      */
-    template <class T, size_t N>
-    MultiArray<T, N, N> identity()
-    {
+    template <class T, size_t N> MultiArray<T, N, N> identity() {
         MultiArray<T, N, N> I{};
-        for (size_t i = 0; i < N; i++)
-            I[i][i] = T{1};
+        for (size_t i = 0; i < N; i++) I[i][i] = T{1};
         return I;
     }
 
@@ -265,12 +249,9 @@ namespace console
      * @param A 方阵。
      * @return T 迹。
      */
-    template <class T, size_t N>
-    T trace(const MultiArray<T, N, N> &A)
-    {
+    template <class T, size_t N> T trace(const MultiArray<T, N, N> &A) {
         T result{};
-        for (size_t i = 0; i < N; i++)
-            result += A[i][i];
+        for (size_t i = 0; i < N; i++) result += A[i][i];
         return result;
     }
 
@@ -282,12 +263,11 @@ namespace console
      * @return MultiArray<T, 3> 叉积结果。
      */
     template <class T>
-    MultiArray<T, 3> cross(const MultiArray<T, 3> &a, const MultiArray<T, 3> &b)
-    {
-        return MultiArray<T, 3>{
-            a[1] * b[2] - a[2] * b[1],
-            a[2] * b[0] - a[0] * b[2],
-            a[0] * b[1] - a[1] * b[0]};
+    MultiArray<T, 3> cross(const MultiArray<T, 3> &a,
+                           const MultiArray<T, 3> &b) {
+        return MultiArray<T, 3>{a[1] * b[2] - a[2] * b[1],
+                                a[2] * b[0] - a[0] * b[2],
+                                a[0] * b[1] - a[1] * b[0]};
     }
 
     // ---------------------------- 元素级运算 ----------------------------
@@ -301,14 +281,12 @@ namespace console
      * @return MultiArray<T, Dims...> 裁剪后的新数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> clamp(const MultiArray<T, Dims...> &arr,
-                                 T low, T high)
-    {
+    MultiArray<T, Dims...> clamp(const MultiArray<T, Dims...> &arr, T low,
+                                 T high) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-        {
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) {
             *ri = *ai < low ? low : (*ai > high ? high : *ai);
             ++ri;
             ++ai;
@@ -324,13 +302,11 @@ namespace console
      * @return MultiArray<T, Dims...> 绝对值数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> abs(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> abs(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::abs(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::abs(*ai++);
         return result;
     }
 
@@ -344,11 +320,9 @@ namespace console
      * @param max 最大值（包含）。
      */
     template <class T, size_t... Dims>
-    void randomize(MultiArray<T, Dims...> &arr, T min = 0, T max = 100)
-    {
+    void randomize(MultiArray<T, Dims...> &arr, T min = 0, T max = 100) {
         uniform_distribution_t<T> dis(min, max);
-        arr.for_each([&](T &x)
-                     { x = dis(default_gen()); });
+        arr.for_each([&](T &x) { x = dis(default_gen()); });
     }
 
     /**
@@ -360,11 +334,10 @@ namespace console
      * @param stddev 标准差。
      */
     template <class T, size_t... Dims>
-    void randomize_normal(MultiArray<T, Dims...> &arr, T mean = 0, T stddev = 1)
-    {
+    void randomize_normal(MultiArray<T, Dims...> &arr, T mean = 0,
+                          T stddev = 1) {
         std::normal_distribution<T> dis(mean, stddev);
-        arr.for_each([&](T &x)
-                     { x = dis(default_gen()); });
+        arr.for_each([&](T &x) { x = dis(default_gen()); });
     }
 
     /**
@@ -376,8 +349,7 @@ namespace console
      * @param end 结束值（包含）。
      */
     template <class T, size_t... Dims>
-    void linspace(MultiArray<T, Dims...> &arr, T start, T end)
-    {
+    void linspace(MultiArray<T, Dims...> &arr, T start, T end) {
         size_t n = arr.fsize();
         for (size_t i = 0; i < n; i++)
             arr.fbegin()[i] = start + (end - start) * i / (n - 1);
@@ -392,9 +364,9 @@ namespace console
      * @return T 乘积。
      */
     template <class T, size_t... Dims>
-    T product(const MultiArray<T, Dims...> &arr)
-    {
-        return std::accumulate(arr.fbegin(), arr.fend(), T{1}, std::multiplies<T>());
+    T product(const MultiArray<T, Dims...> &arr) {
+        return std::accumulate(arr.fbegin(), arr.fend(), T{1},
+                               std::multiplies<T>());
     }
 
     /**
@@ -406,10 +378,8 @@ namespace console
      * @return T 第 k 小的元素值。
      */
     template <class T, size_t... Dims>
-    T kth_smallest(MultiArray<T, Dims...> arr, size_t k)
-    {
-        if (k >= arr.fsize())
-            k = arr.fsize() - 1;
+    T kth_smallest(MultiArray<T, Dims...> arr, size_t k) {
+        if (k >= arr.fsize()) k = arr.fsize() - 1;
         std::nth_element(arr.fbegin(), arr.fbegin() + k, arr.fend());
         return arr.fbegin()[k];
     }
@@ -425,8 +395,7 @@ namespace console
      */
     template <class T, size_t N, size_t K>
     MultiArray<T, N + K - 1> convolve1d(const MultiArray<T, N> &signal,
-                                        const MultiArray<T, K> &kernel)
-    {
+                                        const MultiArray<T, K> &kernel) {
         MultiArray<T, N + K - 1> result{};
         for (size_t i = 0; i < N; i++)
             for (size_t j = 0; j < K; j++)
@@ -443,13 +412,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> sin(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> sin(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::sin(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::sin(*ai++);
         return result;
     }
 
@@ -461,13 +428,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> cos(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> cos(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::cos(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::cos(*ai++);
         return result;
     }
 
@@ -479,13 +444,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> tan(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> tan(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::tan(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::tan(*ai++);
         return result;
     }
 
@@ -497,13 +460,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> asin(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> asin(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::asin(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::asin(*ai++);
         return result;
     }
 
@@ -515,13 +476,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> acos(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> acos(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::acos(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::acos(*ai++);
         return result;
     }
 
@@ -533,13 +492,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> atan(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> atan(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::atan(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::atan(*ai++);
         return result;
     }
 
@@ -551,13 +508,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> sinh(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> sinh(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::sinh(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::sinh(*ai++);
         return result;
     }
 
@@ -569,13 +524,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> cosh(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> cosh(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::cosh(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::cosh(*ai++);
         return result;
     }
 
@@ -587,13 +540,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> tanh(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> tanh(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::tanh(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::tanh(*ai++);
         return result;
     }
 
@@ -606,13 +557,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> exp(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> exp(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::exp(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::exp(*ai++);
         return result;
     }
 
@@ -624,13 +573,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> log(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> log(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::log(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::log(*ai++);
         return result;
     }
 
@@ -642,13 +589,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> log10(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> log10(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::log10(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::log10(*ai++);
         return result;
     }
 
@@ -661,13 +606,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> pow(const MultiArray<T, Dims...> &arr, T exponent)
-    {
+    MultiArray<T, Dims...> pow(const MultiArray<T, Dims...> &arr, T exponent) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::pow(*ai++, exponent);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::pow(*ai++, exponent);
         return result;
     }
 
@@ -681,14 +624,12 @@ namespace console
      */
     template <class T, size_t... Dims>
     MultiArray<T, Dims...> pow(const MultiArray<T, Dims...> &base,
-                               const MultiArray<T, Dims...> &exp)
-    {
+                               const MultiArray<T, Dims...> &exp) {
         MultiArray<T, Dims...> result;
-        auto bi = base.fbegin();
-        auto ei = exp.fbegin();
-        auto ri = result.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::pow(*bi++, *ei++);
+        auto                   bi = base.fbegin();
+        auto                   ei = exp.fbegin();
+        auto                   ri = result.fbegin();
+        while (ri != result.fend()) *ri++ = std::pow(*bi++, *ei++);
         return result;
     }
 
@@ -701,13 +642,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> floor(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> floor(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::floor(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::floor(*ai++);
         return result;
     }
 
@@ -719,13 +658,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> ceil(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> ceil(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::ceil(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::ceil(*ai++);
         return result;
     }
 
@@ -737,13 +674,11 @@ namespace console
      * @return MultiArray<T, Dims...> 结果数组。
      */
     template <class T, size_t... Dims>
-    MultiArray<T, Dims...> round(const MultiArray<T, Dims...> &arr)
-    {
+    MultiArray<T, Dims...> round(const MultiArray<T, Dims...> &arr) {
         MultiArray<T, Dims...> result;
-        auto ri = result.fbegin();
-        auto ai = arr.fbegin();
-        while (ri != result.fend())
-            *ri++ = std::round(*ai++);
+        auto                   ri = result.fbegin();
+        auto                   ai = arr.fbegin();
+        while (ri != result.fend()) *ri++ = std::round(*ai++);
         return result;
     }
 
@@ -756,13 +691,9 @@ namespace console
      * @param name 数组名称（可选），若提供则打印标题。
      */
     template <class T, size_t... Dims>
-    void print_stats(
-        std::ostream &os,
-        const MultiArray<T, Dims...> &arr,
-        const char *name = "")
-    {
-        if (name && *name)
-            os << "=== " << name << " ===" << '\n';
+    void print_stats(std::ostream &os, const MultiArray<T, Dims...> &arr,
+                     const char *name = "") {
+        if (name && *name) os << "=== " << name << " ===" << '\n';
         os << "  sum   : " << sum(arr) << '\n';
         os << "  mean  : " << mean(arr) << '\n';
         os << "  min   : " << min(arr) << '\n';

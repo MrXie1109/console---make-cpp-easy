@@ -30,23 +30,21 @@ SOFTWARE.
 */
 
 #pragma once
-#include <vector>
-#include <utility>
 #include <iterator>
+#include <utility>
+#include <vector>
 
-namespace console
-{
+namespace console {
     /**
      * @class Comprehension
      * @brief 函数式风格的数据流处理容器。
      * @tparam T 容器中元素的类型。
-     * @details 该类包装一个 std::vector<T>，提供 map、filter 等惰性求值风格的操作（实际是立即求值），
+     * @details 该类包装一个 std::vector<T>，提供 map、filter
+     * 等惰性求值风格的操作（实际是立即求值），
      *          并支持从多种来源构造，如容器、迭代器对、初始化列表等。
      * @note 所有转换操作都会创建新的 Comprehension 对象，不会修改原对象。
      */
-    template <class T>
-    class Comprehension
-    {
+    template <class T> class Comprehension {
     protected:
         std::vector<T> vec; ///< 内部存储的 std::vector
 
@@ -60,8 +58,8 @@ namespace console
          * @param cont 源容器（左值）。
          */
         template <class Cont>
-        Comprehension(const Cont &cont)
-            : vec(std::begin(cont), std::end(cont)) {}
+        Comprehension(const Cont &cont) :
+            vec(std::begin(cont), std::end(cont)) {}
 
         /**
          * @brief 从容器（右值）构造，移动所有元素。
@@ -69,10 +67,9 @@ namespace console
          * @param cont 源容器（右值）。
          */
         template <class Cont>
-        Comprehension(Cont &&cont)
-            : vec(
-                  std::make_move_iterator(std::begin(cont)),
-                  std::make_move_iterator(std::end(cont))) {}
+        Comprehension(Cont &&cont) :
+            vec(std::make_move_iterator(std::begin(cont)),
+                std::make_move_iterator(std::end(cont))) {}
 
         /**
          * @brief 从容器的子区间（左值）构造，拷贝指定范围的元素。
@@ -83,9 +80,9 @@ namespace console
          * @note 区间为 [start_pos, end_pos)。
          */
         template <class Cont>
-        Comprehension(const Cont &cont, size_t start_pos, size_t end_pos)
-            : vec(std::next(std::begin(cont), start_pos),
-                  std::next(std::begin(cont), end_pos)) {}
+        Comprehension(const Cont &cont, size_t start_pos, size_t end_pos) :
+            vec(std::next(std::begin(cont), start_pos),
+                std::next(std::begin(cont), end_pos)) {}
 
         /**
          * @brief 从容器的子区间（右值）构造，移动指定范围的元素。
@@ -96,11 +93,10 @@ namespace console
          * @note 区间为 [start_pos, end_pos)。
          */
         template <class Cont>
-        Comprehension(Cont &&cont, size_t start_pos, size_t end_pos)
-            : vec(std::make_move_iterator(
-                      std::next(std::begin(cont), start_pos)),
-                  std::make_move_iterator(
-                      std::next(std::begin(cont), end_pos))) {}
+        Comprehension(Cont &&cont, size_t start_pos, size_t end_pos) :
+            vec(std::make_move_iterator(std::next(std::begin(cont), start_pos)),
+                std::make_move_iterator(std::next(std::begin(cont), end_pos))) {
+        }
 
         /**
          * @brief 从迭代器对构造，拷贝 [beg, end) 范围内的元素。
@@ -121,24 +117,20 @@ namespace console
          * @brief 获取内部 vector 的引用。
          * @return std::vector<T>& 内部 vector 的引用。
          */
-        std::vector<T> &get_vec()
-        {
-            return vec;
-        }
+        std::vector<T> &get_vec() { return vec; }
 
         /**
          * @brief 对每个元素应用函数 f，返回新 Comprehension。
          * @tparam F 可调用对象类型，接受 T 并返回某个类型 U。
          * @param f 映射函数。
-         * @return Comprehension<decltype(f(vec[0]))> 包含映射结果的 Comprehension。
+         * @return Comprehension<decltype(f(vec[0]))> 包含映射结果的
+         * Comprehension。
          * @note 该操作立即求值，生成新容器。
          */
         template <class F>
-        auto map(F &&f) const -> Comprehension<decltype(f(vec[0]))>
-        {
+        auto map(F &&f) const -> Comprehension<decltype(f(vec[0]))> {
             Comprehension<decltype(f(vec[0]))> tmp;
-            for (const T &item : vec)
-                tmp.get_vec().push_back(f(item));
+            for (const T &item : vec) tmp.get_vec().push_back(f(item));
             return tmp;
         }
 
@@ -148,13 +140,10 @@ namespace console
          * @param f 谓词函数。
          * @return Comprehension<T> 包含满足条件的元素的 Comprehension。
          */
-        template <class F>
-        Comprehension<T> filter(F &&f) const
-        {
+        template <class F> Comprehension<T> filter(F &&f) const {
             Comprehension<T> tmp;
             for (const T &item : vec)
-                if (f(item))
-                    tmp.vec.push_back(item);
+                if (f(item)) tmp.vec.push_back(item);
             return tmp;
         }
 
@@ -164,12 +153,9 @@ namespace console
          * @return Cont 构造完成的目标容器。
          * @note 调用后当前 Comprehension 仍有效但内部元素已被移走。
          */
-        template <class Cont>
-        Cont to()
-        {
-            return Cont(
-                std::make_move_iterator(vec.begin()),
-                std::make_move_iterator(vec.end()));
+        template <class Cont> Cont to() {
+            return Cont(std::make_move_iterator(vec.begin()),
+                        std::make_move_iterator(vec.end()));
         }
 
         /**
@@ -178,9 +164,7 @@ namespace console
          * @return Cont 构造完成的目标容器。
          * @note 不修改当前 Comprehension。
          */
-        template <class Cont>
-        Cont make() const
-        {
+        template <class Cont> Cont make() const {
             return Cont(vec.begin(), vec.end());
         }
     };
@@ -192,9 +176,8 @@ namespace console
      * @return Comprehension<typename Cont::value_type> 新构造的 Comprehension。
      */
     template <class Cont>
-    inline auto compre(const Cont &cont)
-        -> Comprehension<typename Cont::value_type>
-    {
+    inline auto
+    compre(const Cont &cont) -> Comprehension<typename Cont::value_type> {
         return Comprehension<typename Cont::value_type>(cont);
     }
 
@@ -205,9 +188,8 @@ namespace console
      * @return Comprehension<typename Cont::value_type> 新构造的 Comprehension。
      */
     template <class Cont>
-    inline auto compre(Cont &&cont)
-        -> Comprehension<typename Cont::value_type>
-    {
+    inline auto
+    compre(Cont &&cont) -> Comprehension<typename Cont::value_type> {
         return Comprehension<typename Cont::value_type>(std::move(cont));
     }
 
@@ -221,10 +203,9 @@ namespace console
      */
     template <class Cont>
     inline auto compre(const Cont &cont, size_t start_pos, size_t end_pos)
-        -> Comprehension<typename Cont::value_type>
-    {
-        return Comprehension<typename Cont::value_type>(
-            cont, start_pos, end_pos);
+        -> Comprehension<typename Cont::value_type> {
+        return Comprehension<typename Cont::value_type>(cont, start_pos,
+                                                        end_pos);
     }
 
     /**
@@ -237,10 +218,9 @@ namespace console
      */
     template <class Cont>
     inline auto compre(Cont &&cont, size_t start_pos, size_t end_pos)
-        -> Comprehension<typename Cont::value_type>
-    {
-        return Comprehension<typename Cont::value_type>(
-            std::move(cont), start_pos, end_pos);
+        -> Comprehension<typename Cont::value_type> {
+        return Comprehension<typename Cont::value_type>(std::move(cont),
+                                                        start_pos, end_pos);
     }
 
     /**
@@ -251,8 +231,7 @@ namespace console
      * @return Comprehension<decltype(*beg)> 新构造的 Comprehension。
      */
     template <class Iter>
-    inline auto compre(Iter beg, Iter end) -> Comprehension<decltype(*beg)>
-    {
+    inline auto compre(Iter beg, Iter end) -> Comprehension<decltype(*beg)> {
         return Comprehension<decltype(*beg)>(beg, end);
     }
 
@@ -263,8 +242,7 @@ namespace console
      * @return Comprehension<T> 新构造的 Comprehension。
      */
     template <class T>
-    inline Comprehension<T> compre(std::initializer_list<T> init)
-    {
+    inline Comprehension<T> compre(std::initializer_list<T> init) {
         return Comprehension<T>(init);
     }
 }

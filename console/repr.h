@@ -1,8 +1,9 @@
 /**
  * @file repr.h
  * @brief 提供类似 Python 的 repr() 函数，用于生成对象的可读字符串表示。
- * @details 该头文件通过 SFINAE 技术重载 repr 函数，支持字符串、字符、布尔值、nullptr、函数指针、
- *          可打印类型（有 operator<<）以及不可打印类型（输出类型信息及地址）。
+ * @details 该头文件通过 SFINAE 技术重载 repr
+ * 函数，支持字符串、字符、布尔值、nullptr、函数指针、 可打印类型（有
+ * operator<<）以及不可打印类型（输出类型信息及地址）。
  * @author MrXie1109
  * @date 2026
  * @copyright MIT License
@@ -32,16 +33,16 @@ SOFTWARE.
 
 #pragma once
 #include <iostream>
-#include <typeinfo>
 #include <memory>
 #include <string>
+#include <typeinfo>
+
 #include "sfinae.h"
 #ifdef __GNUG__
 #include <cxxabi.h>
 #endif
 
-namespace console
-{
+namespace console {
     /**
      * @defgroup repr 类型表示
      * @brief 提供类型名称和值的可读表示。
@@ -53,12 +54,11 @@ namespace console
      * @param ti std::type_info 对象。
      * @return std::string 人类可读的类型名。
      */
-    inline std::string tiname(const std::type_info &ti)
-    {
+    inline std::string tiname(const std::type_info &ti) {
 #ifdef _MSC_VER
         return ti.name();
 #elif defined(__GNUG__)
-        int status = 0;
+        int                                     status = 0;
         std::unique_ptr<char, void (*)(void *)> result(
             abi::__cxa_demangle(ti.name(), nullptr, nullptr, &status),
             std::free);
@@ -76,8 +76,7 @@ namespace console
      * @param os 输出流，默认为 std::cout。
      */
     template <class T>
-    enable_if_string<T> repr(T &&value, std::ostream &os = std::cout)
-    {
+    enable_if_string<T> repr(T &&value, std::ostream &os = std::cout) {
         os << '"' << value << '"';
     }
 
@@ -88,8 +87,7 @@ namespace console
      * @param os 输出流，默认为 std::cout。
      */
     template <class T>
-    enable_if_char<T> repr(T &&value, std::ostream &os = std::cout)
-    {
+    enable_if_char<T> repr(T &&value, std::ostream &os = std::cout) {
         os << "'" << value << "'";
     }
 
@@ -102,8 +100,7 @@ namespace console
     template <class T>
     typename std::enable_if<
         std::is_same<typename std::decay<T>::type, bool>::value>::type
-    repr(T &&value, std::ostream &os = std::cout)
-    {
+    repr(T &&value, std::ostream &os = std::cout) {
         os << (value ? "true" : "false");
     }
 
@@ -116,8 +113,7 @@ namespace console
     template <class T>
     typename std::enable_if<
         std::is_same<typename std::decay<T>::type, std::nullptr_t>::value>::type
-    repr(T &&, std::ostream &os = std::cout)
-    {
+    repr(T &&, std::ostream &os = std::cout) {
         os << "<nullptr>";
     }
 
@@ -129,8 +125,7 @@ namespace console
      * @param os 输出流。
      */
     template <class Ret, class... Args>
-    void repr(Ret (*f)(Args...), std::ostream &os = std::cout)
-    {
+    void repr(Ret (*f)(Args...), std::ostream &os = std::cout) {
         if (f)
             os << "<function at " << (void *)f << '>';
         else
@@ -139,7 +134,8 @@ namespace console
 
     /**
      * @brief 输出可打印类型（定义了 operator<<）的表示，直接输出值。
-     * @tparam T 类型条件：不是 bool，不是字符串，不是字符，不是函数指针，且 is_printable<T>::value 为 true。
+     * @tparam T 类型条件：不是 bool，不是字符串，不是字符，不是函数指针，且
+     * is_printable<T>::value 为 true。
      * @param value 要输出的值。
      * @param os 输出流。
      */
@@ -151,14 +147,14 @@ namespace console
         !is_char<typename std::decay<T>::type>::value &&
         !std::is_function<typename std::decay<T>::type>::value &&
         is_printable<typename std::decay<T>::type>::value>::type
-    repr(T &&value, std::ostream &os = std::cout)
-    {
+    repr(T &&value, std::ostream &os = std::cout) {
         os << value;
     }
 
     /**
      * @brief 输出不可打印类型的表示，格式为 "<'类型名' object at 地址>"。
-     * @tparam T 类型条件：不是 nullptr，不是字符串，不是字符，且 is_printable<T>::value 为 false。
+     * @tparam T 类型条件：不是 nullptr，不是字符串，不是字符，且
+     * is_printable<T>::value 为 false。
      * @param value 要输出的对象。
      * @param os 输出流。
      */
@@ -168,24 +164,18 @@ namespace console
         !is_string<typename std::decay<T>::type>::value &&
         !is_char<typename std::decay<T>::type>::value &&
         !is_printable<typename std::decay<T>::type>::value>::type
-    repr(T &&value, std::ostream &os = std::cout)
-    {
+    repr(T &&value, std::ostream &os = std::cout) {
         os << "<'" << tiname(typeid(typename std::decay<T>::type))
-           << "' object at "
-           << &value
-           << '>';
+           << "' object at " << &value << '>';
     }
 
     template <class T>
-    void repr(std::reference_wrapper<T> v, std::ostream &os = std::cout)
-    {
+    void repr(std::reference_wrapper<T> v, std::ostream &os = std::cout) {
         repr(v.get(), os);
     }
 
 #else
-    template <class T>
-    void repr(T &&value, std::ostream &os = std::cout)
-    {
+    template <class T> void repr(T &&value, std::ostream &os = std::cout) {
         os << std::forward<T>(value);
     }
 #endif

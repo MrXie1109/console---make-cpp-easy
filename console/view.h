@@ -2,8 +2,8 @@
  * @file view.h
  * @brief 提供容器的非拥有视图（View），支持区间切片和便捷的工厂函数。
  * @details View 类是一个轻量级的容器视图，不复制数据，仅保存一对迭代器。
- *          支持范围 for 循环、下标访问、边界检查的 at() 方法，以及 collect() 复制数据到新容器。
- *          同时提供工厂函数 make_view 简化 View 对象的创建。
+ *          支持范围 for 循环、下标访问、边界检查的 at() 方法，以及 collect()
+ * 复制数据到新容器。 同时提供工厂函数 make_view 简化 View 对象的创建。
  * @author MrXie1109
  * @date 2026
  * @copyright MIT License
@@ -32,32 +32,32 @@ SOFTWARE.
 */
 
 #pragma once
-#include <iostream>
 #include <cstddef>
+#include <iostream>
 #include <iterator>
 #include <string>
 #include <vector>
+
 #include "csexc.h"
 
-namespace console
-{
+namespace console {
     /**
      * @class View
      * @brief 容器的非拥有视图（可变版本）。
      * @tparam Container 容器类型，必须支持迭代器。
-     * @details View 不拥有数据，仅保存一对迭代器，可以高效地表示容器的一个连续子区间。
-     *          支持迭代器、下标访问、边界检查的 at() 方法，以及 collect() 复制数据到新容器。
+     * @details View
+     * 不拥有数据，仅保存一对迭代器，可以高效地表示容器的一个连续子区间。
+     *          支持迭代器、下标访问、边界检查的 at() 方法，以及 collect()
+     * 复制数据到新容器。
      * @note 需要确保底层容器在视图生命周期内有效。
      */
-    template <class Container>
-    class View
-    {
-        using Iterator = typename Container::iterator;
+    template <class Container> class View {
+        using Iterator  = typename Container::iterator;
         using cIterator = typename Container::const_iterator;
         Iterator begin_, end_;
 
     public:
-        typedef Iterator iterator;
+        typedef Iterator  iterator;
         typedef cIterator const_iterator;
 
         /// @brief 返回起始迭代器。
@@ -73,8 +73,8 @@ namespace console
          * @brief 构造整个容器的视图。
          * @param container 底层容器（非 const 左值引用）。
          */
-        View(Container &container)
-            : begin_(std::begin(container)), end_(std::end(container)) {}
+        View(Container &container) :
+            begin_(std::begin(container)), end_(std::end(container)) {}
 
         /**
          * @brief 构造容器子区间的视图。
@@ -82,9 +82,9 @@ namespace console
          * @param start_pos 起始索引（包含）。
          * @param end_pos 结束索引（不包含）。
          */
-        View(Container &container, size_t start_pos, size_t end_pos)
-            : begin_(std::next(std::begin(container), start_pos)),
-              end_(std::next(std::begin(container), end_pos)) {}
+        View(Container &container, size_t start_pos, size_t end_pos) :
+            begin_(std::next(std::begin(container), start_pos)),
+            end_(std::next(std::begin(container), end_pos)) {}
 
         /**
          * @brief 从迭代器对构造视图。
@@ -94,18 +94,14 @@ namespace console
         View(Iterator begin, Iterator end) : begin_(begin), end_(end) {}
 
         /// @brief 返回视图中的元素个数。
-        size_t size() const
-        {
-            return std::distance(begin_, end_);
-        }
+        size_t size() const { return std::distance(begin_, end_); }
 
         /**
          * @brief 无边界检查的下标访问。
          * @param pos 索引。
          * @return 元素的引用。
          */
-        auto operator[](size_t pos) const -> decltype(*begin_)
-        {
+        auto operator[](size_t pos) const -> decltype(*begin_) {
             return *std::next(begin_, pos);
         }
 
@@ -115,11 +111,9 @@ namespace console
          * @return 元素的引用。
          * @throw index_error 若索引超出范围。
          */
-        auto at(size_t pos) const -> decltype(*begin_)
-        {
+        auto at(size_t pos) const -> decltype(*begin_) {
             if (pos >= size())
-                throw index_error(std::to_string(pos) +
-                                  " out of 0 ~ " +
+                throw index_error(std::to_string(pos) + " out of 0 ~ " +
                                   std::to_string(size() - 1));
             return (*this)[pos];
         }
@@ -136,9 +130,7 @@ namespace console
      * @brief 容器的非拥有视图（常量版本）。
      * @tparam Container 容器类型。
      */
-    template <class Container>
-    class View<const Container>
-    {
+    template <class Container> class View<const Container> {
         using cIterator = typename Container::const_iterator;
         cIterator begin_, end_;
 
@@ -155,8 +147,8 @@ namespace console
          * @brief 构造整个常量容器的视图。
          * @param container 常量容器引用。
          */
-        View(const Container &container)
-            : begin_(std::begin(container)), end_(std::end(container)) {}
+        View(const Container &container) :
+            begin_(std::begin(container)), end_(std::end(container)) {}
 
         /**
          * @brief 构造常量容器子区间的视图。
@@ -164,10 +156,9 @@ namespace console
          * @param start_pos 起始索引。
          * @param end_pos 结束索引。
          */
-        View(const Container &container,
-             size_t start_pos, size_t end_pos)
-            : begin_(std::next(std::begin(container), start_pos)),
-              end_(std::next(std::begin(container), end_pos)) {}
+        View(const Container &container, size_t start_pos, size_t end_pos) :
+            begin_(std::next(std::begin(container), start_pos)),
+            end_(std::next(std::begin(container), end_pos)) {}
 
         /**
          * @brief 从常量迭代器对构造视图。
@@ -176,21 +167,15 @@ namespace console
          */
         View(cIterator begin, cIterator end) : begin_(begin), end_(end) {}
 
-        size_t size() const
-        {
-            return std::distance(begin_, end_);
-        }
+        size_t size() const { return std::distance(begin_, end_); }
 
-        auto operator[](size_t pos) const -> decltype(*begin_)
-        {
+        auto operator[](size_t pos) const -> decltype(*begin_) {
             return *std::next(begin_, pos);
         }
 
-        auto at(size_t pos) const -> decltype(*begin_)
-        {
+        auto at(size_t pos) const -> decltype(*begin_) {
             if (pos >= size())
-                throw index_error(std::to_string(pos) +
-                                  " out of 0 ~ " +
+                throw index_error(std::to_string(pos) + " out of 0 ~ " +
                                   std::to_string(size() - 1));
             return (*this)[pos];
         }
@@ -208,10 +193,9 @@ namespace console
      * @param sv 字符串视图。
      * @return std::ostream& 流引用。
      */
-    inline std::ostream &operator<<(std::ostream &os, const View<std::string> &sv)
-    {
-        for (auto it = sv.begin(); it != sv.end(); ++it)
-        {
+    inline std::ostream &operator<<(std::ostream            &os,
+                                    const View<std::string> &sv) {
+        for (auto it = sv.begin(); it != sv.end(); ++it) {
             os << *it;
         }
         return os;
@@ -226,8 +210,7 @@ namespace console
      * @warning 有性能开销。
      */
     template <class T>
-    std::ostream &operator<<(std::ostream &os, const View<T> &v)
-    {
+    std::ostream &operator<<(std::ostream &os, const View<T> &v) {
         return os << v.collect();
     }
 
@@ -245,9 +228,7 @@ namespace console
      * @param cont 容器引用。
      * @return View<Container> 视图对象。
      */
-    template <class Container>
-    View<Container> make_view(Container &cont)
-    {
+    template <class Container> View<Container> make_view(Container &cont) {
         return {cont};
     }
 
@@ -258,8 +239,7 @@ namespace console
      * @return View<const Container> 视图对象。
      */
     template <class Container>
-    View<const Container> make_view(const Container &cont)
-    {
+    View<const Container> make_view(const Container &cont) {
         return {cont};
     }
 
@@ -272,8 +252,7 @@ namespace console
      * @return View<Container> 视图对象。
      */
     template <class Container>
-    View<Container> make_view(Container &cont, size_t start, size_t end)
-    {
+    View<Container> make_view(Container &cont, size_t start, size_t end) {
         return {cont, start, end};
     }
 
@@ -286,8 +265,8 @@ namespace console
      * @return View<const Container> 视图对象。
      */
     template <class Container>
-    View<const Container> make_view(const Container &cont, size_t start, size_t end)
-    {
+    View<const Container> make_view(const Container &cont, size_t start,
+                                    size_t end) {
         return {cont, start, end};
     }
 
@@ -300,8 +279,7 @@ namespace console
      */
     template <class Container>
     View<Container> make_view(typename Container::iterator begin,
-                              typename Container::iterator end)
-    {
+                              typename Container::iterator end) {
         return {begin, end};
     }
 
@@ -314,8 +292,7 @@ namespace console
      */
     template <class Container>
     View<const Container> make_view(typename Container::const_iterator begin,
-                                    typename Container::const_iterator end)
-    {
+                                    typename Container::const_iterator end) {
         return {begin, end};
     }
 
@@ -326,10 +303,7 @@ namespace console
      * @param end 结束指针。
      * @return View<std::vector<T>> 视图对象。
      */
-    template <class T>
-    View<std::vector<T>> make_view(T *begin,
-                                   T *end)
-    {
+    template <class T> View<std::vector<T>> make_view(T *begin, T *end) {
         return {begin, end};
     }
 
@@ -341,9 +315,7 @@ namespace console
      * @return View<const std::vector<T>> 视图对象。
      */
     template <class T>
-    View<const std::vector<T>> make_view(const T *begin,
-                                         const T *end)
-    {
+    View<const std::vector<T>> make_view(const T *begin, const T *end) {
         return {begin, end};
     }
 

@@ -2,7 +2,8 @@
  * @file adapter.h
  * @brief 提供带有值返回 pop 操作的容器适配器包装类和 range 函数。
  * @details 该模块对 STL 容器适配器（stack、queue、priority_queue）进行扩展，
- *          重载了 pop() 方法，使其在弹出元素的同时返回该元素的值。适用于需要在弹出元素时获取其值的场景。
+ *          重载了 pop()
+ * 方法，使其在弹出元素的同时返回该元素的值。适用于需要在弹出元素时获取其值的场景。
  *          提供 range() 函数用于生成数值范围，类似于 Python 的 range() 函数。
  * @author MrXie1109
  * @date 2026
@@ -33,14 +34,14 @@ SOFTWARE.
 
 #pragma once
 #include <deque>
-#include <stack>
 #include <queue>
-#include <vector>
+#include <stack>
 #include <utility>
+#include <vector>
+
 #include "iter.h"
 
-namespace console
-{
+namespace console {
     /**
      * @class Stack
      * @brief 栈容器适配器，扩展自 std::stack。
@@ -56,8 +57,7 @@ namespace console
      *          @endcode
      */
     template <class T, class Container = std::deque<T>>
-    class Stack : public std::stack<T, Container>
-    {
+    class Stack : public std::stack<T, Container> {
         using base_type = std::stack<T, Container>;
 
     public:
@@ -66,12 +66,13 @@ namespace console
 
         /**
          * @brief 弹出栈顶元素并返回其值。
-         * @return typename base_type::value_type 栈顶元素的值（通过移动语义返回）。
-         * @details 该方法结合了 top() 和 pop() 操作，返回栈顶元素的副本/移动值，
+         * @return typename base_type::value_type
+         * 栈顶元素的值（通过移动语义返回）。
+         * @details 该方法结合了 top() 和 pop()
+         * 操作，返回栈顶元素的副本/移动值，
          *          然后将栈顶元素弹出。使用移动语义避免不必要的拷贝。
          */
-        typename base_type::value_type pop()
-        {
+        typename base_type::value_type pop() {
             auto top = std::move(base_type::top());
             base_type::pop();
             return top;
@@ -93,8 +94,7 @@ namespace console
      *          @endcode
      */
     template <class T, class Container = std::deque<T>>
-    class Queue : public std::queue<T, Container>
-    {
+    class Queue : public std::queue<T, Container> {
         using base_type = std::queue<T, Container>;
 
     public:
@@ -103,12 +103,13 @@ namespace console
 
         /**
          * @brief 弹出队首元素并返回其值。
-         * @return typename base_type::value_type 队首元素的值（通过移动语义返回）。
-         * @details 该方法结合了 front() 和 pop() 操作，返回队首元素的副本/移动值，
+         * @return typename base_type::value_type
+         * 队首元素的值（通过移动语义返回）。
+         * @details 该方法结合了 front() 和 pop()
+         * 操作，返回队首元素的副本/移动值，
          *          然后将队首元素弹出。使用移动语义避免不必要的拷贝。
          */
-        typename base_type::value_type pop()
-        {
+        typename base_type::value_type pop() {
             auto top = std::move(base_type::front());
             base_type::pop();
             return top;
@@ -121,8 +122,8 @@ namespace console
      * @tparam T 优先队列中存储的元素类型。
      * @tparam Container 底层容器类型，默认为 std::vector<T>。
      * @tparam Compare 比较函数对象类型，默认为 std::less<T>（最大堆）。
-     * @details 该适配器继承自 std::priority_queue，提供了返回值版本的 pop() 方法。
-     *          使用示例：
+     * @details 该适配器继承自 std::priority_queue，提供了返回值版本的 pop()
+     * 方法。 使用示例：
      *          @code
      *          console::PriorityQueue<int> pq;
      *          pq.push(3);
@@ -133,8 +134,7 @@ namespace console
      */
     template <class T, class Container = std::vector<T>,
               class Compare = std::less<T>>
-    class PriorityQueue : public std::priority_queue<T, Container, Compare>
-    {
+    class PriorityQueue : public std::priority_queue<T, Container, Compare> {
         using base_type = std::priority_queue<T, Container, Compare>;
 
     public:
@@ -143,12 +143,13 @@ namespace console
 
         /**
          * @brief 弹出优先级最高的元素并返回其值。
-         * @return typename base_type::value_type 优先级最高的元素的值（通过移动语义返回）。
-         * @details 该方法结合了 top() 和 pop() 操作，返回堆顶元素的副本/移动值，
+         * @return typename base_type::value_type
+         * 优先级最高的元素的值（通过移动语义返回）。
+         * @details 该方法结合了 top() 和 pop()
+         * 操作，返回堆顶元素的副本/移动值，
          *          然后将堆顶元素弹出。使用移动语义避免不必要的拷贝。
          */
-        typename base_type::value_type pop()
-        {
+        typename base_type::value_type pop() {
             auto top = std::move(base_type::top());
             base_type::pop();
             return top;
@@ -162,20 +163,19 @@ namespace console
      *          可以直接用于 range-based for 循环中，生成数值范围。
      * @tparam T 值类型。
      */
-    template <class T>
-    class RangeIterator
-    {
+    template <class T> class RangeIterator {
         T cur_;
         T bounds_;
         T step_;
 
     public:
-        typedef T value_type; ///< 类型别名
-        typedef void pointer; ///< 类型别名（不实际使用）
-        typedef T reference;  ///< 类型别名（由于解引用产出值，所以引用类型实际上不是引用）
+        typedef T    value_type; ///< 类型别名
+        typedef void pointer;    ///< 类型别名（不实际使用）
+        typedef T
+            reference; ///< 类型别名（由于解引用产出值，所以引用类型实际上不是引用）
 
         typedef std::forward_iterator_tag iterator_category; ///< 类型别名
-        typedef std::ptrdiff_t difference_type;              ///< 类型别名
+        typedef std::ptrdiff_t            difference_type;   ///< 类型别名
 
         /**
          * @brief 构造函数。
@@ -183,24 +183,21 @@ namespace console
          * @param end 范围的结束值，默认为 T 的默认构造
          * @param step 范围的步长，默认为 T 的默认构造值。
          */
-        RangeIterator(const T &cur = T{}, const T &bounds = T{}, const T &step = T{})
-            : cur_(cur), bounds_(bounds), step_(step) {}
+        RangeIterator(const T &cur = T{}, const T &bounds = T{},
+                      const T &step = T{}) :
+            cur_(cur), bounds_(bounds), step_(step) {}
 
         /**
          * @brief 解引用运算符。
          * @return T 当前迭代器指向的值。
          */
-        T operator*() const
-        {
-            return cur_;
-        }
+        T operator*() const { return cur_; }
 
         /**
          * @brief 前置递增运算符。
          * @return RangeIterator& 递增后的迭代器引用。
          */
-        RangeIterator &operator++()
-        {
+        RangeIterator &operator++() {
             cur_ += step_;
             return *this;
         }
@@ -209,8 +206,7 @@ namespace console
          * @brief 后置递增运算符。
          * @return const RangeIterator 递增前的迭代器副本。
          */
-        const RangeIterator operator++(int)
-        {
+        const RangeIterator operator++(int) {
             const RangeIterator old = *this;
             cur_ += step_;
             return old;
@@ -219,28 +215,28 @@ namespace console
         /**
          * @brief 比较运算符。
          * @param 另一个 RangeIterator 对象。
-         * @return bool 如果当前迭代器未达到范围边界，则返回 true；否则返回 false。
+         * @return bool 如果当前迭代器未达到范围边界，则返回 true；否则返回
+         * false。
          * @note 可能不是传统语义，但是用于 range-based for 没问题。
          *       第二个迭代器（end）只是一个空壳，比较时不使用其值，仅用于标识范围结束。
-         * @see std::istream_iterator 的比较运算符实现，类似地不使用 end 迭代器的值进行比较，
-         *      而是根据当前迭代器的状态判断是否达到范围边界。
+         * @see std::istream_iterator 的比较运算符实现，类似地不使用 end
+         * 迭代器的值进行比较， 而是根据当前迭代器的状态判断是否达到范围边界。
          */
-        bool operator!=(const RangeIterator &) const
-        {
+        bool operator!=(const RangeIterator &) const {
             return step_ > T{} ? cur_ < bounds_ : cur_ > bounds_;
         }
 
         /**
          * @brief 比较运算符。
          * @param 另一个 RangeIterator 对象。
-         * @return bool 如果当前迭代器已达到范围边界，则返回 true；否则返回 false。
+         * @return bool 如果当前迭代器已达到范围边界，则返回 true；否则返回
+         * false。
          * @note 可能不是传统语义，但是用于 range-based for 没问题。
          *       第二个迭代器（end）只是一个空壳，比较时不使用其值，仅用于标识范围结束。
-         * @see std::istream_iterator 的比较运算符实现，类似地不使用 end 迭代器的值进行比较，
-         *      而是根据当前迭代器的状态判断是否达到范围边界。
+         * @see std::istream_iterator 的比较运算符实现，类似地不使用 end
+         * 迭代器的值进行比较， 而是根据当前迭代器的状态判断是否达到范围边界。
          */
-        bool operator==(const RangeIterator &) const
-        {
+        bool operator==(const RangeIterator &) const {
             return step_ > T{} ? cur_ >= bounds_ : cur_ <= bounds_;
         }
     };
@@ -252,8 +248,7 @@ namespace console
      * @return IteratorPair<RangeIterator<T>> 可迭代对象。
      */
     template <class T>
-    inline IteratorPair<RangeIterator<T>> range(const T &end)
-    {
+    inline IteratorPair<RangeIterator<T>> range(const T &end) {
         return {{T{}, end, T{1}}, {T{}, end, T{1}}};
     }
 
@@ -265,8 +260,7 @@ namespace console
      * @return IteratorPair<RangeIterator<T>> 可迭代对象。
      */
     template <class T>
-    inline IteratorPair<RangeIterator<T>> range(const T &start, const T &end)
-    {
+    inline IteratorPair<RangeIterator<T>> range(const T &start, const T &end) {
         return {{start, end, T{1}}, {start, end, T{1}}};
     }
 
@@ -279,9 +273,8 @@ namespace console
      * @return IteratorPair<RangeIterator<T>> 可迭代对象。
      */
     template <class T>
-    inline IteratorPair<RangeIterator<T>>
-    range(const T &start, const T &end, const T &step)
-    {
+    inline IteratorPair<RangeIterator<T>> range(const T &start, const T &end,
+                                                const T &step) {
         return {{start, end, step}, {start, end, step}};
     }
 }

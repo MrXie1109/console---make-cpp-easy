@@ -32,8 +32,7 @@ SOFTWARE.
 #pragma once
 #include "repr.h"
 
-namespace console
-{
+namespace console {
     /**
      * @brief 如果是字符和串或字符，直接输出，不含引号。
      * @tparam StrOrCharType
@@ -45,8 +44,7 @@ namespace console
     typename std::enable_if<
         is_string<typename std::decay<StrOrCharType>::type>::value ||
         is_char<typename std::decay<StrOrCharType>::type>::value>::type
-    put(std::ostream &os, StrOrCharType &&value)
-    {
+    put(std::ostream &os, StrOrCharType &&value) {
         os << value;
     }
 
@@ -61,8 +59,7 @@ namespace console
     typename std::enable_if<
         !is_string<typename std::decay<OtherType>::type>::value &&
         !is_char<typename std::decay<OtherType>::type>::value>::type
-    put(std::ostream &os, OtherType &&value)
-    {
+    put(std::ostream &os, OtherType &&value) {
         repr(value, os);
     }
 }

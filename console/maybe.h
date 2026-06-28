@@ -1,7 +1,8 @@
 /**
  * @file maybe.h
  * @brief 提供类似 std::optional 的可选值容器 Maybe，支持空状态（nothing）。
- * @details Maybe<T> 可包含一个 T 类型的值或为空（nothing）。提供安全的访问、值提取、默认值等操作。
+ * @details Maybe<T> 可包含一个 T
+ * 类型的值或为空（nothing）。提供安全的访问、值提取、默认值等操作。
  * @author MrXie1109
  * @date 2026
  * @copyright MIT License
@@ -30,19 +31,18 @@ SOFTWARE.
 */
 
 #pragma once
-#include <utility>
-#include <memory>
 #include <iostream>
+#include <memory>
+#include <utility>
+
 #include "csexc.h"
 
-namespace console
-{
+namespace console {
     /**
      * @brief 空状态标记对象，用于显式构造空的 Maybe。
      * @details 使用 `nothing` 可以清空 Maybe 或构造一个空 Maybe。
      */
-    struct
-    {
+    struct {
     } nothing;
 
     /**
@@ -52,9 +52,7 @@ namespace console
      * @details 基于 std::unique_ptr 实现，支持拷贝、移动、流输入输出。
      *          访问空 Maybe 会抛出 TypeError 异常。
      */
-    template <class T>
-    class Maybe
-    {
+    template <class T> class Maybe {
         std::unique_ptr<T> ptr; ///< 实际存储的指针，为空表示 nothing。
 
     public:
@@ -67,23 +65,21 @@ namespace console
          * @param args 转发给 T 的构造函数。
          */
         template <class... Args>
-        Maybe(Args &&...args)
-            : ptr(new T(std::forward<Args>(args)...)) {}
+        Maybe(Args &&...args) : ptr(new T(std::forward<Args>(args)...)) {}
 
         /**
          * @brief 拷贝构造，深拷贝内部值。
          * @param other 源 Maybe。
          * @note 若 other 为空，则新对象也为空。
          */
-        Maybe(const Maybe &other)
-            : ptr(other.ptr ? new T(other.value()) : nullptr) {}
+        Maybe(const Maybe &other) :
+            ptr(other.ptr ? new T(other.value()) : nullptr) {}
 
         /**
          * @brief 移动构造，转移所有权。
          * @param other 源 Maybe，移动后为空。
          */
-        Maybe(Maybe &&other)
-            : ptr(std::move(other.ptr)) {}
+        Maybe(Maybe &&other) : ptr(std::move(other.ptr)) {}
 
         /**
          * @brief 从 nothing 标记构造空 Maybe。
@@ -96,10 +92,8 @@ namespace console
          * @return T& 值的引用。
          * @throw TypeError 若 Maybe 为空。
          */
-        T &value()
-        {
-            if (ptr)
-                return *ptr;
+        T &value() {
+            if (ptr) return *ptr;
             throw TypeError("Nothing");
         }
 
@@ -108,10 +102,8 @@ namespace console
          * @return const T& 值的常量引用。
          * @throw TypeError 若 Maybe 为空。
          */
-        const T &value() const
-        {
-            if (ptr)
-                return *ptr;
+        const T &value() const {
+            if (ptr) return *ptr;
             throw TypeError("Nothing");
         }
 
@@ -120,8 +112,7 @@ namespace console
          * @param value 要赋值的值。
          * @return const Maybe& *this。
          */
-        const Maybe &operator=(const T &value)
-        {
+        const Maybe &operator=(const T &value) {
             ptr.reset(new T(value));
             return *this;
         }
@@ -131,8 +122,7 @@ namespace console
          * @param value 要赋值的右值。
          * @return const Maybe& *this。
          */
-        const Maybe &operator=(T &&value)
-        {
+        const Maybe &operator=(T &&value) {
             ptr.reset(new T(std::move(value)));
             return *this;
         }
@@ -142,8 +132,7 @@ namespace console
          * @param other 源 Maybe。
          * @return Maybe& *this。
          */
-        Maybe &operator=(const Maybe &other)
-        {
+        Maybe &operator=(const Maybe &other) {
             if (this != &other)
                 ptr.reset(other.ptr ? new T(*other.ptr) : nullptr);
             return *this;
@@ -154,10 +143,8 @@ namespace console
          * @param other 源 Maybe，移动后为空。
          * @return Maybe& *this。
          */
-        Maybe &operator=(Maybe &&other) noexcept
-        {
-            if (this != &other)
-                ptr = std::move(other.ptr);
+        Maybe &operator=(Maybe &&other) noexcept {
+            if (this != &other) ptr = std::move(other.ptr);
             return *this;
         }
 
@@ -166,8 +153,7 @@ namespace console
          * @param nothing 标记。
          * @return const Maybe& *this。
          */
-        const Maybe &operator=(decltype(nothing))
-        {
+        const Maybe &operator=(decltype(nothing)) {
             ptr = nullptr;
             return *this;
         }
@@ -175,19 +161,14 @@ namespace console
         /**
          * @brief 清空 Maybe，使其为空。
          */
-        void reset()
-        {
-            ptr.reset();
-        }
+        void reset() { ptr.reset(); }
 
         /**
          * @brief 重置为新的值（从参数包构造）。
          * @tparam Args 参数类型。
          * @param args 转发给 T 的构造函数。
          */
-        template <class... Args>
-        void reset(Args &&...args)
-        {
+        template <class... Args> void reset(Args &&...args) {
             ptr.reset(new T(std::forward<Args>(args)...));
         }
 
@@ -197,10 +178,8 @@ namespace console
          * @param maybe Maybe 对象。
          * @return std::ostream& os。
          */
-        friend std::ostream &operator<<(std::ostream &os, const Maybe &maybe)
-        {
-            if (maybe.ptr)
-                return os << maybe.value();
+        friend std::ostream &operator<<(std::ostream &os, const Maybe &maybe) {
+            if (maybe.ptr) return os << maybe.value();
             return os << "(nothing)";
         }
 
@@ -209,15 +188,14 @@ namespace console
          * @param is 输入流。
          * @param maybe 目标 Maybe。
          * @return std::istream& is。
-         * @details 尝试从流读取一个 T 类型的值，若成功则存入 Maybe，否则将 Maybe 置空并清除错误标志。
+         * @details 尝试从流读取一个 T 类型的值，若成功则存入 Maybe，否则将
+         * Maybe 置空并清除错误标志。
          */
-        friend std::istream &operator>>(std::istream &is, Maybe &maybe)
-        {
+        friend std::istream &operator>>(std::istream &is, Maybe &maybe) {
             T tmp;
             if (is >> tmp)
                 maybe.reset(std::move(tmp));
-            else
-            {
+            else {
                 maybe = nothing;
                 is.clear();
             }
@@ -254,9 +232,7 @@ namespace console
          * @param default_value 默认值（可转发）。
          * @return T 当前值或转换后的默认值。
          */
-        template <class U>
-        T value_or(U &&default_value) const
-        {
+        template <class U> T value_or(U &&default_value) const {
             return ptr ? *ptr : T(std::forward<U>(default_value));
         }
 
@@ -264,9 +240,6 @@ namespace console
          * @brief 交换两个 Maybe 的内容。
          * @param other 要交换的 Maybe。
          */
-        void swap(Maybe &other) noexcept
-        {
-            ptr.swap(other.ptr);
-        }
+        void swap(Maybe &other) noexcept { ptr.swap(other.ptr); }
     };
 }

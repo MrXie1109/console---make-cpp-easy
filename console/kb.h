@@ -1,7 +1,8 @@
 /**
  * @file kb.h
  * @brief 非阻塞的获取键盘的按键输入。
- * @details 使用条件编译确保在不同平台可以使用统一的 API，但只能检测常见的按键情况。
+ * @details 使用条件编译确保在不同平台可以使用统一的
+ * API，但只能检测常见的按键情况。
  *          不处理边界情况，可以用于中小型程序，但切勿在生产环境使用。
  * @author MrXie1109
  * @date 2026
@@ -59,24 +60,22 @@ SOFTWARE.
 #define NOWH                // 不需要 Windows 挂钩
 #define NOPROFILER          // 不需要性能分析器
 #define NODEFERWINDOWPOS    // 不需要窗口位置调整
-#include <windows.h>
 #include <conio.h>
+#include <windows.h>
 #else
+#include <poll.h>
 #include <termios.h>
 #include <unistd.h>
-#include <poll.h>
 #endif
 #include <iostream>
 
-namespace console
-{
+namespace console {
     /**
      * @enum Key
      * @brief 用于表示常用按键的枚举。
      */
-    enum class Key : int
-    {
-        None = 0,
+    enum class Key : int {
+        None    = 0,
         Unknown = 1,
 
         A = 'A',
@@ -119,10 +118,10 @@ namespace console
 
         Space = ' ',
 
-        Enter = 13,
-        Esc = 27,
+        Enter     = 13,
+        Esc       = 27,
         Backspace = 127,
-        Tab = 9,
+        Tab       = 9,
 
         Up = 1000,
         Down,
@@ -149,16 +148,14 @@ namespace console
      * @param k 要打印的 Key。
      * @return os 输出流的引用。
      */
-    inline std::ostream &operator<<(std::ostream &os, Key k)
-    {
+    inline std::ostream &operator<<(std::ostream &os, Key k) {
         if ((k >= Key::A && k <= Key::Z) || (k >= Key::Num0 && k <= Key::Num9))
             return os << static_cast<char>(k);
         if (k >= Key::F1 && k <= Key::F12)
             return os << "<F"
                       << static_cast<int>(k) - static_cast<int>(Key::F1) + 1
                       << '>';
-        switch (k)
-        {
+        switch (k) {
         case Key::Space:
             os << "<space>";
             break;
@@ -200,24 +197,23 @@ namespace console
      * @class Keyboard
      * @brief 用于监视键盘键击情况的类。
      */
-    class Keyboard
-    {
+    class Keyboard {
     public:
         /**
          * @brief 构造函数，开始监视键盘键击。
          * @warning 在 Keyboard 的生命周期内，stdin 将处于不可用状态。
          */
-        Keyboard()
-        {
+        Keyboard() {
 #ifdef _WIN32
             hStdin = GetStdHandle(STD_INPUT_HANDLE);
             GetConsoleMode(hStdin, &oldMode);
-            SetConsoleMode(hStdin, oldMode & ~(ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT));
+            SetConsoleMode(hStdin,
+                           oldMode & ~(ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT));
 #else
             tcgetattr(STDIN_FILENO, &oldTio);
             struct termios newTio = oldTio;
             newTio.c_lflag &= ~(ICANON | ECHO);
-            newTio.c_cc[VMIN] = 0;
+            newTio.c_cc[VMIN]  = 0;
             newTio.c_cc[VTIME] = 0;
             tcsetattr(STDIN_FILENO, TCSANOW, &newTio);
 #endif
@@ -227,8 +223,7 @@ namespace console
          * @brief 析构函数，结束对键盘键击的监视。
          * @note stdin 将恢复可用状态。
          */
-        ~Keyboard()
-        {
+        ~Keyboard() {
 #ifdef _WIN32
             SetConsoleMode(hStdin, oldMode);
 #else
@@ -252,11 +247,9 @@ namespace console
          * @brief 试图取得当前键击的按键。
          * @return Key 如果没有键击，返回 Key::None，否则返回对应按键。
          */
-        Key get()
-        {
+        Key get() {
             int raw = readRaw();
-            if (raw == -1)
-                return Key::None;
+            if (raw == -1) return Key::None;
             return parse(raw);
         }
 
@@ -264,13 +257,10 @@ namespace console
          * @brief 等待直到键击并取得当前按键。
          * @return Key 返回对应按键。
          */
-        Key wait()
-        {
-            while (true)
-            {
+        Key wait() {
+            while (true) {
                 int raw = readRawBlock();
-                if (raw != -1)
-                    return parse(raw);
+                if (raw != -1) return parse(raw);
             }
         }
 
@@ -278,10 +268,8 @@ namespace console
          * @brief 消耗留在缓冲区内的按键。
          * @param n 消耗的数量，负数为所有，默认为 -1。
          */
-        void ignore(int n = -1)
-        {
-            for (int i = 0; i != n && get() != Key::None; i++)
-                ;
+        void ignore(int n = -1) {
+            for (int i = 0; i != n && get() != Key::None; i++);
         }
 
     private:
@@ -289,7 +277,9 @@ namespace console
         HANDLE hStdin; ///< Windows: 标准输入设备句柄（STD_INPUT_HANDLE）
         DWORD oldMode; ///< Windows: 原始控制台输入模式（用于析构时恢复）
 #else
-        struct termios oldTio; ///< Linux/Unix: 原始终端I/O属性（用于析构时恢复规范模式与回显）
+        struct termios
+            oldTio; ///< Linux/Unix:
+                    ///< 原始终端I/O属性（用于析构时恢复规范模式与回显）
 #endif
 
         /**
@@ -298,19 +288,15 @@ namespace console
          * @details Windows 平台使用 _kbhit() 和 _getch()；
          *          Linux 平台使用 poll() 和 read()。
          */
-        int readRaw()
-        {
+        int readRaw() {
 #ifdef _WIN32
-            if (_kbhit())
-                return _getch();
+            if (_kbhit()) return _getch();
             return -1;
 #else
             struct pollfd pfd = {STDIN_FILENO, POLLIN, 0};
-            if (poll(&pfd, 1, 0) <= 0)
-                return -1;
+            if (poll(&pfd, 1, 0) <= 0) return -1;
             unsigned char c;
-            if (read(STDIN_FILENO, &c, 1) != 1)
-                return -1;
+            if (read(STDIN_FILENO, &c, 1) != 1) return -1;
             return c;
 #endif
         }
@@ -321,19 +307,15 @@ namespace console
          * @details Windows 平台直接调用 _getch()；
          *          Linux 平台循环调用 read() 直到成功读取一个字节。
          */
-        int readRawBlock()
-        {
+        int readRawBlock() {
 #ifdef _WIN32
             return _getch();
 #else
             unsigned char c;
             struct pollfd pfd = {STDIN_FILENO, POLLIN, 0};
-            while (true)
-            {
-                if (poll(&pfd, 1, -1) > 0)
-                {
-                    if (read(STDIN_FILENO, &c, 1) == 1)
-                        return c;
+            while (true) {
+                if (poll(&pfd, 1, -1) > 0) {
+                    if (read(STDIN_FILENO, &c, 1) == 1) return c;
                 }
             }
 #endif
@@ -347,21 +329,18 @@ namespace console
          *          - 字母字符（自动将小写转为大写）
          *          - 数字字符
          *          - 空格、回车、Esc、退格、Tab
-         *          - Windows 平台扩展键（方向键、F1-F12，其扫描码为 0xE0 或 0x00）
+         *          - Windows 平台扩展键（方向键、F1-F12，其扫描码为 0xE0 或
+         * 0x00）
          *          - 其他平台无法识别的键返回 Unknown
          */
-        Key parse(int raw)
-        {
-            if ((raw >= 'A' && raw <= 'Z') || (raw >= '0' && raw <= '9'))
-            {
+        Key parse(int raw) {
+            if ((raw >= 'A' && raw <= 'Z') || (raw >= '0' && raw <= '9')) {
                 return static_cast<Key>(raw);
             }
-            if (raw >= 'a' && raw <= 'z')
-            {
+            if (raw >= 'a' && raw <= 'z') {
                 return static_cast<Key>(raw - 32);
             }
-            switch (raw)
-            {
+            switch (raw) {
             case ' ':
                 return Key::Space;
             case 13:
@@ -375,11 +354,9 @@ namespace console
                 return Key::Tab;
             }
 #ifdef _WIN32
-            if (raw == 0xE0 || raw == 0x00)
-            {
+            if (raw == 0xE0 || raw == 0x00) {
                 int ext = _getch();
-                switch (ext)
-                {
+                switch (ext) {
                 case 0x48:
                     return Key::Up;
                 case 0x50:
@@ -421,22 +398,18 @@ namespace console
         /**
          * @brief 处理以 ESC (27) 开头的转义序列（主要针对 Linux 终端）。
          * @return 如果识别为方向键则返回对应 Key；否则返回 Key::Esc。
-         * @details 在 Linux 终端下，方向键会发送 "\033[A"、"\033[B" 等三字节序列。
-         *          本函数通过非阻塞 poll 检查后续输入，若在 5ms 内读到 "[A"-"[D]"
-         *          则转为方向键，否则视为普通 Esc 键。
+         * @details 在 Linux 终端下，方向键会发送 "\033[A"、"\033[B"
+         * 等三字节序列。 本函数通过非阻塞 poll 检查后续输入，若在 5ms 内读到
+         * "[A"-"[D]" 则转为方向键，否则视为普通 Esc 键。
          */
-        Key handleEscape()
-        {
+        Key handleEscape() {
 #ifndef _WIN32
             struct pollfd pfd = {STDIN_FILENO, POLLIN, 0};
-            if (poll(&pfd, 1, 5) <= 0)
-                return Key::Esc;
+            if (poll(&pfd, 1, 5) <= 0) return Key::Esc;
             char seq[3];
-            int n = read(STDIN_FILENO, seq, 3);
-            if (n >= 2 && seq[0] == '[')
-            {
-                switch (seq[1])
-                {
+            int  n = read(STDIN_FILENO, seq, 3);
+            if (n >= 2 && seq[0] == '[') {
+                switch (seq[1]) {
                 case 'A':
                     return Key::Up;
                 case 'B':

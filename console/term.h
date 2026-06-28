@@ -102,55 +102,48 @@ SOFTWARE.
 #include <unistd.h>    // STDOUT_FILENO
 #endif
 
-namespace console
-{
+namespace console {
     /**
      * @brief 将光标移动到指定位置。
      * @param x 列坐标（从 1 开始）
      * @param y 行坐标（从 1 开始）
      */
-    inline void gotoxy(int x, int y) noexcept
-    {
+    inline void gotoxy(int x, int y) noexcept {
         printf("\033[%d;%dH", y, x);
     }
 
     /**
      * @brief 清空整个屏幕并将光标复位到 (1,1)。
      */
-    inline void clear() noexcept
-    {
+    inline void clear() noexcept {
         printf("\033[2J\033[H");
     }
 
     /**
      * @brief 保存当前光标位置。
      */
-    inline void save_cursor() noexcept
-    {
+    inline void save_cursor() noexcept {
         printf("\033[s");
     }
 
     /**
      * @brief 恢复之前保存的光标位置。
      */
-    inline void restore_cursor() noexcept
-    {
+    inline void restore_cursor() noexcept {
         printf("\033[u");
     }
 
     /**
      * @brief 隐藏光标（提高视觉效果）。
      */
-    inline void hide_cursor() noexcept
-    {
+    inline void hide_cursor() noexcept {
         printf("\033[?25l");
     }
 
     /**
      * @brief 显示光标（恢复默认）。
      */
-    inline void show_cursor() noexcept
-    {
+    inline void show_cursor() noexcept {
         printf("\033[?25h");
     }
 
@@ -159,13 +152,11 @@ namespace console
      * @return std::pair<int, int>，first为rows，second为cols。
      * @note 失败时返回 {0, 0}。
      */
-    inline std::pair<int, int> get_terminal_size() noexcept
-    {
+    inline std::pair<int, int> get_terminal_size() noexcept {
 #ifdef _WIN32
         CONSOLE_SCREEN_BUFFER_INFO csbi;
-        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-        if (GetConsoleScreenBufferInfo(hConsole, &csbi))
-        {
+        HANDLE                     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        if (GetConsoleScreenBufferInfo(hConsole, &csbi)) {
             int cols = csbi.srWindow.Right - csbi.srWindow.Left + 1;
             int rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
             return {rows, cols};
@@ -184,24 +175,21 @@ namespace console
     /**
      * @brief 重置终端所有属性（颜色、样式、光标等）到默认状态。
      */
-    inline void reset() noexcept
-    {
+    inline void reset() noexcept {
         printf("\033[0m\033[?25h");
     }
 
     /**
      * @brief 清空当前光标所在行。
      */
-    inline void clear_line() noexcept
-    {
+    inline void clear_line() noexcept {
         printf("\033[2K");
     }
 
     /**
      * @brief 清空从光标位置到行尾。
      */
-    inline void clear_to_eol() noexcept
-    {
+    inline void clear_to_eol() noexcept {
         printf("\033[K");
     }
 
@@ -209,8 +197,7 @@ namespace console
      * @brief 向左相对移动。
      * @param n 移动的步数，默认为1。
      */
-    inline void movel(int n = 1) noexcept
-    {
+    inline void movel(int n = 1) noexcept {
         printf("\033[%dD", n);
     }
 
@@ -218,8 +205,7 @@ namespace console
      * @brief 向右相对移动。
      * @param n 移动的步数，默认为1。
      */
-    inline void mover(int n = 1) noexcept
-    {
+    inline void mover(int n = 1) noexcept {
         printf("\033[%dC", n);
     }
 
@@ -227,8 +213,7 @@ namespace console
      * @brief 向上相对移动。
      * @param n 移动的步数，默认为1。
      */
-    inline void moveu(int n = 1) noexcept
-    {
+    inline void moveu(int n = 1) noexcept {
         printf("\033[%dA", n);
     }
 
@@ -236,32 +221,28 @@ namespace console
      * @brief 向下相对移动。
      * @param n 移动的步数，默认为1。
      */
-    inline void moved(int n = 1) noexcept
-    {
+    inline void moved(int n = 1) noexcept {
         printf("\033[%dB", n);
     }
 
     /**
      * @brief 保存屏幕内容。
      */
-    inline void save_screen() noexcept
-    {
+    inline void save_screen() noexcept {
         printf("\033[?47h");
     }
 
     /**
      * @brief 恢复屏幕内容。
      */
-    inline void restore_screen() noexcept
-    {
+    inline void restore_screen() noexcept {
         printf("\033[?47l");
     }
 
     /**
      * @brief 清空屏幕并保留历史。
      */
-    inline void clear_screen_save() noexcept
-    {
+    inline void clear_screen_save() noexcept {
         printf("\033[?47h\033[2J\033[H");
     }
 
@@ -270,16 +251,13 @@ namespace console
      * @brief 初始化 Windows 虚拟终端支持。
      * @return true 如果成功启用虚拟终端，false 否则。
      */
-    inline const bool &init_windows_terminal() noexcept
-    {
-        static bool initialized = []() noexcept -> bool
-        {
+    inline const bool &init_windows_terminal() noexcept {
+        static bool initialized = []() noexcept -> bool {
             HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
             if (hConsole == INVALID_HANDLE_VALUE || hConsole == nullptr)
                 return false;
             DWORD mode;
-            if (!GetConsoleMode(hConsole, &mode))
-                return false;
+            if (!GetConsoleMode(hConsole, &mode)) return false;
             mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
             mode |= ENABLE_PROCESSED_OUTPUT;
 

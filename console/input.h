@@ -1,6 +1,7 @@
 /**
  * @file input.h
- * @brief 提供丰富的控制台输入函数，支持类型安全输入、范围检查、行读取、确认输入等。
+ * @brief
+ * 提供丰富的控制台输入函数，支持类型安全输入、范围检查、行读取、确认输入等。
  * @author MrXie1109
  * @date 2026
  * @copyright MIT License
@@ -29,27 +30,27 @@ SOFTWARE.
 */
 
 #pragma once
-#include <iostream>
-#include <string>
-#include <limits>
 #include <cfloat>
 #include <cstdint>
+#include <iostream>
+#include <limits>
+#include <string>
+
 #include "strpp.h"
 
-namespace console
-{
+namespace console {
     /**
      * @struct InputSettings
      * @brief 输入/输出流设置，用于自定义 input 函数的输入输出目标。
      * @details 默认使用 std::cout 和 std::cin，可修改以实现重定向或测试。
      */
-    struct InputSettings
-    {
+    struct InputSettings {
         std::ostream &os; ///< 输出提示信息的流
         std::istream &is; ///< 读取输入的流
     };
 
-    static InputSettings inputSettings{std::cout, std::cin}; ///< 全局默认输入设置
+    static InputSettings inputSettings{std::cout,
+                                       std::cin}; ///< 全局默认输入设置
 
     /**
      * @brief 从标准输入读取一个值，支持类型模板。
@@ -60,17 +61,14 @@ namespace console
      * @note 若输入失败（如类型不匹配），会清空错误状态并重新提示，直到成功。
      */
     template <class T = std::string>
-    T input(const std::string &prompt = "",
-            const InputSettings &is = inputSettings)
-    {
-        T tmp;
+    T input(const std::string   &prompt = "",
+            const InputSettings &is     = inputSettings) {
+        T           tmp;
         std::string message;
-        while (true)
-        {
+        while (true) {
             is.os << prompt << std::flush;
             is.is >> tmp;
-            if (!is.is)
-            {
+            if (!is.is) {
                 is.is.clear();
                 is.is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 is.os << "StreamError!\n";
@@ -87,9 +85,9 @@ namespace console
      * @param is 输入设置。
      * @return long double 读取的数字。
      */
-    inline long double inputNumber(const std::string &prompt = "Type a number: ",
-                                   const InputSettings &is = inputSettings)
-    {
+    inline long double
+    inputNumber(const std::string   &prompt = "Type a number: ",
+                const InputSettings &is     = inputSettings) {
         return input<long double>(prompt, is);
     }
 
@@ -99,13 +97,12 @@ namespace console
      * @param is 输入设置。
      * @return std::string 读取的行（不含换行符）。
      */
-    inline std::string inputLine(const std::string &prompt = "Type a line string: ",
-                                 const InputSettings &is = inputSettings)
-    {
+    inline std::string
+    inputLine(const std::string   &prompt = "Type a line string: ",
+              const InputSettings &is     = inputSettings) {
         std::string tmp;
         is.os << prompt << std::flush;
-        if (is.is.peek() == '\n')
-            is.is.get();
+        if (is.is.peek() == '\n') is.is.get();
         std::getline(is.is, tmp);
         return tmp;
     }
@@ -122,22 +119,18 @@ namespace console
      */
     template <class T>
     T inputWithRange(T min, T max,
-                     const std::string &prompt = "Type a number: ",
-                     const InputSettings &is = inputSettings)
-    {
+                     const std::string   &prompt = "Type a number: ",
+                     const InputSettings &is     = inputSettings) {
         T tmp;
-        while (true)
-        {
+        while (true) {
             tmp = input<T>(prompt, is);
-            if (tmp < min)
-            {
+            if (tmp < min) {
                 is.os << "less than the minimum value of " << min << std::endl;
                 continue;
             }
-            if (tmp > max)
-            {
-                is.os << "Greater than the maximum value of "
-                      << max << std::endl;
+            if (tmp > max) {
+                is.os << "Greater than the maximum value of " << max
+                      << std::endl;
                 continue;
             }
             return tmp;
@@ -151,9 +144,8 @@ namespace console
      * @return char 读取的第一个字符。
      * @note 此函数使用 is.is.get()，不会跳过空白字符，注意与格式化输入的区别。
      */
-    inline char inputChar(const std::string &prompt = "Type a character: ",
-                          const InputSettings &is = inputSettings)
-    {
+    inline char inputChar(const std::string   &prompt = "Type a character: ",
+                          const InputSettings &is     = inputSettings) {
         is.os << prompt << std::flush;
         char tmp = is.is.get();
         is.is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -167,12 +159,10 @@ namespace console
      * @return bool true 若输入 'Y' 或 'y'，false 若输入 'N' 或 'n'。
      * @note 若输入其他字符，会提示重新输入。
      */
-    inline bool inputYesOrNo(const std::string &prompt = "Type yes or no: ",
-                             const InputSettings &is = inputSettings)
-    {
+    inline bool inputYesOrNo(const std::string   &prompt = "Type yes or no: ",
+                             const InputSettings &is     = inputSettings) {
         std::string tmp;
-        while (true)
-        {
+        while (true) {
             char tmp = inputChar(prompt, is);
             if (tmp == 'Y' || tmp == 'y')
                 return true;
@@ -190,9 +180,8 @@ namespace console
      * @return std::string 从当前位置到流末尾的所有字符。
      * @note 常用于读取多行输入，直到用户输入 EOF（Ctrl+Z/Ctrl+D）。
      */
-    inline std::string inputAll(const std::string &prompt = "",
-                                const InputSettings &is = inputSettings)
-    {
+    inline std::string inputAll(const std::string   &prompt = "",
+                                const InputSettings &is     = inputSettings) {
         is.os << prompt;
         return {std::istreambuf_iterator<char>(is.is),
                 std::istreambuf_iterator<char>()};

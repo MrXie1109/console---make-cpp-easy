@@ -29,44 +29,41 @@ SOFTWARE.
 */
 
 #pragma once
-#include <vector>
+#include <cstdlib>
+#include <memory>
+#include <ostream>
 #include <typeinfo>
 #include <utility>
-#include <ostream>
-#include <memory>
-#include <cstdlib>
-#include "strpp.h"
+#include <vector>
+
 #include "csexc.h"
 #include "literals.h"
+#include "strpp.h"
 
-namespace console
-{
+namespace console {
     /**
      * @class Item
      * @brief 可存储任意类型单个对象的类型擦除包装器。
      * @details 采用经典的继承 + 虚函数方式实现类型擦除，不进行小对象优化。
      *          支持拷贝、移动、类型安全访问和不安全访问。
      */
-    class Item
-    {
+    class Item {
     private:
         /// @brief 虚基类，定义了所有派生类必须实现的接口。
-        struct Base
-        {
+        struct Base {
             virtual ~Base() {}
-            virtual Base *clone() const = 0;                ///< 克隆当前对象
-            virtual void print(std::ostream &) const = 0;   ///< 输出到流
-            virtual std::string str() const = 0;            ///< 返回字符串表示
-            virtual const std::type_info &type() const = 0; ///< 返回存储对象的类型信息
+            virtual Base *clone() const = 0; ///< 克隆当前对象
+            virtual void  print(std::ostream &) const = 0; ///< 输出到流
+            virtual std::string str() const = 0; ///< 返回字符串表示
+            virtual const std::type_info &
+            type() const = 0; ///< 返回存储对象的类型信息
         };
 
         /**
          * @brief 模板派生类，具体存储类型 T 的值。
          * @tparam T 实际存储的数据类型。
          */
-        template <typename T>
-        struct Derived : Base
-        {
+        template <typename T> struct Derived : Base {
             T value; ///< 实际存储的值
 
             /**
@@ -85,26 +82,19 @@ namespace console
              * @brief 克隆当前对象（堆上分配）。
              * @return 指向新拷贝的 Base 指针。
              */
-            Base *clone() const override
-            {
-                return new Derived(value);
-            }
+            Base *clone() const override { return new Derived(value); }
 
             /**
              * @brief 将存储的值输出到流（使用 repr 函数）。
              * @param os 目标输出流。
              */
-            void print(std::ostream &os) const override
-            {
-                repr(value, os);
-            }
+            void print(std::ostream &os) const override { repr(value, os); }
 
             /**
              * @brief 返回存储值的字符串表示。
              * @return 值的字符串形式。
              */
-            std::string str() const override
-            {
+            std::string str() const override {
                 std::ostringstream oss;
                 repr(value, oss);
                 return oss.str();
@@ -114,10 +104,7 @@ namespace console
              * @brief 获取存储值的类型信息。
              * @return typeid(T)。
              */
-            const std::type_info &type() const override
-            {
-                return typeid(T);
-            }
+            const std::type_info &type() const override { return typeid(T); }
         };
 
         Base *ptr; ///< 指向实际存储数据的指针（堆上对象）。
@@ -132,25 +119,22 @@ namespace console
          * @param value 要存储的值（左值或右值）。
          */
         template <typename T>
-        Item(T &&value)
-            : ptr(new Derived<typename std::decay<T>::type>(
-                  std::forward<T>(value))) {}
+        Item(T &&value) :
+            ptr(new Derived<typename std::decay<T>::type>(
+                std::forward<T>(value))) {}
 
         /**
          * @brief 拷贝构造函数。
          * @param other 源 Item。
          */
-        Item(const Item &other)
-            : ptr(other.ptr ? other.ptr->clone() : nullptr) {}
+        Item(const Item &other) :
+            ptr(other.ptr ? other.ptr->clone() : nullptr) {}
 
         /**
          * @brief 移动构造函数。
          * @param other 源 Item（将被置于空状态）。
          */
-        Item(Item &&other) noexcept : ptr(other.ptr)
-        {
-            other.ptr = nullptr;
-        }
+        Item(Item &&other) noexcept : ptr(other.ptr) { other.ptr = nullptr; }
 
         /**
          * @brief 类型安全地获取存储值的引用（非常量版本）。
@@ -158,15 +142,11 @@ namespace console
          * @return T& 存储值的引用。
          * @throw console::TypeError 若 Item 为空或实际类型与 T 不匹配。
          */
-        template <typename T>
-        T &get()
-        {
-            if (ptr == nullptr)
-                throw TypeError("empty item");
+        template <typename T> T &get() {
+            if (ptr == nullptr) throw TypeError("empty item");
             if (typeid(T) != ptr->type())
                 throw TypeError(std::string("type mismatch: ") +
-                                tiname(typeid(T)) +
-                                " and " +
+                                tiname(typeid(T)) + " and " +
                                 tiname(ptr->type()));
             return ((Derived<T> *)ptr)->value;
         }
@@ -177,9 +157,7 @@ namespace console
          * @return T& 存储值的引用。
          * @warning 不进行任何类型检查或空指针检查，可能导致未定义行为。
          */
-        template <typename T>
-        T &unsafe_get()
-        {
+        template <typename T> T &unsafe_get() {
             return ((Derived<T> *)ptr)->value;
         }
 
@@ -189,15 +167,11 @@ namespace console
          * @return const T& 存储值的常量引用。
          * @throw console::TypeError 若 Item 为空或实际类型与 T 不匹配。
          */
-        template <typename T>
-        const T &get() const
-        {
-            if (ptr == nullptr)
-                throw TypeError("empty item");
+        template <typename T> const T &get() const {
+            if (ptr == nullptr) throw TypeError("empty item");
             if (typeid(T) != ptr->type())
                 throw TypeError(std::string("type mismatch: ") +
-                                typeid(T).name() +
-                                " and " +
+                                typeid(T).name() + " and " +
                                 ptr->type().name());
             return ((Derived<T> *)ptr)->value;
         }
@@ -208,9 +182,7 @@ namespace console
          * @return const T& 存储值的常量引用。
          * @warning 不进行任何类型检查或空指针检查，可能导致未定义行为。
          */
-        template <typename T>
-        const T &unsafe_get() const
-        {
+        template <typename T> const T &unsafe_get() const {
             return ((Derived<T> *)ptr)->value;
         }
 
@@ -219,10 +191,8 @@ namespace console
          * @param other 源 Item。
          * @return const Item& 返回 *this 的常量引用。
          */
-        const Item &operator=(const Item &other)
-        {
-            if (this != &other)
-            {
+        const Item &operator=(const Item &other) {
+            if (this != &other) {
                 Base *new_ptr = other.ptr ? other.ptr->clone() : nullptr;
                 delete ptr;
                 ptr = new_ptr;
@@ -235,12 +205,10 @@ namespace console
          * @param other 源 Item（将被置于空状态）。
          * @return const Item& 返回 *this 的常量引用。
          */
-        const Item &operator=(Item &&other) noexcept
-        {
-            if (this != &other)
-            {
+        const Item &operator=(Item &&other) noexcept {
+            if (this != &other) {
                 delete ptr;
-                ptr = other.ptr;
+                ptr       = other.ptr;
                 other.ptr = nullptr;
             }
             return *this;
@@ -252,8 +220,7 @@ namespace console
          * @param item 要输出的 Item。
          * @return std::ostream& 返回 os 以便链式调用。
          */
-        friend std::ostream &operator<<(std::ostream &os, const Item &item)
-        {
+        friend std::ostream &operator<<(std::ostream &os, const Item &item) {
             item.ptr->print(os);
             return os;
         }
@@ -262,10 +229,7 @@ namespace console
          * @brief 返回 Item 的字符串表示。
          * @return std::string 字符串形式。
          */
-        std::string str() const
-        {
-            return ptr->str();
-        }
+        std::string str() const { return ptr->str(); }
 
         /// @brief 析构函数，释放内部堆内存。
         ~Item() { delete ptr; }
@@ -277,8 +241,7 @@ namespace console
      * @details 公有继承自 std::vector<Item>，支持从多个任意类型的值直接构造，
      *          并提供类型安全的元素访问和解包功能。
      */
-    class Box : public std::vector<Item>
-    {
+    class Box : public std::vector<Item> {
     public:
         /**
          * @brief 从任意数量、任意类型的值构造 Box。
@@ -286,8 +249,8 @@ namespace console
          * @param args 要存储的值（每个值都会被隐式转换为 Item）。
          */
         template <class... Args>
-        Box(Args &&...args)
-            : std::vector<Item>({Item(std::forward<Args>(args))...}) {}
+        Box(Args &&...args) :
+            std::vector<Item>({Item(std::forward<Args>(args))...}) {}
 
         /**
          * @brief 类型安全地获取指定索引处的元素（非常量版本）。
@@ -296,9 +259,7 @@ namespace console
          * @return T& 元素的引用。
          * @throw console::TypeError 若索引越界或实际类型与 T 不匹配。
          */
-        template <class T>
-        T &get(size_t index)
-        {
+        template <class T> T &get(size_t index) {
             return std::vector<Item>::at(index).get<T>();
         }
 
@@ -309,9 +270,7 @@ namespace console
          * @return T& 元素的引用。
          * @warning 不检查索引越界和类型匹配，可能导致未定义行为。
          */
-        template <typename T>
-        T &unsafe_get(size_t index)
-        {
+        template <typename T> T &unsafe_get(size_t index) {
             return std::vector<Item>::operator[](index).unsafe_get<T>();
         }
 
@@ -321,11 +280,9 @@ namespace console
          * @param args 要赋值的变量（按引用传递）。
          * @note 若元素数量或类型不匹配会抛出 TypeError 异常。
          */
-        template <class... Args>
-        void unpack(Args &...args)
-        {
-            size_t i = 0;
-            int _[] = {0, ((args = get<Args>(i++)), 0)...};
+        template <class... Args> void unpack(Args &...args) {
+            size_t i   = 0;
+            int    _[] = {0, ((args = get<Args>(i++)), 0)...};
             (void)_;
         }
 
@@ -333,13 +290,12 @@ namespace console
          * @brief 将 Box 中的元素按顺序解包到多个变量中（不安全版本）。
          * @tparam Args 变量包类型。
          * @param args 要赋值的变量（按引用传递）。
-         * @warning 不进行任何类型或边界检查，需确保 Box 大小和类型与参数包完全匹配。
+         * @warning 不进行任何类型或边界检查，需确保 Box
+         * 大小和类型与参数包完全匹配。
          */
-        template <class... Args>
-        void unsafe_unpack(Args &...args)
-        {
-            size_t i = 0;
-            int _[] = {0, ((args = unsafe_get<Args>(i++)), 0)...};
+        template <class... Args> void unsafe_unpack(Args &...args) {
+            size_t i   = 0;
+            int    _[] = {0, ((args = unsafe_get<Args>(i++)), 0)...};
             (void)_;
         }
 
@@ -349,14 +305,11 @@ namespace console
          * @param box 要输出的 Box。
          * @return std::ostream& 返回 os。
          */
-        friend std::ostream &operator<<(std::ostream &os, const Box &box)
-        {
-            if (box.empty())
-                return os << "()";
+        friend std::ostream &operator<<(std::ostream &os, const Box &box) {
+            if (box.empty()) return os << "()";
             auto it = box.begin();
             os << '(' << *it;
-            while (++it != box.end())
-                os << ", " << *it;
+            while (++it != box.end()) os << ", " << *it;
             return os << ')';
         }
     };
