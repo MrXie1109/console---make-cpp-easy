@@ -101,11 +101,11 @@ SOFTWARE.)";
 
     /**
      * @brief 返回库的版本字符串。
-     * @return std::string 格式为 console version Major.Minor.Patch (YYYY-MM-DD) -- "Commit Information"。
+     * @return std::string 格式为 console version Major.Minor.Patch (YYYY-MM-DD) -- "Commit Message"。
      */
     inline std::string version()
     {
-        return "console version 5.6.3 (2026-06-25) -- \"Useless Things are Unnecessary.\"";
+        return "console version 5.7.0 (2026-06-25) -- \"Believe it.\"";
     }
 
     /**

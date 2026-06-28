@@ -127,16 +127,49 @@ namespace console
         static constexpr char Hidden[] = "\033[8m";
         /// @brief 删除线
         static constexpr char Strikethrough[] = "\033[9m";
+    }
+
+    /**
+     * @brief 修改颜色。
+     * @param clr 颜色，默认 Reset。
+     * @param os 输出流，默认 std::cout。
+     * @note cc = change color
+     */
+    inline void cc(const char *clr = color::Reset, std::ostream &os = std::cout)
+    {
+        os << clr;
+    }
+
+    /**
+     * @class ColorGuard
+     * @brief RAII颜色守卫，构造时设置颜色，析构时自动恢复。
+     */
+    class ColorGuard
+    {
+        std::ostream &os_; ///< 输出流引用
+
+    public:
+        /**
+         * @brief 构造函数，应用指定颜色。
+         * @param color ANSI颜色序列（如 color::Red）
+         * @param os 输出流，默认为 std::cout
+         */
+        explicit ColorGuard(const char *color, std::ostream &os = std::cout)
+            : os_(os)
+        {
+            os << color;
+        }
 
         /**
-         * @brief 修改颜色。
-         * @param clr 颜色，默认 Reset。
-         * @param os 输出流，默认 std::cout。
-         * @note 通过 ADL 实现自动查找命名空间，可以直接写。
+         * @brief 析构函数，自动恢复默认颜色。
          */
-        inline void change(const char *clr = Reset, std::ostream &os = std::cout)
+        ~ColorGuard()
         {
-            os << clr;
+            os_ << color::Reset;
         }
-    }
+
+        // 禁止拷贝
+        ColorGuard(const ColorGuard &) = delete;
+        ColorGuard &operator=(const ColorGuard &) = delete;
+    };
 }

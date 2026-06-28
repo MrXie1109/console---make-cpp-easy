@@ -57,7 +57,7 @@ SOFTWARE.
 #include "iter.h"
 #include "rational.h"
 #include "screen.h"
-#include "kb.h" // windows.h
+#include "kb.h" // windows.h on Windows
 #include "adapter.h"
 #include "syscmd.h"
 #include "config.h"
@@ -65,8 +65,9 @@ SOFTWARE.
 #include "gen.h"
 #include "put.h"
 #include "pool.h"
+#include "term.h" // windows.h on Windows
 
-// #include "win/melody.h" //需要链接，所以不自动包含
+// #include "win/melody.h" // 需要链接，所以不自动包含
 
 #ifdef __linux__
 #include "linux/process.h"
@@ -78,5 +79,5 @@ SOFTWARE.
  */
 namespace console
 {
-    static constexpr char meta[] = "CONSOLE-LIB-2026-06-25-MRXIE1109";
+    static constexpr char meta[] = "CONSOLE-LIB-2026-06-28-MRXIE1109";
 }
